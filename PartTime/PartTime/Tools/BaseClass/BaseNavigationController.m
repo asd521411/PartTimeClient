@@ -1,0 +1,46 @@
+//
+//  BaseNavigationController.m
+//  PartTime
+//
+//  Created by 草帽~小子 on 2019/9/3.
+//  Copyright © 2019 OnePiece. All rights reserved.
+//
+
+#import "BaseNavigationController.h"
+#import "CommonDetailsViewController.h"
+
+@interface BaseNavigationController ()
+
+@end
+
+@implementation BaseNavigationController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    
+    // Do any additional setup after loading the view.
+}
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([viewController isKindOfClass:[CommonDetailsViewController class]]) {
+        viewController.hidesBottomBarWhenPushed = YES;
+    }
+    [super pushViewController:viewController animated:animated];
+}
+
+//- (NSArray<UIViewController *> *)popToViewController:(UIViewController *)viewController animated:(BOOL)animated {
+//    return [super popToViewController:viewController animated:animated];
+//}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end
