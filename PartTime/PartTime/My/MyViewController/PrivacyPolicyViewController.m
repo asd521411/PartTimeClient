@@ -1,23 +1,23 @@
 //
-//  BaseViewController.m
+//  PrivacyPolicyViewController.m
 //  PartTime
 //
-//  Created by 草帽~小子 on 2019/9/3.
+//  Created by 草帽~小子 on 2019/9/6.
 //  Copyright © 2019 OnePiece. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "PrivacyPolicyViewController.h"
 
-@interface BaseViewController ()
+@interface PrivacyPolicyViewController ()
 
 @end
 
-@implementation BaseViewController
+@implementation PrivacyPolicyViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"隐私协议";
     
-    self.view.backgroundColor = [UIColor whiteColor];
     
     // Do any additional setup after loading the view.
 }

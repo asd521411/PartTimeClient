@@ -57,7 +57,7 @@
     textFd1.placeholder = @"";
     [self.backScrollV addSubview:textFd1];
     textFd1.layer.borderColor = LIGHTGRAYCOLOR.CGColor;
-    textFd1.layer.borderWidth = LineWidth;
+    textFd1.layer.borderWidth = LineWidthNormal05;
     
     UILabel *lab2 = [[UILabel alloc] initWithFrame:CGRectMake(space, lab1.bottom + space, space * 2, hei)];
     lab2.textColor = BLACKCOLOR;
@@ -69,7 +69,7 @@
     textFd2.placeholder = @"";
     [self.backScrollV addSubview:textFd2];
     textFd2.layer.borderColor = LIGHTGRAYCOLOR.CGColor;
-    textFd2.layer.borderWidth = LineWidth;
+    textFd2.layer.borderWidth = LineWidthNormal05;
     
     UIButton *login1 = [UIButton buttonWithType:UIButtonTypeCustom];
     login1.frame = CGRectMake((SCREENWIDTH / 2 - space * 2) / 2, self.backScrollV.bottom - 200 , space * 2, space);

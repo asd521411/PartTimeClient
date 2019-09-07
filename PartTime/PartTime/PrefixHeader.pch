@@ -18,34 +18,47 @@
 #define SCREENWIDTH  [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT  [UIScreen mainScreen].bounds.size.height
 
+#define UIScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define UIScreenHeight  [UIScreen mainScreen].bounds.size.height
+
+// MARK: 字体
+#define NormalFontSize8 [UIFont systemFontOfSize:8]
+#define NormalFontSize10 [UIFont systemFontOfSize:10]
+#define NormalFontSize12 [UIFont systemFontOfSize:12.0]
+#define NormalFontSize14 [UIFont systemFontOfSize:14.0]
+#define NormalFontSize16 [UIFont systemFontOfSize:16]
+#define NormalFontSize20 [UIFont systemFontOfSize:20]
+
+#define SMALLFont [UIFont systemFontOfSize:12.0]
+#define NORMALFont  [UIFont systemFontOfSize:14.0]
+#define LARGEFont [UIFont systemFontOfSize:16.0]
 
 // MARK: 颜色
-//+ (UIColor *)blackColor;      // 0.0 white
-//+ (UIColor *)darkGrayColor;   // 0.333 white
-//+ (UIColor *)grayColor;       // 0.5 white
-//+ (UIColor *)lightGrayColor;  // 0.667 white
-//+ (UIColor *)whiteColor;      // 1.0 white
 #define WHITECOLOR  [UIColor whiteColor]
 #define LIGHTGRAYCOLOR  [UIColor lightGrayColor]
 #define GRAYCOLOR   [UIColor grayColor]
 #define DARKGRAYCOLOR   [UIColor darkGrayColor]
 #define BLACKCOLOR  [UIColor blackColor]
 
-// MARK: 字体
-#define NORMALFont  [UIFont systemFontOfSize:14.0]
-#define SMALLFont [UIFont systemFontOfSize:12.0]
-#define LARGEFont [UIFont systemFontOfSize:16.0]
+// MARK: 线宽
+#define LineWidthNormal01 0.1
+#define LineWidthNormal05 0.5
+#define LineWidthNormal1 1
 
-#define LineWidth  0.5
+// MARK: 距离
+#define SpaceDistance10 10
+#define SpaceDistance15 15
+#define SpaceDistance20 20
+#define SpaceDistance50 50
+#define SpaceDistance100 100
 
+#define BorderSpace 10
+#define WidgetSpace1 10
+#define WidgetSpace2 15
+#define LeftSpaceWidth 50
 
-
-
-
-
-
-
-
+// MARK: 高度
+#define WidgetHeight 40
 
 
 

@@ -54,7 +54,7 @@
     textFd1.placeholder = @"请输入6位验证码";
     [self.backScrollV addSubview:textFd1];
     textFd1.layer.borderColor = LIGHTGRAYCOLOR.CGColor;
-    textFd1.layer.borderWidth = LineWidth;
+    textFd1.layer.borderWidth = LineWidthNormal05;
     
     UIButton *login = [UIButton buttonWithType:UIButtonTypeCustom];
     login.frame = CGRectMake(SCREENWIDTH / 3, self.backScrollV.bottom - 200 , SCREENWIDTH / 3, space);

@@ -39,7 +39,7 @@
             btn.frame = CGRectMake((i % 4) * (kWidth + kSpace * 2), lab.bottom + kSpace + (i / 4) * (kHeight + kSpace), kWidth, kHeight);
             btn.backgroundColor = [HWRandomColor randomColor];
             btn.layer.borderColor = LIGHTGRAYCOLOR.CGColor;
-            btn.layer.borderWidth = LineWidth;
+            btn.layer.borderWidth = LineWidthNormal05;
             btn.layer.cornerRadius = 2;
             btn.layer.masksToBounds = YES;
             [self addSubview:btn];

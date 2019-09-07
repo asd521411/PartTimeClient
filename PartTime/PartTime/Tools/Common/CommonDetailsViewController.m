@@ -11,6 +11,8 @@
 
 @interface CommonDetailsViewController ()
 
+@property (nonatomic, strong) UIView *headBackView;
+
 @property (nonatomic, strong) UIScrollView *scrollBackV;
 @property (nonatomic, strong) UIView *topBackV;
 @property (nonatomic, strong) UIView *bottomBackV;
@@ -37,24 +39,24 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    //self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)setupSubViews {
     
+    self.headBackView = [[UIView alloc] initWithFrame:CGRectMake(0, [ECStyle navigationbarHeight], SCREENWIDTH, 200)];
+    self.headBackView.backgroundColor = [HWRandomColor randomColor];
+    [self.view addSubview:self.headBackView];
+    
+    
     self.scrollBackV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
     self.scrollBackV.backgroundColor = [UIColor orangeColor];
     self.scrollBackV.contentSize = CGSizeMake(SCREENWIDTH, SCREENHEIGHT * 2);
-    [self.view addSubview:self.scrollBackV];
+    //[self.view addSubview:self.scrollBackV];
     
     
-    self.topBackV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 300)];
+    self.topBackV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 100)];
     self.topBackV.backgroundColor = [HWRandomColor randomColor];
-    [self.scrollBackV addSubview:self.topBackV];
-    
-    UIView *top = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 200)];
-    top.backgroundColor = [HWRandomColor randomColor];
-    [self.topBackV addSubview:top];
+    [self.headBackView addSubview:self.topBackV];
     
     NSArray *arr1 = @[@"大望路服务员收银员", @"180/天"];
     NSArray *arr2 = @[@"丰台", @"日记", @"可长期"];
@@ -63,19 +65,19 @@
     
     CGFloat space = 50;
     CGFloat height = 20;
-    UILabel *lab1 = [[UILabel alloc] initWithFrame:CGRectMake(space, [ECStyle navigationbarHeight] + space / 2, SCREENWIDTH - space, height)];
+    UILabel *lab1 = [[UILabel alloc] initWithFrame:CGRectMake(LeftSpaceWidth, 0, SCREENWIDTH - space, height)];
     lab1.backgroundColor = [HWRandomColor randomColor];
     lab1.textColor = BLACKCOLOR;
     lab1.font = LARGEFont;
     lab1.text = arr1[0];
-    [top addSubview:lab1];
+    [self.topBackV addSubview:lab1];
     
     UILabel *lab2 = [[UILabel alloc] initWithFrame:CGRectMake(space, lab1.bottom + height, SCREENWIDTH - space, height)];
     lab2.backgroundColor = [HWRandomColor randomColor];
     lab2.textColor = BLACKCOLOR;
     lab2.font = LARGEFont;
     lab2.text = arr1[1];
-    [top addSubview:lab2];
+    [self.topBackV addSubview:lab2];
     
     UILabel *lab3 = [[UILabel alloc] initWithFrame:CGRectMake(space, lab2.bottom + height, SCREENWIDTH - space, height)];
     lab3.backgroundColor = [HWRandomColor randomColor];
@@ -83,9 +85,9 @@
     lab3.font = LARGEFont;
     NSString *text = [arr2 componentsJoinedByString:@"  "];
     lab3.text = text;
-    [top addSubview:lab3];
+    [self.topBackV addSubview:lab3];
     
-    UILabel *lab4 = [[UILabel alloc] initWithFrame:CGRectMake(space, top.bottom + height, SCREENWIDTH - space, height)];
+    UILabel *lab4 = [[UILabel alloc] initWithFrame:CGRectMake(space, self.topBackV.bottom + height, SCREENWIDTH - space, height)];
     lab4.backgroundColor = [HWRandomColor randomColor];
     lab4.textColor = BLACKCOLOR;
     lab4.font = LARGEFont;

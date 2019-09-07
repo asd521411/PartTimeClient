@@ -1,23 +1,22 @@
 //
-//  BaseViewController.m
+//  NotificationViewController.m
 //  PartTime
 //
-//  Created by 草帽~小子 on 2019/9/3.
+//  Created by 草帽~小子 on 2019/9/6.
 //  Copyright © 2019 OnePiece. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "NotificationViewController.h"
 
-@interface BaseViewController ()
+@interface NotificationViewController ()
 
 @end
 
-@implementation BaseViewController
+@implementation NotificationViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.title = @"通知提醒";
     
     // Do any additional setup after loading the view.
 }

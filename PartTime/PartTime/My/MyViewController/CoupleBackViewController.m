@@ -1,24 +1,21 @@
 //
-//  BaseViewController.m
+//  CoupleBackViewController.m
 //  PartTime
 //
-//  Created by 草帽~小子 on 2019/9/3.
+//  Created by 草帽~小子 on 2019/9/6.
 //  Copyright © 2019 OnePiece. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "CoupleBackViewController.h"
 
-@interface BaseViewController ()
+@interface CoupleBackViewController ()
 
 @end
 
-@implementation BaseViewController
+@implementation CoupleBackViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    
     // Do any additional setup after loading the view.
 }
 

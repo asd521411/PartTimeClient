@@ -9,6 +9,7 @@
 #import "DiscoveryViewController.h"
 #import "HeadTapV.h"
 #import "CommonViewController.h"
+#import "MJRefresh.h"
 
 @interface DiscoveryViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -27,13 +28,22 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)loadData {
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+    }];
+    self.tableView.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+        
+    }];
+    
+}
+
 - (void)setupSubViews {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
-    
     
 }
 
@@ -60,7 +70,6 @@
     return cell;
 }
 
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
     NSArray *arr = @[@{@"title":@"热门岗位"}, @{@"title":@"今日急聘"}, @{@"title":@"本周热门"}];
@@ -73,7 +82,6 @@
         [mutArr addObject:tap];
         tap.rightBtn.tag = 888 + i;
         tap.headTapVAction = ^(NSInteger index) {
-            NSLog(@"=====%ld", index);
         };
     }
     
@@ -92,7 +100,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 40;
 }
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {

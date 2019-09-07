@@ -7,6 +7,11 @@
 //
 
 #import "MyViewController.h"
+#import "SetViewController.h"
+#import "RecordDefaultViewController.h"
+#import "ReactiveCocoa.h"
+#import "MyResumeViewController.h"
+
 
 @interface MyViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -17,6 +22,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *listArr;
+@property (nonatomic, strong) NSArray *nextArr;
 
 @end
 
@@ -107,6 +113,11 @@
     self.lowerBackView.backgroundColor = [HWRandomColor randomColor];
     [self.headBackView addSubview:self.lowerBackView];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowerBackViewTap:)];
+    [self.lowerBackView addGestureRecognizer:tap];
+    
+    
+    
     CGFloat ligH = 10;
     
     UILabel *lab4 = [[UILabel alloc] initWithFrame:CGRectMake(space, ligH, SCREENWIDTH / 2, height)];
@@ -137,7 +148,7 @@
 }
 
 - (void)setupTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.headBackView.bottom, SCREENWIDTH, SCREENHEIGHT) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [HWRandomColor randomColor];
     self.tableView.rowHeight = 60;
     self.tableView.delegate =  self;
@@ -145,6 +156,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
+    self.tableView.tableHeaderView = self.headBackView;
 }
 
 
@@ -161,6 +173,17 @@
     }else if (send.tag == 670) {
         
     }
+    
+    RecordDefaultViewController *record = [[RecordDefaultViewController alloc] init];
+    record.hidesBottomBarWhenPushed = YES;
+    record.typeInteger = send.tag - 666;
+    [self.navigationController pushViewController:record animated:YES];
+    
+}
+
+- (void)lowerBackViewTap:(UIGestureRecognizer *)tap {
+    MyResumeViewController *resume = [[MyResumeViewController alloc] init];
+    [self.navigationController pushViewController:resume animated:YES];
 }
 
 #pragma mark delegate
@@ -178,6 +201,12 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIViewController *vc = [[NSClassFromString(self.nextArr[indexPath.row]) alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark getter
 
 - (NSArray *)listArr {
     if (!_listArr) {
@@ -185,6 +214,15 @@
     }
     return _listArr;
 }
+
+- (NSArray *)nextArr {
+    if (!_nextArr) {
+        _nextArr = @[@"SetViewController", @"RelationUsViewController", @"CoupleBackViewController", @"AboutUsViewController"];
+    }
+    return _nextArr;
+}
+
+
 
 
 /*

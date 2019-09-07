@@ -53,6 +53,27 @@
 		0434CEB12320F9B000BE7D66 /* TypeSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0434CEB02320F9B000BE7D66 /* TypeSelectViewController.m */; };
 		0434CEB42320FDED00BE7D66 /* SelectBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0434CEB32320FDED00BE7D66 /* SelectBtnView.m */; };
 		0434CEB72321220D00BE7D66 /* FiltrateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0434CEB62321220D00BE7D66 /* FiltrateViewController.m */; };
+		0434CEBA23216BB800BE7D66 /* SetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0434CEB923216BB800BE7D66 /* SetViewController.m */; };
+		0434CEBD23217CC600BE7D66 /* RelationUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0434CEBC23217CC600BE7D66 /* RelationUsViewController.m */; };
+		0434CEC023217D0E00BE7D66 /* CoupleBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0434CEBF23217D0E00BE7D66 /* CoupleBackViewController.m */; };
+		0434CEC323217D2D00BE7D66 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0434CEC223217D2D00BE7D66 /* AboutUsViewController.m */; };
+		0434CEC62321824900BE7D66 /* ChangeBindingPNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0434CEC52321824900BE7D66 /* ChangeBindingPNViewController.m */; };
+		0434CEC92321827900BE7D66 /* InputCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0434CEC82321827900BE7D66 /* InputCodeViewController.m */; };
+		0434CECC2321845F00BE7D66 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0434CECB2321845F00BE7D66 /* ChangePasswordViewController.m */; };
+		0434CECF232184BA00BE7D66 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0434CECE232184BA00BE7D66 /* NotificationViewController.m */; };
+		0434CED22321850300BE7D66 /* PrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0434CED12321850300BE7D66 /* PrivacyPolicyViewController.m */; };
+		0449B54D232201BB000E22DF /* RecordDefaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449B54C232201BB000E22DF /* RecordDefaultViewController.m */; };
+		0449B55023221D86000E22DF /* CommonTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449B54F23221D86000E22DF /* CommonTableViewController.m */; };
+		0449B55823223E2B000E22DF /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449B55223223E2A000E22DF /* SDCollectionViewCell.m */; };
+		0449B55923223E2B000E22DF /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449B55523223E2B000E22DF /* SDCycleScrollView.m */; };
+		0449B55A23223E2B000E22DF /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449B55723223E2B000E22DF /* UIView+SDExtension.m */; };
+		0449B57023223E83000E22DF /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449B56823223E82000E22DF /* TAAnimatedDotView.m */; };
+		0449B57123223E83000E22DF /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449B56B23223E82000E22DF /* TAAbstractDotView.m */; };
+		0449B57223223E83000E22DF /* TAPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449B56C23223E82000E22DF /* TAPageControl.m */; };
+		0449B57323223E83000E22DF /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449B56E23223E83000E22DF /* TADotView.m */; };
+		0449B5762322460A000E22DF /* ScrollWithImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449B5742322460A000E22DF /* ScrollWithImage.m */; };
+		0449B57923225137000E22DF /* MyResumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449B57823225137000E22DF /* MyResumeViewController.m */; };
+		0449B57C23226D4C000E22DF /* CommonCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449B57B23226D4C000E22DF /* CommonCollectionViewController.m */; };
 		B10BA4C4C542C352B9397D9A /* Pods_PartTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7322883C3B16A255DCCCA03F /* Pods_PartTime.framework */; };
 /* End PBXBuildFile section */
 
@@ -148,6 +169,48 @@
 		0434CEB32320FDED00BE7D66 /* SelectBtnView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectBtnView.m; sourceTree = "<group>"; };
 		0434CEB52321220D00BE7D66 /* FiltrateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FiltrateViewController.h; sourceTree = "<group>"; };
 		0434CEB62321220D00BE7D66 /* FiltrateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FiltrateViewController.m; sourceTree = "<group>"; };
+		0434CEB823216BB800BE7D66 /* SetViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetViewController.h; sourceTree = "<group>"; };
+		0434CEB923216BB800BE7D66 /* SetViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetViewController.m; sourceTree = "<group>"; };
+		0434CEBB23217CC600BE7D66 /* RelationUsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RelationUsViewController.h; sourceTree = "<group>"; };
+		0434CEBC23217CC600BE7D66 /* RelationUsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RelationUsViewController.m; sourceTree = "<group>"; };
+		0434CEBE23217D0E00BE7D66 /* CoupleBackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoupleBackViewController.h; sourceTree = "<group>"; };
+		0434CEBF23217D0E00BE7D66 /* CoupleBackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoupleBackViewController.m; sourceTree = "<group>"; };
+		0434CEC123217D2D00BE7D66 /* AboutUsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
+		0434CEC223217D2D00BE7D66 /* AboutUsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
+		0434CEC42321824900BE7D66 /* ChangeBindingPNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeBindingPNViewController.h; sourceTree = "<group>"; };
+		0434CEC52321824900BE7D66 /* ChangeBindingPNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeBindingPNViewController.m; sourceTree = "<group>"; };
+		0434CEC72321827900BE7D66 /* InputCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputCodeViewController.h; sourceTree = "<group>"; };
+		0434CEC82321827900BE7D66 /* InputCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputCodeViewController.m; sourceTree = "<group>"; };
+		0434CECA2321845F00BE7D66 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
+		0434CECB2321845F00BE7D66 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
+		0434CECD232184BA00BE7D66 /* NotificationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
+		0434CECE232184BA00BE7D66 /* NotificationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
+		0434CED02321850300BE7D66 /* PrivacyPolicyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivacyPolicyViewController.h; sourceTree = "<group>"; };
+		0434CED12321850300BE7D66 /* PrivacyPolicyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivacyPolicyViewController.m; sourceTree = "<group>"; };
+		0449B54B232201BB000E22DF /* RecordDefaultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordDefaultViewController.h; sourceTree = "<group>"; };
+		0449B54C232201BB000E22DF /* RecordDefaultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordDefaultViewController.m; sourceTree = "<group>"; };
+		0449B54E23221D86000E22DF /* CommonTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonTableViewController.h; sourceTree = "<group>"; };
+		0449B54F23221D86000E22DF /* CommonTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonTableViewController.m; sourceTree = "<group>"; };
+		0449B55223223E2A000E22DF /* SDCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCollectionViewCell.m; sourceTree = "<group>"; };
+		0449B55323223E2A000E22DF /* SDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCollectionViewCell.h; sourceTree = "<group>"; };
+		0449B55423223E2A000E22DF /* SDCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCycleScrollView.h; sourceTree = "<group>"; };
+		0449B55523223E2B000E22DF /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
+		0449B55623223E2B000E22DF /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
+		0449B55723223E2B000E22DF /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
+		0449B56823223E82000E22DF /* TAAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAnimatedDotView.m; sourceTree = "<group>"; };
+		0449B56923223E82000E22DF /* TADotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TADotView.h; sourceTree = "<group>"; };
+		0449B56A23223E82000E22DF /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
+		0449B56B23223E82000E22DF /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
+		0449B56C23223E82000E22DF /* TAPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPageControl.m; sourceTree = "<group>"; };
+		0449B56D23223E83000E22DF /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
+		0449B56E23223E83000E22DF /* TADotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TADotView.m; sourceTree = "<group>"; };
+		0449B56F23223E83000E22DF /* TAPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPageControl.h; sourceTree = "<group>"; };
+		0449B5742322460A000E22DF /* ScrollWithImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollWithImage.m; sourceTree = "<group>"; };
+		0449B5752322460A000E22DF /* ScrollWithImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollWithImage.h; sourceTree = "<group>"; };
+		0449B57723225137000E22DF /* MyResumeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyResumeViewController.h; sourceTree = "<group>"; };
+		0449B57823225137000E22DF /* MyResumeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyResumeViewController.m; sourceTree = "<group>"; };
+		0449B57A23226D4C000E22DF /* CommonCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonCollectionViewController.h; sourceTree = "<group>"; };
+		0449B57B23226D4C000E22DF /* CommonCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonCollectionViewController.m; sourceTree = "<group>"; };
 		28C44CAE099A541C4C74EE83 /* Pods-PartTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartTime.release.xcconfig"; path = "Target Support Files/Pods-PartTime/Pods-PartTime.release.xcconfig"; sourceTree = "<group>"; };
 		7322883C3B16A255DCCCA03F /* Pods_PartTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PartTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE120244F67A2D92C7647E37 /* Pods-PartTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartTime.debug.xcconfig"; path = "Target Support Files/Pods-PartTime/Pods-PartTime.debug.xcconfig"; sourceTree = "<group>"; };
@@ -239,6 +302,8 @@
 			children = (
 				0434CE31231EBCDA00BE7D66 /* HomePageViewController.h */,
 				0434CE32231EBCDA00BE7D66 /* HomePageViewController.m */,
+				0449B57A23226D4C000E22DF /* CommonCollectionViewController.h */,
+				0449B57B23226D4C000E22DF /* CommonCollectionViewController.m */,
 			);
 			path = HomePageViewController;
 			sourceTree = "<group>";
@@ -256,6 +321,30 @@
 			children = (
 				0434CE26231EBC2400BE7D66 /* MyViewController.h */,
 				0434CE27231EBC2400BE7D66 /* MyViewController.m */,
+				0449B57723225137000E22DF /* MyResumeViewController.h */,
+				0449B57823225137000E22DF /* MyResumeViewController.m */,
+				0449B54B232201BB000E22DF /* RecordDefaultViewController.h */,
+				0449B54C232201BB000E22DF /* RecordDefaultViewController.m */,
+				0449B54E23221D86000E22DF /* CommonTableViewController.h */,
+				0449B54F23221D86000E22DF /* CommonTableViewController.m */,
+				0434CEB823216BB800BE7D66 /* SetViewController.h */,
+				0434CEB923216BB800BE7D66 /* SetViewController.m */,
+				0434CEC42321824900BE7D66 /* ChangeBindingPNViewController.h */,
+				0434CEC52321824900BE7D66 /* ChangeBindingPNViewController.m */,
+				0434CEC72321827900BE7D66 /* InputCodeViewController.h */,
+				0434CEC82321827900BE7D66 /* InputCodeViewController.m */,
+				0434CECA2321845F00BE7D66 /* ChangePasswordViewController.h */,
+				0434CECB2321845F00BE7D66 /* ChangePasswordViewController.m */,
+				0434CECD232184BA00BE7D66 /* NotificationViewController.h */,
+				0434CECE232184BA00BE7D66 /* NotificationViewController.m */,
+				0434CED02321850300BE7D66 /* PrivacyPolicyViewController.h */,
+				0434CED12321850300BE7D66 /* PrivacyPolicyViewController.m */,
+				0434CEBB23217CC600BE7D66 /* RelationUsViewController.h */,
+				0434CEBC23217CC600BE7D66 /* RelationUsViewController.m */,
+				0434CEBE23217D0E00BE7D66 /* CoupleBackViewController.h */,
+				0434CEBF23217D0E00BE7D66 /* CoupleBackViewController.m */,
+				0434CEC123217D2D00BE7D66 /* AboutUsViewController.h */,
+				0434CEC223217D2D00BE7D66 /* AboutUsViewController.m */,
 			);
 			path = MyViewController;
 			sourceTree = "<group>";
@@ -356,6 +445,7 @@
 		0434CE41231ED52500BE7D66 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0449B55123223DED000E22DF /* SDCycleScrollView */,
 				0434CE962320F7F400BE7D66 /* RHFileTrate */,
 				0434CE6D231F968200BE7D66 /* Model */,
 				0434CE3E231ED51000BE7D66 /* CommonTableViewCell.h */,
@@ -422,6 +512,37 @@
 				0434CE9A2320F84200BE7D66 /* RHHelper.m */,
 			);
 			name = RHFileTrate;
+			sourceTree = "<group>";
+		};
+		0449B55123223DED000E22DF /* SDCycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				0449B5752322460A000E22DF /* ScrollWithImage.h */,
+				0449B5742322460A000E22DF /* ScrollWithImage.m */,
+				0449B55B23223E31000E22DF /* PageControl */,
+				0449B55323223E2A000E22DF /* SDCollectionViewCell.h */,
+				0449B55223223E2A000E22DF /* SDCollectionViewCell.m */,
+				0449B55423223E2A000E22DF /* SDCycleScrollView.h */,
+				0449B55523223E2B000E22DF /* SDCycleScrollView.m */,
+				0449B55623223E2B000E22DF /* UIView+SDExtension.h */,
+				0449B55723223E2B000E22DF /* UIView+SDExtension.m */,
+			);
+			name = SDCycleScrollView;
+			sourceTree = "<group>";
+		};
+		0449B55B23223E31000E22DF /* PageControl */ = {
+			isa = PBXGroup;
+			children = (
+				0449B56A23223E82000E22DF /* TAAbstractDotView.h */,
+				0449B56B23223E82000E22DF /* TAAbstractDotView.m */,
+				0449B56D23223E83000E22DF /* TAAnimatedDotView.h */,
+				0449B56823223E82000E22DF /* TAAnimatedDotView.m */,
+				0449B56923223E82000E22DF /* TADotView.h */,
+				0449B56E23223E83000E22DF /* TADotView.m */,
+				0449B56F23223E83000E22DF /* TAPageControl.h */,
+				0449B56C23223E82000E22DF /* TAPageControl.m */,
+			);
+			name = PageControl;
 			sourceTree = "<group>";
 		};
 		56692150A7F2823579F4B701 /* Pods */ = {
@@ -562,36 +683,57 @@
 				0434CE44231ED54B00BE7D66 /* CommonViewController.m in Sources */,
 				0434CE56231ED93900BE7D66 /* ECStyle.m in Sources */,
 				0434CE69231EEA8E00BE7D66 /* UIView+Dimension.m in Sources */,
+				0434CEC023217D0E00BE7D66 /* CoupleBackViewController.m in Sources */,
+				0449B55A23223E2B000E22DF /* UIView+SDExtension.m in Sources */,
 				0434CE842320028E00BE7D66 /* LoginViewController.m in Sources */,
 				0434CE6C231F5A8C00BE7D66 /* HWTitleItemSelector.m in Sources */,
 				0434CE20231EB91900BE7D66 /* BaseViewController.m in Sources */,
 				0434CE50231ED85300BE7D66 /* AppUpdater.m in Sources */,
+				0434CEBD23217CC600BE7D66 /* RelationUsViewController.m in Sources */,
 				0434CEA42320F84300BE7D66 /* RHHelper.m in Sources */,
 				0434CE33231EBCDA00BE7D66 /* HomePageViewController.m in Sources */,
+				0434CEC92321827900BE7D66 /* InputCodeViewController.m in Sources */,
 				0434CE8F232025D000BE7D66 /* VerifyViewController.m in Sources */,
 				0434CE7C231FB82200BE7D66 /* SortViewController.m in Sources */,
 				0434CE2F231EBC5C00BE7D66 /* SquareViewController.m in Sources */,
 				0434CEA32320F84300BE7D66 /* RHFiltrateView.m in Sources */,
+				0449B5762322460A000E22DF /* ScrollWithImage.m in Sources */,
+				0449B57023223E83000E22DF /* TAAnimatedDotView.m in Sources */,
+				0434CECC2321845F00BE7D66 /* ChangePasswordViewController.m in Sources */,
 				0434CE79231FB7BC00BE7D66 /* LocationViewController.m in Sources */,
+				0434CEC62321824900BE7D66 /* ChangeBindingPNViewController.m in Sources */,
 				0434CEB72321220D00BE7D66 /* FiltrateViewController.m in Sources */,
+				0449B55023221D86000E22DF /* CommonTableViewController.m in Sources */,
 				0434CEA52320F84300BE7D66 /* RHFiltrateCell.m in Sources */,
 				0434CE21231EB91900BE7D66 /* BaseNavigationController.m in Sources */,
 				0434CE3A231EC22500BE7D66 /* HWRandomColor.m in Sources */,
 				0434CDF8231EB5CD00BE7D66 /* ViewController.m in Sources */,
+				0449B54D232201BB000E22DF /* RecordDefaultViewController.m in Sources */,
+				0449B55923223E2B000E22DF /* SDCycleScrollView.m in Sources */,
 				0434CE36231EBD8500BE7D66 /* DiscoveryViewController.m in Sources */,
 				0434CEB12320F9B000BE7D66 /* TypeSelectViewController.m in Sources */,
 				0434CE92232026C600BE7D66 /* ResetViewController.m in Sources */,
 				0434CE59231ED94600BE7D66 /* ECUtil.m in Sources */,
 				0434CE03231EB5CF00BE7D66 /* main.m in Sources */,
 				0434CDF5231EB5CD00BE7D66 /* AppDelegate.m in Sources */,
+				0449B57923225137000E22DF /* MyResumeViewController.m in Sources */,
+				0449B55823223E2B000E22DF /* SDCollectionViewCell.m in Sources */,
+				0449B57C23226D4C000E22DF /* CommonCollectionViewController.m in Sources */,
 				0434CE70231F969C00BE7D66 /* CommonModel.m in Sources */,
 				0434CE73231FA59700BE7D66 /* HeadTapV.m in Sources */,
 				0434CE2B231EBC3000BE7D66 /* MessageViewController.m in Sources */,
 				0434CE63231EE1E900BE7D66 /* ImgTitleView.m in Sources */,
+				0449B57223223E83000E22DF /* TAPageControl.m in Sources */,
+				0434CEC323217D2D00BE7D66 /* AboutUsViewController.m in Sources */,
 				0434CEA62320F84300BE7D66 /* RHCollectionViewFlowLayout.m in Sources */,
+				0434CED22321850300BE7D66 /* PrivacyPolicyViewController.m in Sources */,
 				0434CE7F231FC27400BE7D66 /* LocationTableViewCell.m in Sources */,
 				0434CE53231ED92100BE7D66 /* ECDevice.m in Sources */,
+				0449B57323223E83000E22DF /* TADotView.m in Sources */,
+				0434CEBA23216BB800BE7D66 /* SetViewController.m in Sources */,
+				0449B57123223E83000E22DF /* TAAbstractDotView.m in Sources */,
 				0434CEA82320F84300BE7D66 /* RHFiltrateHeaderView.m in Sources */,
+				0434CECF232184BA00BE7D66 /* NotificationViewController.m in Sources */,
 				0434CE952320B30300BE7D66 /* CommonDetailsViewController.m in Sources */,
 				0434CE76231FB74E00BE7D66 /* TitleSelectItemControl.m in Sources */,
 				0434CE28231EBC2400BE7D66 /* MyViewController.m in Sources */,

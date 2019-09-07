@@ -58,7 +58,7 @@
     textFd1.placeholder = @"请输入手机号";
     [self.backScrollV addSubview:textFd1];
     textFd1.layer.borderColor = LIGHTGRAYCOLOR.CGColor;
-    textFd1.layer.borderWidth = LineWidth;
+    textFd1.layer.borderWidth = LineWidthNormal05;
     
     UILabel *lab2 = [[UILabel alloc] initWithFrame:CGRectMake(space, lab1.bottom + space, space * 2, hei)];
     lab2.textColor = BLACKCOLOR;
@@ -70,7 +70,7 @@
     textFd2.placeholder = @"请输入密码";
     [self.backScrollV addSubview:textFd2];
     textFd2.layer.borderColor = LIGHTGRAYCOLOR.CGColor;
-    textFd2.layer.borderWidth = LineWidth;
+    textFd2.layer.borderWidth = LineWidthNormal05;
     
     UIButton *agree = [UIButton buttonWithType:UIButtonTypeCustom];
     agree.frame = CGRectMake(space, lab2.bottom + space / 2, hei / 2, hei / 2);
