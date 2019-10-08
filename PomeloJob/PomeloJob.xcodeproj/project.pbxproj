@@ -1,0 +1,1094 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0460D9BC234B3B0000C721CE /* CommonWorkLocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460D9BB234B3B0000C721CE /* CommonWorkLocationTableViewCell.m */; };
+		0460D9BF234C212700C721CE /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460D9BE234C212700C721CE /* RTLabel.m */; };
+		04A5E4502338F27D0028B1C9 /* PomeloAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E44F2338F27D0028B1C9 /* PomeloAppDelegate.m */; };
+		04A5E4532338F27D0028B1C9 /* PomeloViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E4522338F27D0028B1C9 /* PomeloViewController.m */; };
+		04A5E4562338F27D0028B1C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A5E4542338F27D0028B1C9 /* Main.storyboard */; };
+		04A5E4582338F27E0028B1C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04A5E4572338F27E0028B1C9 /* Assets.xcassets */; };
+		04A5E45B2338F27E0028B1C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A5E4592338F27E0028B1C9 /* LaunchScreen.storyboard */; };
+		04A5E45E2338F27E0028B1C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E45D2338F27E0028B1C9 /* main.m */; };
+		04A5E47A2338F70F0028B1C9 /* dagou.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A5E4792338F70F0028B1C9 /* dagou.png */; };
+		04A5E4882338F7A10028B1C9 /* PomeloGuidancePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E47B2338F7A00028B1C9 /* PomeloGuidancePageViewController.m */; };
+		04A5E4892338F7A10028B1C9 /* PomeloVerifyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E47C2338F7A00028B1C9 /* PomeloVerifyLoginViewController.m */; };
+		04A5E48A2338F7A10028B1C9 /* PomeloForgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E47E2338F7A00028B1C9 /* PomeloForgetViewController.m */; };
+		04A5E48B2338F7A10028B1C9 /* PomeloResetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E4822338F7A10028B1C9 /* PomeloResetViewController.m */; };
+		04A5E48C2338F7A10028B1C9 /* PomeloVerifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E4832338F7A10028B1C9 /* PomeloVerifyViewController.m */; };
+		04A5E48D2338F7A10028B1C9 /* PomeloLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E4842338F7A10028B1C9 /* PomeloLoginViewController.m */; };
+		04A5E5E7233900CF0028B1C9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04A5E5E6233900CF0028B1C9 /* Images.xcassets */; };
+		04BDCC1223445C860044346C /* DiscoveryRankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BDCC1123445C860044346C /* DiscoveryRankTableViewCell.m */; };
+		04BDCC152344B45F0044346C /* SquareStyleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BDCC142344B45F0044346C /* SquareStyleModel.m */; };
+		8DDE14B9EB9D7404EA2344A3 /* Pods_PomeloJob.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D81614FE93064BA2CBA924A /* Pods_PomeloJob.framework */; };
+		F1C4D85E233A0233004BD723 /* PomeloHotPositionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D856233A0233004BD723 /* PomeloHotPositionTableViewCell.m */; };
+		F1C4D85F233A0233004BD723 /* PomeloFastPositionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D857233A0233004BD723 /* PomeloFastPositionTableViewCell.m */; };
+		F1C4D860233A0233004BD723 /* PomeloHotCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D859233A0233004BD723 /* PomeloHotCollectionViewCell.m */; };
+		F1C4D861233A0233004BD723 /* PomeloDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D85D233A0233004BD723 /* PomeloDiscoveryViewController.m */; };
+		F1C4D865233A02DE004BD723 /* PomeloMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D863233A02DE004BD723 /* PomeloMessageViewController.m */; };
+		F1C4D89B233A0358004BD723 /* PomeloAboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D866233A0356004BD723 /* PomeloAboutUsViewController.m */; };
+		F1C4D89C233A0358004BD723 /* PomeloCommonTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D867233A0356004BD723 /* PomeloCommonTableViewController.m */; };
+		F1C4D89D233A0358004BD723 /* PomeloRelationUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D86B233A0356004BD723 /* PomeloRelationUsViewController.m */; };
+		F1C4D89E233A0358004BD723 /* PomeloCoupleBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D86D233A0356004BD723 /* PomeloCoupleBackViewController.m */; };
+		F1C4D89F233A0358004BD723 /* PomeloResumeImproveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D86F233A0357004BD723 /* PomeloResumeImproveTableViewCell.m */; };
+		F1C4D8A0233A0358004BD723 /* PomeloEducationExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D871233A0357004BD723 /* PomeloEducationExperienceViewController.m */; };
+		F1C4D8A1233A0358004BD723 /* PomeloIndividualResumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D872233A0357004BD723 /* PomeloIndividualResumeViewController.m */; };
+		F1C4D8A2233A0358004BD723 /* PomeloResumeImproveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D875233A0357004BD723 /* PomeloResumeImproveTableViewController.m */; };
+		F1C4D8A3233A0358004BD723 /* PomeloJobIntentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D877233A0357004BD723 /* PomeloJobIntentionViewController.m */; };
+		F1C4D8A4233A0358004BD723 /* PomeloMyResumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D878233A0357004BD723 /* PomeloMyResumeViewController.m */; };
+		F1C4D8A5233A0358004BD723 /* PomeloWorkExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D87C233A0357004BD723 /* PomeloWorkExperienceViewController.m */; };
+		F1C4D8A6233A0358004BD723 /* PomeloLimitTwoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D881233A0357004BD723 /* PomeloLimitTwoTableViewController.m */; };
+		F1C4D8A7233A0358004BD723 /* PomeloLimitFourTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D884233A0357004BD723 /* PomeloLimitFourTableViewController.m */; };
+		F1C4D8A8233A0358004BD723 /* PomeloLimitFiveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D885233A0357004BD723 /* PomeloLimitFiveTableViewController.m */; };
+		F1C4D8A9233A0358004BD723 /* PomeloLimitThreeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D886233A0357004BD723 /* PomeloLimitThreeTableViewController.m */; };
+		F1C4D8AA233A0358004BD723 /* PomeloRecordDefaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D88A233A0357004BD723 /* PomeloRecordDefaultViewController.m */; };
+		F1C4D8AB233A0358004BD723 /* PomeloLimitOneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D88B233A0357004BD723 /* PomeloLimitOneTableViewController.m */; };
+		F1C4D8AC233A0358004BD723 /* PomeloPersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D88C233A0357004BD723 /* PomeloPersonalInfoViewController.m */; };
+		F1C4D8AD233A0358004BD723 /* PomeloMyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D88D233A0357004BD723 /* PomeloMyViewController.m */; };
+		F1C4D8AE233A0358004BD723 /* PomeloChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D890233A0358004BD723 /* PomeloChangePasswordViewController.m */; };
+		F1C4D8AF233A0358004BD723 /* PomeloNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D891233A0358004BD723 /* PomeloNotificationViewController.m */; };
+		F1C4D8B0233A0358004BD723 /* PomeloPrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D893233A0358004BD723 /* PomeloPrivacyPolicyViewController.m */; };
+		F1C4D8B1233A0358004BD723 /* PomeloSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D894233A0358004BD723 /* PomeloSetViewController.m */; };
+		F1C4D8B2233A0358004BD723 /* PomeloChangeBindingPNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D895233A0358004BD723 /* PomeloChangeBindingPNViewController.m */; };
+		F1C4D8B3233A0358004BD723 /* PomeloInputCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D896233A0358004BD723 /* PomeloInputCodeViewController.m */; };
+		F1C4D8C1233A03AE004BD723 /* PomeloSortViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8B7233A03AE004BD723 /* PomeloSortViewController.m */; };
+		F1C4D8C2233A03AE004BD723 /* PomeloTypeSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8B9233A03AE004BD723 /* PomeloTypeSelectViewController.m */; };
+		F1C4D8C3233A03AE004BD723 /* PomeloLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8BB233A03AE004BD723 /* PomeloLocationViewController.m */; };
+		F1C4D8C4233A03AE004BD723 /* PomeloSquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8BC233A03AE004BD723 /* PomeloSquareViewController.m */; };
+		F1C4D8C5233A03AE004BD723 /* PomeloFiltrateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8BE233A03AE004BD723 /* PomeloFiltrateViewController.m */; };
+		F1C4D8C6233A03AE004BD723 /* PomeloLocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8C0233A03AE004BD723 /* PomeloLocationTableViewCell.m */; };
+		F1C4D923233A0785004BD723 /* HWRandomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8CA233A0785004BD723 /* HWRandomColor.m */; };
+		F1C4D924233A0785004BD723 /* ECUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8CB233A0785004BD723 /* ECUtil.m */; };
+		F1C4D925233A0785004BD723 /* AppUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8CC233A0785004BD723 /* AppUpdater.m */; };
+		F1C4D926233A0785004BD723 /* ECDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8CD233A0785004BD723 /* ECDevice.m */; };
+		F1C4D927233A0785004BD723 /* ECStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8CE233A0785004BD723 /* ECStyle.m */; };
+		F1C4D928233A0785004BD723 /* UIView+Dimension.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8D0233A0785004BD723 /* UIView+Dimension.m */; };
+		F1C4D929233A0785004BD723 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8D6233A0785004BD723 /* BaseViewController.m */; };
+		F1C4D92A233A0785004BD723 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8D8233A0785004BD723 /* BaseNavigationController.m */; };
+		F1C4D92B233A0785004BD723 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8DA233A0785004BD723 /* BaseTabBarController.m */; };
+		F1C4D92C233A0785004BD723 /* CommontTopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8DD233A0785004BD723 /* CommontTopTableViewCell.m */; };
+		F1C4D92D233A0785004BD723 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8DE233A0785004BD723 /* BaseTableViewCell.m */; };
+		F1C4D931233A0785004BD723 /* ResumeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8E6233A0785004BD723 /* ResumeTableViewCell.m */; };
+		F1C4D932233A0785004BD723 /* ResumeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8E8233A0785004BD723 /* ResumeModel.m */; };
+		F1C4D933233A0785004BD723 /* CommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8EA233A0785004BD723 /* CommonViewController.m */; };
+		F1C4D934233A0785004BD723 /* CommonTableViewHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8ED233A0785004BD723 /* CommonTableViewHeaderFooterView.m */; };
+		F1C4D935233A0785004BD723 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8F0233A0785004BD723 /* UserInfoModel.m */; };
+		F1C4D936233A0785004BD723 /* CommonDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8F2233A0785004BD723 /* CommonDetailsTableViewCell.m */; };
+		F1C4D938233A0785004BD723 /* CommonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8F5233A0785004BD723 /* CommonModel.m */; };
+		F1C4D939233A0785004BD723 /* CommonDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8F7233A0785004BD723 /* CommonDetailsModel.m */; };
+		F1C4D93A233A0785004BD723 /* HWPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8F9233A0785004BD723 /* HWPickerView.m */; };
+		F1C4D93B233A0785004BD723 /* SelectBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8FA233A0785004BD723 /* SelectBtnView.m */; };
+		F1C4D93C233A0785004BD723 /* HeadTapV.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8FC233A0785004BD723 /* HeadTapV.m */; };
+		F1C4D93D233A0785004BD723 /* CommonImgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D8FF233A0785004BD723 /* CommonImgModel.m */; };
+		F1C4D93E233A0785004BD723 /* ImgTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D902233A0785004BD723 /* ImgTitleView.m */; };
+		F1C4D940233A0785004BD723 /* NavigationBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D907233A0785004BD723 /* NavigationBarView.m */; };
+		F1C4D941233A0785004BD723 /* CommonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D909233A0785004BD723 /* CommonTableViewCell.m */; };
+		F1C4D942233A0785004BD723 /* TitleSelectItemControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D90A233A0785004BD723 /* TitleSelectItemControl.m */; };
+		F1C4D944233A0785004BD723 /* CommonDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D90D233A0785004BD723 /* CommonDetailsViewController.m */; };
+		F1C4D945233A0785004BD723 /* HWTitleItemSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D90F233A0785004BD723 /* HWTitleItemSelector.m */; };
+		F1C4D946233A0785004BD723 /* NSUserDefaultMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D915233A0785004BD723 /* NSUserDefaultMemory.m */; };
+		F1C4D947233A0785004BD723 /* NSString+HWCheckoutHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D916233A0785004BD723 /* NSString+HWCheckoutHelper.m */; };
+		F1C4D948233A0785004BD723 /* LJSecondScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D917233A0785004BD723 /* LJSecondScrollViewController.m */; };
+		F1C4D949233A0785004BD723 /* LJDynamicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D918233A0785004BD723 /* LJDynamicItem.m */; };
+		F1C4D94A233A0785004BD723 /* HWPorgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D919233A0785004BD723 /* HWPorgressHUD.m */; };
+		F1C4D94B233A0785004BD723 /* HWAFNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D91B233A0785004BD723 /* HWAFNetworkManager.m */; };
+		F1C4D94C233A0785004BD723 /* icontext.png in Resources */ = {isa = PBXBuildFile; fileRef = F1C4D91E233A0785004BD723 /* icontext.png */; };
+		F1C4D94D233A0785004BD723 /* UIView+HWUtilView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D922233A0785004BD723 /* UIView+HWUtilView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0460D9BA234B3B0000C721CE /* CommonWorkLocationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonWorkLocationTableViewCell.h; sourceTree = "<group>"; };
+		0460D9BB234B3B0000C721CE /* CommonWorkLocationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonWorkLocationTableViewCell.m; sourceTree = "<group>"; };
+		0460D9BD234C212600C721CE /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
+		0460D9BE234C212700C721CE /* RTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
+		04A5E44B2338F27D0028B1C9 /* PomeloJob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomeloJob.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		04A5E44E2338F27D0028B1C9 /* PomeloAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PomeloAppDelegate.h; sourceTree = "<group>"; };
+		04A5E44F2338F27D0028B1C9 /* PomeloAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PomeloAppDelegate.m; sourceTree = "<group>"; };
+		04A5E4512338F27D0028B1C9 /* PomeloViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PomeloViewController.h; sourceTree = "<group>"; };
+		04A5E4522338F27D0028B1C9 /* PomeloViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PomeloViewController.m; sourceTree = "<group>"; };
+		04A5E4552338F27D0028B1C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		04A5E4572338F27E0028B1C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		04A5E45A2338F27E0028B1C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		04A5E45C2338F27E0028B1C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		04A5E45D2338F27E0028B1C9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		04A5E4792338F70F0028B1C9 /* dagou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dagou.png; sourceTree = "<group>"; };
+		04A5E47B2338F7A00028B1C9 /* PomeloGuidancePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloGuidancePageViewController.m; sourceTree = "<group>"; };
+		04A5E47C2338F7A00028B1C9 /* PomeloVerifyLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloVerifyLoginViewController.m; sourceTree = "<group>"; };
+		04A5E47D2338F7A00028B1C9 /* PomeloGuidancePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloGuidancePageViewController.h; sourceTree = "<group>"; };
+		04A5E47E2338F7A00028B1C9 /* PomeloForgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloForgetViewController.m; sourceTree = "<group>"; };
+		04A5E4802338F7A00028B1C9 /* PomeloLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloLoginViewController.h; sourceTree = "<group>"; };
+		04A5E4812338F7A10028B1C9 /* PomeloVerifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloVerifyViewController.h; sourceTree = "<group>"; };
+		04A5E4822338F7A10028B1C9 /* PomeloResetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloResetViewController.m; sourceTree = "<group>"; };
+		04A5E4832338F7A10028B1C9 /* PomeloVerifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloVerifyViewController.m; sourceTree = "<group>"; };
+		04A5E4842338F7A10028B1C9 /* PomeloLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloLoginViewController.m; sourceTree = "<group>"; };
+		04A5E4852338F7A10028B1C9 /* PomeloForgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloForgetViewController.h; sourceTree = "<group>"; };
+		04A5E4862338F7A10028B1C9 /* PomeloVerifyLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloVerifyLoginViewController.h; sourceTree = "<group>"; };
+		04A5E4872338F7A10028B1C9 /* PomeloResetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloResetViewController.h; sourceTree = "<group>"; };
+		04A5E48E2338F8310028B1C9 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		04A5E5E6233900CF0028B1C9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		04BDCC1023445C860044346C /* DiscoveryRankTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoveryRankTableViewCell.h; sourceTree = "<group>"; };
+		04BDCC1123445C860044346C /* DiscoveryRankTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoveryRankTableViewCell.m; sourceTree = "<group>"; };
+		04BDCC132344B45F0044346C /* SquareStyleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SquareStyleModel.h; sourceTree = "<group>"; };
+		04BDCC142344B45F0044346C /* SquareStyleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SquareStyleModel.m; sourceTree = "<group>"; };
+		1D81614FE93064BA2CBA924A /* Pods_PomeloJob.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PomeloJob.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F625C60F604EA921F8F649F /* Pods-PomeloJob.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PomeloJob.debug.xcconfig"; path = "Target Support Files/Pods-PomeloJob/Pods-PomeloJob.debug.xcconfig"; sourceTree = "<group>"; };
+		8FFC5837324EF42956C32B15 /* Pods-PomeloJob.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PomeloJob.release.xcconfig"; path = "Target Support Files/Pods-PomeloJob/Pods-PomeloJob.release.xcconfig"; sourceTree = "<group>"; };
+		F1C4D856233A0233004BD723 /* PomeloHotPositionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloHotPositionTableViewCell.m; sourceTree = "<group>"; };
+		F1C4D857233A0233004BD723 /* PomeloFastPositionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloFastPositionTableViewCell.m; sourceTree = "<group>"; };
+		F1C4D858233A0233004BD723 /* PomeloDiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloDiscoveryViewController.h; sourceTree = "<group>"; };
+		F1C4D859233A0233004BD723 /* PomeloHotCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloHotCollectionViewCell.m; sourceTree = "<group>"; };
+		F1C4D85A233A0233004BD723 /* PomeloHotPositionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloHotPositionTableViewCell.h; sourceTree = "<group>"; };
+		F1C4D85B233A0233004BD723 /* PomeloFastPositionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloFastPositionTableViewCell.h; sourceTree = "<group>"; };
+		F1C4D85C233A0233004BD723 /* PomeloHotCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloHotCollectionViewCell.h; sourceTree = "<group>"; };
+		F1C4D85D233A0233004BD723 /* PomeloDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloDiscoveryViewController.m; sourceTree = "<group>"; };
+		F1C4D863233A02DE004BD723 /* PomeloMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloMessageViewController.m; sourceTree = "<group>"; };
+		F1C4D864233A02DE004BD723 /* PomeloMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloMessageViewController.h; sourceTree = "<group>"; };
+		F1C4D866233A0356004BD723 /* PomeloAboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloAboutUsViewController.m; sourceTree = "<group>"; };
+		F1C4D867233A0356004BD723 /* PomeloCommonTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloCommonTableViewController.m; sourceTree = "<group>"; };
+		F1C4D868233A0356004BD723 /* PomeloCommonTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloCommonTableViewController.h; sourceTree = "<group>"; };
+		F1C4D869233A0356004BD723 /* PomeloAboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloAboutUsViewController.h; sourceTree = "<group>"; };
+		F1C4D86A233A0356004BD723 /* PomeloPersonalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloPersonalInfoViewController.h; sourceTree = "<group>"; };
+		F1C4D86B233A0356004BD723 /* PomeloRelationUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloRelationUsViewController.m; sourceTree = "<group>"; };
+		F1C4D86C233A0356004BD723 /* PomeloMyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloMyViewController.h; sourceTree = "<group>"; };
+		F1C4D86D233A0356004BD723 /* PomeloCoupleBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloCoupleBackViewController.m; sourceTree = "<group>"; };
+		F1C4D86F233A0357004BD723 /* PomeloResumeImproveTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloResumeImproveTableViewCell.m; sourceTree = "<group>"; };
+		F1C4D870233A0357004BD723 /* PomeloJobIntentionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloJobIntentionViewController.h; sourceTree = "<group>"; };
+		F1C4D871233A0357004BD723 /* PomeloEducationExperienceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloEducationExperienceViewController.m; sourceTree = "<group>"; };
+		F1C4D872233A0357004BD723 /* PomeloIndividualResumeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloIndividualResumeViewController.m; sourceTree = "<group>"; };
+		F1C4D873233A0357004BD723 /* PomeloMyResumeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloMyResumeViewController.h; sourceTree = "<group>"; };
+		F1C4D874233A0357004BD723 /* PomeloWorkExperienceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloWorkExperienceViewController.h; sourceTree = "<group>"; };
+		F1C4D875233A0357004BD723 /* PomeloResumeImproveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloResumeImproveTableViewController.m; sourceTree = "<group>"; };
+		F1C4D876233A0357004BD723 /* PomeloResumeImproveTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloResumeImproveTableViewCell.h; sourceTree = "<group>"; };
+		F1C4D877233A0357004BD723 /* PomeloJobIntentionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloJobIntentionViewController.m; sourceTree = "<group>"; };
+		F1C4D878233A0357004BD723 /* PomeloMyResumeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloMyResumeViewController.m; sourceTree = "<group>"; };
+		F1C4D879233A0357004BD723 /* PomeloIndividualResumeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloIndividualResumeViewController.h; sourceTree = "<group>"; };
+		F1C4D87A233A0357004BD723 /* PomeloEducationExperienceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloEducationExperienceViewController.h; sourceTree = "<group>"; };
+		F1C4D87B233A0357004BD723 /* PomeloResumeImproveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloResumeImproveTableViewController.h; sourceTree = "<group>"; };
+		F1C4D87C233A0357004BD723 /* PomeloWorkExperienceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloWorkExperienceViewController.m; sourceTree = "<group>"; };
+		F1C4D87D233A0357004BD723 /* PomeloCoupleBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloCoupleBackViewController.h; sourceTree = "<group>"; };
+		F1C4D87E233A0357004BD723 /* PomeloRelationUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloRelationUsViewController.h; sourceTree = "<group>"; };
+		F1C4D880233A0357004BD723 /* PomeloLimitThreeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloLimitThreeTableViewController.h; sourceTree = "<group>"; };
+		F1C4D881233A0357004BD723 /* PomeloLimitTwoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloLimitTwoTableViewController.m; sourceTree = "<group>"; };
+		F1C4D882233A0357004BD723 /* PomeloLimitOneTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloLimitOneTableViewController.h; sourceTree = "<group>"; };
+		F1C4D883233A0357004BD723 /* PomeloRecordDefaultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloRecordDefaultViewController.h; sourceTree = "<group>"; };
+		F1C4D884233A0357004BD723 /* PomeloLimitFourTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloLimitFourTableViewController.m; sourceTree = "<group>"; };
+		F1C4D885233A0357004BD723 /* PomeloLimitFiveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloLimitFiveTableViewController.m; sourceTree = "<group>"; };
+		F1C4D886233A0357004BD723 /* PomeloLimitThreeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloLimitThreeTableViewController.m; sourceTree = "<group>"; };
+		F1C4D887233A0357004BD723 /* PomeloLimitTwoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloLimitTwoTableViewController.h; sourceTree = "<group>"; };
+		F1C4D888233A0357004BD723 /* PomeloLimitFiveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloLimitFiveTableViewController.h; sourceTree = "<group>"; };
+		F1C4D889233A0357004BD723 /* PomeloLimitFourTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloLimitFourTableViewController.h; sourceTree = "<group>"; };
+		F1C4D88A233A0357004BD723 /* PomeloRecordDefaultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloRecordDefaultViewController.m; sourceTree = "<group>"; };
+		F1C4D88B233A0357004BD723 /* PomeloLimitOneTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloLimitOneTableViewController.m; sourceTree = "<group>"; };
+		F1C4D88C233A0357004BD723 /* PomeloPersonalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloPersonalInfoViewController.m; sourceTree = "<group>"; };
+		F1C4D88D233A0357004BD723 /* PomeloMyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloMyViewController.m; sourceTree = "<group>"; };
+		F1C4D88F233A0358004BD723 /* PomeloChangeBindingPNViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloChangeBindingPNViewController.h; sourceTree = "<group>"; };
+		F1C4D890233A0358004BD723 /* PomeloChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloChangePasswordViewController.m; sourceTree = "<group>"; };
+		F1C4D891233A0358004BD723 /* PomeloNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloNotificationViewController.m; sourceTree = "<group>"; };
+		F1C4D892233A0358004BD723 /* PomeloInputCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloInputCodeViewController.h; sourceTree = "<group>"; };
+		F1C4D893233A0358004BD723 /* PomeloPrivacyPolicyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloPrivacyPolicyViewController.m; sourceTree = "<group>"; };
+		F1C4D894233A0358004BD723 /* PomeloSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloSetViewController.m; sourceTree = "<group>"; };
+		F1C4D895233A0358004BD723 /* PomeloChangeBindingPNViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloChangeBindingPNViewController.m; sourceTree = "<group>"; };
+		F1C4D896233A0358004BD723 /* PomeloInputCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloInputCodeViewController.m; sourceTree = "<group>"; };
+		F1C4D897233A0358004BD723 /* PomeloNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloNotificationViewController.h; sourceTree = "<group>"; };
+		F1C4D898233A0358004BD723 /* PomeloChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloChangePasswordViewController.h; sourceTree = "<group>"; };
+		F1C4D899233A0358004BD723 /* PomeloSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloSetViewController.h; sourceTree = "<group>"; };
+		F1C4D89A233A0358004BD723 /* PomeloPrivacyPolicyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloPrivacyPolicyViewController.h; sourceTree = "<group>"; };
+		F1C4D8B5233A03AE004BD723 /* PomeloLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloLocationViewController.h; sourceTree = "<group>"; };
+		F1C4D8B6233A03AE004BD723 /* PomeloSquareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloSquareViewController.h; sourceTree = "<group>"; };
+		F1C4D8B7233A03AE004BD723 /* PomeloSortViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloSortViewController.m; sourceTree = "<group>"; };
+		F1C4D8B8233A03AE004BD723 /* PomeloFiltrateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloFiltrateViewController.h; sourceTree = "<group>"; };
+		F1C4D8B9233A03AE004BD723 /* PomeloTypeSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloTypeSelectViewController.m; sourceTree = "<group>"; };
+		F1C4D8BA233A03AE004BD723 /* PomeloLocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloLocationTableViewCell.h; sourceTree = "<group>"; };
+		F1C4D8BB233A03AE004BD723 /* PomeloLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloLocationViewController.m; sourceTree = "<group>"; };
+		F1C4D8BC233A03AE004BD723 /* PomeloSquareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloSquareViewController.m; sourceTree = "<group>"; };
+		F1C4D8BD233A03AE004BD723 /* PomeloTypeSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloTypeSelectViewController.h; sourceTree = "<group>"; };
+		F1C4D8BE233A03AE004BD723 /* PomeloFiltrateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloFiltrateViewController.m; sourceTree = "<group>"; };
+		F1C4D8BF233A03AE004BD723 /* PomeloSortViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloSortViewController.h; sourceTree = "<group>"; };
+		F1C4D8C0233A03AE004BD723 /* PomeloLocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloLocationTableViewCell.m; sourceTree = "<group>"; };
+		F1C4D8C9233A0785004BD723 /* UIView+Dimension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Dimension.h"; sourceTree = "<group>"; };
+		F1C4D8CA233A0785004BD723 /* HWRandomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWRandomColor.m; sourceTree = "<group>"; };
+		F1C4D8CB233A0785004BD723 /* ECUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECUtil.m; sourceTree = "<group>"; };
+		F1C4D8CC233A0785004BD723 /* AppUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUpdater.m; sourceTree = "<group>"; };
+		F1C4D8CD233A0785004BD723 /* ECDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDevice.m; sourceTree = "<group>"; };
+		F1C4D8CE233A0785004BD723 /* ECStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECStyle.m; sourceTree = "<group>"; };
+		F1C4D8CF233A0785004BD723 /* HWRandomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWRandomColor.h; sourceTree = "<group>"; };
+		F1C4D8D0233A0785004BD723 /* UIView+Dimension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Dimension.m"; sourceTree = "<group>"; };
+		F1C4D8D1233A0785004BD723 /* ECUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECUtil.h; sourceTree = "<group>"; };
+		F1C4D8D2233A0785004BD723 /* AppUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUpdater.h; sourceTree = "<group>"; };
+		F1C4D8D3233A0785004BD723 /* ECStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECStyle.h; sourceTree = "<group>"; };
+		F1C4D8D4233A0785004BD723 /* ECDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECDevice.h; sourceTree = "<group>"; };
+		F1C4D8D6233A0785004BD723 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		F1C4D8D7233A0785004BD723 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
+		F1C4D8D8233A0785004BD723 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
+		F1C4D8D9233A0785004BD723 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
+		F1C4D8DA233A0785004BD723 /* BaseTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarController.m; sourceTree = "<group>"; };
+		F1C4D8DB233A0785004BD723 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		F1C4D8DD233A0785004BD723 /* CommontTopTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommontTopTableViewCell.m; sourceTree = "<group>"; };
+		F1C4D8DE233A0785004BD723 /* BaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewCell.m; sourceTree = "<group>"; };
+		F1C4D8DF233A0785004BD723 /* HeadTapV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadTapV.h; sourceTree = "<group>"; };
+		F1C4D8E1233A0785004BD723 /* HWPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWPickerView.h; sourceTree = "<group>"; };
+		F1C4D8E2233A0785004BD723 /* SelectBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectBtnView.h; sourceTree = "<group>"; };
+		F1C4D8E4233A0785004BD723 /* CommonDetailsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonDetailsModel.h; sourceTree = "<group>"; };
+		F1C4D8E6233A0785004BD723 /* ResumeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResumeTableViewCell.m; sourceTree = "<group>"; };
+		F1C4D8E8233A0785004BD723 /* ResumeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResumeModel.m; sourceTree = "<group>"; };
+		F1C4D8E9233A0785004BD723 /* ImgTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImgTitleView.h; sourceTree = "<group>"; };
+		F1C4D8EA233A0785004BD723 /* CommonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonViewController.m; sourceTree = "<group>"; };
+		F1C4D8EB233A0785004BD723 /* CommonImgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonImgModel.h; sourceTree = "<group>"; };
+		F1C4D8ED233A0785004BD723 /* CommonTableViewHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonTableViewHeaderFooterView.m; sourceTree = "<group>"; };
+		F1C4D8EE233A0785004BD723 /* CommonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonTableViewCell.h; sourceTree = "<group>"; };
+		F1C4D8EF233A0785004BD723 /* TitleSelectItemControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleSelectItemControl.h; sourceTree = "<group>"; };
+		F1C4D8F0233A0785004BD723 /* UserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
+		F1C4D8F1233A0785004BD723 /* NavigationBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarView.h; sourceTree = "<group>"; };
+		F1C4D8F2233A0785004BD723 /* CommonDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonDetailsTableViewCell.m; sourceTree = "<group>"; };
+		F1C4D8F4233A0785004BD723 /* HWTitleItemSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWTitleItemSelector.h; sourceTree = "<group>"; };
+		F1C4D8F5233A0785004BD723 /* CommonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonModel.m; sourceTree = "<group>"; };
+		F1C4D8F6233A0785004BD723 /* CommonDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonDetailsViewController.h; sourceTree = "<group>"; };
+		F1C4D8F7233A0785004BD723 /* CommonDetailsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonDetailsModel.m; sourceTree = "<group>"; };
+		F1C4D8F9233A0785004BD723 /* HWPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWPickerView.m; sourceTree = "<group>"; };
+		F1C4D8FA233A0785004BD723 /* SelectBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectBtnView.m; sourceTree = "<group>"; };
+		F1C4D8FC233A0785004BD723 /* HeadTapV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadTapV.m; sourceTree = "<group>"; };
+		F1C4D8FD233A0785004BD723 /* BaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCell.h; sourceTree = "<group>"; };
+		F1C4D8FE233A0785004BD723 /* CommontTopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommontTopTableViewCell.h; sourceTree = "<group>"; };
+		F1C4D8FF233A0785004BD723 /* CommonImgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonImgModel.m; sourceTree = "<group>"; };
+		F1C4D900233A0785004BD723 /* CommonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonViewController.h; sourceTree = "<group>"; };
+		F1C4D901233A0785004BD723 /* ResumeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResumeModel.h; sourceTree = "<group>"; };
+		F1C4D902233A0785004BD723 /* ImgTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImgTitleView.m; sourceTree = "<group>"; };
+		F1C4D903233A0785004BD723 /* ResumeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResumeTableViewCell.h; sourceTree = "<group>"; };
+		F1C4D906233A0785004BD723 /* CommonDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonDetailsTableViewCell.h; sourceTree = "<group>"; };
+		F1C4D907233A0785004BD723 /* NavigationBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarView.m; sourceTree = "<group>"; };
+		F1C4D908233A0785004BD723 /* UserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
+		F1C4D909233A0785004BD723 /* CommonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonTableViewCell.m; sourceTree = "<group>"; };
+		F1C4D90A233A0785004BD723 /* TitleSelectItemControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleSelectItemControl.m; sourceTree = "<group>"; };
+		F1C4D90B233A0785004BD723 /* CommonTableViewHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonTableViewHeaderFooterView.h; sourceTree = "<group>"; };
+		F1C4D90D233A0785004BD723 /* CommonDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonDetailsViewController.m; sourceTree = "<group>"; };
+		F1C4D90F233A0785004BD723 /* HWTitleItemSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWTitleItemSelector.m; sourceTree = "<group>"; };
+		F1C4D910233A0785004BD723 /* CommonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonModel.h; sourceTree = "<group>"; };
+		F1C4D912233A0785004BD723 /* HWPorgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWPorgressHUD.h; sourceTree = "<group>"; };
+		F1C4D913233A0785004BD723 /* HWAppMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWAppMacros.h; sourceTree = "<group>"; };
+		F1C4D914233A0785004BD723 /* HWAFNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWAFNetworkManager.h; sourceTree = "<group>"; };
+		F1C4D915233A0785004BD723 /* NSUserDefaultMemory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUserDefaultMemory.m; sourceTree = "<group>"; };
+		F1C4D916233A0785004BD723 /* NSString+HWCheckoutHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HWCheckoutHelper.m"; sourceTree = "<group>"; };
+		F1C4D917233A0785004BD723 /* LJSecondScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJSecondScrollViewController.m; sourceTree = "<group>"; };
+		F1C4D918233A0785004BD723 /* LJDynamicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJDynamicItem.m; sourceTree = "<group>"; };
+		F1C4D919233A0785004BD723 /* HWPorgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWPorgressHUD.m; sourceTree = "<group>"; };
+		F1C4D91A233A0785004BD723 /* NSUserDefaultMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUserDefaultMemory.h; sourceTree = "<group>"; };
+		F1C4D91B233A0785004BD723 /* HWAFNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWAFNetworkManager.m; sourceTree = "<group>"; };
+		F1C4D91C233A0785004BD723 /* LJSecondScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJSecondScrollViewController.h; sourceTree = "<group>"; };
+		F1C4D91D233A0785004BD723 /* NSString+HWCheckoutHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HWCheckoutHelper.h"; sourceTree = "<group>"; };
+		F1C4D91E233A0785004BD723 /* icontext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icontext.png; sourceTree = "<group>"; };
+		F1C4D91F233A0785004BD723 /* LJDynamicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJDynamicItem.h; sourceTree = "<group>"; };
+		F1C4D921233A0785004BD723 /* UIView+HWUtilView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HWUtilView.h"; sourceTree = "<group>"; };
+		F1C4D922233A0785004BD723 /* UIView+HWUtilView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HWUtilView.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04A5E4482338F27D0028B1C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DDE14B9EB9D7404EA2344A3 /* Pods_PomeloJob.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04A5E4422338F27D0028B1C9 = {
+			isa = PBXGroup;
+			children = (
+				04A5E44D2338F27D0028B1C9 /* PomeloJob */,
+				04A5E44C2338F27D0028B1C9 /* PomeloProducts */,
+				96E0A770EB97EB099CE9E30E /* Pods */,
+				80A777FD583A1E5917C90E69 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		04A5E44C2338F27D0028B1C9 /* PomeloProducts */ = {
+			isa = PBXGroup;
+			children = (
+				04A5E44B2338F27D0028B1C9 /* PomeloJob.app */,
+			);
+			name = PomeloProducts;
+			sourceTree = "<group>";
+		};
+		04A5E44D2338F27D0028B1C9 /* PomeloJob */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D8C7233A0785004BD723 /* PomeloTools */,
+				04A5E5D82339002A0028B1C9 /* PomeloDiscovery */,
+				04A5E5CA2338FDB20028B1C9 /* PomeloMessage */,
+				04A5E57A2338FC750028B1C9 /* PomeloMy */,
+				04A5E4852338F7A10028B1C9 /* PomeloForgetViewController.h */,
+				04A5E47E2338F7A00028B1C9 /* PomeloForgetViewController.m */,
+				04A5E47D2338F7A00028B1C9 /* PomeloGuidancePageViewController.h */,
+				04A5E47B2338F7A00028B1C9 /* PomeloGuidancePageViewController.m */,
+				04A5E4802338F7A00028B1C9 /* PomeloLoginViewController.h */,
+				04A5E4842338F7A10028B1C9 /* PomeloLoginViewController.m */,
+				04A5E4862338F7A10028B1C9 /* PomeloVerifyLoginViewController.h */,
+				04A5E47C2338F7A00028B1C9 /* PomeloVerifyLoginViewController.m */,
+				04A5E4872338F7A10028B1C9 /* PomeloResetViewController.h */,
+				04A5E4822338F7A10028B1C9 /* PomeloResetViewController.m */,
+				04A5E4812338F7A10028B1C9 /* PomeloVerifyViewController.h */,
+				04A5E4832338F7A10028B1C9 /* PomeloVerifyViewController.m */,
+				04A5E4792338F70F0028B1C9 /* dagou.png */,
+				04A5E4662338F62F0028B1C9 /* PomeloSquare */,
+				04A5E5E6233900CF0028B1C9 /* Images.xcassets */,
+				04A5E4642338F5040028B1C9 /* Supporting Files */,
+			);
+			path = PomeloJob;
+			sourceTree = "<group>";
+		};
+		04A5E4642338F5040028B1C9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				04A5E44E2338F27D0028B1C9 /* PomeloAppDelegate.h */,
+				04A5E44F2338F27D0028B1C9 /* PomeloAppDelegate.m */,
+				04A5E4512338F27D0028B1C9 /* PomeloViewController.h */,
+				04A5E4522338F27D0028B1C9 /* PomeloViewController.m */,
+				04A5E4542338F27D0028B1C9 /* Main.storyboard */,
+				04A5E4572338F27E0028B1C9 /* Assets.xcassets */,
+				04A5E4592338F27E0028B1C9 /* LaunchScreen.storyboard */,
+				04A5E45C2338F27E0028B1C9 /* Info.plist */,
+				04A5E45D2338F27E0028B1C9 /* main.m */,
+				04A5E48E2338F8310028B1C9 /* PrefixHeader.pch */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		04A5E4662338F62F0028B1C9 /* PomeloSquare */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D8B4233A03AE004BD723 /* PomeloSquareViewController */,
+			);
+			path = PomeloSquare;
+			sourceTree = "<group>";
+		};
+		04A5E57A2338FC750028B1C9 /* PomeloMy */ = {
+			isa = PBXGroup;
+			children = (
+				04A5E57B2338FC7C0028B1C9 /* PomeloMyViewController */,
+			);
+			path = PomeloMy;
+			sourceTree = "<group>";
+		};
+		04A5E57B2338FC7C0028B1C9 /* PomeloMyViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D86E233A0357004BD723 /* MyResume */,
+				F1C4D869233A0356004BD723 /* PomeloAboutUsViewController.h */,
+				F1C4D866233A0356004BD723 /* PomeloAboutUsViewController.m */,
+				F1C4D868233A0356004BD723 /* PomeloCommonTableViewController.h */,
+				F1C4D867233A0356004BD723 /* PomeloCommonTableViewController.m */,
+				F1C4D87D233A0357004BD723 /* PomeloCoupleBackViewController.h */,
+				F1C4D86D233A0356004BD723 /* PomeloCoupleBackViewController.m */,
+				F1C4D86C233A0356004BD723 /* PomeloMyViewController.h */,
+				F1C4D88D233A0357004BD723 /* PomeloMyViewController.m */,
+				F1C4D86A233A0356004BD723 /* PomeloPersonalInfoViewController.h */,
+				F1C4D88C233A0357004BD723 /* PomeloPersonalInfoViewController.m */,
+				F1C4D87E233A0357004BD723 /* PomeloRelationUsViewController.h */,
+				F1C4D86B233A0356004BD723 /* PomeloRelationUsViewController.m */,
+				F1C4D87F233A0357004BD723 /* RecoredTableView */,
+				F1C4D88E233A0358004BD723 /* Set */,
+			);
+			path = PomeloMyViewController;
+			sourceTree = "<group>";
+		};
+		04A5E5CA2338FDB20028B1C9 /* PomeloMessage */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D862233A02DE004BD723 /* PomeloMessageViewController */,
+			);
+			path = PomeloMessage;
+			sourceTree = "<group>";
+		};
+		04A5E5D82339002A0028B1C9 /* PomeloDiscovery */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D855233A0233004BD723 /* PomeloDiscoveryViewController */,
+			);
+			path = PomeloDiscovery;
+			sourceTree = "<group>";
+		};
+		80A777FD583A1E5917C90E69 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1D81614FE93064BA2CBA924A /* Pods_PomeloJob.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		96E0A770EB97EB099CE9E30E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5F625C60F604EA921F8F649F /* Pods-PomeloJob.debug.xcconfig */,
+				8FFC5837324EF42956C32B15 /* Pods-PomeloJob.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F1C4D855233A0233004BD723 /* PomeloDiscoveryViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D856233A0233004BD723 /* PomeloHotPositionTableViewCell.m */,
+				F1C4D857233A0233004BD723 /* PomeloFastPositionTableViewCell.m */,
+				F1C4D858233A0233004BD723 /* PomeloDiscoveryViewController.h */,
+				F1C4D859233A0233004BD723 /* PomeloHotCollectionViewCell.m */,
+				F1C4D85A233A0233004BD723 /* PomeloHotPositionTableViewCell.h */,
+				F1C4D85B233A0233004BD723 /* PomeloFastPositionTableViewCell.h */,
+				F1C4D85C233A0233004BD723 /* PomeloHotCollectionViewCell.h */,
+				F1C4D85D233A0233004BD723 /* PomeloDiscoveryViewController.m */,
+				04BDCC1023445C860044346C /* DiscoveryRankTableViewCell.h */,
+				04BDCC1123445C860044346C /* DiscoveryRankTableViewCell.m */,
+			);
+			path = PomeloDiscoveryViewController;
+			sourceTree = "<group>";
+		};
+		F1C4D862233A02DE004BD723 /* PomeloMessageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D863233A02DE004BD723 /* PomeloMessageViewController.m */,
+				F1C4D864233A02DE004BD723 /* PomeloMessageViewController.h */,
+			);
+			path = PomeloMessageViewController;
+			sourceTree = "<group>";
+		};
+		F1C4D86E233A0357004BD723 /* MyResume */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D86F233A0357004BD723 /* PomeloResumeImproveTableViewCell.m */,
+				F1C4D870233A0357004BD723 /* PomeloJobIntentionViewController.h */,
+				F1C4D871233A0357004BD723 /* PomeloEducationExperienceViewController.m */,
+				F1C4D872233A0357004BD723 /* PomeloIndividualResumeViewController.m */,
+				F1C4D873233A0357004BD723 /* PomeloMyResumeViewController.h */,
+				F1C4D874233A0357004BD723 /* PomeloWorkExperienceViewController.h */,
+				F1C4D875233A0357004BD723 /* PomeloResumeImproveTableViewController.m */,
+				F1C4D876233A0357004BD723 /* PomeloResumeImproveTableViewCell.h */,
+				F1C4D877233A0357004BD723 /* PomeloJobIntentionViewController.m */,
+				F1C4D878233A0357004BD723 /* PomeloMyResumeViewController.m */,
+				F1C4D879233A0357004BD723 /* PomeloIndividualResumeViewController.h */,
+				F1C4D87A233A0357004BD723 /* PomeloEducationExperienceViewController.h */,
+				F1C4D87B233A0357004BD723 /* PomeloResumeImproveTableViewController.h */,
+				F1C4D87C233A0357004BD723 /* PomeloWorkExperienceViewController.m */,
+			);
+			path = MyResume;
+			sourceTree = "<group>";
+		};
+		F1C4D87F233A0357004BD723 /* RecoredTableView */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D880233A0357004BD723 /* PomeloLimitThreeTableViewController.h */,
+				F1C4D881233A0357004BD723 /* PomeloLimitTwoTableViewController.m */,
+				F1C4D882233A0357004BD723 /* PomeloLimitOneTableViewController.h */,
+				F1C4D883233A0357004BD723 /* PomeloRecordDefaultViewController.h */,
+				F1C4D884233A0357004BD723 /* PomeloLimitFourTableViewController.m */,
+				F1C4D885233A0357004BD723 /* PomeloLimitFiveTableViewController.m */,
+				F1C4D886233A0357004BD723 /* PomeloLimitThreeTableViewController.m */,
+				F1C4D887233A0357004BD723 /* PomeloLimitTwoTableViewController.h */,
+				F1C4D888233A0357004BD723 /* PomeloLimitFiveTableViewController.h */,
+				F1C4D889233A0357004BD723 /* PomeloLimitFourTableViewController.h */,
+				F1C4D88A233A0357004BD723 /* PomeloRecordDefaultViewController.m */,
+				F1C4D88B233A0357004BD723 /* PomeloLimitOneTableViewController.m */,
+			);
+			path = RecoredTableView;
+			sourceTree = "<group>";
+		};
+		F1C4D88E233A0358004BD723 /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D88F233A0358004BD723 /* PomeloChangeBindingPNViewController.h */,
+				F1C4D890233A0358004BD723 /* PomeloChangePasswordViewController.m */,
+				F1C4D891233A0358004BD723 /* PomeloNotificationViewController.m */,
+				F1C4D892233A0358004BD723 /* PomeloInputCodeViewController.h */,
+				F1C4D893233A0358004BD723 /* PomeloPrivacyPolicyViewController.m */,
+				F1C4D894233A0358004BD723 /* PomeloSetViewController.m */,
+				F1C4D895233A0358004BD723 /* PomeloChangeBindingPNViewController.m */,
+				F1C4D896233A0358004BD723 /* PomeloInputCodeViewController.m */,
+				F1C4D897233A0358004BD723 /* PomeloNotificationViewController.h */,
+				F1C4D898233A0358004BD723 /* PomeloChangePasswordViewController.h */,
+				F1C4D899233A0358004BD723 /* PomeloSetViewController.h */,
+				F1C4D89A233A0358004BD723 /* PomeloPrivacyPolicyViewController.h */,
+			);
+			path = Set;
+			sourceTree = "<group>";
+		};
+		F1C4D8B4233A03AE004BD723 /* PomeloSquareViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D8B5233A03AE004BD723 /* PomeloLocationViewController.h */,
+				F1C4D8B6233A03AE004BD723 /* PomeloSquareViewController.h */,
+				F1C4D8B7233A03AE004BD723 /* PomeloSortViewController.m */,
+				F1C4D8B8233A03AE004BD723 /* PomeloFiltrateViewController.h */,
+				F1C4D8B9233A03AE004BD723 /* PomeloTypeSelectViewController.m */,
+				F1C4D8BA233A03AE004BD723 /* PomeloLocationTableViewCell.h */,
+				F1C4D8BB233A03AE004BD723 /* PomeloLocationViewController.m */,
+				F1C4D8BC233A03AE004BD723 /* PomeloSquareViewController.m */,
+				F1C4D8BD233A03AE004BD723 /* PomeloTypeSelectViewController.h */,
+				F1C4D8BE233A03AE004BD723 /* PomeloFiltrateViewController.m */,
+				F1C4D8BF233A03AE004BD723 /* PomeloSortViewController.h */,
+				F1C4D8C0233A03AE004BD723 /* PomeloLocationTableViewCell.m */,
+				04BDCC132344B45F0044346C /* SquareStyleModel.h */,
+				04BDCC142344B45F0044346C /* SquareStyleModel.m */,
+			);
+			path = PomeloSquareViewController;
+			sourceTree = "<group>";
+		};
+		F1C4D8C7233A0785004BD723 /* PomeloTools */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D8C8233A0785004BD723 /* HWUtils */,
+				F1C4D8D5233A0785004BD723 /* BaseClass */,
+				F1C4D8DC233A0785004BD723 /* Common */,
+				F1C4D911233A0785004BD723 /* Lib */,
+			);
+			path = PomeloTools;
+			sourceTree = "<group>";
+		};
+		F1C4D8C8233A0785004BD723 /* HWUtils */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D8C9233A0785004BD723 /* UIView+Dimension.h */,
+				F1C4D8CA233A0785004BD723 /* HWRandomColor.m */,
+				F1C4D8CB233A0785004BD723 /* ECUtil.m */,
+				F1C4D8CC233A0785004BD723 /* AppUpdater.m */,
+				F1C4D8CD233A0785004BD723 /* ECDevice.m */,
+				F1C4D8CE233A0785004BD723 /* ECStyle.m */,
+				F1C4D8CF233A0785004BD723 /* HWRandomColor.h */,
+				F1C4D8D0233A0785004BD723 /* UIView+Dimension.m */,
+				F1C4D8D1233A0785004BD723 /* ECUtil.h */,
+				F1C4D8D2233A0785004BD723 /* AppUpdater.h */,
+				F1C4D8D3233A0785004BD723 /* ECStyle.h */,
+				F1C4D8D4233A0785004BD723 /* ECDevice.h */,
+			);
+			path = HWUtils;
+			sourceTree = "<group>";
+		};
+		F1C4D8D5233A0785004BD723 /* BaseClass */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D8D6233A0785004BD723 /* BaseViewController.m */,
+				F1C4D8D7233A0785004BD723 /* BaseTabBarController.h */,
+				F1C4D8D8233A0785004BD723 /* BaseNavigationController.m */,
+				F1C4D8D9233A0785004BD723 /* BaseNavigationController.h */,
+				F1C4D8DA233A0785004BD723 /* BaseTabBarController.m */,
+				F1C4D8DB233A0785004BD723 /* BaseViewController.h */,
+			);
+			path = BaseClass;
+			sourceTree = "<group>";
+		};
+		F1C4D8DC233A0785004BD723 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D8DD233A0785004BD723 /* CommontTopTableViewCell.m */,
+				F1C4D8DE233A0785004BD723 /* BaseTableViewCell.m */,
+				F1C4D8DF233A0785004BD723 /* HeadTapV.h */,
+				F1C4D8E1233A0785004BD723 /* HWPickerView.h */,
+				F1C4D8E2233A0785004BD723 /* SelectBtnView.h */,
+				F1C4D8E4233A0785004BD723 /* CommonDetailsModel.h */,
+				F1C4D8E6233A0785004BD723 /* ResumeTableViewCell.m */,
+				F1C4D8E8233A0785004BD723 /* ResumeModel.m */,
+				F1C4D8E9233A0785004BD723 /* ImgTitleView.h */,
+				F1C4D8EA233A0785004BD723 /* CommonViewController.m */,
+				F1C4D8EB233A0785004BD723 /* CommonImgModel.h */,
+				F1C4D8ED233A0785004BD723 /* CommonTableViewHeaderFooterView.m */,
+				F1C4D8EE233A0785004BD723 /* CommonTableViewCell.h */,
+				F1C4D8EF233A0785004BD723 /* TitleSelectItemControl.h */,
+				F1C4D8F0233A0785004BD723 /* UserInfoModel.m */,
+				F1C4D8F1233A0785004BD723 /* NavigationBarView.h */,
+				F1C4D8F2233A0785004BD723 /* CommonDetailsTableViewCell.m */,
+				F1C4D8F4233A0785004BD723 /* HWTitleItemSelector.h */,
+				F1C4D8F5233A0785004BD723 /* CommonModel.m */,
+				F1C4D8F6233A0785004BD723 /* CommonDetailsViewController.h */,
+				F1C4D8F7233A0785004BD723 /* CommonDetailsModel.m */,
+				F1C4D8F9233A0785004BD723 /* HWPickerView.m */,
+				F1C4D8FA233A0785004BD723 /* SelectBtnView.m */,
+				F1C4D8FC233A0785004BD723 /* HeadTapV.m */,
+				F1C4D8FD233A0785004BD723 /* BaseTableViewCell.h */,
+				F1C4D8FE233A0785004BD723 /* CommontTopTableViewCell.h */,
+				F1C4D8FF233A0785004BD723 /* CommonImgModel.m */,
+				F1C4D900233A0785004BD723 /* CommonViewController.h */,
+				F1C4D901233A0785004BD723 /* ResumeModel.h */,
+				F1C4D902233A0785004BD723 /* ImgTitleView.m */,
+				F1C4D903233A0785004BD723 /* ResumeTableViewCell.h */,
+				F1C4D906233A0785004BD723 /* CommonDetailsTableViewCell.h */,
+				F1C4D907233A0785004BD723 /* NavigationBarView.m */,
+				F1C4D908233A0785004BD723 /* UserInfoModel.h */,
+				F1C4D909233A0785004BD723 /* CommonTableViewCell.m */,
+				F1C4D90A233A0785004BD723 /* TitleSelectItemControl.m */,
+				F1C4D90B233A0785004BD723 /* CommonTableViewHeaderFooterView.h */,
+				F1C4D90D233A0785004BD723 /* CommonDetailsViewController.m */,
+				F1C4D90F233A0785004BD723 /* HWTitleItemSelector.m */,
+				F1C4D910233A0785004BD723 /* CommonModel.h */,
+				0460D9BA234B3B0000C721CE /* CommonWorkLocationTableViewCell.h */,
+				0460D9BB234B3B0000C721CE /* CommonWorkLocationTableViewCell.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		F1C4D911233A0785004BD723 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				0460D9BD234C212600C721CE /* RTLabel.h */,
+				0460D9BE234C212700C721CE /* RTLabel.m */,
+				F1C4D912233A0785004BD723 /* HWPorgressHUD.h */,
+				F1C4D913233A0785004BD723 /* HWAppMacros.h */,
+				F1C4D914233A0785004BD723 /* HWAFNetworkManager.h */,
+				F1C4D915233A0785004BD723 /* NSUserDefaultMemory.m */,
+				F1C4D916233A0785004BD723 /* NSString+HWCheckoutHelper.m */,
+				F1C4D917233A0785004BD723 /* LJSecondScrollViewController.m */,
+				F1C4D918233A0785004BD723 /* LJDynamicItem.m */,
+				F1C4D919233A0785004BD723 /* HWPorgressHUD.m */,
+				F1C4D91A233A0785004BD723 /* NSUserDefaultMemory.h */,
+				F1C4D91B233A0785004BD723 /* HWAFNetworkManager.m */,
+				F1C4D91C233A0785004BD723 /* LJSecondScrollViewController.h */,
+				F1C4D91D233A0785004BD723 /* NSString+HWCheckoutHelper.h */,
+				F1C4D91E233A0785004BD723 /* icontext.png */,
+				F1C4D91F233A0785004BD723 /* LJDynamicItem.h */,
+				F1C4D920233A0785004BD723 /* Catory */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		F1C4D920233A0785004BD723 /* Catory */ = {
+			isa = PBXGroup;
+			children = (
+				F1C4D921233A0785004BD723 /* UIView+HWUtilView.h */,
+				F1C4D922233A0785004BD723 /* UIView+HWUtilView.m */,
+			);
+			path = Catory;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		04A5E44A2338F27D0028B1C9 /* PomeloJob */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04A5E4612338F27E0028B1C9 /* Build configuration list for PBXNativeTarget "PomeloJob" */;
+			buildPhases = (
+				7E41583FC4B5D8024696D635 /* [CP] Check Pods Manifest.lock */,
+				04A5E4472338F27D0028B1C9 /* Sources */,
+				04A5E4482338F27D0028B1C9 /* Frameworks */,
+				04A5E4492338F27D0028B1C9 /* Resources */,
+				1492D77992994C5750F61DF4 /* [CP] Embed Pods Frameworks */,
+				B308CAAFC6DAC6ACD3B6F29D /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PomeloJob;
+			productName = PomeloJob;
+			productReference = 04A5E44B2338F27D0028B1C9 /* PomeloJob.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04A5E4432338F27D0028B1C9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = OnePiece;
+				TargetAttributes = {
+					04A5E44A2338F27D0028B1C9 = {
+						CreatedOnToolsVersion = 10.3;
+					};
+				};
+			};
+			buildConfigurationList = 04A5E4462338F27D0028B1C9 /* Build configuration list for PBXProject "PomeloJob" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 04A5E4422338F27D0028B1C9;
+			productRefGroup = 04A5E44C2338F27D0028B1C9 /* PomeloProducts */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				04A5E44A2338F27D0028B1C9 /* PomeloJob */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		04A5E4492338F27D0028B1C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04A5E47A2338F70F0028B1C9 /* dagou.png in Resources */,
+				04A5E45B2338F27E0028B1C9 /* LaunchScreen.storyboard in Resources */,
+				04A5E5E7233900CF0028B1C9 /* Images.xcassets in Resources */,
+				04A5E4582338F27E0028B1C9 /* Assets.xcassets in Resources */,
+				04A5E4562338F27D0028B1C9 /* Main.storyboard in Resources */,
+				F1C4D94C233A0785004BD723 /* icontext.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1492D77992994C5750F61DF4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PomeloJob/Pods-PomeloJob-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PomeloJob/Pods-PomeloJob-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PomeloJob/Pods-PomeloJob-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7E41583FC4B5D8024696D635 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PomeloJob-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B308CAAFC6DAC6ACD3B6F29D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PomeloJob/Pods-PomeloJob-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PomeloJob/Pods-PomeloJob-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PomeloJob/Pods-PomeloJob-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04A5E4472338F27D0028B1C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1C4D8A6233A0358004BD723 /* PomeloLimitTwoTableViewController.m in Sources */,
+				F1C4D94A233A0785004BD723 /* HWPorgressHUD.m in Sources */,
+				F1C4D940233A0785004BD723 /* NavigationBarView.m in Sources */,
+				04A5E4532338F27D0028B1C9 /* PomeloViewController.m in Sources */,
+				F1C4D948233A0785004BD723 /* LJSecondScrollViewController.m in Sources */,
+				04A5E48A2338F7A10028B1C9 /* PomeloForgetViewController.m in Sources */,
+				F1C4D865233A02DE004BD723 /* PomeloMessageViewController.m in Sources */,
+				F1C4D8B1233A0358004BD723 /* PomeloSetViewController.m in Sources */,
+				F1C4D89B233A0358004BD723 /* PomeloAboutUsViewController.m in Sources */,
+				F1C4D935233A0785004BD723 /* UserInfoModel.m in Sources */,
+				F1C4D8A1233A0358004BD723 /* PomeloIndividualResumeViewController.m in Sources */,
+				F1C4D860233A0233004BD723 /* PomeloHotCollectionViewCell.m in Sources */,
+				F1C4D932233A0785004BD723 /* ResumeModel.m in Sources */,
+				F1C4D8AF233A0358004BD723 /* PomeloNotificationViewController.m in Sources */,
+				F1C4D929233A0785004BD723 /* BaseViewController.m in Sources */,
+				F1C4D924233A0785004BD723 /* ECUtil.m in Sources */,
+				0460D9BC234B3B0000C721CE /* CommonWorkLocationTableViewCell.m in Sources */,
+				F1C4D8AA233A0358004BD723 /* PomeloRecordDefaultViewController.m in Sources */,
+				F1C4D92D233A0785004BD723 /* BaseTableViewCell.m in Sources */,
+				F1C4D8C3233A03AE004BD723 /* PomeloLocationViewController.m in Sources */,
+				F1C4D8A7233A0358004BD723 /* PomeloLimitFourTableViewController.m in Sources */,
+				F1C4D942233A0785004BD723 /* TitleSelectItemControl.m in Sources */,
+				F1C4D934233A0785004BD723 /* CommonTableViewHeaderFooterView.m in Sources */,
+				F1C4D92A233A0785004BD723 /* BaseNavigationController.m in Sources */,
+				F1C4D8B0233A0358004BD723 /* PomeloPrivacyPolicyViewController.m in Sources */,
+				F1C4D944233A0785004BD723 /* CommonDetailsViewController.m in Sources */,
+				04A5E45E2338F27E0028B1C9 /* main.m in Sources */,
+				F1C4D931233A0785004BD723 /* ResumeTableViewCell.m in Sources */,
+				04BDCC152344B45F0044346C /* SquareStyleModel.m in Sources */,
+				F1C4D8C5233A03AE004BD723 /* PomeloFiltrateViewController.m in Sources */,
+				F1C4D93E233A0785004BD723 /* ImgTitleView.m in Sources */,
+				F1C4D8AE233A0358004BD723 /* PomeloChangePasswordViewController.m in Sources */,
+				04A5E48B2338F7A10028B1C9 /* PomeloResetViewController.m in Sources */,
+				F1C4D923233A0785004BD723 /* HWRandomColor.m in Sources */,
+				04BDCC1223445C860044346C /* DiscoveryRankTableViewCell.m in Sources */,
+				F1C4D8C6233A03AE004BD723 /* PomeloLocationTableViewCell.m in Sources */,
+				F1C4D92B233A0785004BD723 /* BaseTabBarController.m in Sources */,
+				F1C4D939233A0785004BD723 /* CommonDetailsModel.m in Sources */,
+				F1C4D8A4233A0358004BD723 /* PomeloMyResumeViewController.m in Sources */,
+				F1C4D8C1233A03AE004BD723 /* PomeloSortViewController.m in Sources */,
+				04A5E4502338F27D0028B1C9 /* PomeloAppDelegate.m in Sources */,
+				04A5E48D2338F7A10028B1C9 /* PomeloLoginViewController.m in Sources */,
+				F1C4D861233A0233004BD723 /* PomeloDiscoveryViewController.m in Sources */,
+				F1C4D94B233A0785004BD723 /* HWAFNetworkManager.m in Sources */,
+				F1C4D933233A0785004BD723 /* CommonViewController.m in Sources */,
+				F1C4D949233A0785004BD723 /* LJDynamicItem.m in Sources */,
+				F1C4D928233A0785004BD723 /* UIView+Dimension.m in Sources */,
+				F1C4D8A5233A0358004BD723 /* PomeloWorkExperienceViewController.m in Sources */,
+				F1C4D8AD233A0358004BD723 /* PomeloMyViewController.m in Sources */,
+				F1C4D947233A0785004BD723 /* NSString+HWCheckoutHelper.m in Sources */,
+				F1C4D92C233A0785004BD723 /* CommontTopTableViewCell.m in Sources */,
+				F1C4D941233A0785004BD723 /* CommonTableViewCell.m in Sources */,
+				F1C4D8A0233A0358004BD723 /* PomeloEducationExperienceViewController.m in Sources */,
+				F1C4D89C233A0358004BD723 /* PomeloCommonTableViewController.m in Sources */,
+				F1C4D946233A0785004BD723 /* NSUserDefaultMemory.m in Sources */,
+				F1C4D925233A0785004BD723 /* AppUpdater.m in Sources */,
+				F1C4D93B233A0785004BD723 /* SelectBtnView.m in Sources */,
+				F1C4D8A2233A0358004BD723 /* PomeloResumeImproveTableViewController.m in Sources */,
+				F1C4D926233A0785004BD723 /* ECDevice.m in Sources */,
+				04A5E48C2338F7A10028B1C9 /* PomeloVerifyViewController.m in Sources */,
+				F1C4D8B2233A0358004BD723 /* PomeloChangeBindingPNViewController.m in Sources */,
+				F1C4D8C4233A03AE004BD723 /* PomeloSquareViewController.m in Sources */,
+				F1C4D927233A0785004BD723 /* ECStyle.m in Sources */,
+				F1C4D938233A0785004BD723 /* CommonModel.m in Sources */,
+				F1C4D8A8233A0358004BD723 /* PomeloLimitFiveTableViewController.m in Sources */,
+				0460D9BF234C212700C721CE /* RTLabel.m in Sources */,
+				F1C4D89D233A0358004BD723 /* PomeloRelationUsViewController.m in Sources */,
+				F1C4D8A3233A0358004BD723 /* PomeloJobIntentionViewController.m in Sources */,
+				F1C4D85E233A0233004BD723 /* PomeloHotPositionTableViewCell.m in Sources */,
+				F1C4D936233A0785004BD723 /* CommonDetailsTableViewCell.m in Sources */,
+				F1C4D93A233A0785004BD723 /* HWPickerView.m in Sources */,
+				F1C4D945233A0785004BD723 /* HWTitleItemSelector.m in Sources */,
+				F1C4D89E233A0358004BD723 /* PomeloCoupleBackViewController.m in Sources */,
+				F1C4D8B3233A0358004BD723 /* PomeloInputCodeViewController.m in Sources */,
+				F1C4D85F233A0233004BD723 /* PomeloFastPositionTableViewCell.m in Sources */,
+				F1C4D93C233A0785004BD723 /* HeadTapV.m in Sources */,
+				04A5E4892338F7A10028B1C9 /* PomeloVerifyLoginViewController.m in Sources */,
+				F1C4D8A9233A0358004BD723 /* PomeloLimitThreeTableViewController.m in Sources */,
+				04A5E4882338F7A10028B1C9 /* PomeloGuidancePageViewController.m in Sources */,
+				F1C4D93D233A0785004BD723 /* CommonImgModel.m in Sources */,
+				F1C4D8C2233A03AE004BD723 /* PomeloTypeSelectViewController.m in Sources */,
+				F1C4D8AC233A0358004BD723 /* PomeloPersonalInfoViewController.m in Sources */,
+				F1C4D8AB233A0358004BD723 /* PomeloLimitOneTableViewController.m in Sources */,
+				F1C4D89F233A0358004BD723 /* PomeloResumeImproveTableViewCell.m in Sources */,
+				F1C4D94D233A0785004BD723 /* UIView+HWUtilView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		04A5E4542338F27D0028B1C9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04A5E4552338F27D0028B1C9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		04A5E4592338F27E0028B1C9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04A5E45A2338F27E0028B1C9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		04A5E45F2338F27E0028B1C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		04A5E4602338F27E0028B1C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		04A5E4622338F27E0028B1C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F625C60F604EA921F8F649F /* Pods-PomeloJob.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZS7NPDDHHG;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PomeloJob/Supporting Files/PrefixHeader.pch";
+				INFOPLIST_FILE = "PomeloJob/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gx.pomelo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		04A5E4632338F27E0028B1C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8FFC5837324EF42956C32B15 /* Pods-PomeloJob.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZS7NPDDHHG;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PomeloJob/Supporting Files/PrefixHeader.pch";
+				INFOPLIST_FILE = "PomeloJob/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gx.pomelo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04A5E4462338F27D0028B1C9 /* Build configuration list for PBXProject "PomeloJob" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04A5E45F2338F27E0028B1C9 /* Debug */,
+				04A5E4602338F27E0028B1C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04A5E4612338F27E0028B1C9 /* Build configuration list for PBXNativeTarget "PomeloJob" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04A5E4622338F27E0028B1C9 /* Debug */,
+				04A5E4632338F27E0028B1C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04A5E4432338F27D0028B1C9 /* Project object */;
+}
