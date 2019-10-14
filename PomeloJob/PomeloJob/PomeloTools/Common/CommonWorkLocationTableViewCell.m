@@ -46,7 +46,7 @@
     
     [self.componyLocationLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
-        make.top.mas_equalTo(15);
+        make.top.mas_equalTo(10);
         make.right.mas_equalTo(-30);
         make.height.mas_equalTo(20);
     }];

@@ -312,4 +312,16 @@
     }];
 }
 
+- (void)clickOperation:(NSDictionary *)parameters selectAgeByPhonecar:(ZHandlerBlock)handler {
+    [self appGet:CUSOMER_SELECTAGEBYPHONECARD parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+
+- (void)clickOperation:(NSDictionary *)parameters updateageByphonecard:(ZHandlerBlock)handler {
+    [self appGet:CUSTOMER_UPDATEAGEBYPHONECARD parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+
 @end

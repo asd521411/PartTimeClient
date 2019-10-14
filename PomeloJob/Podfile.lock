@@ -14,9 +14,13 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - FBRetainCycleDetector (0.1.4)
+  - FTPopOverMenu (2.0.3)
   - Masonry (1.1.0)
   - MJExtension (3.0.17)
   - MJRefresh (3.2.0)
+  - MLeaksFinder (1.0.0):
+    - FBRetainCycleDetector
   - ReactiveCocoa (2.3.1):
     - ReactiveCocoa/UI (= 2.3.1)
   - ReactiveCocoa/Core (2.3.1):
@@ -39,9 +43,11 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - FTPopOverMenu
   - Masonry
   - MJExtension
   - MJRefresh
+  - MLeaksFinder
   - ReactiveCocoa (~> 2.3.1)
   - SDCycleScrollView
   - SDWebImage (~> 3.7.2)
@@ -55,9 +61,12 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
+    - FBRetainCycleDetector
+    - FTPopOverMenu
     - Masonry
     - MJExtension
     - MJRefresh
+    - MLeaksFinder
     - ReactiveCocoa
     - SDCycleScrollView
     - SDWebImage
@@ -70,9 +79,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
+  FTPopOverMenu: 8aa89de66e72b53db3e7eeab42243d393237768f
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 74ec83124a68891619fb7ba9c5c811bbf1691076
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
+  MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
   ReactiveCocoa: 3fe9b233ca6db810e86681b5749488564c1179a1
   SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
@@ -83,6 +95,6 @@ SPEC CHECKSUMS:
   UMCCommon: 0263a057a2e1ae1da4c8308541e56904a493ce13
   UMCCommonLog: 05a2d5de21858e3d870551562cff405c1366d244
 
-PODFILE CHECKSUM: 0be3765cad631d4df1158bf91d2451845054e757
+PODFILE CHECKSUM: 0ac4c195f9e0e4908308f89825a6f88d07becf45
 
 COCOAPODS: 1.7.3

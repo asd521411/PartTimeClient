@@ -18,6 +18,8 @@
 @property (nonatomic, strong) UILabel *connectNumber;
 @property (nonatomic, strong) UIButton *pasteBtn;
 
+@property (nonatomic, assign) BOOL show;
+
 @end
 
 @implementation CommontTopTableViewCell
@@ -58,15 +60,17 @@
         make.height.mas_equalTo(18);
     }];
     
-    [self.positionStyleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
-        make.top.mas_equalTo(self.addressnameTitleLab.mas_bottom).offset(15);
-        make.right.mas_equalTo(self).offset(-15);
-        make.height.mas_equalTo(12);
-    }];
+//    [self.positionStyleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(15);
+//        make.top.mas_equalTo(self.addressnameTitleLab.mas_bottom).offset(15);
+//        make.right.mas_equalTo(self).offset(-15);
+//        make.height.mas_equalTo(12);
+//    }];
+//    [self.positionStyleLab.superview layoutIfNeeded];
+    
     [self.demandTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
-        make.top.mas_equalTo(self.positionStyleLab.mas_bottom).offset(15);
+        make.top.mas_equalTo(self.princeLab.mas_bottom).offset(15);
         make.right.mas_equalTo(70);
         make.height.mas_equalTo(14);
     }];
@@ -91,7 +95,7 @@
     }
     
     [self.pasteBackV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self).offset(-15);
+        make.bottom.mas_equalTo(self).offset(-5);
         make.left.mas_equalTo(40);
         make.right.mas_equalTo(-40);
         make.height.mas_equalTo(50);
@@ -110,8 +114,12 @@
     [self.pasteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.pasteBackV.mas_right).offset(-10);
         make.centerY.mas_equalTo(self.pasteBackV);
-        make.width.mas_equalTo(80);
         make.height.mas_equalTo(30);
+        if (self.showConnect == YES) {
+            make.width.mas_equalTo(50);
+        }else {
+            make.width.mas_equalTo(120);
+        }
     }];
 }
 
@@ -124,26 +132,26 @@
         self.princeLab.attributedText = attributedStr;
         
         //tag1
-        self.tagArr1 = [[NSMutableArray alloc] init];
-        if (![ECUtil isBlankString:commonModel.positionworkaddressname]) {
-            [self.tagArr1 addObject:commonModel.positionworkaddressname];
-        }
-        if (![ECUtil isBlankString:commonModel.positionpaytypename]) {
-            [self.tagArr1 addObject:commonModel.positionpaytypename];
-        }
-        if (![ECUtil isBlankString:commonModel.positionworktime]) {
-            [self.tagArr1 addObject:commonModel.positionworktime];
-        }
-        
-        NSString *string1 = @"";
-        NSString *str1 = @"•";
-        for (NSString *str in self.tagArr1) {
-            if (![ECUtil isBlankString:str]) {
-                string1 = [string1 stringByAppendingString: [str stringByAppendingString:str1]];
-            }
-        }
-        string1 = [string1 substringToIndex:string1.length-1];
-        self.positionStyleLab.text = string1;
+//        self.tagArr1 = [[NSMutableArray alloc] init];
+//        if (![ECUtil isBlankString:commonModel.positionworkaddressname]) {
+//            [self.tagArr1 addObject:commonModel.positionworkaddressname];
+//        }
+//        if (![ECUtil isBlankString:commonModel.positionpaytypename]) {
+//            [self.tagArr1 addObject:commonModel.positionpaytypename];
+//        }
+//        if (![ECUtil isBlankString:commonModel.positionworktime]) {
+//            [self.tagArr1 addObject:commonModel.positionworktime];
+//        }
+//
+//        NSString *string1 = @"";
+//        NSString *str1 = @"•";
+//        for (NSString *str in self.tagArr1) {
+//            if (![ECUtil isBlankString:str]) {
+//                string1 = [string1 stringByAppendingString: [str stringByAppendingString:str1]];
+//            }
+//        }
+//        string1 = [string1 substringToIndex:string1.length-1];
+//        self.positionStyleLab.text = string1;
         
         //tag2
         self.tagArr2 = [[NSMutableArray alloc] init];
@@ -153,11 +161,23 @@
         if (![ECUtil isBlankString:commonModel.positionsexreq]) {
             [self.tagArr2 addObject:commonModel.positionsexreq];
         }
-        if (![ECUtil isBlankString:commonModel.positiontypename]) {
-            [self.tagArr2 addObject:commonModel.positiontypename];
+//        if (![ECUtil isBlankString:commonModel.positiontypename]) {
+//            [self.tagArr2 addObject:commonModel.positiontypename];
+//        }
+        
+        if (![ECUtil isBlankString:commonModel.positionpaytypename]) {
+            [self.tagArr2 addObject:commonModel.positionpaytypename];
         }
+        
+    
+        if (self.showConnect == YES) {
+            self.connectNumber.text = commonModel.positiontelnum;
+            [self.pasteBtn setTitle:@"复制" forState:UIControlStateNormal];
+        }else {
+            [self.pasteBtn setTitle:@"点击查看联系方式" forState:UIControlStateNormal];
+        }
+        
         self.pastetitleLab.text = commonModel.positionteltype;
-        self.connectNumber.text = commonModel.positiontelnum;
     }
 }
 
@@ -249,15 +269,20 @@
 - (UIButton *)pasteBtn {
     if (!_pasteBtn) {
         _pasteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_pasteBtn setTitle:@"复制" forState:UIControlStateNormal];
+        //[_pasteBtn setTitle:@"复制" forState:UIControlStateNormal];
         _pasteBtn.backgroundColor = [ECUtil colorWithHexString:@"ff4457"];
-        _pasteBtn.titleLabel.font = KFontNormalSize16;
+        _pasteBtn.titleLabel.font = KFontNormalSize14;
         _pasteBtn.layer.cornerRadius = 15;
         _pasteBtn.layer.masksToBounds = YES;
         [_pasteBtn addTarget:self action:@selector(pasteBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _pasteBtn;
 }
+
+- (void)setShowConnect:(BOOL)showConnect {
+    _showConnect = showConnect;
+}
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];

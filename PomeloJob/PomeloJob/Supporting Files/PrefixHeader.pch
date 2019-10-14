@@ -42,40 +42,41 @@ typedef NS_ENUM(NSInteger, EntranceType){
     ForgetPassword,//忘记密码
 };
 
-//#define WS(weakSelf)  __weak typeof(self) weakSelf = self
-//#define SS(strongSelf) __block typeof(weakSelf) strongSelf = weakSelf
+/*
+ * @weakify(self);
+ * @strongify(self);
+ */
+#ifndef weakify
+#if DEBUG
+#if __has_feature(objc_arc)
+#define weakify(object) autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
+#else
+#define weakify(object) autoreleasepool{} __block __typeof__(object) block##_##object = object;
+#endif
+#else
+#if __has_feature(objc_arc)
+#define weakify(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
+#else
+#define weakify(object) try{} @finally{} {} __block __typeof__(object) block##_##object = object;
+#endif
+#endif
+#endif
 
-//#ifndef weakify
-//    #if DEBUG
-//        #if __has_feature(objc_arc)
-//        #define weakify(object) autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
-//        #else
-//        #define weakify(object) autoreleasepool{} __block __typeof__(object) block##_##object = object;
-//        #endif
-//    #else
-//        #if __has_feature(objc_arc)
-//        #define weakify(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
-//        #else
-//        #define weakify(object) try{} @finally{} {} __block __typeof__(object) block##_##object = object;
-//        #endif
-//    #endif
-//#endif
-//
-//#ifndef strongify
-//    #if DEBUG
-//        #if __has_feature(objc_arc)
-//        #define strongify(object) autoreleasepool{} __typeof__(object) object = weak##_##object;
-//        #else
-//        #define strongify(object) autoreleasepool{} __typeof__(object) object = block##_##object;
-//        #endif
-//    #else
-//        #if __has_feature(objc_arc)
-//        #define strongify(object) try{} @finally{} __typeof__(object) object = weak##_##object;
-//        #else
-//        #define strongify(object) try{} @finally{} __typeof__(object) object = block##_##object;
-//        #endif
-//    #endif
-//#endif
+#ifndef strongify
+#if DEBUG
+#if __has_feature(objc_arc)
+#define strongify(object) autoreleasepool{} __typeof__(object) object = weak##_##object;
+#else
+#define strongify(object) autoreleasepool{} __typeof__(object) object = block##_##object;
+#endif
+#else
+#if __has_feature(objc_arc)
+#define strongify(object) try{} @finally{} __typeof__(object) object = weak##_##object;
+#else
+#define strongify(object) try{} @finally{} __typeof__(object) object = block##_##object;
+#endif
+#endif
+#endif
 
 #define SCREENWIDTH     [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT    [UIScreen mainScreen].bounds.size.height

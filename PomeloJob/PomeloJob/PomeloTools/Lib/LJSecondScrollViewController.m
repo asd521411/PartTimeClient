@@ -120,6 +120,11 @@ static CGFloat rubberBandDistance(CGFloat offset, CGFloat dimension) {
     [self loadData];
 }
 
+- (void)addrefresh {
+    self.mainScrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self loadData];
+    }];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -140,6 +145,11 @@ static CGFloat rubberBandDistance(CGFloat offset, CGFloat dimension) {
     [[HWAFNetworkManager shareManager] commonAcquireImg:@{@"imgtype":@"首页"} firstImg:^(BOOL success, id  _Nonnull request) {
         NSDictionary *dic = (NSDictionary *)request;
         if (success) {
+            
+//            [self.imgUrlArr removeAllObjects];
+//            [self.adUrlArr removeAllObjects];
+//            self.bannerView.imageURLStringsGroup = nil;
+            
             self.imgUrlArr = [CommonImgModel mj_objectArrayWithKeyValuesArray:dic[@"img"]];
             self.adUrlArr = [CommonImgModel mj_objectArrayWithKeyValuesArray:dic[@"imgfixed"]];
             NSMutableArray *arr = [[NSMutableArray alloc] init];
@@ -568,21 +578,22 @@ static CGFloat rubberBandDistance(CGFloat offset, CGFloat dimension) {
             tableView.dataSource = self;
             tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             tableView.scrollEnabled = NO;
-            tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+                //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     NSDictionary *para1 = @{@"positionStatus":self.subScrollViewArr[i]};
                     [[HWAFNetworkManager shareManager] position:para1 postion:^(BOOL success, id  _Nonnull request) {
                         NSArray *resultArr = request;
                         if (success) {
-                            //self.listMutArr = [[NSMutableArray alloc] initWithObjects:@[],@[], nil];
+                            //[self.listMutArr removeObjectAtIndex:i];
+                            [self.listMutArr[i] removeAllObjects];
                             self.listMutArr[i] = [CommonModel mj_objectArrayWithKeyValuesArray:resultArr];
                             [tableView reloadData];
-                            [tableView.mj_footer  endRefreshing];
+                            //[tableView.mj_footer  endRefreshing];
                         }
                     }];
-                });
-            }];
-            [tableView.mj_footer beginRefreshing];
+                //});
+            //}];
+            //[tableView.mj_footer beginRefreshing];
             [_subScrollView addSubview:tableView];
             [tableArray addObject:tableView];
             [tableView.mj_footer endRefreshing];
@@ -625,7 +636,13 @@ static CGFloat rubberBandDistance(CGFloat offset, CGFloat dimension) {
 
 - (NSMutableArray *)listMutArr {
     if (!_listMutArr) {
-        _listMutArr = [[NSMutableArray alloc] initWithObjects:@[],@[], nil];
+        NSMutableArray *arr1 = [[NSMutableArray alloc] init];
+        NSMutableArray *arr2 = [[NSMutableArray alloc] init];
+        //self.listMutArr = [[NSMutableArray alloc] initWithObjects:@[],@[], nil];
+        //_listMutArr = [[NSMutableArray alloc] initWithObjects:@[],@[], nil];
+        _listMutArr = [[NSMutableArray alloc] init];
+        [_listMutArr addObject:arr1];
+        [_listMutArr addObject:arr2];
     }
     return _listMutArr;
 }

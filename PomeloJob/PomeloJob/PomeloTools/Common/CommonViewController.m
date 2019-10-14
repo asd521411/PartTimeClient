@@ -28,7 +28,6 @@
     
     [self setupSubViews];
     [self tableViewRefresh];
-    
     // Do any additional setup after loading the view.
 }
 
@@ -55,7 +54,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.commonTableV.mj_header beginRefreshing];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -85,6 +83,8 @@
         self.upOrDown = YES;
         [self loadData];
     }];
+    [self.commonTableV.mj_header beginRefreshing];
+    
     self.commonTableV.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
         self.upOrDown = NO;
         [self loadData];

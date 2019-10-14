@@ -66,8 +66,17 @@
             NSDictionary *dic = (NSDictionary *)request;
             if (success) {
                 self.userInfoModel = [UserInfoModel mj_objectWithKeyValues:dic];
-                self.userName.text = self.userInfoModel.username;
-                self.personalizedLab.text = self.userInfoModel.userprofile;
+                if (![ECUtil isBlankString:self.userInfoModel.username]) {
+                    self.userName.text = self.userInfoModel.username;
+                }else {
+                    self.userName.text = @"姓名";
+                }
+                
+                if (![ECUtil isBlankString:self.userInfoModel.userprofile]) {
+                    self.personalizedLab.text = self.userInfoModel.userprofile;
+                }else {
+                    self.personalizedLab.text = @"暂无个性签名，添加彰显你的个性";
+                }
             }
         }];
     }else {
@@ -105,7 +114,7 @@
 
     UILabel *lab3 = [[UILabel alloc] initWithFrame:CGRectMake(space, self.personalizedLab.bottom + space, SCREENWIDTH / 2, height)];
     lab3.font = KFontNormalSize14;
-    NSArray *arr1 = @[@"沟通能力强", @"效率高"];
+    NSArray *arr1 = @[@"沟通 能力强", @"效率高"];
     NSString *text1 = [arr1 componentsJoinedByString:@" "];
     lab3.text = text1;
     [self.topBackView addSubview:lab3];
@@ -127,7 +136,7 @@
     
     NSArray *arr = @[@{@"img":@"kanguowo",@"title":@"看过我"},
                      @{@"img":@"wokanguo",@"title":@"我看过"},
-                     @{@"img":@"yishenqing",@"title":@"已申请"},
+                     @{@"img":@"yishenqing",@"title":@"已报名"},
                      @{@"img":@"daimianshi",@"title":@"待面试"},
                      @{@"img":@"shoucang",@"title":@"收藏"}];
 
@@ -150,8 +159,8 @@
     self.lowerBackView = [[UIView alloc] initWithFrame:CGRectMake(0, self.itemBackView.bottom + 15, KSCREEN_WIDTH , backHeight / 4)];
     [self.headBackView addSubview:self.lowerBackView];
     
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowerBackViewTap:)];
-//    [self.lowerBackView addGestureRecognizer:tap];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowerBackViewTap:)];
+    [self.lowerBackView addGestureRecognizer:tap];
     
     UIImageView *imgV1 = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, self.lowerBackView.height - 10, self.lowerBackView.height)];
     imgV1.image = [UIImage imageNamed:@"touxiangbody"];
@@ -270,7 +279,7 @@
     cell.textLabel.text = self.listArr[indexPath.row][@"title"];
     //cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.font = KFontNormalSize14;
+    cell.textLabel.font = KFontNormalSize16;
     cell.imageView.image = [UIImage imageNamed:self.listArr[indexPath.row][@"img"]];
     
     UIImageView *right = [[UIImageView alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH - 15 - 15, 17, 12, 16)];
@@ -285,6 +294,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIViewController *vc = [[NSClassFromString(self.nextArr[indexPath.row]) alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

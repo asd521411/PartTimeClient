@@ -7,8 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		043C703E2354108B00083E9E /* YNSuspendTopPauseBaseTableViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C703A2354108A00083E9E /* YNSuspendTopPauseBaseTableViewVC.m */; };
+		043C703F2354108B00083E9E /* YNSuspendTopPausePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C703C2354108B00083E9E /* YNSuspendTopPausePageVC.m */; };
+		043C704E2354116C00083E9E /* YNPageScrollMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C70462354116C00083E9E /* YNPageScrollMenuView.m */; };
+		043C704F2354116C00083E9E /* YNPageCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C70472354116C00083E9E /* YNPageCollectionView.m */; };
+		043C70502354116C00083E9E /* YNPageHeaderScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C70492354116C00083E9E /* YNPageHeaderScrollView.m */; };
+		043C70512354116C00083E9E /* YNPageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C704A2354116C00083E9E /* YNPageTableView.m */; };
+		043C70522354116C00083E9E /* YNPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C704C2354116C00083E9E /* YNPageScrollView.m */; };
+		043C70592354118700083E9E /* UIViewController+YNPageExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C70542354118700083E9E /* UIViewController+YNPageExtend.m */; };
+		043C705A2354118700083E9E /* UIView+YNPageExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C70562354118700083E9E /* UIView+YNPageExtend.m */; };
+		043C705B2354118700083E9E /* UIScrollView+YNPageExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C70572354118700083E9E /* UIScrollView+YNPageExtend.m */; };
+		043C705F235411D800083E9E /* BasePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C705D235411D800083E9E /* BasePageViewController.m */; };
+		043C70642354122D00083E9E /* YNPageConfigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C70622354122D00083E9E /* YNPageConfigration.m */; };
+		043C70652354122D00083E9E /* YNPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C70632354122D00083E9E /* YNPageViewController.m */; };
+		043C7068235412A100083E9E /* BaseTableViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C7066235412A100083E9E /* BaseTableViewVC.m */; };
 		0460D9BC234B3B0000C721CE /* CommonWorkLocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460D9BB234B3B0000C721CE /* CommonWorkLocationTableViewCell.m */; };
 		0460D9BF234C212700C721CE /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460D9BE234C212700C721CE /* RTLabel.m */; };
+		0460D9EB234DE99900C721CE /* PrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460D9EA234DE99900C721CE /* PrivacyPolicyViewController.m */; };
+		0460D9EE234EFD6D00C721CE /* TopMaskBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460D9ED234EFD6D00C721CE /* TopMaskBackViewController.m */; };
 		04A5E4502338F27D0028B1C9 /* PomeloAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E44F2338F27D0028B1C9 /* PomeloAppDelegate.m */; };
 		04A5E4532338F27D0028B1C9 /* PomeloViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E4522338F27D0028B1C9 /* PomeloViewController.m */; };
 		04A5E4562338F27D0028B1C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A5E4542338F27D0028B1C9 /* Main.storyboard */; };
@@ -102,10 +118,42 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		043C703A2354108A00083E9E /* YNSuspendTopPauseBaseTableViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YNSuspendTopPauseBaseTableViewVC.m; sourceTree = "<group>"; };
+		043C703B2354108B00083E9E /* YNSuspendTopPauseBaseTableViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YNSuspendTopPauseBaseTableViewVC.h; sourceTree = "<group>"; };
+		043C703C2354108B00083E9E /* YNSuspendTopPausePageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YNSuspendTopPausePageVC.m; sourceTree = "<group>"; };
+		043C703D2354108B00083E9E /* YNSuspendTopPausePageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YNSuspendTopPausePageVC.h; sourceTree = "<group>"; };
+		043C70442354116C00083E9E /* YNPageHeaderScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YNPageHeaderScrollView.h; sourceTree = "<group>"; };
+		043C70452354116C00083E9E /* YNPageCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YNPageCollectionView.h; sourceTree = "<group>"; };
+		043C70462354116C00083E9E /* YNPageScrollMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YNPageScrollMenuView.m; sourceTree = "<group>"; };
+		043C70472354116C00083E9E /* YNPageCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YNPageCollectionView.m; sourceTree = "<group>"; };
+		043C70482354116C00083E9E /* YNPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YNPageScrollView.h; sourceTree = "<group>"; };
+		043C70492354116C00083E9E /* YNPageHeaderScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YNPageHeaderScrollView.m; sourceTree = "<group>"; };
+		043C704A2354116C00083E9E /* YNPageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YNPageTableView.m; sourceTree = "<group>"; };
+		043C704B2354116C00083E9E /* YNPageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YNPageTableView.h; sourceTree = "<group>"; };
+		043C704C2354116C00083E9E /* YNPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YNPageScrollView.m; sourceTree = "<group>"; };
+		043C704D2354116C00083E9E /* YNPageScrollMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YNPageScrollMenuView.h; sourceTree = "<group>"; };
+		043C70532354118700083E9E /* UIScrollView+YNPageExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+YNPageExtend.h"; sourceTree = "<group>"; };
+		043C70542354118700083E9E /* UIViewController+YNPageExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YNPageExtend.m"; sourceTree = "<group>"; };
+		043C70552354118700083E9E /* UIView+YNPageExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YNPageExtend.h"; sourceTree = "<group>"; };
+		043C70562354118700083E9E /* UIView+YNPageExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YNPageExtend.m"; sourceTree = "<group>"; };
+		043C70572354118700083E9E /* UIScrollView+YNPageExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+YNPageExtend.m"; sourceTree = "<group>"; };
+		043C70582354118700083E9E /* UIViewController+YNPageExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YNPageExtend.h"; sourceTree = "<group>"; };
+		043C705D235411D800083E9E /* BasePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasePageViewController.m; sourceTree = "<group>"; };
+		043C705E235411D800083E9E /* BasePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasePageViewController.h; sourceTree = "<group>"; };
+		043C70602354122D00083E9E /* YNPageConfigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YNPageConfigration.h; sourceTree = "<group>"; };
+		043C70612354122D00083E9E /* YNPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YNPageViewController.h; sourceTree = "<group>"; };
+		043C70622354122D00083E9E /* YNPageConfigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YNPageConfigration.m; sourceTree = "<group>"; };
+		043C70632354122D00083E9E /* YNPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YNPageViewController.m; sourceTree = "<group>"; };
+		043C7066235412A100083E9E /* BaseTableViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewVC.m; sourceTree = "<group>"; };
+		043C7067235412A100083E9E /* BaseTableViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewVC.h; sourceTree = "<group>"; };
 		0460D9BA234B3B0000C721CE /* CommonWorkLocationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonWorkLocationTableViewCell.h; sourceTree = "<group>"; };
 		0460D9BB234B3B0000C721CE /* CommonWorkLocationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonWorkLocationTableViewCell.m; sourceTree = "<group>"; };
 		0460D9BD234C212600C721CE /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
 		0460D9BE234C212700C721CE /* RTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
+		0460D9E9234DE99900C721CE /* PrivacyPolicyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivacyPolicyViewController.h; sourceTree = "<group>"; };
+		0460D9EA234DE99900C721CE /* PrivacyPolicyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivacyPolicyViewController.m; sourceTree = "<group>"; };
+		0460D9EC234EFD6D00C721CE /* TopMaskBackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopMaskBackViewController.h; sourceTree = "<group>"; };
+		0460D9ED234EFD6D00C721CE /* TopMaskBackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopMaskBackViewController.m; sourceTree = "<group>"; };
 		04A5E44B2338F27D0028B1C9 /* PomeloJob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomeloJob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A5E44E2338F27D0028B1C9 /* PomeloAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PomeloAppDelegate.h; sourceTree = "<group>"; };
 		04A5E44F2338F27D0028B1C9 /* PomeloAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PomeloAppDelegate.m; sourceTree = "<group>"; };
@@ -298,6 +346,73 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		043C70392354102A00083E9E /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				043C70402354110D00083E9E /* Libs */,
+				043C703B2354108B00083E9E /* YNSuspendTopPauseBaseTableViewVC.h */,
+				043C703A2354108A00083E9E /* YNSuspendTopPauseBaseTableViewVC.m */,
+				043C703D2354108B00083E9E /* YNSuspendTopPausePageVC.h */,
+				043C703C2354108B00083E9E /* YNSuspendTopPausePageVC.m */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		043C70402354110D00083E9E /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				043C705C235411AB00083E9E /* BasePageViewController */,
+				043C70432354115000083E9E /* View */,
+				043C70422354112500083E9E /* YNCategory */,
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
+		043C70422354112500083E9E /* YNCategory */ = {
+			isa = PBXGroup;
+			children = (
+				043C70532354118700083E9E /* UIScrollView+YNPageExtend.h */,
+				043C70572354118700083E9E /* UIScrollView+YNPageExtend.m */,
+				043C70552354118700083E9E /* UIView+YNPageExtend.h */,
+				043C70562354118700083E9E /* UIView+YNPageExtend.m */,
+				043C70582354118700083E9E /* UIViewController+YNPageExtend.h */,
+				043C70542354118700083E9E /* UIViewController+YNPageExtend.m */,
+			);
+			path = YNCategory;
+			sourceTree = "<group>";
+		};
+		043C70432354115000083E9E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				043C70452354116C00083E9E /* YNPageCollectionView.h */,
+				043C70472354116C00083E9E /* YNPageCollectionView.m */,
+				043C70442354116C00083E9E /* YNPageHeaderScrollView.h */,
+				043C70492354116C00083E9E /* YNPageHeaderScrollView.m */,
+				043C704D2354116C00083E9E /* YNPageScrollMenuView.h */,
+				043C70462354116C00083E9E /* YNPageScrollMenuView.m */,
+				043C70482354116C00083E9E /* YNPageScrollView.h */,
+				043C704C2354116C00083E9E /* YNPageScrollView.m */,
+				043C704B2354116C00083E9E /* YNPageTableView.h */,
+				043C704A2354116C00083E9E /* YNPageTableView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		043C705C235411AB00083E9E /* BasePageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				043C7067235412A100083E9E /* BaseTableViewVC.h */,
+				043C7066235412A100083E9E /* BaseTableViewVC.m */,
+				043C705E235411D800083E9E /* BasePageViewController.h */,
+				043C705D235411D800083E9E /* BasePageViewController.m */,
+				043C70602354122D00083E9E /* YNPageConfigration.h */,
+				043C70622354122D00083E9E /* YNPageConfigration.m */,
+				043C70612354122D00083E9E /* YNPageViewController.h */,
+				043C70632354122D00083E9E /* YNPageViewController.m */,
+			);
+			path = BasePageViewController;
+			sourceTree = "<group>";
+		};
 		04A5E4422338F27D0028B1C9 = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +434,7 @@
 		04A5E44D2338F27D0028B1C9 /* PomeloJob */ = {
 			isa = PBXGroup;
 			children = (
+				043C70392354102A00083E9E /* HomePage */,
 				F1C4D8C7233A0785004BD723 /* PomeloTools */,
 				04A5E5D82339002A0028B1C9 /* PomeloDiscovery */,
 				04A5E5CA2338FDB20028B1C9 /* PomeloMessage */,
@@ -335,6 +451,8 @@
 				04A5E4822338F7A10028B1C9 /* PomeloResetViewController.m */,
 				04A5E4812338F7A10028B1C9 /* PomeloVerifyViewController.h */,
 				04A5E4832338F7A10028B1C9 /* PomeloVerifyViewController.m */,
+				0460D9E9234DE99900C721CE /* PrivacyPolicyViewController.h */,
+				0460D9EA234DE99900C721CE /* PrivacyPolicyViewController.m */,
 				04A5E4792338F70F0028B1C9 /* dagou.png */,
 				04A5E4662338F62F0028B1C9 /* PomeloSquare */,
 				04A5E5E6233900CF0028B1C9 /* Images.xcassets */,
@@ -621,6 +739,8 @@
 				F1C4D90A233A0785004BD723 /* TitleSelectItemControl.m */,
 				F1C4D90B233A0785004BD723 /* CommonTableViewHeaderFooterView.h */,
 				F1C4D90D233A0785004BD723 /* CommonDetailsViewController.m */,
+				0460D9EC234EFD6D00C721CE /* TopMaskBackViewController.h */,
+				0460D9ED234EFD6D00C721CE /* TopMaskBackViewController.m */,
 				F1C4D90F233A0785004BD723 /* HWTitleItemSelector.m */,
 				F1C4D910233A0785004BD723 /* CommonModel.h */,
 				0460D9BA234B3B0000C721CE /* CommonWorkLocationTableViewCell.h */,
@@ -797,12 +917,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				043C705A2354118700083E9E /* UIView+YNPageExtend.m in Sources */,
 				F1C4D8A6233A0358004BD723 /* PomeloLimitTwoTableViewController.m in Sources */,
+				043C703F2354108B00083E9E /* YNSuspendTopPausePageVC.m in Sources */,
 				F1C4D94A233A0785004BD723 /* HWPorgressHUD.m in Sources */,
 				F1C4D940233A0785004BD723 /* NavigationBarView.m in Sources */,
 				04A5E4532338F27D0028B1C9 /* PomeloViewController.m in Sources */,
 				F1C4D948233A0785004BD723 /* LJSecondScrollViewController.m in Sources */,
 				04A5E48A2338F7A10028B1C9 /* PomeloForgetViewController.m in Sources */,
+				043C70512354116C00083E9E /* YNPageTableView.m in Sources */,
 				F1C4D865233A02DE004BD723 /* PomeloMessageViewController.m in Sources */,
 				F1C4D8B1233A0358004BD723 /* PomeloSetViewController.m in Sources */,
 				F1C4D89B233A0358004BD723 /* PomeloAboutUsViewController.m in Sources */,
@@ -838,6 +961,7 @@
 				F1C4D8A4233A0358004BD723 /* PomeloMyResumeViewController.m in Sources */,
 				F1C4D8C1233A03AE004BD723 /* PomeloSortViewController.m in Sources */,
 				04A5E4502338F27D0028B1C9 /* PomeloAppDelegate.m in Sources */,
+				043C70502354116C00083E9E /* YNPageHeaderScrollView.m in Sources */,
 				04A5E48D2338F7A10028B1C9 /* PomeloLoginViewController.m in Sources */,
 				F1C4D861233A0233004BD723 /* PomeloDiscoveryViewController.m in Sources */,
 				F1C4D94B233A0785004BD723 /* HWAFNetworkManager.m in Sources */,
@@ -851,6 +975,7 @@
 				F1C4D941233A0785004BD723 /* CommonTableViewCell.m in Sources */,
 				F1C4D8A0233A0358004BD723 /* PomeloEducationExperienceViewController.m in Sources */,
 				F1C4D89C233A0358004BD723 /* PomeloCommonTableViewController.m in Sources */,
+				043C703E2354108B00083E9E /* YNSuspendTopPauseBaseTableViewVC.m in Sources */,
 				F1C4D946233A0785004BD723 /* NSUserDefaultMemory.m in Sources */,
 				F1C4D925233A0785004BD723 /* AppUpdater.m in Sources */,
 				F1C4D93B233A0785004BD723 /* SelectBtnView.m in Sources */,
@@ -862,26 +987,37 @@
 				F1C4D927233A0785004BD723 /* ECStyle.m in Sources */,
 				F1C4D938233A0785004BD723 /* CommonModel.m in Sources */,
 				F1C4D8A8233A0358004BD723 /* PomeloLimitFiveTableViewController.m in Sources */,
+				043C70522354116C00083E9E /* YNPageScrollView.m in Sources */,
+				0460D9EE234EFD6D00C721CE /* TopMaskBackViewController.m in Sources */,
+				043C70652354122D00083E9E /* YNPageViewController.m in Sources */,
+				043C705F235411D800083E9E /* BasePageViewController.m in Sources */,
 				0460D9BF234C212700C721CE /* RTLabel.m in Sources */,
 				F1C4D89D233A0358004BD723 /* PomeloRelationUsViewController.m in Sources */,
+				043C70642354122D00083E9E /* YNPageConfigration.m in Sources */,
+				043C705B2354118700083E9E /* UIScrollView+YNPageExtend.m in Sources */,
+				043C704E2354116C00083E9E /* YNPageScrollMenuView.m in Sources */,
 				F1C4D8A3233A0358004BD723 /* PomeloJobIntentionViewController.m in Sources */,
 				F1C4D85E233A0233004BD723 /* PomeloHotPositionTableViewCell.m in Sources */,
 				F1C4D936233A0785004BD723 /* CommonDetailsTableViewCell.m in Sources */,
+				043C704F2354116C00083E9E /* YNPageCollectionView.m in Sources */,
 				F1C4D93A233A0785004BD723 /* HWPickerView.m in Sources */,
 				F1C4D945233A0785004BD723 /* HWTitleItemSelector.m in Sources */,
 				F1C4D89E233A0358004BD723 /* PomeloCoupleBackViewController.m in Sources */,
 				F1C4D8B3233A0358004BD723 /* PomeloInputCodeViewController.m in Sources */,
 				F1C4D85F233A0233004BD723 /* PomeloFastPositionTableViewCell.m in Sources */,
+				043C7068235412A100083E9E /* BaseTableViewVC.m in Sources */,
 				F1C4D93C233A0785004BD723 /* HeadTapV.m in Sources */,
 				04A5E4892338F7A10028B1C9 /* PomeloVerifyLoginViewController.m in Sources */,
 				F1C4D8A9233A0358004BD723 /* PomeloLimitThreeTableViewController.m in Sources */,
 				04A5E4882338F7A10028B1C9 /* PomeloGuidancePageViewController.m in Sources */,
+				0460D9EB234DE99900C721CE /* PrivacyPolicyViewController.m in Sources */,
 				F1C4D93D233A0785004BD723 /* CommonImgModel.m in Sources */,
 				F1C4D8C2233A03AE004BD723 /* PomeloTypeSelectViewController.m in Sources */,
 				F1C4D8AC233A0358004BD723 /* PomeloPersonalInfoViewController.m in Sources */,
 				F1C4D8AB233A0358004BD723 /* PomeloLimitOneTableViewController.m in Sources */,
 				F1C4D89F233A0358004BD723 /* PomeloResumeImproveTableViewCell.m in Sources */,
 				F1C4D94D233A0785004BD723 /* UIView+HWUtilView.m in Sources */,
+				043C70592354118700083E9E /* UIViewController+YNPageExtend.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

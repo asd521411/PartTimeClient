@@ -69,12 +69,12 @@
     [self.segmentedControl addTarget:self action:@selector(segmentedControlAction:) forControlEvents:UIControlEventValueChanged];
    
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.segmentedControl.bottom, SCREENWIDTH, SCREENHEIGHT - [ECStyle navigationbarHeight] - self.segmentedControl.height - [ECStyle tabbarExtensionHeight])];
-    self.scrollView.backgroundColor = [HWRandomColor randomColor];
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.bounces = YES;
     self.scrollView.userInteractionEnabled = YES;
     [self.view addSubview:self.scrollView];
+    self.scrollView.contentOffset = CGPointMake(KSCREEN_WIDTH * self.typeInteger, 0);
     self.scrollView.contentSize = CGSizeMake(SCREENWIDTH * self.items.count, SCREENHEIGHT - [ECStyle navigationbarHeight] - self.segmentedControl.height);
     
     self.tableViewController1 = [[PomeloLimitOneTableViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -132,7 +132,7 @@
 
 - (NSArray *)items {
     if (!_items) {
-        _items = @[@"看过我", @"我看过", @"已申请", @"待面试", @"收藏"];;
+        _items = @[@"看过我", @"我看过", @"已报名", @"待面试", @"收藏"];;
     }
     return _items;
 }

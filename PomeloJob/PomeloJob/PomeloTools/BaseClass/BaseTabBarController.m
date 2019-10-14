@@ -9,6 +9,7 @@
 #import "BaseTabBarController.h"
 #import "BaseNavigationController.h"
 #import "LJSecondScrollViewController.h"
+#import "YNSuspendTopPausePageVC.h"
 #import "PomeloDiscoveryViewController.h"
 #import "PomeloSquareViewController.h"
 #import "PomeloMessageViewController.h"
@@ -25,13 +26,15 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     NSMutableArray *vcArr = [[NSMutableArray alloc] init];
-    LJSecondScrollViewController *lj = [[LJSecondScrollViewController alloc] init];
+    //LJSecondScrollViewController *lj = [[LJSecondScrollViewController alloc] init];
+    YNSuspendTopPausePageVC *yn = [YNSuspendTopPausePageVC suspendTopPausePageVC];
+    
     PomeloDiscoveryViewController *dis = [[PomeloDiscoveryViewController alloc] init];
     PomeloSquareViewController *squ = [[PomeloSquareViewController alloc] init];
     PomeloMessageViewController *message = [[PomeloMessageViewController alloc] init];
     PomeloMyViewController *my = [[PomeloMyViewController alloc] init];
     
-    [vcArr addObject:lj];
+    [vcArr addObject:yn];
     [vcArr addObject:dis];
     [vcArr addObject:squ];
     [vcArr addObject:message];

@@ -66,18 +66,19 @@
     [self tableViewRefresh];
     
     
+    [self.squareTableV.mj_header beginRefreshing];
+    
     // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //[self.squareTableV.mj_header beginRefreshing];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    //[self.squareTableV.mj_header endRefreshing];
-    //[self.squareTableV.mj_footer endRefreshing];
+    [self.squareTableV.mj_header endRefreshing];
+    [self.squareTableV.mj_footer endRefreshing];
 }
 
 - (void)loadStyle {

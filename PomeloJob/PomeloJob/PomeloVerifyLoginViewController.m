@@ -9,6 +9,7 @@
 #import "PomeloVerifyLoginViewController.h"
 #import "ReactiveCocoa.h"
 #import "PomeloResetViewController.h"
+#import <UMAnalytics/MobClick.h>
 
 @interface PomeloVerifyLoginViewController ()
 
@@ -21,6 +22,8 @@
 
 @property (nonatomic, strong) UIButton *getCode;
 
+
+
 @end
 
 @implementation PomeloVerifyLoginViewController
@@ -28,19 +31,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.interger = 60;
+    //self.interger = 60;
     
     [self setupSubViews];
     
     // Do any additional setup after loading the view.
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timer:) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-    [self.timer setFireDate:[NSDate distantFuture]];
-    
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     //创建一个UIButton
     UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 40, 40)];
     //设置UIButton的图像
@@ -53,22 +52,30 @@
     self.navigationItem.leftBarButtonItem = backItem;
 }
 
-- (void)timer:(NSTimer *)time {
-    self.interger--;
-    [self.getCode setTitle:[NSString stringWithFormat:@"%ld%@",(long)self.interger, @"s"] forState:UIControlStateNormal];
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+//    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timer:) userInfo:nil repeats:YES];
+//    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+//    [self.timer setFireDate:[NSDate distantFuture]];
     
-    if (self.interger == 0) {
-        [self.getCode setTitle:[NSString stringWithFormat:@"获取验证码"] forState:UIControlStateNormal];
-         self.getCode.userInteractionEnabled = YES;
-        [self.timer setFireDate:[NSDate distantFuture]];
-    }
+}
+
+- (void)timer:(NSTimer *)time {
+//    self.interger--;
+//    [self.getCode setTitle:[NSString stringWithFormat:@"%ld%@",(long)self.interger, @"s"] forState:UIControlStateNormal];
+//
+//    if (self.interger == 0) {
+//        [self.getCode setTitle:[NSString stringWithFormat:@"获取验证码"] forState:UIControlStateNormal];
+//         self.getCode.userInteractionEnabled = YES;
+//        [self.timer setFireDate:[NSDate distantFuture]];
+//    }
     
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    [self.timer invalidate];
-    self.timer = nil;
+//    [self.timer invalidate];
+//    self.timer = nil;
 }
 
 
@@ -79,6 +86,8 @@
     self.backScrollV.scrollEnabled = YES;
     self.backScrollV.bounces = YES;
     [self.view addSubview:self.backScrollV];
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction1:)];
+    [self.backScrollV addGestureRecognizer:tap1];
     
     CGFloat wid = (SCREENWIDTH - 150 * 2);
     CGFloat hei = 40;
@@ -91,7 +100,7 @@
     
     UILabel *lab1 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, self.iconImgV.bottom + 50, 80, hei)];
     lab1.textColor = KColor_212121;
-    lab1.font = KFontNormalSize14;
+    lab1.font = KFontNormalSize18;
     lab1.text = @"手机号";
 //    switch (self.entranceType) {
 //        case VerifyLoginStyle:
@@ -108,7 +117,7 @@
     lab1.textAlignment = NSTextAlignmentLeft;
     [self.backScrollV addSubview:lab1];
     
-    UITextField *textFd1 = [[UITextField alloc] initWithFrame:CGRectMake(lab1.right, lab1.top, KSCREEN_WIDTH - lab1.width - KSpaceDistance15 * 2 - 70, hei)];
+    UITextField *textFd1 = [[UITextField alloc] initWithFrame:CGRectMake(lab1.right, lab1.bottom + 10, KSCREEN_WIDTH - 30 - lab1.width, hei)];
 //    switch (self.entranceType) {
 //        case VerifyLoginStyle:
 //            textFd1.placeholder = @"请输入手机号";
@@ -131,8 +140,9 @@
     }
     textFd1.text = self.phoneNum;
     textFd1.textColor = KColor_C8C8C8;
-    textFd1.font = KFontNormalSize14;
+    textFd1.font = KFontNormalSize16;
     textFd1.keyboardType = UIKeyboardTypeNumberPad;
+    //textFd1.secureTextEntry = YES;
     [self.backScrollV addSubview:textFd1];
     //    textFd1.layer.borderColor = LIGHTGRAYCOLOR.CGColor;
     //    textFd1.layer.borderWidth = KLineWidthMeasure05;
@@ -145,7 +155,7 @@
     self.getCode = [UIButton buttonWithType:UIButtonTypeCustom];
     self.getCode.frame = CGRectMake(KSCREEN_WIDTH - 70 - KSpaceDistance15, textFd1.bottom - 25, 70, 15);
     self.getCode.backgroundColor = [HWRandomColor randomColor];
-    [self.backScrollV addSubview:self.getCode];
+    //[self.backScrollV addSubview:self.getCode];
     self.getCode.layer.cornerRadius = 1;
     self.getCode.layer.masksToBounds = YES;
     [ECUtil gradientLayer:self.getCode startPoint:CGPointMake(0, 0.5) endPoint:CGPointMake(1, 0.5) colorArr1:KColorGradient_light colorArr2:KColorGradient_dark location1:0.5 location2:1];
@@ -172,32 +182,34 @@
         }];
     }];
     
-    UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(KSpaceDistance15, lab1.bottom - 1, KSCREEN_WIDTH - KSpaceDistance15 * 2, KLineWidthMeasure05)];
+    UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(KSpaceDistance15, textFd1.bottom - 1, KSCREEN_WIDTH - KSpaceDistance15 * 2, KLineWidthMeasure05)];
     line1.backgroundColor = KColor_Line;
     [self.backScrollV addSubview:line1];
     
-    UILabel *lab2 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, lab1.bottom + KSpaceDistance15 * 2, lab1.width, hei)];
+    UILabel *lab2 = [[UILabel alloc] initWithFrame:CGRectMake(15, textFd1.bottom + 20, KSCREEN_WIDTH - 30, hei)];
     lab2.textColor = KColor_212121;
-    lab2.font = KFontNormalSize14;
-    lab2.text = @"验证码：";
+    lab2.font = KFontNormalSize18;
+    lab2.text = @"密 码";
+    lab2.textAlignment = NSTextAlignmentLeft;
     [self.backScrollV addSubview:lab2];
     
-    UITextField *textFd2 = [[UITextField alloc] initWithFrame:CGRectMake(lab1.right, lab1.bottom + KSpaceDistance15 * 2, SCREENWIDTH - lab1.width - KSpaceDistance15 * 2, hei)];
-    textFd2.placeholder = @"请输入验证码";
+    UITextField *textFd2 = [[UITextField alloc] initWithFrame:CGRectMake(lab1.right, lab2.bottom + 10, SCREENWIDTH - 30 - lab1.width, hei)];
+    textFd2.placeholder = @"请输入密码";
     textFd2.textColor = KColor_C8C8C8;
-    textFd2.font = KFontNormalSize14;
-    textFd2.keyboardType = UIKeyboardTypeNumberPad;
+    textFd2.font = KFontNormalSize16;
+    //textFd2.keyboardType = UIKeyboardTypeNumberPad;
+    textFd2.secureTextEntry = YES;
     [self.backScrollV addSubview:textFd2];
     //    textFd2.layer.borderColor = LIGHTGRAYCOLOR.CGColor;
     //    textFd2.layer.borderWidth = KLineWidthMeasure05;
     [[textFd2 rac_textSignal] subscribeNext:^(id x) {
         NSString *text = [NSString stringWithFormat:@"%@", x];
-        if (text.length >= 6) {
-            textFd2.text = [text substringToIndex:6];
+        if (text.length >= 16) {
+            textFd2.text = [text substringToIndex:16];
         }
     }];
     
-    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(KSpaceDistance15, lab2.bottom - 1, KSCREEN_WIDTH - KSpaceDistance15 * 2, KLineWidthMeasure05)];
+    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(KSpaceDistance15, textFd2.bottom - 1, KSCREEN_WIDTH - KSpaceDistance15 * 2, KLineWidthMeasure05)];
     line2.backgroundColor = KColor_Line;
     [self.backScrollV addSubview:line2];
     
@@ -213,14 +225,15 @@
         case ForgetPassword:
             [login setTitle:@"输入新密码" forState:UIControlStateNormal];
         case RegisterStyle:
-            [login setTitle:@"输入密码" forState:UIControlStateNormal];
+            [login setTitle:@"提     交" forState:UIControlStateNormal];
             break;
         default:
             break;
     }
     [login setTintColor:[UIColor whiteColor]];
     login.adjustsImageWhenHighlighted = NO;
-    [ECUtil gradientLayer:login startPoint:CGPointMake(0, 0.5) endPoint:CGPointMake(1, 0.5) colorArr1:KColorGradient_light colorArr2:KColorGradient_dark location1:0 location2:0];
+    //[ECUtil gradientLayer:login startPoint:CGPointMake(0, 0.5) endPoint:CGPointMake(1, 0.5) colorArr1:KColorGradient_light colorArr2:KColorGradient_dark location1:0 location2:0];
+    [login setBackgroundColor:[UIColor colorWithRed:70/255.0 green:222/255.0 blue:160/255.0 alpha:1]];
     
     [[login rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         if (![textFd1.text n6_isMobile]) {
@@ -229,11 +242,11 @@
             return ;
         }
 
-        if (textFd2.text.length != 6) {
-            [SVProgressHUD showInfoWithStatus:@"验证码格式错误！"];
-            [SVProgressHUD dismissWithDelay:1];
-            return ;
-        }
+//        if (textFd2.text.length >= 16) {
+//            [SVProgressHUD showInfoWithStatus:@"密码过长！"];
+//            [SVProgressHUD dismissWithDelay:1];
+//            return ;
+//        }
         
         __strong typeof(weakSelf) strongSelf = weakSelf;
         
@@ -244,18 +257,25 @@
 //                                       @"phonecar":[ECUtil getIDFA]
 //                                       };
                 NSDictionary *para = @{@"usertel":textFd1.text,
-                                       @"usermessagecode":textFd2.text,
+                                       @"userpassword":textFd2.text,
                                        @"phonecar":[ECUtil getIDFA]
                                        };
-                [[HWAFNetworkManager shareManager] accountRequest:para loginByMessageCode:^(BOOL success, id  _Nonnull request) {
-                    NSLog(@"-------------%@", request);
+                [[HWAFNetworkManager shareManager] accountRequest:para loginByPassword:^(BOOL success, id  _Nonnull request) {
                     if (success) {
                         [SVProgressHUD showSuccessWithStatus:request[@"statusMessage"]];
                         [SVProgressHUD dismissWithDelay:1];
-                        [NSUserDefaultMemory defaultSetMemory:request[@"userid"] unityKey:USERID];
-                        [strongSelf.navigationController popToRootViewControllerAnimated:YES];
-                        UITabBarController *tabBarVc = strongSelf.navigationController.tabBarController;
-                        tabBarVc.selectedIndex = 0;
+                        
+                        if ([request[@"status"] isEqualToString:@"success"]) {
+                            [NSUserDefaultMemory defaultSetMemory:request[@"userid"] unityKey:USERID];
+                            [MobClick profileSignInWithPUID:request[@"userid"]];
+                            [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+                            UITabBarController *tabBarVc = strongSelf.navigationController.tabBarController;
+                            tabBarVc.selectedIndex = 0;
+                        }
+                        if ([request[@"status"] isEqualToString:@"fail"]) {
+                            
+                        }
+                        
                     }
                 }];
             } break;
@@ -295,24 +315,24 @@
 //                NSDictionary *para = @{@"usertel":textFd1.text,
 //                                       @"usermessagecode":textFd2.text,
 //                                       };
-                [[HWAFNetworkManager shareManager] accountRequest:para loginSendMessage:^(BOOL success, id  _Nonnull request) {
-                    if (success) {
-                        if ([request[@"status"] isEqualToString:@"fail"]) {
-                            [SVProgressHUD showInfoWithStatus:request[@"statusMessage"]];
-                            [SVProgressHUD dismissWithDelay:1];
-                        }
-                        if ([request[@"status"] isEqualToString:@"success"]) {
-                            [SVProgressHUD showInfoWithStatus:request[@"statusMessage"]];
-                            [SVProgressHUD dismissWithDelay:1];
-                            
-                            PomeloResetViewController *set = [[PomeloResetViewController alloc] init];
-                            set.phoneNum = textFd1.text;
-                            set.password = strongSelf.password;
-                            set.entranceType = RegisterStyle;
-                            [strongSelf.navigationController pushViewController:set animated:YES];
-                        }
-                    }
-                }];
+//                [[HWAFNetworkManager shareManager] accountRequest:para loginSendMessage:^(BOOL success, id  _Nonnull request) {
+//                    if (success) {
+//                        if ([request[@"status"] isEqualToString:@"fail"]) {
+//                            [SVProgressHUD showInfoWithStatus:request[@"statusMessage"]];
+//                            [SVProgressHUD dismissWithDelay:1];
+//                        }
+//                        if ([request[@"status"] isEqualToString:@"success"]) {
+//                            [SVProgressHUD showInfoWithStatus:request[@"statusMessage"]];
+//                            [SVProgressHUD dismissWithDelay:1];
+//                            
+//                            PomeloResetViewController *set = [[PomeloResetViewController alloc] init];
+//                            set.phoneNum = textFd1.text;
+//                            set.password = strongSelf.password;
+//                            set.entranceType = RegisterStyle;
+//                            [strongSelf.navigationController pushViewController:set animated:YES];
+//                        }
+//                    }
+//                }];
             }break;
             default:
                 break;
@@ -321,7 +341,9 @@
     
 }
 
-
+- (void)tapAction1:(UITapGestureRecognizer *)tap {
+    [self.view endEditing:YES];
+}
 
 
 /*

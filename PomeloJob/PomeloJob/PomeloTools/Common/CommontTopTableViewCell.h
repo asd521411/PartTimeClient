@@ -24,6 +24,8 @@ typedef void(^PasteAction)(NSString *num);
 @property (nonatomic, strong) CommonModel *commonModel;
 @property (nonatomic, copy) PasteAction pasteAction;
 
+@property (nonatomic, assign) BOOL showConnect;
+
 @end
 
 NS_ASSUME_NONNULL_END

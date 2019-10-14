@@ -52,9 +52,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self loadData];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
+    
     [super viewDidAppear:animated];
     //创建一个UIButton
     UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 40, 40)];
@@ -66,6 +64,10 @@
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
     //覆盖返回按键
     self.navigationItem.leftBarButtonItem = backItem;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+
 }
 
 - (void)loadData {
@@ -81,7 +83,6 @@
             self.resume_schoolModel = [ResumeModel mj_objectWithKeyValues:request[@"resume_school"]];
             
             self.lab1.text = self.resumeinfoModel.resumename;
-            
             NSString *ageStr = self.resumeinfoModel.resumebrithday;
 
             NSString *heiStr = @"xxxcm";
@@ -118,6 +119,8 @@
     self.headBackView = [[UIView alloc] initWithFrame:CGRectMake(0, [ECStyle navigationbarHeight], KSCREEN_WIDTH, backHeight)];
     self.headBackView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.headBackView];
+    //self.headBackView 
+    
     
     CGFloat headW = KSCREEN_WIDTH - 300;
     
@@ -148,26 +151,26 @@
     
     self.lab2 = [[UILabel alloc] init];
     self.lab2.textColor = KColor_212121;
-    self.lab2.font = KFontNormalSize12;
+    self.lab2.font = KFontNormalSize14;
     self.lab2.text = @"x岁 | xxxcm | 学历";
     self.lab2.textAlignment = NSTextAlignmentCenter;
     [self.headBackView addSubview:self.lab2];
     [self.lab2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.lab1.mas_bottom).offset(10);
         make.left.right.mas_equalTo(self.headBackView);
-        make.height.mas_equalTo(10);
+        make.height.mas_equalTo(14);
     }];
     
     self.lab3 = [[UILabel alloc] init];
     self.lab3.textColor = KColor_212121;
-    self.lab3.font = KFontNormalSize12;
+    self.lab3.font = KFontNormalSize14;
     self.lab3.text = @"入职时间";
     self.lab3.textAlignment = NSTextAlignmentCenter;
     [self.headBackView addSubview:self.lab3];
     [self.lab3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.lab2.mas_bottom).offset(10);
         make.left.right.mas_equalTo(self.headBackView);
-        make.height.mas_equalTo(10);
+        make.height.mas_equalTo(14);
     }];
     
     self.lowerBackView = [[UIView alloc] init];
@@ -179,7 +182,7 @@
         make.bottom.mas_equalTo(self.headBackView.mas_bottom);
     }];
     
-    self.lab4 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, 15, SCREENWIDTH - 30, height)];
+    self.lab4 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, 5, SCREENWIDTH - 30, height)];
     self.lab4.attributedText = [ECUtil mutableArrtibuteString:@"工作时间    " foregroundColor:[ECUtil colorWithHexString:@"212121"] fontName:KFontNormalSize18 attribut:@"x年" foregroundColor:[ECUtil colorWithHexString:@"212121"] fontName:KFontNormalSize14];
     self.lab4.textAlignment = NSTextAlignmentLeft;
     [self.lowerBackView addSubview:self.lab4];
@@ -196,7 +199,7 @@
     
     UIButton *editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     editBtn.backgroundColor = [ECUtil colorWithHexString:@"e24e77"];
-    editBtn.titleLabel.font = KFontNormalSize12;
+    editBtn.titleLabel.font = KFontNormalSize14;
     [editBtn setTitle:@"编辑简历" forState:UIControlStateNormal];
     [self.headBackView addSubview:editBtn];
     [editBtn mas_makeConstraints:^(MASConstraintMaker *make) {

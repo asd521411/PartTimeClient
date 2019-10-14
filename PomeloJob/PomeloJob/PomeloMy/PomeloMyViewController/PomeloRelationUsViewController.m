@@ -10,17 +10,29 @@
 
 @interface PomeloRelationUsViewController ()
 
+@property (nonatomic, strong) UIScrollView *backScrollV;
+
 @end
 
 @implementation PomeloRelationUsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setupSubViews];
+    
     // Do any additional setup after loading the view.
 }
 
+
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     //创建一个UIButton
     UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 40, 40)];
     //设置UIButton的图像
@@ -32,6 +44,19 @@
     //覆盖返回按键
     self.navigationItem.leftBarButtonItem = backItem;
 }
+
+- (void)setupSubViews {
+    self.backScrollV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, [ECStyle navigationbarHeight], KSCREEN_WIDTH, KSCREEN_HEIGHT - [ECStyle navigationbarHeight] - [ECStyle toolbarHeight])];
+    self.backScrollV.scrollEnabled = YES;
+    self.backScrollV.bounces = YES;
+    self.backScrollV.contentSize = CGSizeMake(KSCREEN_WIDTH, KSCREEN_HEIGHT - [ECStyle navigationbarHeight] + 100);
+    [self.view addSubview:self.backScrollV];
+    
+    UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT)];
+    img.image = [UIImage imageNamed:@"lianxi"];
+    [self.backScrollV addSubview:img];
+}
+
 
 /*
 #pragma mark - Navigation

@@ -27,6 +27,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        //self.backgroundColor = [HWRandomColor randomColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 //
 //        self.payLab = [[UILabel alloc] init];
@@ -120,7 +121,7 @@
         make.left.mas_equalTo(15);
         make.top.mas_equalTo(self);
         make.right.mas_equalTo(self).offset(-15);
-        make.height.mas_equalTo(self.hei);
+        make.height.mas_equalTo(self.height);
     }];
     
 //    self.rtLab.text = self.conStr;
@@ -134,9 +135,10 @@
     
     
     [self.workContentBackV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
+        make.left.mas_equalTo(10);
         make.right.mas_equalTo(-15);
-        make.top.mas_equalTo(self.workContentLab.mas_bottom);
+        //make.top.mas_equalTo(self.workContentLab.mas_bottom);
+        make.bottom.mas_equalTo(self);
         make.height.mas_equalTo(50);
     }];
     
@@ -190,7 +192,8 @@
     if (_commonModel != commonModel) {
         
 //        self.payLab.text = commonModel.positionname;
-        //self.workContentLab.text = commonModel.positioninfo;
+        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[commonModel.positioninfo dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+        self.workContentLab.attributedText = attributedString;
         
 //        self.workTimeLab.text = commonModel.positionworktime;
 //        self.workRequireLab.text = commonModel.positionworkaddressinfo;
@@ -206,15 +209,13 @@
     }
 }
 
-- (void)setContentStr:(NSString *)contentStr {
-    if (_contentStr != contentStr) {
-        _contentStr = contentStr;
-        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[contentStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-        CGRect rect = [attributedString boundingRectWithSize:CGSizeMake(self.width - 30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
-        //CGSize size = [ECUtil textSize:attributedString.string font:KFontNormalSize14 bounding:CGSizeMake(KSCREEN_WIDTH - 30, CGFLOAT_MAX)];
-        self.hei = rect.size.height;
-    }
-}
+//- (void)setContentStr:(NSString *)contentStr {
+//    if (_contentStr != contentStr) {
+//        _contentStr = contentStr;
+//        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[contentStr. dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+//        self.workContentLab.attributedText = attributedString;
+//    }
+//}
 
 - (NSMutableArray *)stringHeight {
     if (!_stringHeight) {

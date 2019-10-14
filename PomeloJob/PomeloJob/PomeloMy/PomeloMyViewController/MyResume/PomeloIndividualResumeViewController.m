@@ -9,7 +9,7 @@
 #import "PomeloIndividualResumeViewController.h"
 #import "PomeloResumeImproveTableViewController.h"
 
-@interface PomeloIndividualResumeViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface PomeloIndividualResumeViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIScrollView *backScrollV;
 @property (nonatomic, strong) UIButton *headPortrait;
@@ -66,6 +66,20 @@
 //    [self.pickBackV addSubview:self.pickView];
 //}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //创建一个UIButton
+    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 40, 40)];
+    //设置UIButton的图像
+    [backButton setImage:[UIImage imageNamed:@"turnleft"] forState:UIControlStateNormal];
+    [[backButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
+    //覆盖返回按键
+    self.navigationItem.leftBarButtonItem = backItem;
+}
+
 
 - (void)setupSubViews {
     
@@ -93,7 +107,7 @@
 
     UILabel *lab1 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, self.headPortrait.bottom + 50, 80, hei)];
     lab1.textColor = KColor_212121;
-    lab1.font = KFontNormalSize14;
+    lab1.font = KFontNormalSize16;
     lab1.text = @"姓      名";
     lab1.textAlignment = NSTextAlignmentLeft;
     [self.backScrollV addSubview:lab1];
@@ -101,7 +115,7 @@
     self.textFd1 = [[UITextField alloc] initWithFrame:CGRectMake(lab1.right, lab1.top, KSCREEN_WIDTH - lab1.width - KSpaceDistance15 * 2, hei)];
     self.textFd1.placeholder = @"请输入姓名";
     self.textFd1.textColor = KColor_C8C8C8;
-    self.textFd1.font = KFontNormalSize10;
+    self.textFd1.font = KFontNormalSize16;
     //self.textFd1.keyboardType = UIKeyboardTypeNumberPad;
     [self.backScrollV addSubview:self.textFd1];
     
@@ -113,7 +127,7 @@
 
     UILabel *lab2 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, lab1.bottom + KSpaceDistance15, 80, hei)];
     lab2.textColor = KColor_212121;
-    lab2.font = KFontNormalSize14;
+    lab2.font = KFontNormalSize16;
     lab2.text = @"性      别";
     lab2.textAlignment = NSTextAlignmentLeft;
     [self.backScrollV addSubview:lab2];
@@ -161,17 +175,24 @@
 
     UILabel *lab3 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, lab2.bottom + KSpaceDistance15, 80, hei)];
     lab3.textColor = KColor_212121;
-    lab3.font = KFontNormalSize14;
-    lab3.text = @"身      高";
+    lab3.font = KFontNormalSize16;
+    lab3.text = @"年      龄";
     lab3.textAlignment = NSTextAlignmentLeft;
     [self.backScrollV addSubview:lab3];
 
     self.textFd3 = [[UITextField alloc] initWithFrame:CGRectMake(lab3.right, lab3.top, KSCREEN_WIDTH - lab3.width - KSpaceDistance15 * 2, hei)];
-    self.textFd3.placeholder = @"请输入身高";
+    self.textFd3.placeholder = @"请输入年龄";
     self.textFd3.textColor = KColor_C8C8C8;
-    self.textFd3.font = KFontNormalSize10;
+    self.textFd3.font = KFontNormalSize16;
     self.textFd3.keyboardType = UIKeyboardTypeNumberPad;
     [self.backScrollV addSubview:self.textFd3];
+    [[self.textFd3 rac_textSignal] subscribeNext:^(id x) {
+        NSString *text = [NSString stringWithFormat:@"%@", x];
+        if (text.length >= 3) {
+            self.textFd3.text = [text substringToIndex:3];
+        }
+    }];
+    
 
     UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(KSpaceDistance15, lab3.bottom, KSCREEN_WIDTH - KSpaceDistance15 * 2, KLineWidthMeasure05)];
     line3.backgroundColor = KColor_Line;
@@ -181,14 +202,14 @@
 
     UILabel *lab4 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, lab3.bottom + KSpaceDistance15 , 80, hei)];
     lab4.textColor = KColor_212121;
-    lab4.font = KFontNormalSize14;
+    lab4.font = KFontNormalSize16;
     lab4.text = @"学      历";
     lab4.textAlignment = NSTextAlignmentLeft;
     [self.backScrollV addSubview:lab4];
     
     self.textFd4 = [[UILabel alloc] initWithFrame:CGRectMake(lab1.right, lab4.top, KSCREEN_WIDTH - lab4.width - KSpaceDistance15 * 2 - 10, hei)];
     self.textFd4.textColor = KColor_C8C8C8;
-    self.textFd4.font = KFontNormalSize10;
+    self.textFd4.font = KFontNormalSize16;
     self.textFd4.text = @"请输入学历";
     self.textFd4.textAlignment = NSTextAlignmentLeft;
     self.textFd4.userInteractionEnabled = YES;
@@ -208,17 +229,24 @@
 
     UILabel *lab5 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, lab4.bottom + KSpaceDistance15 , 80, hei)];
     lab5.textColor = KColor_212121;
-    lab5.font = KFontNormalSize14;
-    lab5.text = @"出生年份";
+    lab5.font = KFontNormalSize16;
+    lab5.text = @"身      高";
     lab5.textAlignment = NSTextAlignmentLeft;
     [self.backScrollV addSubview:lab5];
 
     self.textFd5 = [[UITextField alloc] initWithFrame:CGRectMake(lab1.right, lab5.top, KSCREEN_WIDTH - lab1.width - KSpaceDistance15 * 2, hei)];
-    self.textFd5.placeholder = @"请输入出生年份";
+    self.textFd5.placeholder = @"请输入身高(cm)";
     self.textFd5.textColor = KColor_C8C8C8;
-    self.textFd5.font = KFontNormalSize10;
+    self.textFd5.font = KFontNormalSize16;
     self.textFd5.keyboardType = UIKeyboardTypeNumberPad;
     [self.backScrollV addSubview:self.textFd5];
+    [[self.textFd5 rac_textSignal] subscribeNext:^(id x) {
+        NSString *text = [NSString stringWithFormat:@"%@", x];
+        if (text.length >= 3) {
+            self.textFd5.text = [text substringToIndex:3];
+        }
+    }];
+    
     
     UIView *line5 = [[UIView alloc] initWithFrame:CGRectMake(KSpaceDistance15, lab5.bottom, KSCREEN_WIDTH - KSpaceDistance15 * 2, KLineWidthMeasure05)];
     line5.backgroundColor = KColor_Line;
@@ -228,7 +256,7 @@
 
     UILabel *lab6 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, lab5.bottom + KSpaceDistance15, 80, hei)];
     lab6.textColor = KColor_212121;
-    lab6.font = KFontNormalSize14;
+    lab6.font = KFontNormalSize16;
     lab6.text = @"工作时间";
     lab6.textAlignment = NSTextAlignmentLeft;
     [self.backScrollV addSubview:lab6];
@@ -236,7 +264,7 @@
     self.textFd6 = [[UITextField alloc] initWithFrame:CGRectMake(lab1.right, lab6.top, KSCREEN_WIDTH - lab1.width - KSpaceDistance15 * 2, hei)];
     self.textFd6.placeholder = @"请输入工作时间";
     self.textFd6.textColor = KColor_C8C8C8;
-    self.textFd6.font = KFontNormalSize10;
+    self.textFd6.font = KFontNormalSize16;
     self.textFd6.keyboardType = UIKeyboardTypeNumberPad;
     [self.backScrollV addSubview:self.textFd6];
     
@@ -248,15 +276,15 @@
 
     UILabel *lab7 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, lab6.bottom + KSpaceDistance15, 80, hei)];
     lab7.textColor = KColor_212121;
-    lab7.font = KFontNormalSize14;
-    lab7.text = @"手 机 号";
+    lab7.font = KFontNormalSize16;
+    lab7.text = @"手  机  号";
     lab7.textAlignment = NSTextAlignmentLeft;
     [self.backScrollV addSubview:lab7];
 
     self.textFd7 = [[UITextField alloc] initWithFrame:CGRectMake(lab1.right, lab7.top, KSCREEN_WIDTH - lab1.width - KSpaceDistance15 * 2, hei)];
     self.textFd7.placeholder = @"请输入手机号";
     self.textFd7.textColor = KColor_C8C8C8;
-    self.textFd7.font = KFontNormalSize10;
+    self.textFd7.font = KFontNormalSize16;
     self.textFd7.keyboardType = UIKeyboardTypeNumberPad;
     [self.backScrollV addSubview:self.textFd7];
     
@@ -268,7 +296,7 @@
 
     UILabel *lab8 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, lab7.bottom + KSpaceDistance15, 80, hei)];
     lab8.textColor = KColor_212121;
-    lab8.font = KFontNormalSize14;
+    lab8.font = KFontNormalSize16;
     lab8.text = @"邮     箱";
     lab8.textAlignment = NSTextAlignmentLeft;
     [self.backScrollV addSubview:lab8];
@@ -276,7 +304,7 @@
     self.textFd8 = [[UITextField alloc] initWithFrame:CGRectMake(lab1.right, lab8.top, KSCREEN_WIDTH - lab1.width - KSpaceDistance15 * 2, hei)];
     self.textFd8.placeholder = @"请输入邮箱";
     self.textFd8.textColor = KColor_C8C8C8;
-    self.textFd8.font = KFontNormalSize10;
+    self.textFd8.font = KFontNormalSize16;
     //textFd8.keyboardType = UIKeyboardTypeNumberPad;
     [self.backScrollV addSubview:self.textFd8];
     
@@ -288,7 +316,7 @@
 
     UILabel *lab9 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, lab8.bottom + KSpaceDistance15, 80, hei)];
     lab9.textColor = KColor_212121;
-    lab9.font = KFontNormalSize14;
+    lab9.font = KFontNormalSize16;
     lab9.text = @"户籍地址";
     lab9.textAlignment = NSTextAlignmentLeft;
     [self.backScrollV addSubview:lab9];
@@ -296,7 +324,7 @@
     self.textFd9 = [[UITextField alloc] initWithFrame:CGRectMake(lab1.right, lab9.top, KSCREEN_WIDTH - lab1.width - KSpaceDistance15 * 2, hei)];
     self.textFd9.placeholder = @"请输入户籍所在地";
     self.textFd9.textColor = KColor_C8C8C8;
-    self.textFd9.font = KFontNormalSize10;
+    self.textFd9.font = KFontNormalSize16;
     //textFd9.keyboardType = UIKeyboardTypeNumberPad;
     [self.backScrollV addSubview:self.textFd9];
     
@@ -308,7 +336,7 @@
 
     UILabel *lab10 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, lab9.bottom + KSpaceDistance15, 80, hei)];
     lab10.textColor = KColor_212121;
-    lab10.font = KFontNormalSize14;
+    lab10.font = KFontNormalSize16;
     lab10.text = @"求职状态";
     lab10.textAlignment = NSTextAlignmentLeft;
     [self.backScrollV addSubview:lab10];
@@ -316,7 +344,7 @@
     
     self.textFd10 = [[UILabel alloc] initWithFrame:CGRectMake(lab1.right, lab10.top, KSCREEN_WIDTH - lab1.width - KSpaceDistance15 * 2 - 10, hei)];
     self.textFd10.textColor = KColor_C8C8C8;
-    self.textFd10.font = KFontNormalSize10;
+    self.textFd10.font = KFontNormalSize16;
     self.textFd10.text = @"请输入求职状态";
     self.textFd10.textAlignment = NSTextAlignmentLeft;
     self.textFd10.userInteractionEnabled = YES;
@@ -351,37 +379,35 @@
             return ;
         }
         
-        if ([ECUtil isBlankString:strongSelf.textFd3.text]) {
-            [SVProgressHUD showErrorWithStatus:@"请输入身高！"];
-            [SVProgressHUD dismissWithDelay:1];
-            return ;
-        }
+//        if ([ECUtil isBlankString:strongSelf.textFd3.text]) {
+//            [SVProgressHUD showErrorWithStatus:@"请输入身高！"];
+//            [SVProgressHUD dismissWithDelay:1];
+//            return ;
+//        }
         
-        if ([ECUtil isBlankString:strongSelf.textFd4.text] || [strongSelf.textFd4.text isEqualToString:@"请输入学历"]) {
-            [SVProgressHUD showErrorWithStatus:@"请输入学历！"];
+//        if ([ECUtil isBlankString:strongSelf.textFd4.text] || [strongSelf.textFd4.text isEqualToString:@"请输入学历"]) {
+//            [SVProgressHUD showErrorWithStatus:@"请输入学历！"];
+//            [SVProgressHUD dismissWithDelay:1];
+//            return ;
+//        }
+        if ([ECUtil isBlankString:strongSelf.textFd3.text]) {
+            [SVProgressHUD showErrorWithStatus:@"请输入年龄！"];
             [SVProgressHUD dismissWithDelay:1];
             return ;
         }
-        if ([ECUtil isBlankString:strongSelf.textFd5.text]) {
-            [SVProgressHUD showErrorWithStatus:@"请输入出生年份！"];
-            [SVProgressHUD dismissWithDelay:1];
-            return ;
-        }
-        if ([ECUtil isBlankString:strongSelf.textFd10.text] || [strongSelf.textFd10.text isEqualToString:@"请输入求职状态"]) {
-            [SVProgressHUD showErrorWithStatus:@"请输入求职状态！"];
-            [SVProgressHUD dismissWithDelay:1];
-            return ;
-        }
+//        if ([ECUtil isBlankString:strongSelf.textFd10.text] || [strongSelf.textFd10.text isEqualToString:@"请输入求职状态"]) {
+//            [SVProgressHUD showErrorWithStatus:@"请输入求职状态！"];
+//            [SVProgressHUD dismissWithDelay:1];
+//            return ;
+//        }
         NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
         
         NSDictionary *para = @{@"userid":![ECUtil isBlankString:userid]?userid:@"",
                                @"resumename":![ECUtil isBlankString:strongSelf.textFd1.text]?strongSelf.textFd1.text:@"",
                                @"resumesex":strongSelf.btn1.selected==YES?@"男":@"女",
-                               @"resumeheight":![ECUtil isBlankString:strongSelf.textFd3.text]?strongSelf.textFd3.text:@"",
+                               @"resumebrithday":![ECUtil isBlankString:strongSelf.textFd3.text]?strongSelf.textFd3.text:@"",
                                @"resumeeducationname":![ECUtil isBlankString:strongSelf.resumeeducation]?strongSelf.resumeeducation:@"",
-                               @"resumebrithday":![ECUtil isBlankString:strongSelf.textFd5.text]?strongSelf.textFd5.text:@"",
-                               @"resumeworkstarttime":@"2016",
-                               @"resumeworkendtime":@"2017",
+                               @"resumeheight":![ECUtil isBlankString:strongSelf.textFd5.text]?strongSelf.textFd5.text:@"",
                                @"resumetel":![ECUtil isBlankString:strongSelf.textFd7.text]?strongSelf.textFd7.text:@"",
                                @"resumeemail":![ECUtil isBlankString:strongSelf.textFd8.text]?strongSelf.textFd8.text:@"",
                                //@"resumewaddress":![ECUtil isBlankString:strongSelf.textFd8.text]?strongSelf.textFd8.text:@"",
@@ -392,7 +418,11 @@
             if (success) {
                 [SVProgressHUD showWithStatus:request[@"statusMessage"]];
                 [SVProgressHUD dismissWithDelay:1];
-                [self.navigationController popViewControllerAnimated:YES];
+                if ([request[@"status"] isEqualToString:@"success"]) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else {
+                    
+                }
             }
         }];
         

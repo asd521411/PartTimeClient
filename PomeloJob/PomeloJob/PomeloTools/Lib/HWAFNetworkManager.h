@@ -52,6 +52,10 @@ typedef void(^ZHandlerBlock)(BOOL success, id request);
 
 //记录操作
 - (void)clickOperation:(NSDictionary *)parameters advertismentclick:(ZHandlerBlock)handler;
+//查询是否第一次安装
+- (void)clickOperation:(NSDictionary *)parameters selectAgeByPhonecar:(ZHandlerBlock)handler;
+//上传年龄
+- (void)clickOperation:(NSDictionary *)parameters updateageByphonecard:(ZHandlerBlock)handler;
 
 @end
 

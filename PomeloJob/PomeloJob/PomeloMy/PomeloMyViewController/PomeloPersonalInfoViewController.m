@@ -50,10 +50,7 @@
             
         }
     }];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+    
     //创建一个UIButton
     UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 40, 40)];
     //设置UIButton的图像
@@ -64,6 +61,11 @@
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
     //覆盖返回按键
     self.navigationItem.leftBarButtonItem = backItem;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
 }
 
 - (void)setupSubViews {

@@ -12,9 +12,9 @@
 // MARK: test
 
 //本地
-//#define PartTimeBaseUrl                                           @"http://192.168.200.63:8080/"
+#define PartTimeBaseUrl                                           @"http://192.168.200.63:8080/"
 //服务器
-#define PartTimeBaseUrl                                           @"http://114.116.230.97:8080/"
+//#define PartTimeBaseUrl                                           @"http://114.116.230.97:8080/"
 //#define PartTimeBaseUrl                                              @"http://26aq970368.zicp.vip/"
 
 //手机号登陆
@@ -72,5 +72,10 @@
 
 //记录操作点击
 #define CUSTOMER_ADVERTISEMENTCLICK                                 @"advertismentclick"
+
+//查询是否安装过
+#define CUSOMER_SELECTAGEBYPHONECARD                                @"selectageByphonecard"
+//上传年龄
+#define CUSTOMER_UPDATEAGEBYPHONECARD                               @"updateageByphonecard"
 
 #endif /* HWAppMacros_h */

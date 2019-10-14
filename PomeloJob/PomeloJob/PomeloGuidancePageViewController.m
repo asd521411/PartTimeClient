@@ -88,7 +88,7 @@
                 
                 UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
                 btn1.backgroundColor = [HWRandomColor randomColor];
-                btn1.frame = CGRectMake(95, KSCREEN_HEIGHT - 100 - 80, KSCREEN_WIDTH - 95 * 2, hei);
+                btn1.frame = CGRectMake(95, KSCREEN_HEIGHT - 100 - 50, KSCREEN_WIDTH - 95 * 2, hei);
                 btn1.layer.cornerRadius = 20;
                 btn1.layer.masksToBounds = YES;
                 btn1.tag = 222;

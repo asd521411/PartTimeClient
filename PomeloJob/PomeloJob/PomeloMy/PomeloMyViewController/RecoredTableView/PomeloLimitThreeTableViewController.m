@@ -58,7 +58,7 @@
 - (void)loadData {
     
     NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
-    NSDictionary *para = @{@"userid":[ECUtil isBlankString:userid]?@"":userid, @"relationtype":@"已申请"};
+    NSDictionary *para = @{@"userid":[ECUtil isBlankString:userid]?@"":userid, @"relationtype":@"已报名"};
     
     [[HWAFNetworkManager shareManager] userLimitPositionRequest:para userPosition:^(BOOL success, id  _Nonnull request) {
         if (success) {
@@ -91,7 +91,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
+    return 80;
 }
 
 - (NSMutableArray *)listArr {
