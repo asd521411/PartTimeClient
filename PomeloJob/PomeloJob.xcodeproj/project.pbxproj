@@ -31,7 +31,6 @@
 		04A5E4582338F27E0028B1C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04A5E4572338F27E0028B1C9 /* Assets.xcassets */; };
 		04A5E45B2338F27E0028B1C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A5E4592338F27E0028B1C9 /* LaunchScreen.storyboard */; };
 		04A5E45E2338F27E0028B1C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E45D2338F27E0028B1C9 /* main.m */; };
-		04A5E47A2338F70F0028B1C9 /* dagou.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A5E4792338F70F0028B1C9 /* dagou.png */; };
 		04A5E4882338F7A10028B1C9 /* PomeloGuidancePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E47B2338F7A00028B1C9 /* PomeloGuidancePageViewController.m */; };
 		04A5E4892338F7A10028B1C9 /* PomeloVerifyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E47C2338F7A00028B1C9 /* PomeloVerifyLoginViewController.m */; };
 		04A5E48A2338F7A10028B1C9 /* PomeloForgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E47E2338F7A00028B1C9 /* PomeloForgetViewController.m */; };
@@ -164,7 +163,6 @@
 		04A5E45A2338F27E0028B1C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04A5E45C2338F27E0028B1C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		04A5E45D2338F27E0028B1C9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		04A5E4792338F70F0028B1C9 /* dagou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dagou.png; sourceTree = "<group>"; };
 		04A5E47B2338F7A00028B1C9 /* PomeloGuidancePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloGuidancePageViewController.m; sourceTree = "<group>"; };
 		04A5E47C2338F7A00028B1C9 /* PomeloVerifyLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomeloVerifyLoginViewController.m; sourceTree = "<group>"; };
 		04A5E47D2338F7A00028B1C9 /* PomeloGuidancePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PomeloGuidancePageViewController.h; sourceTree = "<group>"; };
@@ -453,7 +451,6 @@
 				04A5E4832338F7A10028B1C9 /* PomeloVerifyViewController.m */,
 				0460D9E9234DE99900C721CE /* PrivacyPolicyViewController.h */,
 				0460D9EA234DE99900C721CE /* PrivacyPolicyViewController.m */,
-				04A5E4792338F70F0028B1C9 /* dagou.png */,
 				04A5E4662338F62F0028B1C9 /* PomeloSquare */,
 				04A5E5E6233900CF0028B1C9 /* Images.xcassets */,
 				04A5E4642338F5040028B1C9 /* Supporting Files */,
@@ -842,7 +839,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04A5E47A2338F70F0028B1C9 /* dagou.png in Resources */,
 				04A5E45B2338F27E0028B1C9 /* LaunchScreen.storyboard in Resources */,
 				04A5E5E7233900CF0028B1C9 /* Images.xcassets in Resources */,
 				04A5E4582338F27E0028B1C9 /* Assets.xcassets in Resources */,

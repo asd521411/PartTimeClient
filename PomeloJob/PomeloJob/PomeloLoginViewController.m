@@ -181,8 +181,6 @@
     }];
     
     
-    
-    
 //    UIButton *agree = [UIButton buttonWithType:UIButtonTypeCustom];
 //    agree.frame = CGRectMake(KSpaceDistance15, lab2.bottom + KSpaceDistance15, hei / 2, hei / 2);
 //    agree.layer.cornerRadius = 3;

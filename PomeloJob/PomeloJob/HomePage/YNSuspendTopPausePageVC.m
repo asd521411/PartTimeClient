@@ -195,6 +195,7 @@
 - (void)ImgTitleViewACtion:(NSInteger)index {
     CommonViewController *com = [[CommonViewController alloc] init];
     com.titleStr = self.positionTypeArr[index - 1000][@"title"];
+    com.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:com animated:YES];
 }
 

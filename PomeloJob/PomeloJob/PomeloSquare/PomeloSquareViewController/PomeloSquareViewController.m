@@ -46,6 +46,7 @@
 @property (nonatomic, strong) UITableView *squareTableV;
 @property (nonatomic, strong) NSMutableArray *listArr;
 @property (nonatomic, assign) BOOL upOrDown;
+@property (nonatomic, assign) NSInteger page;
 
 
 @end
@@ -56,6 +57,8 @@
     [super viewDidLoad];
     
     self.title = @"广场";
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     [self loadStyle];
     
@@ -108,18 +111,31 @@
 - (void)tableViewRefresh {
     self.squareTableV.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.upOrDown = YES;
+        self.page = 1;
+        [self loadData];
+    }];
+    
+    self.squareTableV.mj_footer =[MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        self.upOrDown = NO;
         [self loadData];
     }];
     
 }
 
 - (void)loadData {
-    [[HWAFNetworkManager shareManager] position:@{} postion:^(BOOL success, id  _Nonnull request) {
-        NSArray *arr = (NSArray *)request;
+    NSDictionary *para = @{@"page":@(self.page)};
+    [[HWAFNetworkManager shareManager] position:para postion:^(BOOL success, id  _Nonnull request) {
+        NSArray *arr = request[@"resultList"];
         if (success) {
             if (self.upOrDown) {
                 [self.listArr removeAllObjects];
                 self.listArr = [CommonModel mj_objectArrayWithKeyValuesArray:arr];
+            }else {
+                NSArray *ar = [CommonModel mj_objectArrayWithKeyValuesArray:arr];
+                [self.listArr addObjectsFromArray:ar];
+                if (ar.count > 0) {
+                    self.page++;
+                }
             }
         }
         [self.squareTableV.mj_header endRefreshing];
@@ -137,7 +153,7 @@
     
     [self configTitleSelectItem];
     
-    self.squareTableV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT) style:UITableViewStylePlain];
+    self.squareTableV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT - [ECStyle navigationbarHeight] - [ECStyle toolbarHeight]) style:UITableViewStylePlain];
     self.squareTableV.delegate = self;
     self.squareTableV.dataSource = self;
     self.squareTableV.separatorStyle = UITableViewCellSeparatorStyleNone;

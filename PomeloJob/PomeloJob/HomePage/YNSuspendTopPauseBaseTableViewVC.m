@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, assign) NSInteger page;
+@property (nonatomic, assign) BOOL upOrDown;
 
 @end
 
@@ -32,11 +33,14 @@
     [self.view addSubview:self.tableView];
     
     _dataArray = @[].mutableCopy;
-    /// 加载数据
+    //加载数据
+    self.upOrDown = YES;
+    self.page = 1;
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSDictionary *para1 = @{@"positionStatus":self.cellTitle, @"page":@(self.page)};
         [[HWAFNetworkManager shareManager] position:para1 postion:^(BOOL success, id  _Nonnull request) {
-            NSArray *resultArr = request;
+            NSArray *resultArr = request[@"resultList"];
             if (success) {
                 [self.dataArray removeAllObjects];
                 self.dataArray = [CommonModel mj_objectArrayWithKeyValuesArray:resultArr];
@@ -46,6 +50,8 @@
     });
     [self addTableViewRefresh];
 }
+
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -65,21 +71,32 @@
 
 - (void)addTableViewRefresh {
     __weak typeof (self) weakSelf = self;
-    /// 这里加 footer 刷新
-    self.page++;
-    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    // 这里加 footer 刷新
+    
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (weakSelf.upOrDown == YES) {
+                self.page = 2;
+            }
             NSDictionary *para1 = @{@"positionStatus":self.cellTitle, @"page":@(self.page)};
             [[HWAFNetworkManager shareManager] position:para1 postion:^(BOOL success, id  _Nonnull request) {
-                NSArray *resultArr = request;
+                NSArray *resultArr = request[@"resultList"];
                 if (success) {
-                    NSArray *arr = [CommonModel mj_objectArrayWithKeyValuesArray:resultArr];;
-                    [self.dataArray addObjectsFromArray:arr];
-                    [weakSelf.tableView reloadData];
-                    [weakSelf.tableView.mj_footer endRefreshing];
+                    if (resultArr.count > 0) {
+                        NSArray *arr = [CommonModel mj_objectArrayWithKeyValuesArray:resultArr];;
+                        [weakSelf.dataArray addObjectsFromArray:arr];
+                        weakSelf.page++;
+                        weakSelf.upOrDown = NO;
+                    }else {
+//                        [SVProgressHUD showWithStatus:@"无更多数据"];
+//                        [SVProgressHUD dismissWithDelay:1];
+                    }
+                }else {
+                    
                 }
             }];
-            
+            [weakSelf.tableView reloadData];
+            [weakSelf.tableView.mj_footer endRefreshing];
         });
     }];
 }

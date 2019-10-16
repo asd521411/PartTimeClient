@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UITableView *commonTableV;
 @property (nonatomic, strong) NSMutableArray *listArr;
 @property (nonatomic, assign) BOOL upOrDown;
+@property (nonatomic, assign) NSInteger page;
 
 @end
 
@@ -81,12 +82,14 @@
 - (void)tableViewRefresh {
     self.commonTableV.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.upOrDown = YES;
+        self.page = 1;
         [self loadData];
     }];
     [self.commonTableV.mj_header beginRefreshing];
     
     self.commonTableV.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
         self.upOrDown = NO;
+        self.page++;
         [self loadData];
     }];
 }
@@ -128,19 +131,21 @@
 }
 
 - (void)loadData {
-    NSDictionary *para = @{@"positionStatus":self.titleStr};
+    
+    NSDictionary *para = @{@"positionStatus":self.titleStr, @"page":@(self.page)};
+    
     [[HWAFNetworkManager shareManager] position:para postion:^(BOOL success, id  _Nonnull request) {
-        NSArray *arr = request;
+        NSArray *resultArr = request;
         if (success) {
             if (self.upOrDown == YES) {
                 [self.listArr removeAllObjects];
-                self.listArr = [CommonModel mj_objectArrayWithKeyValuesArray:arr];
+                self.listArr = [CommonModel mj_objectArrayWithKeyValuesArray:resultArr];
                 [self.commonTableV reloadData];
             }else {
-                
+                NSArray *arr = [CommonModel mj_objectArrayWithKeyValuesArray:resultArr];;
+                [self.listArr addObjectsFromArray:arr];
+                [self.commonTableV reloadData];
             }
-            [self.commonTableV.mj_header endRefreshing];
-            [self.commonTableV.mj_footer endRefreshing];
         }
         [self.commonTableV.mj_header endRefreshing];
         [self.commonTableV.mj_footer endRefreshing];
