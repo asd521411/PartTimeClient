@@ -95,8 +95,6 @@
     self.textFd1.placeholder = @"请输入昵称（不得超过10个字）";
     self.textFd1.font = KFontNormalSize10;
     [self.backScrollV addSubview:self.textFd1];
-//    textFd1.layer.borderColor = LIGHTGRAYCOLOR.CGColor;
-//    textFd1.layer.borderWidth = KLineWidthMeasure05;
 
     [[self.textFd1 rac_textSignal] subscribeNext:^(id x) {
         NSString *str = [NSString stringWithFormat:@"%@", x];
@@ -109,7 +107,7 @@
     line1.backgroundColor = KColor_Line;
     [self.backScrollV addSubview:line1];
     
-    UILabel *lab2 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance10, lab1.bottom + KSpaceDistance20, lab1.width, lab1.height)];
+    UILabel *lab2 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance10, lab1.bottom + 20, lab1.width, lab1.height)];
     lab2.textColor = KColor_212121;
     lab2.font = KFontNormalSize14;
     lab2.text = @"个性签名";
@@ -130,13 +128,13 @@
         
     }];
     
-    UILabel *lab3 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance10, self.textFd2.bottom + KSpaceDistance20, 80, 40)];
+    UILabel *lab3 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance10, self.textFd2.bottom + 20, 80, 40)];
     lab3.textColor = KColor_212121;
     lab3.font = KFontNormalSize14;
     lab3.text = @"个人标签";
     [self.backScrollV addSubview:lab3];
     
-    UILabel *lab33 = [[UILabel alloc] initWithFrame:CGRectMake(lab3.right, lab3.bottom - KSpaceDistance20, 100, 20)];
+    UILabel *lab33 = [[UILabel alloc] initWithFrame:CGRectMake(lab3.right, lab3.bottom - 20, 100, 20)];
     lab33.textColor = KColor_212121;
     lab33.font = KFontNormalSize12;
     lab33.text = @"（最多选择三个）";
@@ -146,7 +144,7 @@
     CGFloat hig = 23;
     for (NSInteger i = 0; i < self.tagArr.count; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(KSpaceDistance10 + (i % 5) * (wid + KSpaceDistance10), lab3.bottom + KSpaceDistance20 + (i / 5) * (hig + KSpaceDistance10), wid, hig);
+        btn.frame = CGRectMake(KSpaceDistance10 + (i % 5) * (wid + KSpaceDistance10), lab3.bottom + 20 + (i / 5) * (hig + KSpaceDistance10), wid, hig);
         btn.backgroundColor = [UIColor whiteColor];
 //        btn.layer.cornerRadius = 2;
 //        btn.layer.masksToBounds = YES;

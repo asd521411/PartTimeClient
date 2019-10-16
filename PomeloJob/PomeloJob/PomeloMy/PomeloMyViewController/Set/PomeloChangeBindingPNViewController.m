@@ -42,7 +42,7 @@
     UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, SCREENWIDTH - 40, 50)];
     lab.backgroundColor = [UIColor whiteColor];
     lab.textColor = DARKGRAYCOLOR;
-    lab.font = LARGEFont;
+    //lab.font = LARGEFont;
     lab.text = @"更改手机号后，下次登陆请使用新绑定手机号登陆";
     lab.textAlignment = NSTextAlignmentCenter;
     lab.numberOfLines = 2;
@@ -63,8 +63,6 @@
     textFd1.keyboardType = UIKeyboardTypeNumberPad;
     [self.backScrollV addSubview:textFd1];
     textFd1.layer.borderColor = LIGHTGRAYCOLOR.CGColor;
-//    textFd1.layer.borderWidth = KLineWidthMeasure05;
-//    textFd1.keyboardType = UIKeyboardTypeNumberPad;
     self.textFd1 = textFd1;
     [[textFd1 rac_textSignal] subscribeNext:^(id x) {
         NSString *str = [NSString stringWithFormat:@"%@", x];

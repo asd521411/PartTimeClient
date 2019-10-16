@@ -15,6 +15,7 @@
 #import "PomeloLoginViewController.h"
 #import "ImgTitleView.h"
 #import "UserInfoModel.h"
+#import "SSKeychain.h"
 
 @interface PomeloMyViewController ()<UITableViewDelegate, UITableViewDataSource, ImgTitleViewDelegate>
 
@@ -50,12 +51,21 @@
 }
 
 - (BOOL)loginStatus {
-    NSString *status = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
-    if ([ECUtil isBlankString:status]) {//空未登陆
-        return NO;
-    }else {
-        return YES;
-    }
+    
+    return [[UserInfoManager shareInstance] userLoginStatus];
+    
+//    NSString *userpassword = [SSKeychain passwordForService:SERVICEKEYCHAIN account:USERACCOUNT];
+//    if ([ECUtil isBlankString:userpassword]) {
+//        return NO;
+//    }
+//    return YES;
+    
+//    NSString *status = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
+//    if ([ECUtil isBlankString:status]) {//空未登陆
+//        return NO;
+//    }else {
+//        return YES;
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -69,7 +79,7 @@
                 if (![ECUtil isBlankString:self.userInfoModel.username]) {
                     self.userName.text = self.userInfoModel.username;
                 }else {
-                    self.userName.text = @"姓名";
+                    self.userName.text = @"昵称";
                 }
                 
                 if (![ECUtil isBlankString:self.userInfoModel.userprofile]) {
@@ -117,7 +127,7 @@
     NSArray *arr1 = @[@"沟通 能力强", @"效率高"];
     NSString *text1 = [arr1 componentsJoinedByString:@" "];
     lab3.text = text1;
-    [self.topBackView addSubview:lab3];
+    //[self.topBackView addSubview:lab3];
 
     self.headImgV = [[UIImageView alloc] initWithFrame:CGRectMake(SCREENWIDTH - space - 80, space, 80, 80)];
     self.headImgV.image = [UIImage imageNamed:@"touxiang"];

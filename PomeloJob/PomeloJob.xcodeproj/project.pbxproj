@@ -21,6 +21,7 @@
 		043C70642354122D00083E9E /* YNPageConfigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C70622354122D00083E9E /* YNPageConfigration.m */; };
 		043C70652354122D00083E9E /* YNPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C70632354122D00083E9E /* YNPageViewController.m */; };
 		043C7068235412A100083E9E /* BaseTableViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C7066235412A100083E9E /* BaseTableViewVC.m */; };
+		043C70872357097900083E9E /* UserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C70862357097900083E9E /* UserInfoManager.m */; };
 		0460D9BC234B3B0000C721CE /* CommonWorkLocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460D9BB234B3B0000C721CE /* CommonWorkLocationTableViewCell.m */; };
 		0460D9BF234C212700C721CE /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460D9BE234C212700C721CE /* RTLabel.m */; };
 		0460D9EB234DE99900C721CE /* PrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460D9EA234DE99900C721CE /* PrivacyPolicyViewController.m */; };
@@ -145,6 +146,8 @@
 		043C70632354122D00083E9E /* YNPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YNPageViewController.m; sourceTree = "<group>"; };
 		043C7066235412A100083E9E /* BaseTableViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewVC.m; sourceTree = "<group>"; };
 		043C7067235412A100083E9E /* BaseTableViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewVC.h; sourceTree = "<group>"; };
+		043C70852357097900083E9E /* UserInfoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoManager.h; sourceTree = "<group>"; };
+		043C70862357097900083E9E /* UserInfoManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoManager.m; sourceTree = "<group>"; };
 		0460D9BA234B3B0000C721CE /* CommonWorkLocationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonWorkLocationTableViewCell.h; sourceTree = "<group>"; };
 		0460D9BB234B3B0000C721CE /* CommonWorkLocationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonWorkLocationTableViewCell.m; sourceTree = "<group>"; };
 		0460D9BD234C212600C721CE /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
@@ -713,6 +716,8 @@
 				F1C4D8EE233A0785004BD723 /* CommonTableViewCell.h */,
 				F1C4D8EF233A0785004BD723 /* TitleSelectItemControl.h */,
 				F1C4D8F0233A0785004BD723 /* UserInfoModel.m */,
+				043C70852357097900083E9E /* UserInfoManager.h */,
+				043C70862357097900083E9E /* UserInfoManager.m */,
 				F1C4D8F1233A0785004BD723 /* NavigationBarView.h */,
 				F1C4D8F2233A0785004BD723 /* CommonDetailsTableViewCell.m */,
 				F1C4D8F4233A0785004BD723 /* HWTitleItemSelector.h */,
@@ -995,6 +1000,7 @@
 				F1C4D8A3233A0358004BD723 /* PomeloJobIntentionViewController.m in Sources */,
 				F1C4D85E233A0233004BD723 /* PomeloHotPositionTableViewCell.m in Sources */,
 				F1C4D936233A0785004BD723 /* CommonDetailsTableViewCell.m in Sources */,
+				043C70872357097900083E9E /* UserInfoManager.m in Sources */,
 				043C704F2354116C00083E9E /* YNPageCollectionView.m in Sources */,
 				F1C4D93A233A0785004BD723 /* HWPickerView.m in Sources */,
 				F1C4D945233A0785004BD723 /* HWTitleItemSelector.m in Sources */,

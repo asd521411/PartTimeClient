@@ -28,7 +28,6 @@
 
 @implementation PomeloLoginViewController
 
-
 - (instancetype)shareInstance {
     static PomeloLoginViewController *instance = nil;
     static dispatch_once_t *once_Token;
@@ -38,12 +37,10 @@
     return instance;
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setupSubViews];
-    
     
     // Do any additional setup after loading the view.
 }
@@ -290,11 +287,11 @@
             [SVProgressHUD dismissWithDelay:1];
             return ;
         }
-//        if (textFd2.text.length > 32) {
-//            //[SVProgressHUD showInfoWithStatus:@"密码过长！"];
-//            [SVProgressHUD dismissWithDelay:1];
-//            return ;
-//        }
+        if (textFd2.text.length > 16) {
+            [SVProgressHUD showInfoWithStatus:@"密码过长！"];
+            [SVProgressHUD dismissWithDelay:1];
+            return ;
+        }
 //        if (!agree.selected) {
 //            [SVProgressHUD showInfoWithStatus:@"请同意用户注册及使用APP隐私协议！"];
 //            [SVProgressHUD dismissWithDelay:1];
@@ -325,12 +322,6 @@
                 [SVProgressHUD dismissWithDelay:1];
                 
                 if ([request[@"status"] isEqualToString:@"fail"]) {
-//                    PomeloVerifyLoginViewController *reg = [[PomeloVerifyLoginViewController alloc] init];
-//                    reg.phoneNum = textFd1.text;
-//                    reg.password = textFd2.text;
-//                    reg.entranceType = RegisterStyle;
-//                    [strongSelf.navigationController pushViewController:reg animated:YES];
-                    
                     if ([request[@"statusMessage"] isEqualToString:@"验证码错误"]) {
                         [SVProgressHUD showSuccessWithStatus:request[@"statusMessage"]];
                         [SVProgressHUD dismissWithDelay:1];
@@ -348,8 +339,10 @@
                 if ([request[@"status"] isEqualToString:@"success"]) {
                     if (dic[@"userid"]) {
                         [NSUserDefaultMemory defaultSetMemory:dic[@"userid"] unityKey:USERID];
-                        [MobClick profileSignInWithPUID:dic[@"userid"]];
-                        [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+                        if ([[UserInfoManager shareInstance] setUserInfo:dic[@"userid"]]) {
+                            [MobClick profileSignInWithPUID:dic[@"userid"]];
+                            [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+                        }
                     }else {
                         [SVProgressHUD showSuccessWithStatus:@"请求错误！"];
                         [SVProgressHUD dismissWithDelay:1];

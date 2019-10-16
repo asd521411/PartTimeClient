@@ -14,8 +14,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.leftLab = [[UILabel alloc] init];
-        self.leftLab.textColor = DARKGRAYCOLOR;
-        self.leftLab.font = LARGEFont;
         [self addSubview:self.leftLab];
         
         self.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];

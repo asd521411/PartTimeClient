@@ -107,6 +107,10 @@
 
 - (void)exitBtnAction:(UIButton *)send {
     [NSUserDefaultMemory defaultSetMemory:@"" unityKey:USERID];
+//    if ([UserInfoManager shareInstance] ) {
+//        <#statements#>
+//    }
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

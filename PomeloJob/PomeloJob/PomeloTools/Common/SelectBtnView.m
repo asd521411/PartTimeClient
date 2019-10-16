@@ -28,7 +28,7 @@
     if (self) {
         UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.width, kHeight)];
         lab.textColor = BLACKCOLOR;
-        lab.font = LARGEFont;
+        //lab.font = LARGEFont;
         lab.textAlignment = NSTextAlignmentLeft;
         lab.text = title;
         lab.userInteractionEnabled = NO;
@@ -38,8 +38,6 @@
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             btn.frame = CGRectMake((i % 4) * (kWidth + kSpace * 2), lab.bottom + kSpace + (i / 4) * (kHeight + kSpace), kWidth, kHeight);
             btn.backgroundColor = [UIColor whiteColor];
-//            btn.layer.borderColor = LIGHTGRAYCOLOR.CGColor;
-//            btn.layer.borderWidth = KLineWidthMeasure05;
             btn.layer.cornerRadius = 2;
 //            btn.layer.masksToBounds = YES;
             [btn setTitleColor:KColor_B1AFAF forState:UIControlStateNormal];

@@ -14,15 +14,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-//        self.titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height * 4 / 5)];
-//        self.titleLab.backgroundColor = [HWRandomColor randomColor];
-//        [self addSubview:self.titleLab];
-        
         self.topBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.topBtn.frame = CGRectMake(0, 0, self.width, self.height * 4 / 5);
         self.topBtn.backgroundColor = [HWRandomColor randomColor];
         //[self.topBtn setTitle:title forState:UIControlStateNormal];
-        self.topBtn.titleLabel.font = NORMALFont;
         [self addSubview:self.topBtn];
         [self.topBtn addTarget:self action:@selector(topBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         

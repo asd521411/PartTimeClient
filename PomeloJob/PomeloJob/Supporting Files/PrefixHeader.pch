@@ -27,14 +27,20 @@
 #import <SSKeychain/SSKeychain.h>
 #import <SSKeychain/SSKeychainQuery.h>
 #import <AdSupport/AdSupport.h>
+#import "SSKeychain.h"
+#import "UserInfoManager.h"
 
 #define DebugLog(s, ...) NSLog(@"%s(%d): %@", __FUNCTION__, __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__])
 
-#define SERVICEKEYCHAIN             @"com.gx.pomelo"
-#define ALREADYRESIGN               @"ALREADYRESIGN"
-#define FIRSTLAUNCHRECORD           @"FirstLaunchRecord"
+#define SERVICEKEYCHAIN                 @"com.GeXin.Company" //柚选、河豚统一用一个
+#define USERACCOUNT                     @"useraccount"
+
+//#define ALREADYRESIGN                 @"ALREADYEXIT"
+#define FIRSTLAUNCHRECORD             @"FirstLaunchRecord"
+
+
 #define UMENGkEY                    @"5d8c2eb63fc195d708000730"
-//#define USERPASSWORD              @"userpassword"
+
 
 typedef NS_ENUM(NSInteger, EntranceType){
     VerifyLoginStyle,//验证码登陆
@@ -84,7 +90,6 @@ typedef NS_ENUM(NSInteger, EntranceType){
 #define KSCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height
 
 // MARK: 字体
-
 #define KFontNormalSize10   [UIFont systemFontOfSize:10]
 #define KFontNormalSize12   [UIFont systemFontOfSize:12]
 #define KFontNormalSize14   [UIFont systemFontOfSize:14]
@@ -98,13 +103,7 @@ typedef NS_ENUM(NSInteger, EntranceType){
 #define NormalFontSize16    [UIFont systemFontOfSize:16]
 #define NormalFontSize20    [UIFont systemFontOfSize:20]
 
-#define SMALLFont   [UIFont systemFontOfSize:12.0]
-#define NORMALFont  [UIFont systemFontOfSize:14.0]
-#define LARGEFont   [UIFont systemFontOfSize:16.0]
-
 // MARK: 颜色
-
-#define WHITECOLOR      [UIColor whiteColor]
 #define LIGHTGRAYCOLOR  [UIColor lightGrayColor]
 #define GRAYCOLOR       [UIColor grayColor]
 #define DARKGRAYCOLOR   [UIColor darkGrayColor]
@@ -118,28 +117,13 @@ typedef NS_ENUM(NSInteger, EntranceType){
 #define KColorGradient_light            [UIColor colorWithRed:0xff/255.0 green:0x39/255.0 blue:0x74/255.0 alpha:1]
 #define KColorGradient_dark             [UIColor colorWithRed:0xff/255.0 green:0x48/255.0 blue:0x4a/255.0 alpha:1]
 #define KColor_Line     [UIColor colorWithRed:0xe8/255.0 green:0xe8/255.0 blue:0xe8/255.0 alpha:1]
-// MARK: 线宽
-#define LineWidthNormal01 0.1
-#define KLineWidthMeasure05 0.5
-#define LineWidthNormal1 1
 
+// MARK: 线宽
+#define KLineWidthMeasure05 0.5
 
 // MARK: 距离
 #define KSpaceDistance10 10
 #define KSpaceDistance15 15
-#define KSpaceDistance20 20
-#define KSpaceDistance50 50
-#define SpaceDistance100 100
-
-#define BorderSpace 10
-#define WidgetSpace1 10
-#define WidgetSpace2 15
-#define LeftSpaceWidth 50
-
-// MARK: 高度
-#define WidgetHeight 40
-
-
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
