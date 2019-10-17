@@ -231,7 +231,6 @@
         verify.entranceType = VerifyLoginStyle;
         [strongSelf.navigationController pushViewController:verify animated:YES];
         
-        
     }];
     
 //    UIButton *regis = [UIButton buttonWithType:UIButtonTypeCustom];

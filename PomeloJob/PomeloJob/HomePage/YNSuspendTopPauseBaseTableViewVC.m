@@ -73,7 +73,7 @@
     __weak typeof (self) weakSelf = self;
     // 这里加 footer 刷新
     
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if (weakSelf.upOrDown == YES) {
                 self.page = 2;

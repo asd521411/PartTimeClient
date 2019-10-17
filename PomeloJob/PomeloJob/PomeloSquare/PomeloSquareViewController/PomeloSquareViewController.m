@@ -135,6 +135,9 @@
                 [self.listArr addObjectsFromArray:ar];
                 if (ar.count > 0) {
                     self.page++;
+                }else {
+                    [SVProgressHUD showWithStatus:@"无更多数据"];
+                    [SVProgressHUD dismissWithDelay:0.5];
                 }
             }
         }
