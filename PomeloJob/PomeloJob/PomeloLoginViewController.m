@@ -12,6 +12,8 @@
 #import <UMAnalytics/MobClick.h>
 #import "PrivacyPolicyViewController.h"
 #import "PomeloResetViewController.h"
+#import "LoginNavigationController.h"
+#import "LoginViewController.h"
 
 @interface PomeloLoginViewController ()
 
@@ -28,14 +30,14 @@
 
 @implementation PomeloLoginViewController
 
-- (instancetype)shareInstance {
-    static PomeloLoginViewController *instance = nil;
-    static dispatch_once_t *once_Token;
-    dispatch_once(once_Token, ^{
-        instance = [[PomeloLoginViewController alloc] init];
-    });
-    return instance;
-}
+//+ (instancetype)shareInstance {
+//    static PomeloLoginViewController *instance = nil;
+//    static dispatch_once_t *once_Token;
+//    dispatch_once(once_Token, ^{
+//        instance = [[PomeloLoginViewController alloc] init];
+//    });
+//    return instance;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -93,7 +95,6 @@
     lab.text = @"手机号";
     lab.textAlignment = NSTextAlignmentLeft;
     [self.backScrollV addSubview:lab];
-    
     
     UILabel *lab1 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, lab.bottom, 80, hei)];
     lab1.textColor = KColor_212121;
@@ -226,9 +227,12 @@
         verify.phoneNum = textFd1.text;
         verify.password = textFd2.text;
         verify.entranceType = VerifyLoginStyle;
-        [strongSelf.navigationController pushViewController:verify animated:YES];
+        //[strongSelf.navigationController pushViewController:verify animated:YES];
+        //[strongSelf presentViewController:verify animated:YES completion:nil];
         
-        
+        LoginViewController *log = [[LoginViewController alloc] init];
+        LoginNavigationController *na = [[LoginNavigationController alloc] initWithRootViewController:log];
+        [self presentViewController:na animated:YES completion:nil];
     }];
     
 //    UIButton *regis = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -287,46 +291,19 @@
             [SVProgressHUD dismissWithDelay:1];
             return ;
         }
-        if (textFd2.text.length > 16) {
-            [SVProgressHUD showInfoWithStatus:@"密码过长！"];
-            [SVProgressHUD dismissWithDelay:1];
-            return ;
-        }
-//        if (!agree.selected) {
-//            [SVProgressHUD showInfoWithStatus:@"请同意用户注册及使用APP隐私协议！"];
-//            [SVProgressHUD dismissWithDelay:1];
-//            return ;
-//        }
-        
-        //唯一标识
-//        NSString *uuid = nil;
-//        if ([SSKeychain passwordForService:SERVICEKEYCHAIN account:ALREADYRESIGN]) {
-//            uuid = [SSKeychain passwordForService:SERVICEKEYCHAIN account:ALREADYRESIGN];
-//        }else {
-//            uuid = [ECUtil getUUID];
-//            [SSKeychain setPassword:uuid forService:SERVICEKEYCHAIN account:ALREADYRESIGN];
-//        }
+
         NSDictionary *para = @{@"usertel":textFd1.text,
                                @"usermessagecode":textFd2.text,
                                @"phonecard":[ECUtil getIDFA]
                                };
-        
-//        NSDictionary *para = @{@"usertel":@"18345067097",
-//                               @"userpassword":@"123456",
-//                               @"phonecard":[ECUtil getIDFA]
-//                               };
         [[HWAFNetworkManager shareManager] accountRequest:para loginByMessageCode:^(BOOL success, id  _Nonnull request) {
             NSDictionary *dic = (NSDictionary *)request;
             if (success) {
                 [SVProgressHUD showSuccessWithStatus:dic[@"statusMessage"]];
                 [SVProgressHUD dismissWithDelay:1];
-                
                 if ([request[@"status"] isEqualToString:@"fail"]) {
                     if ([request[@"statusMessage"] isEqualToString:@"验证码错误"]) {
-                        [SVProgressHUD showSuccessWithStatus:request[@"statusMessage"]];
-                        [SVProgressHUD dismissWithDelay:1];
                     }
-                    
                     if ([request[@"statusMessage"] isEqualToString:@"用户没有注册，请注册"]) {
                         PomeloResetViewController *reset = [[PomeloResetViewController alloc] init];
                         reset.phoneNum = textFd1.text;
@@ -339,12 +316,13 @@
                 if ([request[@"status"] isEqualToString:@"success"]) {
                     if (dic[@"userid"]) {
                         [NSUserDefaultMemory defaultSetMemory:dic[@"userid"] unityKey:USERID];
-                        if ([[UserInfoManager shareInstance] setUserInfo:dic[@"userid"]]) {
-                            [MobClick profileSignInWithPUID:dic[@"userid"]];
-                            [strongSelf.navigationController popToRootViewControllerAnimated:YES];
-                        }
+//                        if ([[UserInfoManager shareInstance] setUserInfo:dic[@"userid"]]) {
+//
+//                        }
+                        [MobClick profileSignInWithPUID:dic[@"userid"]];
+                        [strongSelf.navigationController popToRootViewControllerAnimated:YES];
                     }else {
-                        [SVProgressHUD showSuccessWithStatus:@"请求错误！"];
+                        [SVProgressHUD showErrorWithStatus:dic[@"statusMessage"]];
                         [SVProgressHUD dismissWithDelay:1];
                     }
                 }

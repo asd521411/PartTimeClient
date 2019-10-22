@@ -22,4 +22,5 @@ target 'PomeloJob' do
   pod 'SSKeychain'
   pod 'MLeaksFinder'
   pod 'FTPopOverMenu'
+  pod 'YYText'
 end

@@ -54,7 +54,6 @@
 
 - (NSDictionary *)wrappedParameters:(NSDictionary *)parameters {
     
-    
 //    NSMutableArray *headers = [[NSMutableArray alloc] init];
 //    for (NSString *key in md) {
 //        [headers addObject:[NSString stringWithFormat:@"%@=%@", key, [md objectForKey:key]]];
@@ -132,21 +131,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 - (void)accountRequest:(NSDictionary *)parameters loginByPassword:(nonnull ZHandlerBlock)handler {
     [self appPost:CUSTOMER_LOGINBYPASSWORD parameters:parameters handler:^(BOOL success, NSDictionary *response) {
         handler(success, response);
@@ -188,6 +172,20 @@
         handler(success, response);
     }];
 }
+
+//登陆2.0
+- (void)accountRequest:(NSDictionary *)parameters loginByMessageAndPassword:(ZHandlerBlock)handler {
+    [self appPost:CUSTOMER_LOGINBYMESSAGEANDPASSWORD parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+- (void)accountRequest:(NSDictionary *)parameters userLogin:(ZHandlerBlock)handler {
+    [self appPost:CUSTOMER_USERLOGON parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+
+
 
 //权限
 - (void)userLimitPositionRequest:(NSDictionary *)parameters userPosition:(ZHandlerBlock)handler {
@@ -240,14 +238,6 @@
     }];
 }
 
-
-
-
-//- (void)positionDetailRequest:(NSDictionary *)parameters positionDetailId:(ZHandlerBlock)handler {
-//    [self appGet:nil parameters:parameters handler:^(BOOL success, NSDictionary *response) {
-//        handler(success, response);
-//    }];
-//}
 
 //加载图片
 - (void)commonAcquireImg:(NSDictionary *)parameters firstImg:(ZHandlerBlock)handler {
@@ -323,5 +313,13 @@
         handler(success, response);
     }];
 }
+
+//我的新版
+- (void)userInfo:(NSDictionary *)parameters queryMymine:(ZHandlerBlock)handler {
+    [self appGet:CUSTOMER_QUERYMYMINE parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+
 
 @end

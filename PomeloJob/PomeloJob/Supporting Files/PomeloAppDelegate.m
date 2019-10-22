@@ -19,7 +19,6 @@
 
 @implementation PomeloAppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // MARK:友盟
@@ -30,16 +29,20 @@
     NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
     [MobClick profileSignInWithPUID:userid];
     //上传唯一标识
-    NSDictionary *para = @{@"phonecard":[ECUtil getIDFA]};
+    NSDictionary *para = nil;
+    if ([ECUtil isBlankString:userid]) {
+        para = @{@"phonecard":[ECUtil getIDFA]};
+    }else {
+        para = @{@"phonecard":[ECUtil getIDFA], @"userid":userid};
+    }
+    
     [[HWAFNetworkManager shareManager] accountRequest:para initPhonecard:^(BOOL success, id  _Nonnull request) {
         if (success) {
         }
     }];
     
-    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    
     if (![NSUserDefaultMemory defaultGetwithUnityKey:FIRSTLAUNCHRECORD]) {
         PomeloGuidancePageViewController *gui = [[PomeloGuidancePageViewController alloc] init];
         self.window.rootViewController = gui;

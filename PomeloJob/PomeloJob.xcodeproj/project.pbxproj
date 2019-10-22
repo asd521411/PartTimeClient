@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0408D93323581BEA005D6B18 /* LoginNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D93223581BEA005D6B18 /* LoginNavigationController.m */; };
+		0408D93623581ED7005D6B18 /* NoteVerifyFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D93523581ED7005D6B18 /* NoteVerifyFeedbackViewController.m */; };
+		0408D9392358418C005D6B18 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D9382358418C005D6B18 /* LoginViewController.m */; };
+		0408D93C235870A5005D6B18 /* FindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D93B235870A5005D6B18 /* FindViewController.m */; };
+		0408D93F2359A58F005D6B18 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D93E2359A58F005D6B18 /* MyViewController.m */; };
+		0408D9422359B5B9005D6B18 /* HeadBackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D9412359B5B9005D6B18 /* HeadBackView.m */; };
+		0408D9452359D287005D6B18 /* CompleteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D9442359D287005D6B18 /* CompleteTableViewCell.m */; };
+		0408D948235D453C005D6B18 /* ModificationControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D947235D453C005D6B18 /* ModificationControl.m */; };
+		0408D94B235D7CDD005D6B18 /* MyCollectResignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D94A235D7CDD005D6B18 /* MyCollectResignViewController.m */; };
+		0408D94E235D88BA005D6B18 /* CollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D94D235D88BA005D6B18 /* CollectionTableViewCell.m */; };
+		0408D951235D94C5005D6B18 /* MyResumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D950235D94C5005D6B18 /* MyResumeViewController.m */; };
+		0408D954235D9FD5005D6B18 /* MyNewResumeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D953235D9FD5005D6B18 /* MyNewResumeTableViewCell.m */; };
+		0408D957235DA7B4005D6B18 /* ResumeInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D956235DA7B4005D6B18 /* ResumeInputViewController.m */; };
+		0408D95A235DC999005D6B18 /* ChangePersonInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D959235DC999005D6B18 /* ChangePersonInfoViewController.m */; };
+		0408D95D235E16B1005D6B18 /* DetailBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D95C235E16B1005D6B18 /* DetailBottomBar.m */; };
+		0408D960235E9E5A005D6B18 /* MyWeChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D95F235E9E5A005D6B18 /* MyWeChatTableViewCell.m */; };
+		0408D963235ED789005D6B18 /* VerifyCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D962235ED789005D6B18 /* VerifyCodeViewController.m */; };
 		043C703E2354108B00083E9E /* YNSuspendTopPauseBaseTableViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C703A2354108A00083E9E /* YNSuspendTopPauseBaseTableViewVC.m */; };
 		043C703F2354108B00083E9E /* YNSuspendTopPausePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C703C2354108B00083E9E /* YNSuspendTopPausePageVC.m */; };
 		043C704E2354116C00083E9E /* YNPageScrollMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C70462354116C00083E9E /* YNPageScrollMenuView.m */; };
@@ -118,6 +135,40 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0408D93123581BEA005D6B18 /* LoginNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginNavigationController.h; sourceTree = "<group>"; };
+		0408D93223581BEA005D6B18 /* LoginNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginNavigationController.m; sourceTree = "<group>"; };
+		0408D93423581ED7005D6B18 /* NoteVerifyFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoteVerifyFeedbackViewController.h; sourceTree = "<group>"; };
+		0408D93523581ED7005D6B18 /* NoteVerifyFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoteVerifyFeedbackViewController.m; sourceTree = "<group>"; };
+		0408D9372358418C005D6B18 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		0408D9382358418C005D6B18 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		0408D93A235870A5005D6B18 /* FindViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindViewController.h; sourceTree = "<group>"; };
+		0408D93B235870A5005D6B18 /* FindViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindViewController.m; sourceTree = "<group>"; };
+		0408D93D2359A58F005D6B18 /* MyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
+		0408D93E2359A58F005D6B18 /* MyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
+		0408D9402359B5B9005D6B18 /* HeadBackView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeadBackView.h; sourceTree = "<group>"; };
+		0408D9412359B5B9005D6B18 /* HeadBackView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeadBackView.m; sourceTree = "<group>"; };
+		0408D9432359D287005D6B18 /* CompleteTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompleteTableViewCell.h; sourceTree = "<group>"; };
+		0408D9442359D287005D6B18 /* CompleteTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompleteTableViewCell.m; sourceTree = "<group>"; };
+		0408D946235D453C005D6B18 /* ModificationControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModificationControl.h; sourceTree = "<group>"; };
+		0408D947235D453C005D6B18 /* ModificationControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModificationControl.m; sourceTree = "<group>"; };
+		0408D949235D7CDD005D6B18 /* MyCollectResignViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCollectResignViewController.h; sourceTree = "<group>"; };
+		0408D94A235D7CDD005D6B18 /* MyCollectResignViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCollectResignViewController.m; sourceTree = "<group>"; };
+		0408D94C235D88BA005D6B18 /* CollectionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionTableViewCell.h; sourceTree = "<group>"; };
+		0408D94D235D88BA005D6B18 /* CollectionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionTableViewCell.m; sourceTree = "<group>"; };
+		0408D94F235D94C5005D6B18 /* MyResumeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyResumeViewController.h; sourceTree = "<group>"; };
+		0408D950235D94C5005D6B18 /* MyResumeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyResumeViewController.m; sourceTree = "<group>"; };
+		0408D952235D9FD5005D6B18 /* MyNewResumeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyNewResumeTableViewCell.h; sourceTree = "<group>"; };
+		0408D953235D9FD5005D6B18 /* MyNewResumeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyNewResumeTableViewCell.m; sourceTree = "<group>"; };
+		0408D955235DA7B4005D6B18 /* ResumeInputViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResumeInputViewController.h; sourceTree = "<group>"; };
+		0408D956235DA7B4005D6B18 /* ResumeInputViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResumeInputViewController.m; sourceTree = "<group>"; };
+		0408D958235DC999005D6B18 /* ChangePersonInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePersonInfoViewController.h; sourceTree = "<group>"; };
+		0408D959235DC999005D6B18 /* ChangePersonInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePersonInfoViewController.m; sourceTree = "<group>"; };
+		0408D95B235E16B1005D6B18 /* DetailBottomBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailBottomBar.h; sourceTree = "<group>"; };
+		0408D95C235E16B1005D6B18 /* DetailBottomBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailBottomBar.m; sourceTree = "<group>"; };
+		0408D95E235E9E5A005D6B18 /* MyWeChatTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyWeChatTableViewCell.h; sourceTree = "<group>"; };
+		0408D95F235E9E5A005D6B18 /* MyWeChatTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWeChatTableViewCell.m; sourceTree = "<group>"; };
+		0408D961235ED789005D6B18 /* VerifyCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerifyCodeViewController.h; sourceTree = "<group>"; };
+		0408D962235ED789005D6B18 /* VerifyCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VerifyCodeViewController.m; sourceTree = "<group>"; };
 		043C703A2354108A00083E9E /* YNSuspendTopPauseBaseTableViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YNSuspendTopPauseBaseTableViewVC.m; sourceTree = "<group>"; };
 		043C703B2354108B00083E9E /* YNSuspendTopPauseBaseTableViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YNSuspendTopPauseBaseTableViewVC.h; sourceTree = "<group>"; };
 		043C703C2354108B00083E9E /* YNSuspendTopPausePageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YNSuspendTopPausePageVC.m; sourceTree = "<group>"; };
@@ -347,6 +398,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0408D93023581B4D005D6B18 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0408D93123581BEA005D6B18 /* LoginNavigationController.h */,
+				0408D93223581BEA005D6B18 /* LoginNavigationController.m */,
+				0408D9372358418C005D6B18 /* LoginViewController.h */,
+				0408D9382358418C005D6B18 /* LoginViewController.m */,
+				0408D93A235870A5005D6B18 /* FindViewController.h */,
+				0408D93B235870A5005D6B18 /* FindViewController.m */,
+				0408D93423581ED7005D6B18 /* NoteVerifyFeedbackViewController.h */,
+				0408D93523581ED7005D6B18 /* NoteVerifyFeedbackViewController.m */,
+				0408D961235ED789005D6B18 /* VerifyCodeViewController.h */,
+				0408D962235ED789005D6B18 /* VerifyCodeViewController.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		043C70392354102A00083E9E /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -435,6 +503,7 @@
 		04A5E44D2338F27D0028B1C9 /* PomeloJob */ = {
 			isa = PBXGroup;
 			children = (
+				0408D93023581B4D005D6B18 /* Login */,
 				043C70392354102A00083E9E /* HomePage */,
 				F1C4D8C7233A0785004BD723 /* PomeloTools */,
 				04A5E5D82339002A0028B1C9 /* PomeloDiscovery */,
@@ -512,6 +581,28 @@
 				F1C4D86B233A0356004BD723 /* PomeloRelationUsViewController.m */,
 				F1C4D87F233A0357004BD723 /* RecoredTableView */,
 				F1C4D88E233A0358004BD723 /* Set */,
+				0408D93D2359A58F005D6B18 /* MyViewController.h */,
+				0408D93E2359A58F005D6B18 /* MyViewController.m */,
+				0408D958235DC999005D6B18 /* ChangePersonInfoViewController.h */,
+				0408D959235DC999005D6B18 /* ChangePersonInfoViewController.m */,
+				0408D9402359B5B9005D6B18 /* HeadBackView.h */,
+				0408D9412359B5B9005D6B18 /* HeadBackView.m */,
+				0408D946235D453C005D6B18 /* ModificationControl.h */,
+				0408D947235D453C005D6B18 /* ModificationControl.m */,
+				0408D9432359D287005D6B18 /* CompleteTableViewCell.h */,
+				0408D9442359D287005D6B18 /* CompleteTableViewCell.m */,
+				0408D949235D7CDD005D6B18 /* MyCollectResignViewController.h */,
+				0408D94A235D7CDD005D6B18 /* MyCollectResignViewController.m */,
+				0408D94C235D88BA005D6B18 /* CollectionTableViewCell.h */,
+				0408D94D235D88BA005D6B18 /* CollectionTableViewCell.m */,
+				0408D94F235D94C5005D6B18 /* MyResumeViewController.h */,
+				0408D950235D94C5005D6B18 /* MyResumeViewController.m */,
+				0408D952235D9FD5005D6B18 /* MyNewResumeTableViewCell.h */,
+				0408D953235D9FD5005D6B18 /* MyNewResumeTableViewCell.m */,
+				0408D95E235E9E5A005D6B18 /* MyWeChatTableViewCell.h */,
+				0408D95F235E9E5A005D6B18 /* MyWeChatTableViewCell.m */,
+				0408D955235DA7B4005D6B18 /* ResumeInputViewController.h */,
+				0408D956235DA7B4005D6B18 /* ResumeInputViewController.m */,
 			);
 			path = PomeloMyViewController;
 			sourceTree = "<group>";
@@ -741,6 +832,8 @@
 				F1C4D90A233A0785004BD723 /* TitleSelectItemControl.m */,
 				F1C4D90B233A0785004BD723 /* CommonTableViewHeaderFooterView.h */,
 				F1C4D90D233A0785004BD723 /* CommonDetailsViewController.m */,
+				0408D95B235E16B1005D6B18 /* DetailBottomBar.h */,
+				0408D95C235E16B1005D6B18 /* DetailBottomBar.m */,
 				0460D9EC234EFD6D00C721CE /* TopMaskBackViewController.h */,
 				0460D9ED234EFD6D00C721CE /* TopMaskBackViewController.m */,
 				F1C4D90F233A0785004BD723 /* HWTitleItemSelector.m */,
@@ -918,23 +1011,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0408D951235D94C5005D6B18 /* MyResumeViewController.m in Sources */,
 				043C705A2354118700083E9E /* UIView+YNPageExtend.m in Sources */,
 				F1C4D8A6233A0358004BD723 /* PomeloLimitTwoTableViewController.m in Sources */,
 				043C703F2354108B00083E9E /* YNSuspendTopPausePageVC.m in Sources */,
 				F1C4D94A233A0785004BD723 /* HWPorgressHUD.m in Sources */,
 				F1C4D940233A0785004BD723 /* NavigationBarView.m in Sources */,
 				04A5E4532338F27D0028B1C9 /* PomeloViewController.m in Sources */,
+				0408D954235D9FD5005D6B18 /* MyNewResumeTableViewCell.m in Sources */,
+				0408D93F2359A58F005D6B18 /* MyViewController.m in Sources */,
 				F1C4D948233A0785004BD723 /* LJSecondScrollViewController.m in Sources */,
 				04A5E48A2338F7A10028B1C9 /* PomeloForgetViewController.m in Sources */,
 				043C70512354116C00083E9E /* YNPageTableView.m in Sources */,
 				F1C4D865233A02DE004BD723 /* PomeloMessageViewController.m in Sources */,
 				F1C4D8B1233A0358004BD723 /* PomeloSetViewController.m in Sources */,
 				F1C4D89B233A0358004BD723 /* PomeloAboutUsViewController.m in Sources */,
+				0408D93623581ED7005D6B18 /* NoteVerifyFeedbackViewController.m in Sources */,
 				F1C4D935233A0785004BD723 /* UserInfoModel.m in Sources */,
 				F1C4D8A1233A0358004BD723 /* PomeloIndividualResumeViewController.m in Sources */,
+				0408D963235ED789005D6B18 /* VerifyCodeViewController.m in Sources */,
 				F1C4D860233A0233004BD723 /* PomeloHotCollectionViewCell.m in Sources */,
 				F1C4D932233A0785004BD723 /* ResumeModel.m in Sources */,
 				F1C4D8AF233A0358004BD723 /* PomeloNotificationViewController.m in Sources */,
+				0408D94E235D88BA005D6B18 /* CollectionTableViewCell.m in Sources */,
 				F1C4D929233A0785004BD723 /* BaseViewController.m in Sources */,
 				F1C4D924233A0785004BD723 /* ECUtil.m in Sources */,
 				0460D9BC234B3B0000C721CE /* CommonWorkLocationTableViewCell.m in Sources */,
@@ -962,7 +1061,10 @@
 				F1C4D8A4233A0358004BD723 /* PomeloMyResumeViewController.m in Sources */,
 				F1C4D8C1233A03AE004BD723 /* PomeloSortViewController.m in Sources */,
 				04A5E4502338F27D0028B1C9 /* PomeloAppDelegate.m in Sources */,
+				0408D95D235E16B1005D6B18 /* DetailBottomBar.m in Sources */,
+				0408D957235DA7B4005D6B18 /* ResumeInputViewController.m in Sources */,
 				043C70502354116C00083E9E /* YNPageHeaderScrollView.m in Sources */,
+				0408D9422359B5B9005D6B18 /* HeadBackView.m in Sources */,
 				04A5E48D2338F7A10028B1C9 /* PomeloLoginViewController.m in Sources */,
 				F1C4D861233A0233004BD723 /* PomeloDiscoveryViewController.m in Sources */,
 				F1C4D94B233A0785004BD723 /* HWAFNetworkManager.m in Sources */,
@@ -980,17 +1082,22 @@
 				F1C4D946233A0785004BD723 /* NSUserDefaultMemory.m in Sources */,
 				F1C4D925233A0785004BD723 /* AppUpdater.m in Sources */,
 				F1C4D93B233A0785004BD723 /* SelectBtnView.m in Sources */,
+				0408D93C235870A5005D6B18 /* FindViewController.m in Sources */,
 				F1C4D8A2233A0358004BD723 /* PomeloResumeImproveTableViewController.m in Sources */,
+				0408D9452359D287005D6B18 /* CompleteTableViewCell.m in Sources */,
 				F1C4D926233A0785004BD723 /* ECDevice.m in Sources */,
+				0408D94B235D7CDD005D6B18 /* MyCollectResignViewController.m in Sources */,
 				04A5E48C2338F7A10028B1C9 /* PomeloVerifyViewController.m in Sources */,
 				F1C4D8B2233A0358004BD723 /* PomeloChangeBindingPNViewController.m in Sources */,
 				F1C4D8C4233A03AE004BD723 /* PomeloSquareViewController.m in Sources */,
 				F1C4D927233A0785004BD723 /* ECStyle.m in Sources */,
 				F1C4D938233A0785004BD723 /* CommonModel.m in Sources */,
 				F1C4D8A8233A0358004BD723 /* PomeloLimitFiveTableViewController.m in Sources */,
+				0408D960235E9E5A005D6B18 /* MyWeChatTableViewCell.m in Sources */,
 				043C70522354116C00083E9E /* YNPageScrollView.m in Sources */,
 				0460D9EE234EFD6D00C721CE /* TopMaskBackViewController.m in Sources */,
 				043C70652354122D00083E9E /* YNPageViewController.m in Sources */,
+				0408D9392358418C005D6B18 /* LoginViewController.m in Sources */,
 				043C705F235411D800083E9E /* BasePageViewController.m in Sources */,
 				0460D9BF234C212700C721CE /* RTLabel.m in Sources */,
 				F1C4D89D233A0358004BD723 /* PomeloRelationUsViewController.m in Sources */,
@@ -1009,11 +1116,14 @@
 				F1C4D85F233A0233004BD723 /* PomeloFastPositionTableViewCell.m in Sources */,
 				043C7068235412A100083E9E /* BaseTableViewVC.m in Sources */,
 				F1C4D93C233A0785004BD723 /* HeadTapV.m in Sources */,
+				0408D95A235DC999005D6B18 /* ChangePersonInfoViewController.m in Sources */,
 				04A5E4892338F7A10028B1C9 /* PomeloVerifyLoginViewController.m in Sources */,
 				F1C4D8A9233A0358004BD723 /* PomeloLimitThreeTableViewController.m in Sources */,
 				04A5E4882338F7A10028B1C9 /* PomeloGuidancePageViewController.m in Sources */,
 				0460D9EB234DE99900C721CE /* PrivacyPolicyViewController.m in Sources */,
+				0408D93323581BEA005D6B18 /* LoginNavigationController.m in Sources */,
 				F1C4D93D233A0785004BD723 /* CommonImgModel.m in Sources */,
+				0408D948235D453C005D6B18 /* ModificationControl.m in Sources */,
 				F1C4D8C2233A03AE004BD723 /* PomeloTypeSelectViewController.m in Sources */,
 				F1C4D8AC233A0358004BD723 /* PomeloPersonalInfoViewController.m in Sources */,
 				F1C4D8AB233A0358004BD723 /* PomeloLimitOneTableViewController.m in Sources */,

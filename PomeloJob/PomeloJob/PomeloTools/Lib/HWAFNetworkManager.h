@@ -31,6 +31,11 @@ typedef void(^ZHandlerBlock)(BOOL success, id request);
 - (void)accountRequest:(NSDictionary *)parameters checkStatus:(ZHandlerBlock)handler;
 - (void)accountRequest:(NSDictionary *)parameters initPhonecard:(ZHandlerBlock)handler;
 - (void)positionRequest:(NSDictionary *)parameters selectResumeByuserid:(ZHandlerBlock)handler;
+
+//新接口
+- (void)accountRequest:(NSDictionary *)parameters loginByMessageAndPassword:(ZHandlerBlock)handler;
+- (void)accountRequest:(NSDictionary *)parameters userLogin:(ZHandlerBlock)handler;
+
 //广场
 - (void)positionRequest:(NSDictionary *)parameters getStyle:(ZHandlerBlock)handler;
 
@@ -56,6 +61,9 @@ typedef void(^ZHandlerBlock)(BOOL success, id request);
 - (void)clickOperation:(NSDictionary *)parameters selectAgeByPhonecar:(ZHandlerBlock)handler;
 //上传年龄
 - (void)clickOperation:(NSDictionary *)parameters updateageByphonecard:(ZHandlerBlock)handler;
+
+//我的
+- (void)userInfo:(NSDictionary *)parameters queryMymine:(ZHandlerBlock)handler;
 
 @end
 

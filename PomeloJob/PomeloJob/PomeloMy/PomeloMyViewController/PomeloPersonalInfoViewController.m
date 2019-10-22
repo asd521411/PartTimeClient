@@ -51,16 +51,16 @@
         }
     }];
     
-    //创建一个UIButton
-    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 40, 40)];
-    //设置UIButton的图像
-    [backButton setImage:[UIImage imageNamed:@"turnleft"] forState:UIControlStateNormal];
-    [[backButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
-    //覆盖返回按键
-    self.navigationItem.leftBarButtonItem = backItem;
+//    //创建一个UIButton
+//    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 40, 40)];
+//    //设置UIButton的图像
+//    [backButton setImage:[UIImage imageNamed:@"turnleft"] forState:UIControlStateNormal];
+//    [[backButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }];
+//    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
+//    //覆盖返回按键
+//    self.navigationItem.leftBarButtonItem = backItem;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

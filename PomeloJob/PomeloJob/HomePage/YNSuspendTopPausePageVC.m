@@ -172,7 +172,6 @@
     [[HWAFNetworkManager shareManager] commonAcquireImg:@{@"imgtype":@"首页"} firstImg:^(BOOL success, id  _Nonnull request) {
         NSDictionary *dic = (NSDictionary *)request;
         if (success) {
-            
             self.imgUrlArr = [CommonImgModel mj_objectArrayWithKeyValuesArray:dic[@"img"]];
             self.adUrlArr = [CommonImgModel mj_objectArrayWithKeyValuesArray:dic[@"imgfixed"]];
             NSMutableArray *arr = [[NSMutableArray alloc] init];

@@ -14,6 +14,7 @@
 #import "PomeloSquareViewController.h"
 #import "PomeloMessageViewController.h"
 #import "PomeloMyViewController.h"
+#import "MyViewController.h"
 
 @interface BaseTabBarController ()<UITabBarControllerDelegate>
 
@@ -32,7 +33,8 @@
     PomeloDiscoveryViewController *dis = [[PomeloDiscoveryViewController alloc] init];
     PomeloSquareViewController *squ = [[PomeloSquareViewController alloc] init];
     PomeloMessageViewController *message = [[PomeloMessageViewController alloc] init];
-    PomeloMyViewController *my = [[PomeloMyViewController alloc] init];
+    //PomeloMyViewController *my = [[PomeloMyViewController alloc] init];
+    MyViewController *my = [[MyViewController alloc] init];
     
     [vcArr addObject:yn];
     [vcArr addObject:dis];

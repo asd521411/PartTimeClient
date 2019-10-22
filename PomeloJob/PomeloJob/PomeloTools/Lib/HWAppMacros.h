@@ -31,6 +31,10 @@
 #define CUSTOMERFORGINMESSAGE                                       @"forginMessage"
 #define CUSTOMER_UPDATEPASSWORD                                     @"updatePassword"
 
+//新接口===================
+#define CUSTOMER_LOGINBYMESSAGEANDPASSWORD                          @"loginByMessageAndPassword"
+#define CUSTOMER_USERLOGON                                          @"userlogon"
+
 //首页
 #define CUSTOMER_FIRSTIMG                                           @"firstimg"
 // MARK: 看过我、我看过、已申请、待面试、收藏的职位列表，有权限
@@ -65,7 +69,9 @@
 #define CUSTOMER_RESUMESCHOOL                                      @"resumeschool"
 
 // MARK: user-key
-#define USERID                                                      @"userid"
+#define USERID                                                     @"userid"
+#define USERINFO                                                   @"userInfo"
+
 
 //个人信息
 #define CUSTOMER_USERINFO                                           @"user"
@@ -77,5 +83,10 @@
 #define CUSOMER_SELECTAGEBYPHONECARD                                @"selectageByphonecard"
 //上传年龄
 #define CUSTOMER_UPDATEAGEBYPHONECARD                               @"updateageByphonecard"
+
+//我的
+#define CUSTOMER_QUERYMYMINE                                         @"queryMymine"
+
+
 
 #endif /* HWAppMacros_h */

@@ -21,18 +21,21 @@
 
 - (BOOL)userLoginStatus {
     NSString *password = [SSKeychain passwordForService:SERVICEKEYCHAIN account:USERACCOUNT error:nil];
+    if ([ECUtil isBlankString:password]) {
+        return NO;
+    }
     return ![ECUtil isBlankString:password];
 }
 
-- (BOOL)setUserInfo:(NSString *)password {
-    return [SSKeychain setPassword:password forService:SERVICEKEYCHAIN account:USERACCOUNT];
+- (BOOL)setUserInfo:(id)password {
+    return [SSKeychain setPassword:[NSString stringWithFormat:@"%@", password] forService:SERVICEKEYCHAIN account:USERACCOUNT];
 }
 
 - (NSString *)getUserInfoForPassword{
     return [SSKeychain passwordForService:SERVICEKEYCHAIN account:USERACCOUNT];
 }
 
-- (BOOL)exitUserInfoForPassword{
+- (BOOL)exit{
     return [SSKeychain deletePasswordForService:SERVICEKEYCHAIN account:USERACCOUNT];
 }
 

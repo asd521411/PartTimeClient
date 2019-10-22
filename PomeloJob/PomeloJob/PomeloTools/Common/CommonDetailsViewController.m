@@ -19,8 +19,9 @@
 #import "CommonWorkLocationTableViewCell.h"
 #import "PomeloIndividualResumeViewController.h"
 #import "TopMaskBackViewController.h"
+#import "DetailBottomBar.h"
 
-@interface CommonDetailsViewController ()<UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface CommonDetailsViewController ()<UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, DetailBottomBarDelegate>
 
 @property (nonatomic, strong) UIView *headBackView;
 @property (nonatomic, strong) UILabel *lab1;
@@ -49,6 +50,8 @@
 @property (nonatomic, strong) NSMutableArray *ageListArr;
 @property (nonatomic, copy) NSString *ageStr;
 @property (nonatomic, assign) BOOL firstLoginMark;
+
+@property (nonatomic, strong) DetailBottomBar *detailBottomBar;
 
 @end
 
@@ -163,24 +166,24 @@
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
     btn1.frame = CGRectMake(0, 0, SCREENWIDTH / 3, height);
     btn1.backgroundColor = [ECUtil colorWithHexString:@"339cf9"];
-    [btn1 setTitle:@"电话咨询" forState:UIControlStateNormal];
+    [btn1 setTitle:@"收藏" forState:UIControlStateNormal];
     [btn1 setTintColor:[UIColor whiteColor]];
-    //[self.bottomBackV addSubview:btn1];
+    [self.bottomBackV addSubview:btn1];
     
     [[btn1 rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         
     }];
     
-    UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn2.frame = CGRectMake(btn1.right, 0, SCREENWIDTH / 3, height);
-    btn2.backgroundColor = [ECUtil colorWithHexString:@"f8f8f8"];
-    [btn2 setTitle:@"沟通" forState:UIControlStateNormal];
-    [btn2 setTintColor:[UIColor whiteColor]];
-    //[self.bottomBackV addSubview:btn2];
-    [[btn2 rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        
-    }];
-    
+//    UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+//    btn2.frame = CGRectMake(btn1.right, 0, SCREENWIDTH / 3, height);
+//    btn2.backgroundColor = [ECUtil colorWithHexString:@"f8f8f8"];
+//    [btn2 setTitle:@"沟通" forState:UIControlStateNormal];
+//    [btn2 setTintColor:[UIColor whiteColor]];
+//    //[self.bottomBackV addSubview:btn2];
+//    [[btn2 rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+//
+//    }];
+//
     self.applyBtn3 = [UIButton buttonWithType:UIButtonTypeCustom];
     self.applyBtn3.frame = CGRectMake(0, 0, SCREENWIDTH, height);
     if ([self.commonModel.relationtype isEqualToString:@"已报名"]) {
@@ -402,9 +405,7 @@
 }
 
 - (void)loadData {
-    
     NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
-    
     NSDictionary *para = @{@"positionid":[ECUtil isBlankString:self.positionid]?@"":self.positionid, @"userid":[ECUtil isBlankString:userid]?@"":userid};
     [[HWAFNetworkManager shareManager] positionRequest:para positionInfo:^(BOOL success, id  _Nonnull request) {
         NSDictionary *dic = (NSDictionary *)request;
@@ -428,6 +429,18 @@
         [self.tableView.mj_footer endRefreshing];
     }];
 }
+
+#pragma mark custom delegate
+
+- (void)bottomBarcollect {
+    
+}
+
+- (void)bottomBarSignup {
+    
+}
+
+#pragma mark UITableView delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (self.tableView == tableView) {
@@ -655,8 +668,6 @@
     return _otherRecommendArr;
 }
 
-
-
 - (NSMutableArray *)ageListArr {
     if (!_ageListArr) {
         _ageListArr = [[NSMutableArray alloc] init];
@@ -666,6 +677,14 @@
         }
     }
     return _ageListArr;
+}
+
+- (DetailBottomBar *)detailBottomBar {
+    if (_detailBottomBar) {
+        _detailBottomBar = [[DetailBottomBar alloc] initWithFrame:CGRectMake(15, KSCREEN_HEIGHT - [ECStyle tabbarExtensionHeight], KSCREEN_WIDTH - 30, 40)];
+        _detailBottomBar.delegate = self;
+    }
+    return _detailBottomBar;
 }
 
 @end

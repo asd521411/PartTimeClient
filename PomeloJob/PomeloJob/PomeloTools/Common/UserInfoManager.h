@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)userLoginStatus;
 - (BOOL)setUserInfo:(NSString *)password;
 - (NSString *)getUserInfoForPassword;
-- (BOOL)exitUserInfoForPassword;
+- (BOOL)exit;
 
 - (NSString *)getIDFA;
 @end

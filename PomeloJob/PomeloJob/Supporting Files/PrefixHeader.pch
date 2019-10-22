@@ -29,6 +29,8 @@
 #import <AdSupport/AdSupport.h>
 #import "SSKeychain.h"
 #import "UserInfoManager.h"
+#import "YYText.h"
+#import <UMAnalytics/MobClick.h>
 
 #define DebugLog(s, ...) NSLog(@"%s(%d): %@", __FUNCTION__, __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__])
 
@@ -95,6 +97,8 @@ typedef NS_ENUM(NSInteger, EntranceType){
 #define KFontNormalSize14   [UIFont systemFontOfSize:14]
 #define KFontNormalSize16   [UIFont systemFontOfSize:16]
 #define KFontNormalSize18   [UIFont systemFontOfSize:18]
+#define kFontNormalSize(size) [UIFont systemFontOfSize:size]
+#define kFontBoldSize(size) [UIFont boldSystemFontOfSize:size]
 
 #define NormalFontSize8     [UIFont systemFontOfSize:8]
 #define NormalFontSize10    [UIFont systemFontOfSize:10]
@@ -109,6 +113,9 @@ typedef NS_ENUM(NSInteger, EntranceType){
 #define DARKGRAYCOLOR   [UIColor darkGrayColor]
 #define BLACKCOLOR      [UIColor blackColor]
 #define kCOLOR_BLACK    [UIColor blackColor]
+
+#define kColor_Main [ECUtil colorWithHexString:@"ff761b"]
+#define kColor_UnSelect [ECUtil colorWithHexString:@"a8a8a8"]
 
 #define KColorMain_FF4457     [UIColor colorWithRed:0xff / 255.0 green:0x44 / 255.0 blue:0x57 / 255.0 alpha:1]
 #define KColor_212121         [UIColor colorWithRed:0x21 / 255.0 green:0x21 / 255.0 blue:0x21 / 255.0 alpha:1]

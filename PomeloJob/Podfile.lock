@@ -40,6 +40,7 @@ PODS:
     - UMCCommon
   - UMCCommon (2.0.1)
   - UMCCommonLog (1.0.0)
+  - YYText (1.0.7)
 
 DEPENDENCIES:
   - AFNetworking
@@ -57,6 +58,7 @@ DEPENDENCIES:
   - UMCAnalytics
   - UMCCommon
   - UMCCommonLog
+  - YYText
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -76,6 +78,7 @@ SPEC REPOS:
     - UMCAnalytics
     - UMCCommon
     - UMCCommonLog
+    - YYText
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -94,7 +97,8 @@ SPEC CHECKSUMS:
   UMCAnalytics: ff58714ada407682c4a07548156f94bcec92f055
   UMCCommon: 0263a057a2e1ae1da4c8308541e56904a493ce13
   UMCCommonLog: 05a2d5de21858e3d870551562cff405c1366d244
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 0ac4c195f9e0e4908308f89825a6f88d07becf45
+PODFILE CHECKSUM: 6b03f2f9469e1f9367912d5c6d1048e840dc4b36
 
 COCOAPODS: 1.7.3

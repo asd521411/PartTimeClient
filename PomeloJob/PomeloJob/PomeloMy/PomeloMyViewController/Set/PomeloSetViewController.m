@@ -46,7 +46,7 @@
 }
 
 - (void)setupSubViews {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [ECStyle navigationbarHeight], SCREENWIDTH, SCREENHEIGHT) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT) style:UITableViewStylePlain];
     self.tableView.rowHeight = 60;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -107,11 +107,9 @@
 
 - (void)exitBtnAction:(UIButton *)send {
     [NSUserDefaultMemory defaultSetMemory:@"" unityKey:USERID];
-//    if ([UserInfoManager shareInstance] ) {
-//        <#statements#>
-//    }
-    
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([[UserInfoManager shareInstance] exit]) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 

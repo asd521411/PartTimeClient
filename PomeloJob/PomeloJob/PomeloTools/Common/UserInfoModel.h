@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UserInfoModel : NSObject
 
+@property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *userid;
 @property (nonatomic, copy) NSString *usertel;
 @property (nonatomic, copy) NSString *useremail;
@@ -20,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *userprofile;
 @property (nonatomic, copy) NSString *cardone;
-
+@property (nonatomic, copy) NSString *resumecompleteness;
 
 @end
 

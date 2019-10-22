@@ -16,6 +16,7 @@
 #import "ImgTitleView.h"
 #import "UserInfoModel.h"
 #import "SSKeychain.h"
+#import "LoginNavigationController.h"
 
 @interface PomeloMyViewController ()<UITableViewDelegate, UITableViewDataSource, ImgTitleViewDelegate>
 
@@ -42,6 +43,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"我的";
     
     [self setupSubViews];
     
@@ -50,9 +52,12 @@
     // Do any additional setup after loading the view.
 }
 
+
+
+
 - (BOOL)loginStatus {
     
-    return [[UserInfoManager shareInstance] userLoginStatus];
+    //return [[UserInfoManager shareInstance] userLoginStatus];
     
 //    NSString *userpassword = [SSKeychain passwordForService:SERVICEKEYCHAIN account:USERACCOUNT];
 //    if ([ECUtil isBlankString:userpassword]) {
@@ -60,16 +65,20 @@
 //    }
 //    return YES;
     
-//    NSString *status = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
-//    if ([ECUtil isBlankString:status]) {//空未登陆
-//        return NO;
-//    }else {
-//        return YES;
-//    }
+    NSString *status = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
+    if ([ECUtil isBlankString:status]) {//空未登陆
+        return NO;
+    }else {
+        return YES;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setBarTintColor:[UIColor orangeColor]];
+    [self.navigationController.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, KFontNormalSize18,NSFontAttributeName,nil]];
+    
     if ([self loginStatus]) {
         NSString *status = [NSString stringWithFormat:@"%@", [NSUserDefaultMemory defaultGetwithUnityKey:USERID]];
         [[HWAFNetworkManager shareManager] userInfo:@{@"userid":status} getUserInfo:^(BOOL success, id  _Nonnull request) {
@@ -93,6 +102,12 @@
         self.userName.text = @"登陆";
         self.personalizedLab.text = @"暂无个性签名，添加彰显你的个性";
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor],NSForegroundColorAttributeName, KFontNormalSize18,NSFontAttributeName,nil]];
 }
 
 - (void)setupSubViews {
@@ -204,9 +219,11 @@
         
         if ([strongSelf loginStatus]) {
             PomeloMyResumeViewController *resume = [[PomeloMyResumeViewController alloc] init];
+            self.navigationController.hidesBottomBarWhenPushed = YES;
             [strongSelf.navigationController pushViewController:resume animated:YES];
         }else {
             PomeloLoginViewController *login = [[PomeloLoginViewController alloc] init];
+            self.navigationController.hidesBottomBarWhenPushed = YES;
             [strongSelf.navigationController pushViewController:login animated:YES];
         }
     }];
@@ -238,11 +255,17 @@
 
 - (void)topUnloginAction:(UIGestureRecognizer *)tap {
     if ([self loginStatus]) {
-        PomeloPersonalInfoViewController *info = [[PomeloPersonalInfoViewController alloc] init];
-        [self.navigationController pushViewController:info animated:YES];
+//        PomeloPersonalInfoViewController *info = [[PomeloPersonalInfoViewController alloc] init];
+//        info.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:info animated:YES];
+        LoginNavigationController *na = [[LoginNavigationController alloc] init];
+        //[self.navigationController presentViewController:na animated:YES completion:nil];
+    
     }else {
         PomeloLoginViewController *log = [[PomeloLoginViewController alloc] init];
+        log.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:log animated:YES];
+        //[self presentViewController:log animated:YES completion:nil];
     }
 }
 
@@ -259,9 +282,11 @@
 - (void)lowerBackViewTap:(UIGestureRecognizer *)tap {
     if ([self loginStatus]) {
         PomeloMyResumeViewController *resume = [[PomeloMyResumeViewController alloc] init];
+        resume.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:resume animated:YES];
     }else {
         PomeloLoginViewController *login = [[PomeloLoginViewController alloc] init];
+        login.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:login animated:YES];
     }
 }
@@ -276,6 +301,7 @@
         [self.navigationController pushViewController:record animated:YES];
     }else {
         PomeloLoginViewController *login = [[PomeloLoginViewController alloc] init];
+        login.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:login animated:YES];
     }
 }

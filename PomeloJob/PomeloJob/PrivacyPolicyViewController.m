@@ -42,16 +42,23 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //创建一个UIButton
-    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 40, 40)];
-    //设置UIButton的图像
-    [backButton setImage:[UIImage imageNamed:@"turnleft"] forState:UIControlStateNormal];
-    [[backButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
-    //覆盖返回按键
-    self.navigationItem.leftBarButtonItem = backItem;
+    
+//    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+//    self.navigationController.navigationBar.translucent = NO;
+//
+//    [self.navigationController.navigationBar setBarTintColor:kColor_Main];
+//    [self.navigationController.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, KFontNormalSize18,NSFontAttributeName,nil]];
+    
+//    //创建一个UIButton
+//    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 40, 40)];
+//    //设置UIButton的图像
+//    [backButton setImage:[UIImage imageNamed:@"turnleft"] forState:UIControlStateNormal];
+//    [[backButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }];
+//    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
+//    //覆盖返回按键
+//    self.navigationItem.leftBarButtonItem = backItem;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
