@@ -19,7 +19,6 @@
 
 @implementation PomeloAppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // MARK:友盟
@@ -35,7 +34,6 @@
         if (success) {
         }
     }];
-    
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];

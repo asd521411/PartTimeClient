@@ -12,9 +12,11 @@
 // MARK: test
 
 //本地
-#define PartTimeBaseUrl                                           @"http://192.168.200.63:8080/"
-//服务器
+//#define PartTimeBaseUrl                                           @"http://192.168.200.63:8080/"
+//1.4对应服务器
 //#define PartTimeBaseUrl                                           @"http://114.116.230.97:8080/"
+//版本1.5对应服务器
+#define PartTimeBaseUrl                                           @"http://114.116.230.97:8180/"
 //#define PartTimeBaseUrl                                              @"http://26aq970368.zicp.vip/"
 
 //手机号登陆

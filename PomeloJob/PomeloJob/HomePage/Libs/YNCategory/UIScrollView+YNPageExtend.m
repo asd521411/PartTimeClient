@@ -55,7 +55,7 @@
     return objc_getAssociatedObject(self, _cmd);
 }
 
-- (void)setYn_pageScrollViewBeginDragginScrollView:(YNPageScrollViewBeginDragginScrollView)yn_pageScrollViewBeginDragginScrollView {
+-(void)setYn_pageScrollViewBeginDragginScrollView:(YNPageScrollViewBeginDragginScrollView)yn_pageScrollViewBeginDragginScrollView {
     objc_setAssociatedObject(self, @selector(yn_pageScrollViewBeginDragginScrollView), yn_pageScrollViewBeginDragginScrollView, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
