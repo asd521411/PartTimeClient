@@ -7,18 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NS_ENUM(NSInteger, CellShowType) {
+    CellShowTypeCommon,
+    CellShowTypeSelect,
+};
 
 @interface MyNewResumeTableViewCell : UITableViewCell
 
 @property (nonatomic, assign) BOOL mustSelect;
-
 @property (nonatomic, strong) UILabel *titleLab;
 @property (nonatomic, strong) UILabel *showLab;
-
-@property (nonatomic, strong) UIButton *selectBtn1;
-@property (nonatomic, strong) UIButton *selectBtn2;
+@property (nonatomic, assign) CellShowType cellShowType;
+@property (nonatomic, strong) CommonModel *commonModel;
 
 @end
 

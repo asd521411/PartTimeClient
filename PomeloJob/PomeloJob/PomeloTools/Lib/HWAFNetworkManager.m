@@ -173,7 +173,7 @@
     }];
 }
 
-//登陆2.0
+//登陆1.5
 - (void)accountRequest:(NSDictionary *)parameters loginByMessageAndPassword:(ZHandlerBlock)handler {
     [self appPost:CUSTOMER_LOGINBYMESSAGEANDPASSWORD parameters:parameters handler:^(BOOL success, NSDictionary *response) {
         handler(success, response);
@@ -275,6 +275,20 @@
         handler(success, response);
     }];
 }
+//简历1.5
+
+- (void)resume:(NSDictionary *)parameters selectResumeInfo:(ZHandlerBlock)handler {
+    [self appGet:CUSTOMER_SELECTRESUMEINFO parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+
+- (void)resume:(NSDictionary *)parameters updateResume:(ZHandlerBlock)handler {
+    [self appGet:CUSTOMER_UPDATERESUME parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+
 
 - (void)userInfo:(NSDictionary *)parameters postUserInfo:(ZHandlerBlock)handler {
     [self appPost:CUSTOMER_USERINFO parameters:parameters handler:^(BOOL success, NSDictionary *response) {

@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) UIImageView *tagImgV;
 //@property (nonatomic, strong) UILabel *titleLab;
+@property (nonatomic, strong) UIButton *selectBtn1;
+@property (nonatomic, strong) UIButton *selectBtn2;
 @property (nonatomic, strong) UIImageView *rightImgV;
 
 @end
@@ -40,12 +42,40 @@
     self.tagImgV.hidden = !mustSelect;
 }
 
+- (void)setCellShowType:(CellShowType)cellShowType {
+    _cellShowType = cellShowType;
+    
+    switch (cellShowType) {
+        case CellShowTypeCommon:
+            self.selectBtn1.hidden= YES;
+            self.selectBtn2.hidden = YES;
+            self.rightImgV.hidden = NO;
+            break;
+        case CellShowTypeSelect:
+            self.selectBtn1.hidden= NO;
+            self.selectBtn2.hidden = NO;
+            self.rightImgV.hidden = YES;
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)setCommonModel:(CommonModel *)commonModel {
+    _commonModel = commonModel;
+    [self.selectBtn1 setTitle:@"" forState:UIControlStateNormal];
+    [self.selectBtn2 setTitle:@"" forState:UIControlStateNormal];
+}
+
 - (void)selectBtn1Action:(UIButton *)sender {
-    self.selectBtn1.selected = !self.selectBtn2.selected;
+    self.selectBtn1.selected = YES;
+    self.selectBtn2.selected = NO;
 }
 
 - (void)selectBtn2Action:(UIButton *)sender {
-    self.selectBtn2.selected = !self.selectBtn1.selected;
+    self.selectBtn2.selected = YES;
+    self.selectBtn1.selected = NO;
 }
 
 - (void)layoutSubviews {
@@ -75,16 +105,18 @@
         make.height.mas_equalTo(16);
     }];
     
-    [self.selectBtn2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-15);
-        make.height.mas_equalTo(20);
-        make.centerY.mas_equalTo(self);
-    }];
-    
     [self.selectBtn1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.selectBtn1.mas_left);
-        make.height.mas_equalTo(20);
+        make.right.mas_equalTo(-23);
         make.centerY.mas_equalTo(self);
+        //make.height.mas_equalTo(20);
+    }];
+//    CGFloat wid = CGRectGetWidth(self.selectBtn1.frame);
+//    [self.selectBtn1 setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, wid)];
+//
+    [self.selectBtn2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.selectBtn1.mas_left).offset(-10);
+        make.centerY.mas_equalTo(self);
+        //make.height.mas_equalTo(self);
     }];
     
     UIView *line = [[UIView alloc] init];
@@ -136,8 +168,10 @@
 - (UIButton *)selectBtn1 {
     if (_selectBtn1 == nil) {
         _selectBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_selectBtn1 setBackgroundImage:[UIImage imageNamed:@"tagnormalimg"] forState:UIControlStateNormal];
-        [_selectBtn1 setBackgroundImage:[UIImage imageNamed:@"tagselectimg"] forState:UIControlStateSelected];
+        [_selectBtn1 setTitle:@"积极工作" forState:UIControlStateNormal];
+        [_selectBtn1 setTitleColor:[ECUtil colorWithHexString:@"2f2f2f"] forState:UIControlStateNormal];
+        [_selectBtn1 setImage:[UIImage imageNamed:@"tagnormalimg"] forState:UIControlStateNormal];
+        [_selectBtn1 setImage:[UIImage imageNamed:@"tagselectimg"] forState:UIControlStateSelected];
         [_selectBtn1 addTarget:self action:@selector(selectBtn1Action:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _selectBtn1;
@@ -146,8 +180,11 @@
 - (UIButton *)selectBtn2 {
     if (_selectBtn2 == nil) {
         _selectBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_selectBtn2 setBackgroundImage:[UIImage imageNamed:@"tagnormalimg"] forState:UIControlStateNormal];
-        [_selectBtn2 setBackgroundImage:[UIImage imageNamed:@"tagselectimg"] forState:UIControlStateSelected];
+        _selectBtn2.selected = YES;
+        [_selectBtn2 setTitle:@"不找工作" forState:UIControlStateNormal];
+        [_selectBtn2 setTitleColor:[ECUtil colorWithHexString:@"2f2f2f"] forState:UIControlStateNormal];
+        [_selectBtn2 setImage:[UIImage imageNamed:@"tagnormalimg"] forState:UIControlStateNormal];
+        [_selectBtn2 setImage:[UIImage imageNamed:@"tagselectimg"] forState:UIControlStateSelected];
         [_selectBtn2 addTarget:self action:@selector(selectBtn2Action:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _selectBtn2;

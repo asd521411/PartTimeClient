@@ -220,10 +220,9 @@
                 [SVProgressHUD showWithStatus:dic[@"statusMessage"]];
                 [SVProgressHUD dismissWithDelay:1];
                 if (dic[@"body"]) {
-                    //UserInfoModel *info = [UserInfoModel mj_objectWithKeyValues:dic[@"body"]];
                     [NSUserDefaultMemory defaultSetMemory:dic[@"body"][@"userid"] unityKey:USERID];
                     NSDictionary *body = [NSDictionary dictionaryWithDictionary:dic[@"body"]];
-                    //[NSUserDefaultMemory defaultSetMemory:body unityKey:USERINFO];
+                    [NSUserDefaultMemory defaultSetMemory:body unityKey:USERINFO];
                     [MobClick profileSignInWithPUID:dic[@"userid"]];
                     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                 }else {

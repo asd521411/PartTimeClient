@@ -21,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"工作职位";
     
     [self.view addSubview:self.backScrollV];
     [self.backScrollV addSubview:self.saveBtn];
@@ -109,7 +110,10 @@
 }
 
 - (void)saveBtnAction:(UIButton *)sender {
-    
+    if (self.inputContentBlock) {
+        self.inputContentBlock(self.inputTextFd.text);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (UIScrollView *)backScrollV {
@@ -126,7 +130,7 @@
         _saveBtn.backgroundColor = kColor_Main;
         _saveBtn.layer.cornerRadius = 2;
         _saveBtn.layer.masksToBounds = YES;
-        _saveBtn.frame = CGRectMake(30, KSCREEN_HEIGHT - 235, KSCREEN_WIDTH-60, 40);
+        _saveBtn.frame = CGRectMake(30, 340, KSCREEN_WIDTH-60, 40);
         [_saveBtn setTitle:@"保存" forState:UIControlStateNormal];
         [_saveBtn addTarget:self action:@selector(saveBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -136,13 +140,19 @@
 - (UITextField *)inputTextFd {
     if (_inputTextFd == nil) {
         _inputTextFd = [[UITextField alloc] initWithFrame:CGRectMake(15, 40, KSCREEN_WIDTH-30, 40)];
-        _inputTextFd.placeholder = @"请输入你的职位";
+        _inputTextFd.placeholder = @"请输入";//self.placeHolder
+        //_inputTextFd.text = self.placeHolder;
         _inputTextFd.textAlignment = NSTextAlignmentCenter;
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, _inputTextFd.bottom-0.5, KSCREEN_WIDTH-30, 0.5)];
         line.backgroundColor = [ECUtil colorWithHexString:@"e5e5e5"];
         [self.backScrollV addSubview:line];
+        __weak typeof(self) weakSelf = self;
         [[_inputTextFd rac_textSignal] subscribeNext:^(id x) {
-            
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            NSString *str = [NSString stringWithFormat:@"%@", x];
+            if (str.length >= 16) {
+                strongSelf.inputTextFd.text = [str substringToIndex:16];
+            }
         }];
     }
     return _inputTextFd;

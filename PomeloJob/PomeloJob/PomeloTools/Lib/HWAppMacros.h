@@ -89,4 +89,16 @@
 
 
 
+
+
+
+
+//简历1.5
+//简历加载
+#define CUSTOMER_SELECTRESUMEINFO                                   @"selectResumeInfo"
+//简历上传
+#define CUSTOMER_UPDATERESUME                                        @"updateResume"
+
+
+
 #endif /* HWAppMacros_h */

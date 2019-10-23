@@ -48,7 +48,7 @@
 
 - (UIImageView *)wechatImgV {
     if (_wechatImgV == nil) {
-        _wechatImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@" "]];
+        _wechatImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wechatimg"]];
         _wechatImgV.backgroundColor = [HWRandomColor randomColor];
     }
     return _wechatImgV;

@@ -40,6 +40,25 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *resumeschool;
 @property (nonatomic, copy) NSString *resumescstarttime;
 
+@property (nonatomic, copy) NSString *educationexperienceid;
+@property (nonatomic, copy) NSString *edustartdate;
+@property (nonatomic, copy) NSString *endtime;
+@property (nonatomic, copy) NSString *imgfile;
+@property (nonatomic, copy) NSString *jobduties;
+@property (nonatomic, copy) NSString *jobposition;
+@property (nonatomic, copy) NSString *major;
+@property (nonatomic, copy) NSString *resumebirthday;
+@property (nonatomic, copy) NSString *resumeeducation;
+@property (nonatomic, copy) NSString *resumeid;
+@property (nonatomic, copy) NSString *resumeidentity;
+@property (nonatomic, copy) NSString *resumeimg;
+@property (nonatomic, copy) NSString *resumejobstatus;
+@property (nonatomic, copy) NSString *reresumename;
+@property (nonatomic, copy) NSString *resumeworkexperience;
+@property (nonatomic, copy) NSString *schoolname;
+@property (nonatomic, copy) NSString *starttime;
+@property (nonatomic, copy) NSString *workexperienceid;
+
 @end
 
 NS_ASSUME_NONNULL_END

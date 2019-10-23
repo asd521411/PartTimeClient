@@ -54,6 +54,10 @@ typedef void(^ZHandlerBlock)(BOOL success, id request);
 - (void)resume:(NSDictionary *)parameters resumeCompany:(ZHandlerBlock)handler;
 - (void)resume:(NSDictionary *)parameters resumeSchool:(ZHandlerBlock)handler;
 - (void)discover:(NSDictionary *)parameters defaultFound:(ZHandlerBlock)handler;
+//1.5
+- (void)resume:(NSDictionary *)parameters selectResumeInfo:(ZHandlerBlock)handler;
+- (void)resume:(NSDictionary *)parameters updateResume:(ZHandlerBlock)handler;
+
 
 //记录操作
 - (void)clickOperation:(NSDictionary *)parameters advertismentclick:(ZHandlerBlock)handler;

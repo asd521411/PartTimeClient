@@ -21,14 +21,16 @@ typedef NS_ENUM(NSInteger, InforType) {
 
 - (void)gotoLogin;
 - (void)changeInfoMessage;
+- (void)sdportraitImgV;
 
 @end
 
 
 @interface HeadBackView : UIView
 
-@property (nonatomic, assign) InforType infoType;
+@property (nonatomic, strong) UIButton *portraitImgV;
 
+@property (nonatomic, assign) InforType infoType;
 @property (nonatomic, weak) id<HeadBackViewDelegate>delegate;
 
 @end
