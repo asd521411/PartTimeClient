@@ -12,15 +12,43 @@
 #import "ResumeInputViewController.h"
 #import "ResumeModel.h"
 
-@interface MyResumeViewController ()<UITableViewDelegate, UITableViewDataSource, HeadBackViewDelegate>
+@interface MyResumeViewController ()<UITableViewDelegate, UITableViewDataSource, HeadBackViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) HeadBackView *headBackView;
+@property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *listArr;
 @property (nonatomic, strong) UIButton *saveBtn;
 @property (nonatomic, strong) UIButton *fillnicknameBtn;
 @property (nonatomic, strong) NSMutableDictionary *paraMutDic;
-@property (nonatomic, strong) ResumeModel *resumeModel;
+@property (nonatomic, strong) ResumeModel *baseinfoModel;
+@property (nonatomic, strong) ResumeModel *educationexperienceModel;
+@property (nonatomic, strong) ResumeModel *workexperiencesModel;
+@property (nonatomic, strong) UIView *datePickerBackV;
+@property (nonatomic, strong) UIDatePicker *datePicker;
+@property (nonatomic, strong) UIButton *cancelBtn;
+@property (nonatomic, strong) UIButton *sureBtn;
+@property (nonatomic, strong) UIPickerView *pickerView;
+@property (nonatomic, strong) NSArray *pickerViewRowsArr;
+@property (nonatomic, strong) NSArray *educationBackgroundArr;//最高学历
+@property (nonatomic, strong) NSArray *workYears;//工作年限
+@property (nonatomic, assign) NSInteger section;
+@property (nonatomic, assign) NSInteger row;
+
+@property (nonatomic, copy) NSString *pickStr;
+//时间
+@property (nonatomic, copy) NSString *birthday;
+@property (nonatomic, copy) NSString *edustartdate;
+@property (nonatomic, copy) NSString *starttime;
+@property (nonatomic, copy) NSString *endtime;
+//UIPickerView
+@property (nonatomic, copy) NSString *education;
+@property (nonatomic, copy) NSString *workexperience;//工作年限
+
+@property (nonatomic, copy) NSString *jobposition;
+@property (nonatomic, copy) NSString *jobduties;
+@property (nonatomic, copy) NSString *schoolname;
+@property (nonatomic, copy) NSString *major;
 
 @end
 
@@ -42,11 +70,38 @@
     NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
     NSDictionary *para = @{@"userid":userid};
     [[HWAFNetworkManager shareManager] resume:para selectResumeInfo:^(BOOL success, id  _Nonnull request) {
-        NSDictionary *dic = request[@"body"];
         NSLog(@"--------%@", request);
         if (success) {
-            self.resumeModel = [ResumeModel mj_objectWithKeyValues:dic];
-            NSMutableArray *mutArr = [[NSMutableArray alloc] init];
+            self.baseinfoModel = [ResumeModel mj_objectWithKeyValues:request[@"baseinfo"]];
+            self.educationexperienceModel = [ResumeModel mj_objectWithKeyValues:request[@"educationexperience"]];
+            self.workexperiencesModel = [ResumeModel mj_objectWithKeyValues:request[@"workexperiences"]];
+            
+            //基本信息
+            if ([ECUtil isBlankString:self.baseinfoModel.resumename]) {
+                self.baseinfoModel.resumesex = @"女";//默认给男性
+            }
+            if ([ECUtil isBlankString:self.baseinfoModel.resumeidentity]) {
+                self.baseinfoModel.resumeidentity = @"非学生";
+            }
+            if ([ECUtil isBlankString:self.baseinfoModel.resumejobstatus]) {
+                self.baseinfoModel.resumejobstatus = @"不找工作";
+            }
+            
+            if ([ECUtil isBlankString:self.baseinfoModel.resumebirthday]) {//出生日期
+                self.baseinfoModel.resumebirthday = @"";
+            }
+            if ([ECUtil isBlankString:self.baseinfoModel.resumeeducation]) {//最高学历
+                self.baseinfoModel.resumeeducation = @"";
+            }
+            if ([ECUtil isBlankString:self.baseinfoModel.resumeworkexperience]) {//工作年限
+                self.baseinfoModel.resumeworkexperience = @"";
+            }
+            
+            //教育经历
+            
+            //工作经验
+            [self.tableView reloadData];
+            
         }
     }];
     
@@ -110,6 +165,16 @@
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headBackView;
     [self.view addSubview:self.saveBtn];
+    
+    UIWindow *win = [[UIApplication sharedApplication] delegate].window;
+    [win addSubview:self.datePickerBackV];
+    [self.datePickerBackV addSubview:self.cancelBtn];
+    [self.datePickerBackV addSubview:self.sureBtn];
+    [self.datePickerBackV addSubview:self.datePicker];
+    self.datePicker.hidden = YES;
+    [self.datePickerBackV addSubview:self.pickerView];
+    self.pickerView.hidden = YES;
+    self.datePickerBackV.hidden = YES;
 }
 
 #pragma mark action
@@ -127,24 +192,29 @@
 }
 
 - (void)saveBtnAction:(UIButton *)sender {
+    [self postData];
+}
+
+- (void)postData {
     
-    
-    NSDictionary *para = @{@"userid":@"",
+    NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
+    NSDictionary *para = @{@"userid":userid,
                            @"imgfie":@"",//上传图片
-                           @"resumename":@"",//简历中的姓名
-                           @"resumesex":@"",//简历中的性别
-                           @"resumebirthday":@"",//简历中的生日
-                           @"resumeidentity":@"",//简历中的身份
-                           @"resumeeducation":@"",//简历中的学历
-                           @"resumeworkexperience":@"",//简历中的工作经验
-                           @"resumejobstatus":@"",//简历中的求职状态
-                           @"jobposition":@"",//工作职位
-                           @"starttime":@"",//工作开始时间
-                           @"endtime":@"",//工作结束时间
-                           @"jobduties":@"",//工作职责
-                           @"schoolname":@"",//学校经历
-                           @"major":@"",//专业
-                           @"edustartdate":@"",//入学年份
+                           @"resumename":self.fillnicknameBtn.titleLabel.text,//简历中的姓名
+                           @"resumesex":self.baseinfoModel.resumesex,//简历中的性别
+                           @"resumebirthday":self.baseinfoModel.resumebirthday,//简历中的生日
+                           @"resumeidentity":self.baseinfoModel.resumeidentity,//简历中的身份
+                           @"resumeeducation":self.baseinfoModel.resumeeducation,//简历中的学历
+                           @"resumeworkexperience":self.baseinfoModel.resumeworkexperience,//简历中的工作经验
+                           @"resumejobstatus":self.baseinfoModel.resumejobstatus,//简历中的求职状态
+                           //非毕传
+                           @"jobposition":self.jobposition,//工作职位
+                           @"starttime":self.starttime,//工作开始时间
+                           @"endtime":self.endtime,//工作结束时间
+                           @"jobduties":self.jobduties,//工作职责
+                           @"schoolname":self.schoolname,//学校经历
+                           @"major":self.major,//专业
+                           @"edustartdate":self.edustartdate,//入学年份
     };
     
     [SVProgressHUD showWithStatus:@""];
@@ -157,10 +227,127 @@
     }];
 }
 
+- (BOOL)alreadyConformCondition {
+    if ([ECUtil isBlankString:self.fillnicknameBtn.titleLabel.text] ) {
+        return NO;
+    }
+    if ([ECUtil isBlankString:self.baseinfoModel.resumesex]) {
+        return NO;
+    }
+    if ([ECUtil isBlankString:self.baseinfoModel.resumebirthday]) {
+        return NO;
+    }
+    if ([ECUtil isBlankString:self.baseinfoModel.resumeidentity]) {
+        return NO;
+    }
+    return YES;
+    
+}
+
+- (void)cancelBtnAction:(UIButton *)sender {
+    self.datePickerBackV.hidden = YES;
+}
+
+- (void)sureBtnAction:(UIButton *)sender {
+    if (self.datePicker.hidden == NO && self.pickerView.hidden == YES) {
+        if (self.section == 0) {
+            if (self.row == 1) {
+                self.baseinfoModel.resumebirthday = self.birthday;
+            }
+        }else if (self.section == 1) {
+            if (self.row == 2) {
+                self.baseinfoModel.edustartdate = self.edustartdate;
+            }
+        }else if (self.section == 2) {
+            if (self.row == 1) {
+                self.workexperiencesModel.starttime = self.starttime;
+            }
+            if (self.row == 2) {
+                self.workexperiencesModel.endtime = self.endtime;
+            }
+        }
+    }else if (self.datePicker.hidden == YES && self.pickerView.hidden == NO){
+        if (self.section == 0) {
+            if (self.row == 3) {
+                self.baseinfoModel.resumeeducation = self.education;
+             }
+            if (self.row == 4) {
+                self.baseinfoModel.resumeworkexperience = self.workexperience;
+            }
+        }
+    }
+    //刷新cell
+    NSIndexPath *index = [NSIndexPath indexPathForRow:self.row  inSection:self.section];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:index,nil] withRowAnimation:UITableViewRowAnimationNone];
+    self.datePickerBackV.hidden = YES;
+}
+
+- (void)dateChange:(UIDatePicker *)datePicker {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    //设置时间格式
+    formatter.dateFormat = @"yyyy年 MM月 dd日";
+    NSString *dateStr = [formatter  stringFromDate:datePicker.date];
+    NSLog(@"pppppp====%@", dateStr);
+
+    if (self.section == 0) {
+        if (self.row == 1) {
+            self.birthday = dateStr;
+        }
+    }
+    
+    if (self.section == 1) {
+        if (self.row == 2) {
+            self.edustartdate = dateStr;
+        }
+    }
+    
+    if (self.section == 2) {
+        if (self.row == 1) {
+            self.starttime = dateStr;
+        }
+        if (self.row == 2) {
+            self.endtime = dateStr;
+        }
+    }
+    
+}
+
 #pragma mark custom delegate
 
 - (void)sdportraitImgV {
+    UIAlertController *alertController=[UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *actionCamera=[UIAlertAction actionWithTitle:@"打开相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+        self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:self.imagePickerController animated:YES completion:nil];
+        
+    }];
     
+    UIAlertAction *actionPhotoLIbrary=[UIAlertAction actionWithTitle:@"打开相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:self.imagePickerController animated:YES completion:nil];
+        
+    }];
+    
+    UIAlertAction *actionPhotoAlbum=[UIAlertAction actionWithTitle:@"打开图库" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        [self presentViewController:self.imagePickerController animated:YES completion:nil];
+        
+    }];
+    
+    UIAlertAction *cancelAction=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alertController addAction:actionCamera];
+    
+    [alertController addAction:actionPhotoAlbum];
+    
+    [alertController addAction:actionPhotoLIbrary];
+    
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark UITableViewDelegate
@@ -177,23 +364,76 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MyNewResumeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyNewResumeTableViewCell"];
     cell.titleLab.text = self.listArr[indexPath.section][@"row"][indexPath.row][@"title"];
-    cell.showLab.text = self.listArr[indexPath.section][@"row"][indexPath.row][@"showtitle"];
-    //cell.showLab.text =
     if (indexPath.section == 0) {
-        cell.mustSelect = YES;
-        
-    }else {
-        cell.mustSelect = NO;
-    }
-    
-    if (indexPath.section == 0) {
+        cell.mustSelect = YES;//必填标志
         if (indexPath.row == 0 || indexPath.row == 2 || indexPath.row == 5) {
-            cell.cellShowType = CellShowTypeSelect;
+            cell.cellShowType = CellShowTypeSelect;//左右按钮
         }else {
             cell.cellShowType = CellShowTypeCommon;
         }
     }else {
+        cell.mustSelect = NO;
         cell.cellShowType = CellShowTypeCommon;
+    }
+    if (indexPath.section == 0) {
+        
+        if (indexPath.row == 0) {
+            if ([self.baseinfoModel.resumesex isEqualToString:@"男"]) {//默认显示
+                cell.selectBtn2.selected = YES;
+                cell.selectBtn1.selected = NO;
+            }else {
+                cell.selectBtn2.selected = NO;
+                cell.selectBtn1.selected = YES;
+            }
+            [cell.selectBtn2 setTitle:@"男" forState:UIControlStateNormal];
+            [cell.selectBtn1 setTitle:@"女" forState:UIControlStateNormal];
+        }else if (indexPath.row == 1) {
+            cell.showLab.text = self.baseinfoModel.resumebirthday;
+        }else if (indexPath.row == 2) {
+            if ([self.baseinfoModel.resumeidentity isEqualToString:@"学生"]) {
+                cell.selectBtn2.selected = YES;
+                cell.selectBtn1.selected = NO;
+            }else {
+                cell.selectBtn2.selected = NO;
+                cell.selectBtn1.selected = YES;
+            }
+            [cell.selectBtn2 setTitle:@"学生" forState:UIControlStateNormal];
+            [cell.selectBtn1 setTitle:@"非学生" forState:UIControlStateNormal];
+        }else if (indexPath.row == 3) {
+            cell.showLab.text = self.baseinfoModel.resumeeducation;
+        }else if (indexPath.row == 4) {
+            cell.showLab.text = self.baseinfoModel.resumeworkexperience;//=========================有问题
+        }else if (indexPath.row == 5) {
+            if ([self.baseinfoModel.resumejobstatus isEqualToString:@"积极找工作"]) {
+                cell.selectBtn2.selected = YES;
+                cell.selectBtn1.selected = NO;
+            }else {
+                cell.selectBtn2.selected = NO;
+                cell.selectBtn1.selected = YES;
+            }
+            [cell.selectBtn2 setTitle:@"积极找工作" forState:UIControlStateNormal];
+            [cell.selectBtn1 setTitle:@"不找工作" forState:UIControlStateNormal];
+        }
+        
+    }else if (indexPath.section == 1) {
+        
+        if (indexPath.row == 0) {
+            cell.showLab.text = self.educationexperienceModel.schoolname;
+        }else if (indexPath.row == 1) {
+            cell.showLab.text = self.educationexperienceModel.major;
+        }else if (indexPath.row == 2) {
+            cell.showLab.text = self.educationexperienceModel.edustartdate;
+        }
+    }else if (indexPath.section == 2) {
+        if (indexPath.row == 0) {
+            cell.showLab.text = self.workexperiencesModel.jobposition;
+        }else if (indexPath.row == 1) {
+            cell.showLab.text = self.workexperiencesModel.starttime;
+        }else if (indexPath.row == 2) {
+            cell.showLab.text = self.workexperiencesModel.endtime;
+        }else if (indexPath.row == 3) {
+            cell.showLab.text = self.workexperiencesModel.jobduties;
+        }
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -206,24 +446,96 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    if ((indexPath.section == 1 && (indexPath.row == 0 || indexPath.row == 1) || (indexPath.section)) {
-//    ResumeInputViewController *input = [[ResumeInputViewController alloc] init];
-//            //input.placeHolder = self.fillnicknameBtn.titleLabel.text;
-//            input.inputType = InputTypeWorkPosition;
-//            __weak typeof(self) weakSelf = self;
-//            input.inputContentBlock = ^(NSString * _Nonnull content) {
-//                __strong typeof(weakSelf) strongSelf = weakSelf;
-//    //            NSIndexPath *index = [NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section];
-//    //            MyNewResumeTableViewCell *cell = [strongSelf.tableView cellForRowAtIndexPath:index];
-//    //            NSLog(@"ss=s=s=s=s%@", content);
-//    //            cell.showLab.text = content;
-//    //            [strongSelf.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:index,nil] withRowAnimation:UITableViewRowAnimationAutomatic];
-//
-//            };
-//            [weakSelf.navigationController pushViewController:input animated:YES];
-//    }else {
-//
-//    }
+    self.section = indexPath.section;
+    self.row = indexPath.row;
+    if (indexPath.section == 0) {
+        if (indexPath.row == 1) {
+            self.datePickerBackV.hidden = NO;
+            self.datePicker.hidden = NO;
+            self.pickerView.hidden = YES;
+        }
+        if (indexPath.row == 3) {
+            self.datePickerBackV.hidden = NO;
+            self.datePicker.hidden = YES;
+            self.pickerView.hidden = NO;
+            self.pickerViewRowsArr = nil;
+            self.pickerViewRowsArr = [NSArray arrayWithArray:self.educationBackgroundArr];
+            [self.pickerView reloadAllComponents];
+        }
+        if (indexPath.row == 4) {
+            self.datePickerBackV.hidden = NO;
+            self.datePicker.hidden = YES;
+            self.pickerView.hidden = NO;
+            self.pickerViewRowsArr = nil;
+            self.pickerViewRowsArr = [NSArray arrayWithArray:self.workYears];
+            [self.pickerView reloadAllComponents];
+        }
+    }else if (indexPath.section == 1) {
+        if (indexPath.row == 0 || indexPath.row == 1) {
+            ResumeInputViewController *input = [[ResumeInputViewController alloc] init];
+                    //input.placeHolder = self.fillnicknameBtn.titleLabel.text;
+                    input.inputType = InputTypeWorkPosition;
+                    __weak typeof(self) weakSelf = self;
+                    input.inputContentBlock = ^(NSString * _Nonnull content) {
+                        __strong typeof(weakSelf) strongSelf = weakSelf;
+            //            NSIndexPath *index = [NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section];
+            //            MyNewResumeTableViewCell *cell = [strongSelf.tableView cellForRowAtIndexPath:index];
+            //            NSLog(@"ss=s=s=s=s%@", content);
+            //            cell.showLab.text = content;
+            //            [strongSelf.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:index,nil] withRowAnimation:UITableViewRowAnimationAutomatic];
+
+                    };
+                    [weakSelf.navigationController pushViewController:input animated:YES];
+        }
+        
+        if (indexPath.row == 2) {
+            self.datePickerBackV.hidden = NO;
+            self.datePicker.hidden = NO;
+            self.pickerView.hidden = YES;
+        }
+        
+    }else if (indexPath.section == 2) {
+        if (indexPath.row == 0) {
+            ResumeInputViewController *input = [[ResumeInputViewController alloc] init];
+                    //input.placeHolder = self.fillnicknameBtn.titleLabel.text;
+                    input.inputType = InputTypeWorkPosition;
+                    __weak typeof(self) weakSelf = self;
+                    input.inputContentBlock = ^(NSString * _Nonnull content) {
+                        __strong typeof(weakSelf) strongSelf = weakSelf;
+                        NSIndexPath *index = [NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section];
+                        MyNewResumeTableViewCell *cell = [strongSelf.tableView cellForRowAtIndexPath:index];
+                        NSLog(@"ss=s=s=s=s%@", content);
+                        cell.showLab.text = content;
+                        [strongSelf.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:index,nil] withRowAnimation:UITableViewRowAnimationAutomatic];
+
+                    };
+                    [weakSelf.navigationController pushViewController:input animated:YES];
+        }
+        if (indexPath.row == 1) {
+            self.datePickerBackV.hidden = NO;
+            self.datePicker.hidden = NO;
+            self.pickerView.hidden = YES;
+        }
+        if (indexPath.row == 2) {
+            self.datePickerBackV.hidden = NO;
+            self.datePicker.hidden = NO;
+            self.pickerView.hidden = YES;
+        }
+        if (indexPath.row == 3) {
+            ResumeInputViewController *input = [[ResumeInputViewController alloc] init];
+            input.inputType = InputTypeWorkContent;
+            __weak typeof(self) weakSelf = self;
+            input.inputContentBlock = ^(NSString * _Nonnull content) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+//                NSIndexPath *index = [NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section];
+//                MyNewResumeTableViewCell *cell = [strongSelf.tableView cellForRowAtIndexPath:index];
+//                NSLog(@"ss=s=s=s=s%@", content);
+//                cell.showLab.text = content;
+//                [strongSelf.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:index,nil] withRowAnimation:UITableViewRowAnimationAutomatic];
+            };
+            [weakSelf.navigationController pushViewController:input animated:YES];
+        }
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -255,6 +567,48 @@
     return 0;
 }
 
+#pragma mark UIPickerView delegate
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return self.pickerViewRowsArr.count;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return self.pickerViewRowsArr[row];
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+    return KSCREEN_WIDTH;
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    return 45;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    if (self.section == 0) {
+        if (self.row == 3) {
+            self.education = self.pickerViewRowsArr[row];
+        }
+        if (self.row == 4) {
+            self.workexperience = self.pickerViewRowsArr[row];
+        }
+    }
+    
+    NSLog(@"===%ld------%@", (long)row, self.pickerViewRowsArr[row]);
+}
+
+#pragma mark
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(nonnull NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
+    [self.headBackView.portraitImgV setBackgroundImage:info[@"UIImagePickerControllerOriginalImage"] forState:UIControlStateNormal];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark getter
 
 - (HeadBackView *)headBackView {
@@ -265,6 +619,15 @@
         _headBackView.delegate = self;
     }
     return _headBackView;
+}
+
+- (UIImagePickerController *)imagePickerController {
+    if (!_imagePickerController) {
+        _imagePickerController = [[UIImagePickerController alloc] init];
+        _imagePickerController.delegate = self;
+        _imagePickerController.allowsEditing = YES;
+    }
+    return _imagePickerController;
 }
 
 - (UIButton *)fillnicknameBtn {
@@ -296,19 +659,19 @@
 
 - (NSArray *)listArr {
     if (!_listArr) {
-        _listArr = @[@{@"section":@"基本信息", @"row":@[@{@"title":@"性   别", @"showtitle":[ECUtil isBlankString:self.resumeModel.resumename]?@"":self.resumeModel.resumename},
-                                                    @{@"title":@"出生日期", @"showtitle":[ECUtil isBlankString:self.resumeModel.resumebirthday]?@"":self.resumeModel.resumebirthday},
-                                                    @{@"title":@"身份类型", @"showtitle":[ECUtil isBlankString:self.resumeModel.resumeidentity]?@"":self.resumeModel.resumeidentity},
-                                                    @{@"title":@"最高学历", @"showtitle":[ECUtil isBlankString:self.resumeModel.resumeeducation]?@"":self.resumeModel.resumeeducation},
-                                                    @{@"title":@"工作年限", @"showtitle":[ECUtil isBlankString:self.resumeModel.resumeworkexperience]?@"":self.resumeModel.resumeworkexperience},
-                                                    @{@"title":@"求职状态", @"showtitle":[ECUtil isBlankString:self.resumeModel.resumejobstatus]?@"":self.resumeModel.resumejobstatus}]},
-                     @{@"section":@"教育经历", @"row":@[@{@"title":@"学校名称", @"showtitle":[ECUtil isBlankString:self.resumeModel.schoolname]?@"":self.resumeModel.schoolname},
-                                                    @{@"title":@"所学专业", @"showtitle":[ECUtil isBlankString:self.resumeModel.major]?@"":self.resumeModel.major},
-                                                    @{@"title":@"入学年份", @"showtitle":[ECUtil isBlankString:self.resumeModel.edustartdate]?@"":self.resumeModel.edustartdate}]},
-                     @{@"section":@"工作经验", @"row":@[@{@"title":@"工作职位", @"showtitle":[ECUtil isBlankString:self.resumeModel.jobduties]?@"":self.resumeModel.jobduties},
-                                                    @{@"title":@"开始时间", @"showtitle":[ECUtil isBlankString:self.resumeModel.starttime]?@"":self.resumeModel.starttime},
-                                                    @{@"title":@"结束时间", @"showtitle":[ECUtil isBlankString:self.resumeModel.endtime]?@"":self.resumeModel.endtime},
-                                                    @{@"title":@"工作内容", @"showtitle":[ECUtil isBlankString:self.resumeModel.jobposition]?@"":self.resumeModel.jobposition}]}
+        _listArr = @[@{@"section":@"基本信息", @"row":@[@{@"title":@"性   别", @"showtitle":[ECUtil isBlankString:self.baseinfoModel.resumename]?@"":self.baseinfoModel.resumename},
+                                                    @{@"title":@"出生日期", @"showtitle":[ECUtil isBlankString:self.baseinfoModel.resumebirthday]?@"":self.baseinfoModel.resumebirthday},
+                                                    @{@"title":@"身份类型", @"showtitle":[ECUtil isBlankString:self.baseinfoModel.resumeidentity]?@"":self.baseinfoModel.resumeidentity},
+                                                    @{@"title":@"最高学历", @"showtitle":[ECUtil isBlankString:self.baseinfoModel.resumeeducation]?@"":self.baseinfoModel.resumeeducation},
+                                                    @{@"title":@"工作年限", @"showtitle":[ECUtil isBlankString:self.baseinfoModel.resumeworkexperience]?@"":self.baseinfoModel.resumeworkexperience},
+                                                    @{@"title":@"求职状态", @"showtitle":[ECUtil isBlankString:self.baseinfoModel.resumejobstatus]?@"":self.baseinfoModel.resumejobstatus}]},
+                     @{@"section":@"教育经历", @"row":@[@{@"title":@"学校名称", @"showtitle":[ECUtil isBlankString:self.educationexperienceModel.schoolname]?@"":self.educationexperienceModel.schoolname},
+                                                    @{@"title":@"所学专业", @"showtitle":[ECUtil isBlankString:self.educationexperienceModel.major]?@"":self.educationexperienceModel.major},
+                                                    @{@"title":@"入学年份", @"showtitle":[ECUtil isBlankString:self.educationexperienceModel.edustartdate]?@"":self.educationexperienceModel.edustartdate}]},
+                     @{@"section":@"工作经验", @"row":@[@{@"title":@"工作职位", @"showtitle":[ECUtil isBlankString:self.workexperiencesModel.jobduties]?@"":self.workexperiencesModel.jobduties},
+                                                    @{@"title":@"开始时间", @"showtitle":[ECUtil isBlankString:self.workexperiencesModel.starttime]?@"":self.workexperiencesModel.starttime},
+                                                    @{@"title":@"结束时间", @"showtitle":[ECUtil isBlankString:self.workexperiencesModel.endtime]?@"":self.workexperiencesModel.endtime},
+                                                    @{@"title":@"工作内容", @"showtitle":[ECUtil isBlankString:self.workexperiencesModel.jobposition]?@"":self.workexperiencesModel.jobposition}]}
         ];
     }
     return _listArr;
@@ -326,6 +689,95 @@
     }
     return _saveBtn;
 }
+
+- (UIView *)datePickerBackV {
+    if (_datePickerBackV == nil) {
+        _datePickerBackV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT)];
+        _datePickerBackV.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+    }
+    return _datePickerBackV;
+}
+
+- (UIDatePicker *)datePicker {
+    if (_datePicker == nil) {
+        _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT-300, KSCREEN_WIDTH, 300)];
+        _datePicker.backgroundColor = [UIColor whiteColor];
+        _datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
+        //设置日期模式(Displays month, day, and year depending on the locale setting)
+        _datePicker.datePickerMode = UIDatePickerModeDate;
+        // 设置当前显示时间
+        [_datePicker setDate:[NSDate date] animated:YES];
+        // 设置显示最大时间（此处为当前时间）
+        [_datePicker setMaximumDate:[NSDate date]];
+        [_datePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
+        
+    }
+    return _datePicker;
+}
+
+- (UIButton *)cancelBtn {
+    if (_cancelBtn == nil) {
+        _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _cancelBtn.backgroundColor = [UIColor whiteColor];
+        _cancelBtn.frame = CGRectMake(0, KSCREEN_HEIGHT-300-40, KSCREEN_WIDTH/2, 40);
+        [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+        [_cancelBtn setTitleColor:[ECUtil colorWithHexString:@"2f2f2f"] forState:UIControlStateNormal];
+        [_cancelBtn addTarget:self action:@selector(cancelBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _cancelBtn;
+}
+
+- (UIButton *)sureBtn {
+    if (_sureBtn == nil) {
+        _sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _sureBtn.backgroundColor = [UIColor whiteColor];
+        _sureBtn.frame = CGRectMake(KSCREEN_WIDTH/2, KSCREEN_HEIGHT-300-40, KSCREEN_WIDTH/2, 40);
+        [_sureBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [_sureBtn setTitleColor:[ECUtil colorWithHexString:@"2f2f2f"] forState:UIControlStateNormal];
+        [_sureBtn addTarget:self action:@selector(sureBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _sureBtn;
+}
+
+- (UIPickerView *)pickerView {
+    if (_pickerView == nil) {
+        _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT-300, KSCREEN_WIDTH, 300)];
+        _pickerView.backgroundColor = [UIColor whiteColor];
+        _pickerView.delegate = self;
+        _pickerView.dataSource = self;
+    }
+    return _pickerView;
+}
+
+- (NSArray *)pickerViewRowsArr {
+    if (_pickerViewRowsArr == nil) {
+        _pickerViewRowsArr = [NSArray array];
+    }
+    return _pickerViewRowsArr;
+}
+
+- (NSArray *)educationBackgroundArr {
+    if (_educationBackgroundArr == nil) {
+        _educationBackgroundArr = @[@"初中以下",
+                                    @"初中",
+                                    @"中专",
+                                    @"高中",
+                                    @"专科",
+                                    @"本科",
+                                    @"研究生",
+                                    @"硕士",
+                                    @"博士及以上",];
+    }
+    return _educationBackgroundArr;
+}
+
+- (NSArray *)workYears {
+    if (_workYears == nil) {
+        _workYears = @[@"无工作经验",@"0-1年", @"0-3年",@"3-5年",@"5-10年", @"10年以上"];
+    }
+    return _workYears;
+}
+
 
 //- (NSMutableDictionary *)paraMutDic {
 //    if (_paraMutDic == nil) {

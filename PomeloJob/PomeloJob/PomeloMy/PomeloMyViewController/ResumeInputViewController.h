@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, InputType) {
+    InputTypeWorkPosition,
     InputTypeWorkContent,
-    InputTypeWorkPosition
 };
 
 typedef void(^InputContentBlock)(NSString *content);

@@ -97,6 +97,9 @@
     if ([string isEqualToString:@"(null)"]){
         return YES;
     }
+    if ([string isEqualToString:@"<null>"]) {
+        return YES;
+    }
     return NO;
 }
 

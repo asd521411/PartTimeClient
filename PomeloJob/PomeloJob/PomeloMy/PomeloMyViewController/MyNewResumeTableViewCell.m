@@ -12,8 +12,7 @@
 
 @property (nonatomic, strong) UIImageView *tagImgV;
 //@property (nonatomic, strong) UILabel *titleLab;
-@property (nonatomic, strong) UIButton *selectBtn1;
-@property (nonatomic, strong) UIButton *selectBtn2;
+
 @property (nonatomic, strong) UIImageView *rightImgV;
 
 @end
@@ -47,26 +46,35 @@
     
     switch (cellShowType) {
         case CellShowTypeCommon:
-            self.selectBtn1.hidden= YES;
+            self.selectBtn1.hidden = YES;
             self.selectBtn2.hidden = YES;
             self.rightImgV.hidden = NO;
             break;
         case CellShowTypeSelect:
-            self.selectBtn1.hidden= NO;
+            self.selectBtn1.hidden = NO;
             self.selectBtn2.hidden = NO;
             self.rightImgV.hidden = YES;
             break;
-            
+        case CellShowTypeNone:
+            self.selectBtn1.hidden = YES;
+            self.selectBtn2.hidden = YES;
+            self.rightImgV.hidden = YES;
         default:
             break;
     }
 }
 
-- (void)setCommonModel:(CommonModel *)commonModel {
-    _commonModel = commonModel;
-    [self.selectBtn1 setTitle:@"" forState:UIControlStateNormal];
-    [self.selectBtn2 setTitle:@"" forState:UIControlStateNormal];
-}
+//- (void)setCommonModel:(CommonModel *)commonModel {
+//    _commonModel = commonModel;
+//    [self.selectBtn1 setTitle:@"" forState:UIControlStateNormal];
+//    [self.selectBtn2 setTitle:@"" forState:UIControlStateNormal];
+//}
+
+//- (void)setSelectBtn1:(UIButton *)selectBtn1 {
+//
+//}
+
+
 
 - (void)selectBtn1Action:(UIButton *)sender {
     self.selectBtn1.selected = YES;
@@ -106,7 +114,7 @@
     }];
     
     [self.selectBtn1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-23);
+        make.right.mas_equalTo(-25);
         make.centerY.mas_equalTo(self);
         //make.height.mas_equalTo(20);
     }];
@@ -168,8 +176,9 @@
 - (UIButton *)selectBtn1 {
     if (_selectBtn1 == nil) {
         _selectBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_selectBtn1 setTitle:@"积极工作" forState:UIControlStateNormal];
+        //[_selectBtn1 setTitle:@"积极工作" forState:UIControlStateNormal];
         [_selectBtn1 setTitleColor:[ECUtil colorWithHexString:@"2f2f2f"] forState:UIControlStateNormal];
+        _selectBtn1.titleLabel.font = kFontBoldSize(12);
         [_selectBtn1 setImage:[UIImage imageNamed:@"tagnormalimg"] forState:UIControlStateNormal];
         [_selectBtn1 setImage:[UIImage imageNamed:@"tagselectimg"] forState:UIControlStateSelected];
         [_selectBtn1 addTarget:self action:@selector(selectBtn1Action:) forControlEvents:UIControlEventTouchUpInside];
@@ -181,8 +190,9 @@
     if (_selectBtn2 == nil) {
         _selectBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
         _selectBtn2.selected = YES;
-        [_selectBtn2 setTitle:@"不找工作" forState:UIControlStateNormal];
+        //[_selectBtn2 setTitle:@"不找工作" forState:UIControlStateNormal];
         [_selectBtn2 setTitleColor:[ECUtil colorWithHexString:@"2f2f2f"] forState:UIControlStateNormal];
+        _selectBtn2.titleLabel.font = kFontBoldSize(12);
         [_selectBtn2 setImage:[UIImage imageNamed:@"tagnormalimg"] forState:UIControlStateNormal];
         [_selectBtn2 setImage:[UIImage imageNamed:@"tagselectimg"] forState:UIControlStateSelected];
         [_selectBtn2 addTarget:self action:@selector(selectBtn2Action:) forControlEvents:UIControlEventTouchUpInside];
