@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CompleteTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) UIImageView *percentImgV;
 @property (nonatomic, strong) UserInfoModel *userInfoModel;
 
 @end

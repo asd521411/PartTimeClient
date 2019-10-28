@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CommonDetailsTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *payLab;
-@property (nonatomic, strong) UILabel *workContentLab;
+@property (nonatomic, strong) UITextView *workContentLab;
 @property (nonatomic, strong) UILabel *workTimeLab;
 @property (nonatomic, strong) UILabel *workRequireLab;
 @property (nonatomic, strong) UILabel *otherWelfareLab;
@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) CommonModel *commonModel;
 
 @property (nonatomic, strong) UIView *workContentBackV;
+
 @property (nonatomic, copy) NSString *contentStr;
 
 @end

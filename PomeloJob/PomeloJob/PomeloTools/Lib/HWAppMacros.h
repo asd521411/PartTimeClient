@@ -20,11 +20,11 @@
 //测试
 #define PartTimeBaseUrl                                           @"http://114.116.230.97:9091/"
 
-//手机号登陆
+//手机号登录
 #define CUSTOMER_LOGINBYPASSWORD                                   @"loginByPassword"
 //发送验证码
 #define CUSTOMER_SENDMESSAGE                                       @"sendMessage"
-//验证码登陆
+//验证码登录
 #define CUSTOMER_LOGINBYMESSAGECODE                                @"loginByMessageCode"
 //注册验证验证码
 #define CUSTOMER_LOGONSENDMESSAGE                                  @"logonsendMessage"
@@ -44,7 +44,7 @@
 #define CUSTOMER_USERPOSITION                                      @"userPosition"
 //获取普通职位列表
 #define CUSTOMER_POSITION                                          @"position"
-//登陆的时候传唯一标识符
+//登录的时候传唯一标识符
 #define CUSTOMER_INITPHONECARD                                     @"initphonecard"
 //简历状态
 #define CUSTOMER_SELECTRESUMEBYUSERID                              @"selectResumeByuserid"
@@ -90,18 +90,23 @@
 //我的
 #define CUSTOMER_QUERYMYMINE                                         @"queryMymine"
 
-
-
-
-
-
-
 //简历1.5
 //简历加载
-#define CUSTOMER_SELECTRESUMEINFO                                   @"selectResumeInfo"
+#define CUSTOMER_SELECTRESUMEINFO                                    @"selectResumeInfo"
 //简历上传
 #define CUSTOMER_UPDATERESUME                                        @"updateResume"
+//反馈
+#define CUSTOMER_COLLECTTEL                                          @"collectTel"
+//意见反馈
+#define CUSTOMER_COLLECTFEEDBACK                                      @"collectFeedback"
 
-
+#define CUSTOMER_FINDPASSWORD                                         @"findPassword"
+#define CUSTOMER_UPDATEREFACTORUSERPASSWORD                           @"updaterefactoruserpassword"
+#define CUSTOMER_CHECKMESSAGE                                         @"checkMessage"
+#define CUSTOMER_SELECTUSERINFO                                       @"selectuserinfo"
+#define CUSTOMER_UPDATEUSERINFO                                       @"updateuserinfo"
+#define CUSTOMER_DELETEUSERPOSITION                                   @"deleteuserposition"
+#define CUSTOMER_SETUSERPOSITION                                      @"setuserposition"
+#define CUSTOMER_COLLECTFEEDBACK                                      @"collectFeedback"
 
 #endif /* HWAppMacros_h */

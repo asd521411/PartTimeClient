@@ -43,7 +43,7 @@
     lab.backgroundColor = [UIColor whiteColor];
     lab.textColor = DARKGRAYCOLOR;
     //lab.font = LARGEFont;
-    lab.text = @"更改手机号后，下次登陆请使用新绑定手机号登陆";
+    lab.text = @"更改手机号后，下次登录请使用新绑定手机号登录";
     lab.textAlignment = NSTextAlignmentCenter;
     lab.numberOfLines = 2;
     lab.lineBreakMode = NSLineBreakByTruncatingTail;

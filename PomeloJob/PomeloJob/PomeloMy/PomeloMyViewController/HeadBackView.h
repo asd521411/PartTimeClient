@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UserInfoModel.h"
+#import "ModificationControl.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,6 +30,7 @@ typedef NS_ENUM(NSInteger, InforType) {
 @interface HeadBackView : UIView
 
 @property (nonatomic, strong) UIButton *portraitImgV;
+@property (nonatomic, strong) ModificationControl *modificationControl;
 
 @property (nonatomic, assign) InforType infoType;
 @property (nonatomic, weak) id<HeadBackViewDelegate>delegate;

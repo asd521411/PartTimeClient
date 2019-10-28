@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CommonWorkLocationTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) CommonModel *commonModel;
+@property (nonatomic, strong) UILabel *componyLocationLab;
 
 @end
 

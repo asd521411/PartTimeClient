@@ -21,7 +21,6 @@
 
 @end
 
-
 @implementation CommonDetailsTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -35,14 +34,10 @@
 //        self.payLab.numberOfLines = 0;
 //        //[self addSubview:self.payLab];
         
-        self.workContentLab = [[UILabel alloc] init];
-        self.workContentLab.font = KFontNormalSize14;
-        self.workContentLab.numberOfLines = 0;
+        self.workContentLab = [[UITextView alloc] init];
+        self.workContentLab.scrollEnabled = NO;
         self.workContentLab.textColor = [ECUtil colorWithHexString:@"7a7a7a"];
         [self addSubview:self.workContentLab];
-//
-//        self.rtLab = [[RTLabel alloc] init];
-//        [self addSubview:self.rtLab];
         
         self.workContentBackV = [[UIView alloc] init];
         self.workContentBackV.backgroundColor = [ECUtil colorWithHexString:@"f8f8f8"];
@@ -51,9 +46,9 @@
         [self addSubview:self.workContentBackV];
         
         self.workRequireLab = [[UILabel alloc] init];
-        self.workRequireLab.font = KFontNormalSize12;
+        self.workRequireLab.font = KFontNormalSize16;
         self.workRequireLab.numberOfLines = 0;
-        self.workRequireLab.textColor = [ECUtil colorWithHexString:@"ff4457"];
+        self.workRequireLab.textColor = kColor_Main;
         self.workRequireLab.text = @"凡是涉及到工作内容不符、收费、违法信息传播的工作，请您警惕并收集相关证据向我们举报";
         self.workContentLab.textAlignment = NSTextAlignmentLeft;
         [self.workContentBackV addSubview:self.workRequireLab];
@@ -139,7 +134,7 @@
         make.right.mas_equalTo(-15);
         //make.top.mas_equalTo(self.workContentLab.mas_bottom);
         make.bottom.mas_equalTo(self);
-        make.height.mas_equalTo(50);
+        make.height.mas_equalTo(self);
     }];
     
 //    [self.workContentTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -209,13 +204,14 @@
     }
 }
 
-//- (void)setContentStr:(NSString *)contentStr {
-//    if (_contentStr != contentStr) {
-//        _contentStr = contentStr;
-//        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[contentStr. dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-//        self.workContentLab.attributedText = attributedString;
-//    }
-//}
+- (void)setContentStr:(NSString *)contentStr {
+    if (_contentStr != contentStr) {
+        _contentStr = contentStr;
+        
+//        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[contentStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+        self.workContentLab.attributedText = [self setAttributedString:contentStr font:nil lineSpacing:5];
+    }
+}
 
 - (NSMutableArray *)stringHeight {
     if (!_stringHeight) {
@@ -223,6 +219,64 @@
     }
     return _stringHeight;
 }
+
+/**
+ html 富文本设置
+
+ @param str html 未处理的字符串
+ @param font 设置字体
+ @param lineSpacing 设置行高
+ @return 默认不将 \n替换<br/> 返回处理好的富文本
+ */
+-(NSMutableAttributedString *)setAttributedString:(NSString *)str font:(UIFont *)font lineSpacing:(CGFloat)lineSpacing
+{
+    //如果有换行，把\n替换成<br/>
+    //如果有需要把换行加上
+//    str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"];
+    //设置HTML图片的宽度
+    str = [NSString stringWithFormat:@"<head><style>img{width:%f !important;height:auto}</style></head>%@",[UIScreen mainScreen].bounds.size.width,str];
+    NSMutableAttributedString *htmlString =[[NSMutableAttributedString alloc] initWithData:[str dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute:[NSNumber numberWithInt:NSUTF8StringEncoding]} documentAttributes:NULL error:nil];
+    //设置富文本字的大小
+//    [htmlString addAttributes:@{NSFontAttributeName:font} range:NSMakeRange(0, htmlString.length)];
+    //设置行间距
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:lineSpacing];
+    [htmlString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [htmlString length])];
+    
+    return htmlString;
+
+}
+
+
+
+/**
+ 计算html字符串高度
+
+ @param str html 未处理的字符串
+ @param font 字体设置
+ @param lineSpacing 行高设置
+ @param width 容器宽度设置
+ @return 富文本高度
+ */
++(CGFloat )getHTMLHeightByStr:(NSString *)str font:(UIFont *)font lineSpacing:(CGFloat)lineSpacing width:(CGFloat)width
+{
+//    str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"];
+    str = [NSString stringWithFormat:@"<head><style>img{width:%f !important;height:auto}</style></head>%@",[UIScreen mainScreen].bounds.size.width,str];
+    
+    NSMutableAttributedString *htmlString =[[NSMutableAttributedString alloc] initWithData:[str dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute:[NSNumber numberWithInt:NSUTF8StringEncoding]} documentAttributes:NULL error:nil];
+//    [htmlString addAttributes:@{NSFontAttributeName:font} range:NSMakeRange(0, htmlString.length)];
+    //设置行间距
+    NSMutableParagraphStyle *paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle1 setLineSpacing:lineSpacing];
+    [htmlString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle1 range:NSMakeRange(0, [htmlString length])];
+    
+    CGSize contextSize = [htmlString boundingRectWithSize:(CGSize){width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
+    return contextSize.height ;
+}
+
+
+
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];

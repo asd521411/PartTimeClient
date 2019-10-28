@@ -58,6 +58,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *companyimg;
 @property (nonatomic, copy) NSString *companyScale;
 @property (nonatomic, copy) NSString *relationtype;
+@property (nonatomic, copy) NSString *relationtypecollect;
+
+
 
 @end
 

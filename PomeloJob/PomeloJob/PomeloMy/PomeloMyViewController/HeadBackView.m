@@ -7,7 +7,6 @@
 //
 
 #import "HeadBackView.h"
-#import "ModificationControl.h"
 #import "UIImageView+WebCache.h"
 #import "UIButton+WebCache.h"
 
@@ -17,7 +16,7 @@
 @property (nonatomic, strong) UIButton *loginBtn;
 
 //@property (nonatomic, strong) UILabel *<#mark#>;
-@property (nonatomic, strong) ModificationControl *modificationControl;
+//@property (nonatomic, strong) ModificationControl *modificationControl;
 
 @end
 
@@ -93,11 +92,11 @@
                 self.portraitImgV.hidden = NO;
                 self.modificationControl.hidden = NO;
                 self.loginBtn.hidden = YES;
-                NSDictionary *dic = [[NSUserDefaults standardUserDefaults] objectForKey:USERINFO];
-                self.modificationControl.nameStr = dic[@"name"];
-                [self.portraitImgV sd_setBackgroundImageWithURL:[NSURL URLWithString:dic[@"userimg"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portraitImgV"]];
+//                NSDictionary *dic = [[NSUserDefaults standardUserDefaults] objectForKey:USERINFO];
+//                self.modificationControl.nameStr = dic[@"name"];
+//                [self.portraitImgV sd_setBackgroundImageWithURL:[NSURL URLWithString:dic[@"userimg"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portraitImgV"]];
                 [self.portraitImgV mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.top.mas_equalTo(20);
+                    make.top.mas_equalTo(10);
                     make.left.mas_equalTo(self).offset(20);
                     make.width.height.mas_equalTo(80);
                 }];
@@ -107,7 +106,7 @@
                 self.loginBtn.hidden = YES;
                 self.portraitImgV.hidden = NO;
                 [self.portraitImgV mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.top.mas_equalTo(20);
+                    make.top.mas_equalTo(10);
                     make.centerX.mas_equalTo(self);
                     make.width.height.mas_equalTo(80);
                 }];
@@ -131,7 +130,9 @@
 - (UIButton *)portraitImgV {
     if (_portraitImgV == nil) {
         _portraitImgV = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_portraitImgV setBackgroundImage:[UIImage imageNamed:@"portraitImgV"] forState:UIControlStateNormal];
+        _portraitImgV.layer.cornerRadius = 40;
+        _portraitImgV.layer.masksToBounds = YES;
+        //[_portraitImgV setBackgroundImage:[UIImage imageNamed:@"portraitImgV"] forState:UIControlStateNormal];
         [_portraitImgV addTarget:self action:@selector(portraitImgV:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _portraitImgV;
@@ -140,7 +141,7 @@
 - (UIButton *)loginBtn {
     if (_loginBtn == nil) {
         _loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_loginBtn setTitle:@"登陆/注册" forState:UIControlStateNormal];
+        [_loginBtn setTitle:@"登录/注册" forState:UIControlStateNormal];
         [_loginBtn setBackgroundImage:[UIImage imageNamed:@"loginimg"] forState:UIControlStateNormal];
         [_loginBtn addTarget:self action:@selector(loginBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     }

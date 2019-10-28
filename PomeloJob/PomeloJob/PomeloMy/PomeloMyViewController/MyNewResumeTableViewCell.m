@@ -14,6 +14,7 @@
 //@property (nonatomic, strong) UILabel *titleLab;
 
 @property (nonatomic, strong) UIImageView *rightImgV;
+@property (nonatomic, strong) UIView *line;
 
 @end
 
@@ -35,6 +36,7 @@
     [self addSubview:self.rightImgV];
     [self addSubview:self.selectBtn1];
     [self addSubview:self.selectBtn2];
+    [self addSubview:self.line];
 }
 
 - (void)setMustSelect:(BOOL)mustSelect {
@@ -79,11 +81,17 @@
 - (void)selectBtn1Action:(UIButton *)sender {
     self.selectBtn1.selected = YES;
     self.selectBtn2.selected = NO;
+    if (self.cellBtnSelectBlock) {
+        self.cellBtnSelectBlock(self.selectBtn1.titleLabel.text);
+    }
 }
 
 - (void)selectBtn2Action:(UIButton *)sender {
     self.selectBtn2.selected = YES;
     self.selectBtn1.selected = NO;
+    if (self.cellBtnSelectBlock) {
+        self.cellBtnSelectBlock(self.selectBtn2.titleLabel.text);
+    }
 }
 
 - (void)layoutSubviews {
@@ -96,14 +104,15 @@
     }];
     
     [self.tagImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.titleLab.mas_left);
-        make.centerY.mas_equalTo(self);
+        make.right.mas_equalTo(self.titleLab.mas_left).offset(-2);
+        make.centerY.mas_equalTo(self).offset(-5);
         make.width.height.mas_equalTo(5);
     }];
     
     [self.showLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.titleLab.mas_right).offset(10);
         make.centerY.mas_equalTo(self);
+        make.width.mas_equalTo(KSCREEN_WIDTH-150);
     }];
 
     [self.rightImgV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -113,25 +122,17 @@
         make.height.mas_equalTo(16);
     }];
     
-    [self.selectBtn1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-25);
-        make.centerY.mas_equalTo(self);
-        //make.height.mas_equalTo(20);
-    }];
-//    CGFloat wid = CGRectGetWidth(self.selectBtn1.frame);
-//    [self.selectBtn1 setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, wid)];
-//
     [self.selectBtn2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.selectBtn1.mas_left).offset(-10);
+        make.left.mas_equalTo(self.titleLab.mas_right).offset(10);
         make.centerY.mas_equalTo(self);
-        //make.height.mas_equalTo(self);
     }];
     
-    UIView *line = [[UIView alloc] init];
-    line.backgroundColor = [ECUtil colorWithHexString:@"e5e5e4"];
-    [self addSubview:line];
+    [self.selectBtn1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.selectBtn2.mas_right).offset(10);
+        make.centerY.mas_equalTo(self);
+    }];
     
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.width.mas_equalTo(KSCREEN_WIDTH-30);
         make.bottom.mas_equalTo(-0.5);
@@ -159,7 +160,7 @@
 - (UILabel *)showLab {
     if (_showLab == nil) {
         _showLab = [[UILabel alloc] init];
-        _showLab.font = kFontNormalSize(14);
+        _showLab.font = kFontNormalSize(16);
         _showLab.textAlignment = NSTextAlignmentLeft;
         _showLab.textColor = [ECUtil colorWithHexString:@"2f2f2f"];
     }
@@ -178,7 +179,7 @@
         _selectBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
         //[_selectBtn1 setTitle:@"积极工作" forState:UIControlStateNormal];
         [_selectBtn1 setTitleColor:[ECUtil colorWithHexString:@"2f2f2f"] forState:UIControlStateNormal];
-        _selectBtn1.titleLabel.font = kFontBoldSize(12);
+        _selectBtn1.titleLabel.font = kFontNormalSize(16);
         [_selectBtn1 setImage:[UIImage imageNamed:@"tagnormalimg"] forState:UIControlStateNormal];
         [_selectBtn1 setImage:[UIImage imageNamed:@"tagselectimg"] forState:UIControlStateSelected];
         [_selectBtn1 addTarget:self action:@selector(selectBtn1Action:) forControlEvents:UIControlEventTouchUpInside];
@@ -192,12 +193,20 @@
         _selectBtn2.selected = YES;
         //[_selectBtn2 setTitle:@"不找工作" forState:UIControlStateNormal];
         [_selectBtn2 setTitleColor:[ECUtil colorWithHexString:@"2f2f2f"] forState:UIControlStateNormal];
-        _selectBtn2.titleLabel.font = kFontBoldSize(12);
+        _selectBtn2.titleLabel.font = kFontNormalSize(16);
         [_selectBtn2 setImage:[UIImage imageNamed:@"tagnormalimg"] forState:UIControlStateNormal];
         [_selectBtn2 setImage:[UIImage imageNamed:@"tagselectimg"] forState:UIControlStateSelected];
         [_selectBtn2 addTarget:self action:@selector(selectBtn2Action:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _selectBtn2;
+}
+
+- (UIView *)line {
+    if (_line == nil) {
+        _line = [[UIView alloc] init];
+        _line.backgroundColor = [ECUtil colorWithHexString:@"e5e5e5"];
+    }
+    return _line;
 }
 
 - (void)awakeFromNib {

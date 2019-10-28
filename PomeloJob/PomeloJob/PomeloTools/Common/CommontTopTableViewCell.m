@@ -50,7 +50,7 @@
     [self.addressnameTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(15);
         make.right.mas_equalTo(self.princeLab.mas_left);
-        make.height.mas_equalTo(18);
+        make.height.mas_equalTo(20);
     }];
     
     [self.princeLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -80,14 +80,14 @@
     if (self.tagArr2.count > 0) {
         for (NSInteger i = 0; i < self.tagArr2.count; i++) {
             NSString *strW = self.tagArr2[i];
-            CGFloat wid = strW.length * 14;
-            UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(w, self.demandTitleLab.bottom + 10, wid, 12)];
-            lab.backgroundColor = [UIColor whiteColor];
-            lab.textColor = KColorGradient_light;
-            lab.font = KFontNormalSize12;
+            CGFloat wid = strW.length * 16;
+            UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(w, self.demandTitleLab.bottom, wid, 16)];
+            lab.backgroundColor = kColor_Main;
+            lab.textColor = [UIColor whiteColor];
+            lab.font = KFontNormalSize14;
             lab.text = self.tagArr2[i];
-            lab.layer.borderColor = KColorGradient_light.CGColor;
-            lab.layer.borderWidth = KLineWidthMeasure05;
+//            lab.layer.borderColor = KColorGradient_light.CGColor;
+//            lab.layer.borderWidth = 0.5;
             lab.textAlignment = NSTextAlignmentCenter;
             [self addSubview:lab];
             w = w + wid + 15;
@@ -126,8 +126,8 @@
 - (void)setCommonModel:(CommonModel *)commonModel {
     if (_commonModel != commonModel) {
         self.addressnameTitleLab.text = commonModel.positionname;
-        NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:commonModel.positonmoney attributes:@{NSForegroundColorAttributeName:[ECUtil colorWithHexString:@"ff4457"], NSFontAttributeName:KFontNormalSize16}];
-        NSMutableAttributedString *attributedStr1 = [[NSMutableAttributedString alloc] initWithString:@"/天" attributes:@{NSForegroundColorAttributeName:[ECUtil colorWithHexString:@"ff4457"], NSFontAttributeName:KFontNormalSize12}];
+        NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:commonModel.positonmoney attributes:@{NSForegroundColorAttributeName:kColor_Main, NSFontAttributeName:kFontBoldSize(16)}];
+        NSMutableAttributedString *attributedStr1 = [[NSMutableAttributedString alloc] initWithString:@"元/天" attributes:@{NSForegroundColorAttributeName:kColor_Main, NSFontAttributeName:KFontNormalSize12}];
         [attributedStr appendAttributedString:attributedStr1];
         self.princeLab.attributedText = attributedStr;
         
@@ -170,13 +170,23 @@
         }
         
     
-        if (self.showConnect == YES) {
-            self.connectNumber.text = commonModel.positiontelnum;
-            [self.pasteBtn setTitle:@"复制" forState:UIControlStateNormal];
-        }else {
-            [self.pasteBtn setTitle:@"点击查看联系方式" forState:UIControlStateNormal];
+//        if (self.showConnect == YES) {
+//            NSString *str = nil;
+//            if (commonModel.positiontelnum.length > 4) {
+//                str = [commonModel.positiontelnum stringByReplacingCharactersInRange:NSMakeRange(2, commonModel.positiontelnum.length-4) withString:@"******"];
+//            }
+//            self.connectNumber.text = str;
+//
+//            [self.pasteBtn setTitle:@"复制" forState:UIControlStateNormal];
+//        }else {
+//            [self.pasteBtn setTitle:@"点击查看联系方式" forState:UIControlStateNormal];
+//        }
+        NSString *str = nil;
+        if (commonModel.positiontelnum.length > 4) {
+            str = [commonModel.positiontelnum stringByReplacingCharactersInRange:NSMakeRange(2, commonModel.positiontelnum.length-4) withString:@"******"];
         }
-        
+        self.connectNumber.text = str;
+        [self.pasteBtn setTitle:@"复制" forState:UIControlStateNormal];
         self.pastetitleLab.text = commonModel.positionteltype;
     }
 }
@@ -190,8 +200,8 @@
 - (UILabel *)addressnameTitleLab {
     if (!_addressnameTitleLab) {
         _addressnameTitleLab = [[UILabel alloc] init];
-        _addressnameTitleLab.textColor = KColor_212121;
-        _addressnameTitleLab.font = KFontNormalSize18;
+        _addressnameTitleLab.textColor = [ECUtil colorWithHexString:@"2f2f2f"];
+        _addressnameTitleLab.font = kFontBoldSize(20);
         _addressnameTitleLab.textAlignment = NSTextAlignmentLeft;
     }
     return _addressnameTitleLab;
@@ -217,9 +227,9 @@
 - (UILabel *)demandTitleLab {
     if (!_demandTitleLab) {
         _demandTitleLab = [[UILabel alloc] init];
-        _demandTitleLab.textColor = KColor_212121;
-        _demandTitleLab.font = KFontNormalSize16;
-        _demandTitleLab.text = @"招聘需求";
+        //_demandTitleLab.textColor = [ECUtil colorWithHexString:@""];
+        _demandTitleLab.font = kFontNormalSize(16);
+        //_demandTitleLab.text = @"招聘需求";
     }
     return _demandTitleLab;
 }
@@ -241,7 +251,7 @@
 - (UIView *)pasteBackV {
     if (!_pasteBackV) {
         _pasteBackV = [[UIView alloc] init];
-        _pasteBackV.backgroundColor = [ECUtil colorWithHexString:@"f5f5f5"];
+        _pasteBackV.backgroundColor = [ECUtil colorWithHexString:@"f8f8f8"];
         _pasteBackV.layer.cornerRadius = 25;
         _pasteBackV.layer.masksToBounds = YES;
     }
@@ -260,6 +270,7 @@
 - (UILabel *)connectNumber {
     if (!_connectNumber) {
         _connectNumber = [[UILabel alloc] init];
+        _connectNumber.textColor = kColor_Main;
         _connectNumber.font = KFontNormalSize16;
         _connectNumber.textAlignment = NSTextAlignmentLeft;
     }
@@ -270,7 +281,7 @@
     if (!_pasteBtn) {
         _pasteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         //[_pasteBtn setTitle:@"复制" forState:UIControlStateNormal];
-        _pasteBtn.backgroundColor = [ECUtil colorWithHexString:@"ff4457"];
+        _pasteBtn.backgroundColor = kColor_Main;
         _pasteBtn.titleLabel.font = KFontNormalSize14;
         _pasteBtn.layer.cornerRadius = 15;
         _pasteBtn.layer.masksToBounds = YES;

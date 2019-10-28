@@ -90,7 +90,7 @@
     login.layer.cornerRadius = 20;
     login.layer.masksToBounds = YES;
     [self.backScrollV addSubview:login];
-    [login setTitle:@"登  陆" forState:UIControlStateNormal];
+    [login setTitle:@"登  录" forState:UIControlStateNormal];
     [login setTintColor:[UIColor whiteColor]];
     login.adjustsImageWhenHighlighted = NO;
     [ECUtil gradientLayer:login startPoint:CGPointMake(0, 0.5) endPoint:CGPointMake(1, 0.5) colorArr1:KColorGradient_light colorArr2:KColorGradient_dark location1:0 location2:0];

@@ -49,7 +49,6 @@
     self.backScrollV.contentSize = CGSizeMake(KSCREEN_WIDTH, KSCREEN_HEIGHT);
     [self.view addSubview:self.backScrollV];
     
-    CGFloat wid = (SCREENWIDTH - 150 * 2);
     CGFloat hei = 40;
     
     UILabel *lab1 = [[UILabel alloc] initWithFrame:CGRectMake(KSpaceDistance15, 100, 100, hei)];

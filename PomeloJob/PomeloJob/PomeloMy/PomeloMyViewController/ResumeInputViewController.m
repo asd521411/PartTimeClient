@@ -8,12 +8,15 @@
 
 #import "ResumeInputViewController.h"
 
-@interface ResumeInputViewController ()<UITextViewDelegate>
+@interface ResumeInputViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UIScrollView *backScrollV;
 @property (nonatomic, strong) UIView *contentTextV;
 @property (nonatomic, strong) UITextField *inputTextFd;
+@property (nonatomic, strong) UITextField *textFdV;
 @property (nonatomic, strong) UIButton *saveBtn;
+@property (nonatomic, strong) UILabel *lab2;
+@property (nonatomic, strong) UILabel *lab1;
 
 @end
 
@@ -21,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"工作职位";
+    self.title = self.titleStr;
     
     [self.view addSubview:self.backScrollV];
     [self.backScrollV addSubview:self.saveBtn];
@@ -42,6 +45,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[ECUtil colorWithHexString:@"4a4a4a"],NSForegroundColorAttributeName, KFontNormalSize18,NSFontAttributeName,nil]];
     
     //创建一个UIButton
     UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 40, 40)];
@@ -68,51 +75,78 @@
         make.height.mas_equalTo(300);
     }];
     
-    UILabel *lab1 = [[UILabel alloc] init];
-    lab1.text = @"请填写工作内容";
-    lab1.font = kFontNormalSize(16);
-    lab1.textColor = [ECUtil colorWithHexString:@"9b9b9b"];
-    [self.contentTextV addSubview:lab1];
-    [lab1 mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.lab1 = [[UILabel alloc] init];
+    self.lab1.text = @"请填写工作内容";
+    self.lab1.font = kFontNormalSize(16);
+    self.lab1.textColor = [ECUtil colorWithHexString:@"9b9b9b"];
+    //[self.contentTextV addSubview:self.lab1];
+    [self.lab1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(self.contentTextV).offset(10);
         make.height.mas_equalTo(17);
     }];
     
-    UITextView *textFdV = [[UITextView alloc] init];
-    textFdV.backgroundColor = [ECUtil colorWithHexString:@"f1f1f1"];
-    textFdV.delegate = self;
-    textFdV.font = kFontNormalSize(14);
-    textFdV.textColor = [ECUtil colorWithHexString:@"9b9b9b"];
-    [self.contentTextV addSubview:textFdV];
-    [textFdV mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.textFdV = [[UITextField alloc] init];
+    self.textFdV.backgroundColor = [ECUtil colorWithHexString:@"f1f1f1"];
+    self.textFdV.delegate = self;
+    self.textFdV.font = kFontNormalSize(14);
+    self.textFdV.textColor = [ECUtil colorWithHexString:@"9b9b9b"];
+    self.textFdV.textAlignment = NSTextAlignmentLeft;
+    self.textFdV.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+    [self.contentTextV addSubview:self.textFdV];
+    
+    if ([ECUtil isBlankString:self.placeHolder]) {
+        self.textFdV.placeholder = @"请填写工作内容";
+    }else {
+        self.textFdV.text = self.placeHolder;
+    }
+    [self.textFdV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.contentTextV).offset(10);
-        make.top.mas_equalTo(lab1.mas_bottom).offset(10);
+        make.top.mas_equalTo(10);
         make.right.mas_equalTo(self.contentTextV.mas_right).offset(-10);
         make.bottom.mas_equalTo(self.contentTextV.mas_bottom).offset(-30);
     }];
-    
-    [[textFdV rac_textSignal] subscribeNext:^(id x) {
+    __weak typeof(self) weakSelf = self;
+    [[self.textFdV rac_textSignal] subscribeNext:^(id x) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
         NSString *str = [NSString stringWithFormat:@"%@", x];
-        if (str.length > 200) {
-            textFdV.text = [str substringToIndex:200];
+        
+//        if (str.length > 0) {
+//            strongSelf.lab1.hidden = YES;
+//        }else {
+//            strongSelf.lab1.hidden = NO;
+//        }
+        
+        if (str.length >= 200) {
+            strongSelf.textFdV.text = [str substringToIndex:200];
         }
+        strongSelf.lab2.text =  [@"(" stringByAppendingString:[[NSString stringWithFormat:@"%lu", (unsigned long)strongSelf.textFdV.text.length] stringByAppendingString:@"/200)"]];
     }];
     
-    UILabel *lab2 = [[UILabel alloc] init];
-    lab2.text = @"(200以内)";
-    lab2.font = kFontNormalSize(16);
-    lab2.textColor = [ECUtil colorWithHexString:@"9b9b9b"];
-    [self.contentTextV addSubview:lab2];
-    [lab2 mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.lab2 = [[UILabel alloc] init];
+    self.lab2.text = @"(200)";
+    self.lab2.font = kFontNormalSize(16);
+    self.lab2.textColor = [ECUtil colorWithHexString:@"9b9b9b"];
+    [self.contentTextV addSubview:self.lab2];
+    [self.lab2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.bottom.mas_equalTo(self.contentTextV).offset(-10);
     }];
-    
 }
 
 - (void)saveBtnAction:(UIButton *)sender {
-    if (self.inputContentBlock) {
-        self.inputContentBlock(self.inputTextFd.text);
+    switch (self.inputType) {
+        case InputTypeWorkContent:
+            if (self.inputContentBlock) {
+                self.inputContentBlock([ECUtil isBlankString:self.textFdV.text]?@"":self.textFdV.text);
+            }
+            break;
+        case InputTypeWorkPosition:
+            if (self.inputContentBlock) {
+                self.inputContentBlock([ECUtil isBlankString:self.inputTextFd.text]?@"":self.inputTextFd.text);
+            }
+        default:
+            break;
     }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -140,9 +174,13 @@
 - (UITextField *)inputTextFd {
     if (_inputTextFd == nil) {
         _inputTextFd = [[UITextField alloc] initWithFrame:CGRectMake(15, 40, KSCREEN_WIDTH-30, 40)];
-        _inputTextFd.placeholder = @"请输入";//self.placeHolder
-        //_inputTextFd.text = self.placeHolder;
+        if ([ECUtil isBlankString:self.placeHolder]) {
+            _inputTextFd.placeholder = @"请输入";
+        }else {
+            _inputTextFd.text = self.placeHolder;
+        }
         _inputTextFd.textAlignment = NSTextAlignmentCenter;
+        _inputTextFd.textColor = [ECUtil colorWithHexString:@"4a4a4a"];
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, _inputTextFd.bottom-0.5, KSCREEN_WIDTH-30, 0.5)];
         line.backgroundColor = [ECUtil colorWithHexString:@"e5e5e5"];
         [self.backScrollV addSubview:line];

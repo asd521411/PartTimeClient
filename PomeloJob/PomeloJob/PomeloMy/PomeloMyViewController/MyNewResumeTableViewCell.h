@@ -17,6 +17,8 @@ typedef NS_ENUM(NSInteger, CellShowType) {
     CellShowTypeNone,
 };
 
+typedef void(^CellBtnSelectBlock)(NSString *selectTitle);
+
 @interface MyNewResumeTableViewCell : UITableViewCell
 
 @property (nonatomic, assign) BOOL mustSelect;
@@ -27,9 +29,9 @@ typedef NS_ENUM(NSInteger, CellShowType) {
 
 @property (nonatomic, strong) UIButton *selectBtn1;
 @property (nonatomic, strong) UIButton *selectBtn2;
-
 @property (nonatomic, assign) BOOL selectLeftOrRight;
 
+@property (nonatomic, copy) CellBtnSelectBlock cellBtnSelectBlock;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -66,7 +66,7 @@
 //    return YES;
     
     NSString *status = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
-    if ([ECUtil isBlankString:status]) {//空未登陆
+    if ([ECUtil isBlankString:status]) {//空未登录
         return NO;
     }else {
         return YES;
@@ -99,7 +99,7 @@
             }
         }];
     }else {
-        self.userName.text = @"登陆";
+        self.userName.text = @"登录";
         self.personalizedLab.text = @"暂无个性签名，添加彰显你的个性";
     }
 }
@@ -107,7 +107,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
-    [self.navigationController.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor],NSForegroundColorAttributeName, KFontNormalSize18,NSFontAttributeName,nil]];
+    [self.navigationController.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[ECUtil colorWithHexString:@"4a4a4a"],NSForegroundColorAttributeName, KFontNormalSize18,NSFontAttributeName,nil]];
 }
 
 - (void)setupSubViews {

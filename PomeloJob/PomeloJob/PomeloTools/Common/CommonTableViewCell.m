@@ -117,7 +117,7 @@
         self.accountStyleLab.text = commonModel.positionpaytypename;
         
         NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:commonModel.positonmoney attributes:@{NSForegroundColorAttributeName:kColor_Main, NSFontAttributeName:[UIFont boldSystemFontOfSize:18]}];
-        NSMutableAttributedString *attributedStr1 = [[NSMutableAttributedString alloc] initWithString:@"/天" attributes:@{NSForegroundColorAttributeName:kColor_Main, NSFontAttributeName:KFontNormalSize14}];
+        NSMutableAttributedString *attributedStr1 = [[NSMutableAttributedString alloc] initWithString:@"元/天" attributes:@{NSForegroundColorAttributeName:kColor_Main, NSFontAttributeName:KFontNormalSize14}];
         [attributedStr appendAttributedString:attributedStr1];
         self.princeLab.attributedText = attributedStr;
         

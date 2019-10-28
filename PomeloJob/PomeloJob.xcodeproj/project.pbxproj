@@ -39,10 +39,17 @@
 		043C70652354122D00083E9E /* YNPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C70632354122D00083E9E /* YNPageViewController.m */; };
 		043C7068235412A100083E9E /* BaseTableViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C7066235412A100083E9E /* BaseTableViewVC.m */; };
 		043C70872357097900083E9E /* UserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C70862357097900083E9E /* UserInfoManager.m */; };
+		0450F11A236208FE005BAD9A /* CommonRemindTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0450F119236208FE005BAD9A /* CommonRemindTableViewCell.m */; };
+		0450F11D23628879005BAD9A /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0450F11C23628879005BAD9A /* FeedBackViewController.m */; };
+		0450F12023629027005BAD9A /* FindSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0450F11F23629027005BAD9A /* FindSecondViewController.m */; };
+		0450F12323629BA4005BAD9A /* FindPasswodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0450F12223629BA4005BAD9A /* FindPasswodViewController.m */; };
+		0450F1262363512F005BAD9A /* NoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0450F1252363512F005BAD9A /* NoneTableViewCell.m */; };
+		0450F12923642F0F005BAD9A /* SavePhotoToAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 0450F12823642F0F005BAD9A /* SavePhotoToAlbum.m */; };
 		0460D9BC234B3B0000C721CE /* CommonWorkLocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460D9BB234B3B0000C721CE /* CommonWorkLocationTableViewCell.m */; };
 		0460D9BF234C212700C721CE /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460D9BE234C212700C721CE /* RTLabel.m */; };
 		0460D9EB234DE99900C721CE /* PrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460D9EA234DE99900C721CE /* PrivacyPolicyViewController.m */; };
 		0460D9EE234EFD6D00C721CE /* TopMaskBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460D9ED234EFD6D00C721CE /* TopMaskBackViewController.m */; };
+		048D73072366B88D0071C9CF /* BusinessRelationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048D73062366B88D0071C9CF /* BusinessRelationViewController.m */; };
 		04A5E4502338F27D0028B1C9 /* PomeloAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E44F2338F27D0028B1C9 /* PomeloAppDelegate.m */; };
 		04A5E4532338F27D0028B1C9 /* PomeloViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E4522338F27D0028B1C9 /* PomeloViewController.m */; };
 		04A5E4562338F27D0028B1C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A5E4542338F27D0028B1C9 /* Main.storyboard */; };
@@ -199,6 +206,18 @@
 		043C7067235412A100083E9E /* BaseTableViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewVC.h; sourceTree = "<group>"; };
 		043C70852357097900083E9E /* UserInfoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoManager.h; sourceTree = "<group>"; };
 		043C70862357097900083E9E /* UserInfoManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoManager.m; sourceTree = "<group>"; };
+		0450F118236208FE005BAD9A /* CommonRemindTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonRemindTableViewCell.h; sourceTree = "<group>"; };
+		0450F119236208FE005BAD9A /* CommonRemindTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonRemindTableViewCell.m; sourceTree = "<group>"; };
+		0450F11B23628879005BAD9A /* FeedBackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
+		0450F11C23628879005BAD9A /* FeedBackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
+		0450F11E23629027005BAD9A /* FindSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindSecondViewController.h; sourceTree = "<group>"; };
+		0450F11F23629027005BAD9A /* FindSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindSecondViewController.m; sourceTree = "<group>"; };
+		0450F12123629BA4005BAD9A /* FindPasswodViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindPasswodViewController.h; sourceTree = "<group>"; };
+		0450F12223629BA4005BAD9A /* FindPasswodViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindPasswodViewController.m; sourceTree = "<group>"; };
+		0450F1242363512F005BAD9A /* NoneTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoneTableViewCell.h; sourceTree = "<group>"; };
+		0450F1252363512F005BAD9A /* NoneTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoneTableViewCell.m; sourceTree = "<group>"; };
+		0450F12723642F0F005BAD9A /* SavePhotoToAlbum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SavePhotoToAlbum.h; sourceTree = "<group>"; };
+		0450F12823642F0F005BAD9A /* SavePhotoToAlbum.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SavePhotoToAlbum.m; sourceTree = "<group>"; };
 		0460D9BA234B3B0000C721CE /* CommonWorkLocationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonWorkLocationTableViewCell.h; sourceTree = "<group>"; };
 		0460D9BB234B3B0000C721CE /* CommonWorkLocationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonWorkLocationTableViewCell.m; sourceTree = "<group>"; };
 		0460D9BD234C212600C721CE /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
@@ -207,6 +226,8 @@
 		0460D9EA234DE99900C721CE /* PrivacyPolicyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivacyPolicyViewController.m; sourceTree = "<group>"; };
 		0460D9EC234EFD6D00C721CE /* TopMaskBackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopMaskBackViewController.h; sourceTree = "<group>"; };
 		0460D9ED234EFD6D00C721CE /* TopMaskBackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopMaskBackViewController.m; sourceTree = "<group>"; };
+		048D73052366B88D0071C9CF /* BusinessRelationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BusinessRelationViewController.h; sourceTree = "<group>"; };
+		048D73062366B88D0071C9CF /* BusinessRelationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BusinessRelationViewController.m; sourceTree = "<group>"; };
 		04A5E44B2338F27D0028B1C9 /* PomeloJob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomeloJob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A5E44E2338F27D0028B1C9 /* PomeloAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PomeloAppDelegate.h; sourceTree = "<group>"; };
 		04A5E44F2338F27D0028B1C9 /* PomeloAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PomeloAppDelegate.m; sourceTree = "<group>"; };
@@ -407,10 +428,16 @@
 				0408D9382358418C005D6B18 /* LoginViewController.m */,
 				0408D93A235870A5005D6B18 /* FindViewController.h */,
 				0408D93B235870A5005D6B18 /* FindViewController.m */,
+				0450F11E23629027005BAD9A /* FindSecondViewController.h */,
+				0450F11F23629027005BAD9A /* FindSecondViewController.m */,
+				0450F12123629BA4005BAD9A /* FindPasswodViewController.h */,
+				0450F12223629BA4005BAD9A /* FindPasswodViewController.m */,
 				0408D93423581ED7005D6B18 /* NoteVerifyFeedbackViewController.h */,
 				0408D93523581ED7005D6B18 /* NoteVerifyFeedbackViewController.m */,
 				0408D961235ED789005D6B18 /* VerifyCodeViewController.h */,
 				0408D962235ED789005D6B18 /* VerifyCodeViewController.m */,
+				0450F11B23628879005BAD9A /* FeedBackViewController.h */,
+				0450F11C23628879005BAD9A /* FeedBackViewController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -603,6 +630,8 @@
 				0408D95F235E9E5A005D6B18 /* MyWeChatTableViewCell.m */,
 				0408D955235DA7B4005D6B18 /* ResumeInputViewController.h */,
 				0408D956235DA7B4005D6B18 /* ResumeInputViewController.m */,
+				048D73052366B88D0071C9CF /* BusinessRelationViewController.h */,
+				048D73062366B88D0071C9CF /* BusinessRelationViewController.m */,
 			);
 			path = PomeloMyViewController;
 			sourceTree = "<group>";
@@ -840,6 +869,10 @@
 				F1C4D910233A0785004BD723 /* CommonModel.h */,
 				0460D9BA234B3B0000C721CE /* CommonWorkLocationTableViewCell.h */,
 				0460D9BB234B3B0000C721CE /* CommonWorkLocationTableViewCell.m */,
+				0450F118236208FE005BAD9A /* CommonRemindTableViewCell.h */,
+				0450F119236208FE005BAD9A /* CommonRemindTableViewCell.m */,
+				0450F1242363512F005BAD9A /* NoneTableViewCell.h */,
+				0450F1252363512F005BAD9A /* NoneTableViewCell.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -864,6 +897,8 @@
 				F1C4D91E233A0785004BD723 /* icontext.png */,
 				F1C4D91F233A0785004BD723 /* LJDynamicItem.h */,
 				F1C4D920233A0785004BD723 /* Catory */,
+				0450F12723642F0F005BAD9A /* SavePhotoToAlbum.h */,
+				0450F12823642F0F005BAD9A /* SavePhotoToAlbum.m */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -1033,12 +1068,15 @@
 				F1C4D860233A0233004BD723 /* PomeloHotCollectionViewCell.m in Sources */,
 				F1C4D932233A0785004BD723 /* ResumeModel.m in Sources */,
 				F1C4D8AF233A0358004BD723 /* PomeloNotificationViewController.m in Sources */,
+				0450F12923642F0F005BAD9A /* SavePhotoToAlbum.m in Sources */,
 				0408D94E235D88BA005D6B18 /* CollectionTableViewCell.m in Sources */,
+				0450F12023629027005BAD9A /* FindSecondViewController.m in Sources */,
 				F1C4D929233A0785004BD723 /* BaseViewController.m in Sources */,
 				F1C4D924233A0785004BD723 /* ECUtil.m in Sources */,
 				0460D9BC234B3B0000C721CE /* CommonWorkLocationTableViewCell.m in Sources */,
 				F1C4D8AA233A0358004BD723 /* PomeloRecordDefaultViewController.m in Sources */,
 				F1C4D92D233A0785004BD723 /* BaseTableViewCell.m in Sources */,
+				048D73072366B88D0071C9CF /* BusinessRelationViewController.m in Sources */,
 				F1C4D8C3233A03AE004BD723 /* PomeloLocationViewController.m in Sources */,
 				F1C4D8A7233A0358004BD723 /* PomeloLimitFourTableViewController.m in Sources */,
 				F1C4D942233A0785004BD723 /* TitleSelectItemControl.m in Sources */,
@@ -1047,11 +1085,13 @@
 				F1C4D8B0233A0358004BD723 /* PomeloPrivacyPolicyViewController.m in Sources */,
 				F1C4D944233A0785004BD723 /* CommonDetailsViewController.m in Sources */,
 				04A5E45E2338F27E0028B1C9 /* main.m in Sources */,
+				0450F1262363512F005BAD9A /* NoneTableViewCell.m in Sources */,
 				F1C4D931233A0785004BD723 /* ResumeTableViewCell.m in Sources */,
 				04BDCC152344B45F0044346C /* SquareStyleModel.m in Sources */,
 				F1C4D8C5233A03AE004BD723 /* PomeloFiltrateViewController.m in Sources */,
 				F1C4D93E233A0785004BD723 /* ImgTitleView.m in Sources */,
 				F1C4D8AE233A0358004BD723 /* PomeloChangePasswordViewController.m in Sources */,
+				0450F11A236208FE005BAD9A /* CommonRemindTableViewCell.m in Sources */,
 				04A5E48B2338F7A10028B1C9 /* PomeloResetViewController.m in Sources */,
 				F1C4D923233A0785004BD723 /* HWRandomColor.m in Sources */,
 				04BDCC1223445C860044346C /* DiscoveryRankTableViewCell.m in Sources */,
@@ -1119,6 +1159,7 @@
 				0408D95A235DC999005D6B18 /* ChangePersonInfoViewController.m in Sources */,
 				04A5E4892338F7A10028B1C9 /* PomeloVerifyLoginViewController.m in Sources */,
 				F1C4D8A9233A0358004BD723 /* PomeloLimitThreeTableViewController.m in Sources */,
+				0450F11D23628879005BAD9A /* FeedBackViewController.m in Sources */,
 				04A5E4882338F7A10028B1C9 /* PomeloGuidancePageViewController.m in Sources */,
 				0460D9EB234DE99900C721CE /* PrivacyPolicyViewController.m in Sources */,
 				0408D93323581BEA005D6B18 /* LoginNavigationController.m in Sources */,
@@ -1126,6 +1167,7 @@
 				0408D948235D453C005D6B18 /* ModificationControl.m in Sources */,
 				F1C4D8C2233A03AE004BD723 /* PomeloTypeSelectViewController.m in Sources */,
 				F1C4D8AC233A0358004BD723 /* PomeloPersonalInfoViewController.m in Sources */,
+				0450F12323629BA4005BAD9A /* FindPasswodViewController.m in Sources */,
 				F1C4D8AB233A0358004BD723 /* PomeloLimitOneTableViewController.m in Sources */,
 				F1C4D89F233A0358004BD723 /* PomeloResumeImproveTableViewCell.m in Sources */,
 				F1C4D94D233A0785004BD723 /* UIView+HWUtilView.m in Sources */,
@@ -1275,6 +1317,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = ZS7NPDDHHG;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PomeloJob/Supporting Files/PrefixHeader.pch";
@@ -1299,6 +1342,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = ZS7NPDDHHG;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PomeloJob/Supporting Files/PrefixHeader.pch";

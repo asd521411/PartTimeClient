@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *userprofile;
 @property (nonatomic, copy) NSString *cardone;
 @property (nonatomic, copy) NSString *resumecompleteness;
+@property (nonatomic, copy) NSString *userbirthday;
+@property (nonatomic, copy) NSString *usersex;
 
 @end
 

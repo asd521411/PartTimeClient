@@ -63,8 +63,10 @@
 }
 
 - (void)setNameStr:(NSString *)nameStr{
-    _nameStr = nameStr;
-    self.nameLab.text = nameStr;
+    if (_nameStr != nameStr) {
+        NSLog(@"============%@", nameStr);
+        self.nameLab.text = nameStr;
+    }
 }
 
 - (UIImageView *)headImgV {

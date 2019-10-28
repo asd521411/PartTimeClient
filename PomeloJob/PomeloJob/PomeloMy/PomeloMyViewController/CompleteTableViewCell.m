@@ -11,7 +11,6 @@
 @interface CompleteTableViewCell ()
 
 @property (nonatomic, strong) UIImageView *backImgV;
-@property (nonatomic, strong) UIImageView *percentImgV;
 @property (nonatomic, strong) UILabel *explainLab;
 @property (nonatomic, strong) UILabel *rightAwayLab;
 
@@ -81,7 +80,7 @@
 
 - (UIImageView *)percentImgV {
     if (_percentImgV == nil) {
-        _percentImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"resumepercent0"]];
+        _percentImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"percent1"]];
     }
     return _percentImgV;
 }

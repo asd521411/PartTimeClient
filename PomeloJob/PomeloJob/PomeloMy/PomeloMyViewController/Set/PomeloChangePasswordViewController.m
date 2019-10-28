@@ -38,7 +38,7 @@
     lab.backgroundColor = [UIColor whiteColor];
     lab.textColor = KColor_C8C8C8;
     lab.font = KFontNormalSize12;
-    lab.text = @"*更改密码后将回到登陆界面重新登陆";
+    lab.text = @"*更改密码后将回到登录界面重新登录";
     lab.textAlignment = NSTextAlignmentCenter;
     lab.numberOfLines = 2;
     lab.lineBreakMode = NSLineBreakByTruncatingTail;

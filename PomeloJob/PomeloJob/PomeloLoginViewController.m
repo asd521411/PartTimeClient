@@ -196,7 +196,7 @@
 //    UIButton *left = [UIButton buttonWithType:UIButtonTypeCustom];
 //    left.frame = CGRectMake(KSpaceDistance15, remind.bottom + KSpaceDistance15, 100, hei);
 //    left.titleLabel.textAlignment = NSTextAlignmentLeft;
-//    //[left setTitle:@"验证码登陆" forState:UIControlStateNormal];
+//    //[left setTitle:@"验证码登录" forState:UIControlStateNormal];
 //    [left setTitleColor:KColor_212121 forState:UIControlStateNormal];
 //    [self.backScrollV addSubview:left];
 //
@@ -215,7 +215,7 @@
     //right.titleLabel.textAlignment = NSTextAlignmentRight;
     //right.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     //right.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
-    [right setTitle:@"获取不到验证码？用密码登陆" forState:UIControlStateNormal];
+    [right setTitle:@"获取不到验证码？用密码登录" forState:UIControlStateNormal];
     right.titleLabel.font = KFontNormalSize16;
     right.titleLabel.textAlignment = NSTextAlignmentRight;
     [right setTitleColor:[ECUtil colorWithHexString:@"7f7f7f"] forState:UIControlStateNormal];
@@ -232,6 +232,7 @@
         
         LoginViewController *log = [[LoginViewController alloc] init];
         LoginNavigationController *na = [[LoginNavigationController alloc] initWithRootViewController:log];
+        na.modalPresentationStyle = UIModalPresentationFullScreen;
         [self presentViewController:na animated:YES completion:nil];
     }];
     
@@ -272,7 +273,7 @@
     login.layer.cornerRadius = 20;
     login.layer.masksToBounds = YES;
     [self.backScrollV addSubview:login];
-    [login setTitle:@"登  陆" forState:UIControlStateNormal];
+    [login setTitle:@"登  录" forState:UIControlStateNormal];
     [login setTintColor:[UIColor whiteColor]];
     login.adjustsImageWhenHighlighted = NO;
     //[ECUtil gradientLayer:login startPoint:CGPointMake(0, 0.5) endPoint:CGPointMake(1, 0.5) colorArr1:KColorGradient_light colorArr2:KColorGradient_dark location1:0 location2:0];
@@ -333,7 +334,7 @@
     
     UILabel *remind = [[UILabel alloc] initWithFrame:CGRectMake(15, login.bottom + 50, KSCREEN_WIDTH - 30, hei)];
     
-    NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc] initWithString:@"登陆即代表你已同意"];
+    NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc] initWithString:@"登录即代表你已同意"];
     [mutStr addAttributes:@{NSForegroundColorAttributeName:[ECUtil colorWithHexString:@"b7b7b7"], NSFontAttributeName:KFontNormalSize16} range:NSMakeRange(0, 9)];
     NSMutableAttributedString *mutStr1 = [[NSMutableAttributedString alloc] initWithString:@"《柚选隐私政策》"];
     [mutStr1 addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:70/255.0 green:222/255.0 blue:160/255.0 alpha:1], NSFontAttributeName:KFontNormalSize16} range:NSMakeRange(0, 8)];

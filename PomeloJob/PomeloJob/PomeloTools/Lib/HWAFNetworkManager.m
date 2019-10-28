@@ -17,7 +17,7 @@
     static dispatch_once_t once_Token;
     dispatch_once(&once_Token, ^{
         _instance = [[HWAFNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:PartTimeBaseUrl]];
-        //_instance = [[HWAFNetworkManager alloc] initWithBaseURL:nil];
+        
     });
     return _instance;
 }
@@ -75,35 +75,82 @@
         NSDictionary *response = (NSDictionary *)responseObject;
         [self handleData:response withHandle:handler];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"failure---------%@=======%@", task, error);
         [self handleError:error withHandle:handler];
     }];
     
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    url = [PartTimeBaseUrl stringByAppendingString:url];
-//    [manager GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"======%@", responseObject);
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        NSLog(@"------%@", error);
-//    }];
+}
+
+- (void)appPost:(NSString *)url parameters:(NSDictionary *)parameters image:(UIImage *)image handler:(void(^)(BOOL success, NSDictionary *response))handler{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"apolication/json", @"text/html",@"text/plain",@"image/jpeg",@"image/png", nil];
+    manager.responseSerializer.acceptableStatusCodes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(200, 201)];
+    manager.requestSerializer.timeoutInterval = 10.0;
     
+    
+    url = [PartTimeBaseUrl stringByAppendingString:url];
+    UIImage *imageq = [UIImage imageNamed:@"portraitImgV"];
+    NSData *imageData = UIImageJPEGRepresentation(imageq, 0.5);
+    
+    [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        [formData appendPartWithFileData:imageData name:@"portrait" fileName:@"imgfile" mimeType:@"JPEG"];
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        handler(YES, responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"failure---------%@=======%@", task, error);
+    }];
 }
 
 - (NSURLSessionDataTask *)appPost:(NSString *)url parameters:(NSDictionary *)parameters handler:(void(^)(BOOL success, NSDictionary *response))handler{
     
     if (self.reachabilityManager.networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
-        
         [self handleError:[[NSError alloc] initWithDomain:@"network" code:-1009 userInfo:nil] withHandle:nil];
         return nil;
     }
-    
     return [self POST:url parameters:[self wrappedParameters:parameters] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *response = (NSDictionary *)responseObject;
         [self handleData:response withHandle:handler];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self handleError:error withHandle:handler];
+        NSLog(@"failure====================%@", task);
     }];
 }
 
+//图片
+- (NSURLSessionDataTask *)appPost:(NSString *)url parameters:(NSDictionary *)parameters images:(NSArray<UIImage *> *)images name:(NSString *)name fileName:(NSString *)fileName mimeType:(NSString *)mimeType progress:(void(^)(NSProgress *progress))progress handler:(void(^)(BOOL success, NSDictionary *response))handler{
+    if (self.reachabilityManager.networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
+        [self handleError:[[NSError alloc] initWithDomain:@"network" code:-1009 userInfo:nil] withHandle:nil];
+        return nil;
+    }
+    return [self POST:url parameters:[self wrappedParameters:parameters] constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [images enumerateObjectsUsingBlock:^(UIImage * _Nonnull image, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+            [formData appendPartWithFileData:imageData name:name fileName:fileName mimeType:mimeType];
+        }];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        progress(uploadProgress);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *response = (NSDictionary *)responseObject;
+        [self handleData:response withHandle:handler];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        //[self handleError:error withHandle:handler];
+        NSLog(@"task========%@--------%@", task, error);
+    }];
+}
+
+- (void)resume:(NSDictionary *)parameters updateResume:(ZHandlerBlock)handler {
+    [self appPost:CUSTOMER_UPDATERESUME parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
 
 // MARK: response state
 
@@ -127,8 +174,6 @@
         //handler(NO, @{@"code":@"error"});
     }
 }
-
-
 
 
 - (void)accountRequest:(NSDictionary *)parameters loginByPassword:(nonnull ZHandlerBlock)handler {
@@ -173,7 +218,7 @@
     }];
 }
 
-//登陆1.5
+//登录1.5
 - (void)accountRequest:(NSDictionary *)parameters loginByMessageAndPassword:(ZHandlerBlock)handler {
     [self appPost:CUSTOMER_LOGINBYMESSAGEANDPASSWORD parameters:parameters handler:^(BOOL success, NSDictionary *response) {
         handler(success, response);
@@ -184,7 +229,6 @@
         handler(success, response);
     }];
 }
-
 
 
 //权限
@@ -225,7 +269,7 @@
     }];
 }
 
-//登陆的时候传唯一标识
+//登录的时候传唯一标识
 - (void)accountRequest:(NSDictionary *)parameters initPhonecard:(ZHandlerBlock)handler {
     [self appGet:CUSTOMER_INITPHONECARD parameters:parameters handler:^(BOOL success, NSDictionary *response) {
         handler(success, response);
@@ -283,8 +327,10 @@
     }];
 }
 
-- (void)resume:(NSDictionary *)parameters updateResume:(ZHandlerBlock)handler {
-    [self appGet:CUSTOMER_UPDATERESUME parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+- (void)resume:(NSDictionary *)parameters images:(NSArray<UIImage *> *)images name:(NSString *)name fileName:(NSString *)filename mimeType:(NSString *)type progress:(ZHandlerProgressBlock)progressHandler updateResume:(ZHandlerBlock)handler {
+    [self appPost:CUSTOMER_UPDATERESUME parameters:parameters images:images name:name fileName:filename mimeType:type progress:^(NSProgress *progress) {
+        progressHandler(progress);
+    } handler:^(BOOL success, NSDictionary *response) {
         handler(success, response);
     }];
 }
@@ -335,5 +381,66 @@
     }];
 }
 
+- (void)opinionRequest:(NSDictionary *)parameters collectTel:(ZHandlerBlock)handler {
+    [self appGet:CUSTOMER_COLLECTTEL parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+
+- (void)opinionRequest:(NSDictionary *)parameters collectFeedback:(ZHandlerBlock)handler {
+    [self appGet:CUSTOMER_COLLECTFEEDBACK parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+
+- (void)accountRequest:(NSDictionary *)parameters findPassword:(ZHandlerBlock)handler {
+    [self appPost:CUSTOMER_FINDPASSWORD parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+
+- (void)accountRequest:(NSDictionary *)parameters updaterefactoruserpassword:(ZHandlerBlock)handler {
+    [self appPost:CUSTOMER_UPDATEREFACTORUSERPASSWORD parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+
+- (void)accountRequest:(NSDictionary *)parameters checkMessage:(ZHandlerBlock)handler {
+    [self appGet:CUSTOMER_CHECKMESSAGE parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+
+- (void)userInfo:(NSDictionary *)parameters selectuserinfo:(ZHandlerBlock)handler {
+    [self appGet:CUSTOMER_SELECTUSERINFO parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+
+- (void)userInfo:(NSDictionary *)parameters images:(nonnull NSArray<UIImage *> *)images name:(nonnull NSString *)name fileName:(nonnull NSString *)filename mimeType:(nonnull NSString *)type progress:(nonnull ZHandlerProgressBlock)progressHandler updateuserinfo:(nonnull ZHandlerBlock)handler {
+    [self appPost:CUSTOMER_UPDATEUSERINFO parameters:parameters images:images name:name fileName:filename mimeType:type progress:^(NSProgress *progress) {
+        progressHandler(progress);
+    } handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+
+- (void)position:(NSDictionary *)parameters deleteuserposition:(ZHandlerBlock)handler {
+    [self appGet:CUSTOMER_DELETEUSERPOSITION parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+
+- (void)position:(NSDictionary *)parameters setuserposition:(ZHandlerBlock)handler {
+    [self appGet:CUSTOMER_SETUSERPOSITION parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
+
+- (void)position:(NSDictionary *)parameters collectFeedback:(ZHandlerBlock)handler {
+    [self appGet:CUSTOMER_COLLECTFEEDBACK parameters:parameters handler:^(BOOL success, NSDictionary *response) {
+        handler(success, response);
+    }];
+}
 
 @end

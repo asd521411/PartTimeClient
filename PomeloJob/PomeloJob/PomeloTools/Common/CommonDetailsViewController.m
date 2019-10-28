@@ -20,6 +20,10 @@
 #import "PomeloIndividualResumeViewController.h"
 #import "TopMaskBackViewController.h"
 #import "DetailBottomBar.h"
+#import "CommonRemindTableViewCell.h"
+#import "LoginViewController.h"
+#import "LoginNavigationController.h"
+#import "MyResumeViewController.h"
 
 @interface CommonDetailsViewController ()<UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, DetailBottomBarDelegate>
 
@@ -42,7 +46,7 @@
 @property (nonatomic, strong) UILabel *connectType;
 @property (nonatomic, strong) UILabel *connectNum;
 @property (nonatomic, strong) UIView *maskBackV;
-
+@property (nonatomic, strong) UIButton *collectBtn;
 @property (nonatomic, strong) UIButton *applyBtn3;
 
 @property (nonatomic, strong) UIView *topMaskBackV;
@@ -53,6 +57,9 @@
 
 @property (nonatomic, strong) DetailBottomBar *detailBottomBar;
 
+@property (nonatomic, strong) UIView *resumeMaskBackV;
+@property (nonatomic, strong) UIButton *completeBtn;
+
 @end
 
 #define KTableRowFixedWidth     KSCREEN_WIDTH - 100 - 15
@@ -62,18 +69,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self firstLogin];
-    
+    ////[self firstLogin];
+
     [self setupTableViews];
 
     [self tableViewRefresh];
 
     [self setupConnectViews];
 
-    [self setupTopMaskViews];
-    
+    ////[self setupTopMaskViews];
+
     [self setupMaskViews];
-    
+
+    [self resumeMaskSubViews];
+
     [self.tableView.mj_header beginRefreshing];
     
     // Do any additional setup after loading the view.
@@ -111,30 +120,29 @@
     [super viewWillDisappear:animated];
 }
 
-- (void)firstLogin {
-    NSDictionary *para = @{@"phonecard":[ECUtil getIDFA]};
-    [[HWAFNetworkManager shareManager] clickOperation:para selectAgeByPhonecar:^(BOOL success, id  _Nonnull request) {
-        if (success) {
-            if ([request[@"status"] isEqualToString:@"success"]) {
-                NSDictionary *dic = (NSDictionary *)request;
-                NSNumber * boolNum = dic[@"statuscode"];
-                self.firstLoginMark = [boolNum boolValue];
-            }
-        }
-    }];
-}
+//- (void)firstLogin {
+//    NSDictionary *para = @{@"phonecard":[ECUtil getIDFA]};
+//    [[HWAFNetworkManager shareManager] clickOperation:para selectAgeByPhonecar:^(BOOL success, id  _Nonnull request) {
+//        if (success) {
+//            if ([request[@"status"] isEqualToString:@"success"]) {
+//                NSDictionary *dic = (NSDictionary *)request;
+//                NSNumber * boolNum = dic[@"statuscode"];
+//                self.firstLoginMark = [boolNum boolValue];
+//            }
+//        }
+//    }];
+//}
 
 - (void)tableViewRefresh {
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.upOrDown = YES;
         [self loadData];
-
     }];
     
-    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
-        self.upOrDown = NO;
-        [self loadData];
-    }];
+//    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+//        self.upOrDown = NO;
+//        [self loadData];
+//    }];
 }
 
 
@@ -158,58 +166,100 @@
 
 - (void)setupConnectViews {
     
-    CGFloat height = 50;
+    CGFloat height = 42;
     
-    self.bottomBackV = [[UIView alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT - height - [ECStyle tabbarExtensionHeight], SCREENWIDTH, height)];
+    self.bottomBackV = [[UIView alloc] initWithFrame:CGRectMake(15, SCREENHEIGHT - (height+[ECStyle tabbarExtensionHeight]+5), SCREENWIDTH-30, height+[ECStyle tabbarExtensionHeight]+5)];
     [self.view addSubview:self.bottomBackV];
+    self.bottomBackV.hidden = YES;
     
-    UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn1.frame = CGRectMake(0, 0, SCREENWIDTH / 3, height);
-    btn1.backgroundColor = [ECUtil colorWithHexString:@"339cf9"];
-    [btn1 setTitle:@"收藏" forState:UIControlStateNormal];
-    [btn1 setTintColor:[UIColor whiteColor]];
-    [self.bottomBackV addSubview:btn1];
+    self.collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.collectBtn.frame = CGRectMake(0, 0, (SCREENWIDTH-30)/2, height);
+    self.collectBtn.backgroundColor = [UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1];
+//    [self.collectBtn setBackgroundImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateNormal];
+//    [self.collectBtn setBackgroundImage:[UIImage imageNamed:@"yishoucang"] forState:UIControlStateSelected];
+    [self.collectBtn setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateNormal];
+    [self.collectBtn setImage:[UIImage imageNamed:@"yishoucang"] forState:UIControlStateSelected];
+//    self.collectBtn.layer.masksToBounds = YES;
+    [self.collectBtn setTitle:@"收藏" forState:UIControlStateNormal];
+    [self.collectBtn setTitle:@"已收藏" forState:UIControlStateSelected];
+    [self.collectBtn setTitleColor:kColor_Main forState:UIControlStateNormal];
+    [self.collectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -10)];
+    self.collectBtn.adjustsImageWhenHighlighted = NO;
+    [self.bottomBackV addSubview:self.collectBtn];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.collectBtn.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadii:CGSizeMake(height/2, height/2)];
+    CAShapeLayer *lay = [CAShapeLayer layer];
+    lay.frame = self.collectBtn.bounds;
+    lay.path = path.CGPath;
+    self.collectBtn.layer.mask = lay;
     
-    [[btn1 rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        
-    }];
-    
-//    UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-//    btn2.frame = CGRectMake(btn1.right, 0, SCREENWIDTH / 3, height);
-//    btn2.backgroundColor = [ECUtil colorWithHexString:@"f8f8f8"];
-//    [btn2 setTitle:@"沟通" forState:UIControlStateNormal];
-//    [btn2 setTintColor:[UIColor whiteColor]];
-//    //[self.bottomBackV addSubview:btn2];
-//    [[btn2 rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-//
-//    }];
-//
-    self.applyBtn3 = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.applyBtn3.frame = CGRectMake(0, 0, SCREENWIDTH, height);
-    if ([self.commonModel.relationtype isEqualToString:@"已报名"]) {
-        self.applyBtn3.userInteractionEnabled = NO;
-        self.applyBtn3.backgroundColor = [ECUtil colorWithHexString:@"7f7f7f"];
+    if ([self.commonModel.relationtypecollect isEqualToString:@"已收藏"]) {
+        self.collectBtn.userInteractionEnabled = NO;
+        self.collectBtn.selected = YES;
     }else {
-        self.applyBtn3.backgroundColor = [ECUtil colorWithHexString:@"ff4457"];
+        self.collectBtn.selected = NO;
     }
     
-    [self.applyBtn3 setTitle:@"立即报名" forState:UIControlStateNormal];
-    [self.applyBtn3 setTintColor:[UIColor whiteColor]];
-    UIBezierPath *pa = [UIBezierPath bezierPathWithRoundedRect:self.applyBtn3.frame byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(22, 22)];
-    CAShapeLayer *lay = [CAShapeLayer layer];
-    lay.frame = self.applyBtn3.frame;
-    lay.path = pa.CGPath;
-    self.applyBtn3.layer.mask = lay;
-    
-    [[HWAFNetworkManager shareManager] accountRequest:@{} checkStatus:^(BOOL success, id  _Nonnull request) {
-        if (success) {
-            if ([request[@"status"] isEqualToString:@"0"]) {
-            }else if ([request[@"status"] isEqualToString:@"1"])
-            [self.bottomBackV addSubview:self.applyBtn3];
+    __weak typeof(self) weakSelf = self;
+    [[self.collectBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
+        if (![ECUtil isBlankString:userid]) {
+            NSDictionary *para = @{@"userid":userid, @"positionid":self.commonModel.positionid, @"relationtype":@"已收藏"};
+            [[HWAFNetworkManager shareManager] position:para setuserposition:^(BOOL success, id  _Nonnull request) {
+                
+                if (success) {
+                    [SVProgressHUD showWithStatus:request[@"statusMessage"]];
+                    [SVProgressHUD dismissWithDelay:1];
+                    if ([request[@"status"] integerValue] == 200) {
+                        strongSelf.collectBtn.userInteractionEnabled = NO;
+                        strongSelf.collectBtn.selected = YES;
+                    }
+                    if ([request[@"status"] integerValue] == 400) {
+                        
+                    }
+                }
+            }];
+        }else {
+            LoginViewController *log = [[LoginViewController alloc] init];
+            LoginNavigationController *na = [[LoginNavigationController alloc] initWithRootViewController:log];
+            na.modalPresentationStyle = UIModalPresentationFullScreen;
+            [weakSelf presentViewController:na animated:YES completion:nil];
         }
     }];
     
-    __weak typeof(self) weakSelf = self;
+    self.applyBtn3 = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.applyBtn3.frame = CGRectMake(self.collectBtn.right, 0, (SCREENWIDTH-30)/2, height);
+    self.applyBtn3.backgroundColor = kColor_Main;
+//    [self.applyBtn3 setBackgroundImage:[UIImage imageNamed:@"baoming"] forState:UIControlStateNormal];
+//    [self.applyBtn3 setBackgroundImage:[UIImage imageNamed:@"yibaoming"] forState:UIControlStateSelected];
+    [self.applyBtn3 setTitle:@"立即报名" forState:UIControlStateNormal];
+    [self.applyBtn3 setTitle:@"已报名" forState:UIControlStateSelected];
+    [self.bottomBackV addSubview:self.applyBtn3];
+    UIBezierPath *applyPath = [UIBezierPath bezierPathWithRoundedRect:self.applyBtn3.bounds byRoundingCorners:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadii:CGSizeMake(height/2, height/2)];
+    CAShapeLayer *appLay = [CAShapeLayer layer];
+    appLay.frame = self.applyBtn3.bounds;
+    appLay.path = applyPath.CGPath;
+    self.applyBtn3.layer.mask = appLay;
+    
+    
+    if ([self.commonModel.relationtype isEqualToString:@"已报名"]) {
+        self.applyBtn3.userInteractionEnabled = NO;
+        self.applyBtn3.selected = YES;
+    }else {
+        self.applyBtn3.selected = NO;
+    }
+    
+    //审核状态
+    [[HWAFNetworkManager shareManager] accountRequest:@{} checkStatus:^(BOOL success, id  _Nonnull request) {
+        if (success) {
+            if ([request[@"status"] isEqualToString:@"0"]) {
+                self.bottomBackV.hidden = YES;
+            }else if ([request[@"status"] isEqualToString:@"1"]){
+                self.bottomBackV.hidden = NO;
+            }
+        }
+    }];
+    
     [[self.applyBtn3 rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
@@ -217,33 +267,70 @@
             NSDictionary *para = @{@"userid":userid, @"positionid":self.commonModel.positionid, @"relationtype":@"已报名"};
             [[HWAFNetworkManager shareManager] positionRequest:para selectResumeByuserid:^(BOOL success, id  _Nonnull request) {
                 if (success) {
-                    if ([request[@"status"] isEqualToString:@"success"]) {
+                    if ([request[@"status"] integerValue] == 200) {
                         strongSelf.connectType.text = strongSelf.commonModel.positionteltype;
-                        strongSelf.connectNum.text = strongSelf.commonModel.positiontelnum;
+                        NSString *str = nil;
+                        if (strongSelf.commonModel.positiontelnum.length > 4) {
+                            str = [strongSelf.commonModel.positiontelnum stringByReplacingCharactersInRange:NSMakeRange(2, strongSelf.commonModel.positiontelnum.length-4) withString:@"******"];
+                        }
+                        strongSelf.connectNum.text = str;
                         strongSelf.maskBackV.hidden = NO;
-                    
-//                        strongSelf.applyBtn3.userInteractionEnabled = NO;
-//                        strongSelf.applyBtn3.backgroundColor = [ECUtil colorWithHexString:@"c6c6c6"];
-//
                         strongSelf.applyBtn3.userInteractionEnabled = NO;
-                        strongSelf.applyBtn3.backgroundColor = [ECUtil colorWithHexString:@"7f7f7f"];
+                        strongSelf.applyBtn3.selected = YES;
                         
-                    }else if ([request[@"status"] isEqualToString:@"file"]) {
+                    }else if ([request[@"status"] integerValue] == 400) {
                         //跳到简历页面
-                        PomeloIndividualResumeViewController *resume = [[PomeloIndividualResumeViewController alloc] init];
-                        resume.hidesBottomBarWhenPushed = YES;
-                        [self.navigationController pushViewController:resume animated:YES];
+//                        PomeloIndividualResumeViewController *resume = [[PomeloIndividualResumeViewController alloc] init];
+                        self.resumeMaskBackV.hidden = NO;
                     }
                 }
             }];
         }else {
-            PomeloLoginViewController *login = [[PomeloLoginViewController alloc] init];
-            [self.navigationController pushViewController:login animated:YES];
+//            PomeloLoginViewController *login = [[PomeloLoginViewController alloc] init];
+//            [self.navigationController pushViewController:login animated:YES];
+            LoginViewController *log = [[LoginViewController alloc] init];
+            LoginNavigationController *na = [[LoginNavigationController alloc] initWithRootViewController:log];
+            na.modalPresentationStyle = UIModalPresentationFullScreen;
+            [self presentViewController:na animated:YES completion:nil];
         }
         
         [self.tableView.mj_header endRefreshing];
     }];
 }
+
+- (void)resumeMaskSubViews {
+    
+    UIWindow *win = [[UIApplication sharedApplication] delegate].window;
+    [win addSubview:self.resumeMaskBackV];
+    self.resumeMaskBackV.hidden = YES;
+
+    CGFloat wid = KSCREEN_WIDTH - 128;
+    CGFloat hei = wid * 331 / 492;
+    UIView *back = [[UIView alloc] initWithFrame:CGRectMake((KSCREEN_WIDTH-wid)/2, 70, wid, hei)];
+    back.backgroundColor = [UIColor whiteColor];
+    back.layer.cornerRadius = 20;
+    back.layer.masksToBounds = YES;
+    [self.resumeMaskBackV addSubview:back];
+    
+    UIImageView *backImgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 90, 90)];
+    backImgV.backgroundColor = [UIColor whiteColor];
+    backImgV.image = [UIImage imageNamed:@"resumbackimg"];
+    backImgV.center = CGPointMake(back.width/2, 60);
+    [back addSubview:backImgV];
+    
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, backImgV.bottom+10, back.width, 15)];
+    lab.textColor = kColor_Main;
+    lab.numberOfLines = 0;
+    lab.font = kFontNormalSize(14);
+    lab.text = @"还没完善简历呢，快去完善简历吧！";
+    lab.textAlignment = NSTextAlignmentCenter;
+    [back addSubview:lab];
+    
+    self.completeBtn.frame = CGRectMake(60, lab.bottom+10, back.width-120, 30);
+    [back addSubview:self.completeBtn];
+    
+}
+
 
 - (void)sendDojob {
     NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
@@ -316,10 +403,13 @@
     //[self.view addSubview:self.maskBackV];
     [win addSubview:self.maskBackV];
     
-    CGFloat wid = KSCREEN_WIDTH - 60;
-    CGFloat hei = wid * 259 / 319;
-    UIImageView *backImgV = [[UIImageView alloc] initWithFrame:CGRectMake(30, 112, wid, hei)];
-    backImgV.image = [UIImage imageNamed:@"pastebackimg"];
+    CGFloat wid = KSCREEN_WIDTH - 128;
+    CGFloat hei = wid * 331 / 492;
+    UIImageView *backImgV = [[UIImageView alloc] initWithFrame:CGRectMake((KSCREEN_WIDTH-wid)/2, 112, wid, hei)];
+    backImgV.backgroundColor = [UIColor whiteColor];
+    backImgV.layer.cornerRadius = 5;
+    backImgV.layer.masksToBounds = YES;
+    //backImgV.image = [UIImage imageNamed:@"pastebackimg"];
     backImgV.userInteractionEnabled = YES;
     [self.maskBackV addSubview:backImgV];
     
@@ -328,13 +418,17 @@
     lab.numberOfLines = 0;
     lab.font = KFontNormalSize14;
     lab.text = @"请主动联系公司咨询相关工作内容，完成录取流程。";
-    [backImgV addSubview:lab];
+    //[backImgV addSubview:lab];
     
-    UILabel *connect = [[UILabel alloc] initWithFrame:CGRectMake(0, backImgV.height - 90, backImgV.width / 2 - 50, 20)];
-    connect.textAlignment = NSTextAlignmentRight;
-    connect.textColor = [ECUtil colorWithHexString:@"5c5c5c"];
+    UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"xiangqingtishi"]];
+    img.frame = CGRectMake((backImgV.width-80)/2, 20, 80, 80);
+    [backImgV addSubview:img];
+    
+    UILabel *connect = [[UILabel alloc] initWithFrame:CGRectMake(10, backImgV.height - 90, backImgV.width-20, 20)];
+    connect.textAlignment = NSTextAlignmentCenter;
+    connect.textColor = kColor_Main;
     connect.font = KFontNormalSize16;
-    connect.text = @"联系方式";
+    connect.text = @"报名成功，快去联系吧！";
     [backImgV addSubview:connect];
     
     self.connectType = [[UILabel alloc] init];
@@ -342,7 +436,7 @@
     //connect1.textColor = [ECUtil colorWithHexString:@"5c5c5c"];
     self.connectType.font = KFontNormalSize16;
     self.connectType.text = @"    ";
-    [backImgV addSubview:self.connectType];
+    //[backImgV addSubview:self.connectType];
     [self.connectType mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(connect.mas_right).offset(10);
         make.top.mas_equalTo(connect.mas_top);
@@ -350,20 +444,20 @@
     
     self.connectNum = [[UILabel alloc] init];
     self.connectNum.textAlignment = NSTextAlignmentLeft;
-    //connect1.textColor = [ECUtil colorWithHexString:@"5c5c5c"];
+    self.connectNum.textColor = kColor_Main;
     self.connectNum.font = KFontNormalSize16;
     self.connectNum.text = @"   ";
-    [backImgV addSubview:self.connectNum];
+    //[backImgV addSubview:self.connectNum];
     [self.connectNum mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.connectType.mas_right).offset(10);
         make.top.mas_equalTo(connect.mas_top);
     }];
     
     UIButton *pasteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    pasteBtn.backgroundColor = [ECUtil colorWithHexString:@"ff4457"];
-    pasteBtn.frame = CGRectMake(92, backImgV.height - 57, wid - 92 * 2, 42);
-    [pasteBtn setTitle:@"复制" forState:UIControlStateNormal];
-    pasteBtn.layer.cornerRadius = 21;
+    pasteBtn.backgroundColor = kColor_Main;
+    pasteBtn.frame = CGRectMake(60, backImgV.height - 57, wid - 60 * 2, 38);
+    [pasteBtn setTitle:@"复制联系方式" forState:UIControlStateNormal];
+    pasteBtn.layer.cornerRadius = 19;
     pasteBtn.layer.masksToBounds = YES;
     [backImgV addSubview:pasteBtn];
     __weak typeof(self) weakSelf = self;
@@ -373,13 +467,16 @@
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = strongSelf.commonModel.positiontelnum;
         [HWPorgressHUD HWHudShowStatus:@"复制成功！"];
+        [SVProgressHUD showWithStatus:@" "];
+        [SVProgressHUD dismissWithDelay:1];
         strongSelf.maskBackV.hidden = YES;
         if ([strongSelf.commonModel.positionteltype isEqualToString:@"联系微信号"] || [strongSelf.commonModel.positionteltype isEqualToString:@"公众号联系"] || [strongSelf.commonModel.positionteltype isEqualToString:@"微信号联系"]) {
             [strongSelf openWechat];
         }
-        if ([strongSelf.commonModel.positionteltype isEqualToString:@"手机号联系"]) {
-            
+        if ([strongSelf.commonModel.positionteltype isEqualToString:@"支付宝联系"]) {
+            [strongSelf openAlipay];
         }
+        
         //记录点击次数
         NSDictionary *para = @{@"adtype":@"报名",
                                @"adindex":self.commonModel.positionid,
@@ -397,7 +494,19 @@
     BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
     //先判断是否能打开该url
     if (canOpen){   //打开微信
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+        });
+    }else {
+    }
+}
+
+- (void)openAlipay {
+    NSURL * url = [NSURL URLWithString:@"alipays://"];
+    BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
+    //先判断是否能打开该url
+    if (canOpen){   //打开支付宝
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
         });
     }else {
@@ -409,12 +518,24 @@
     NSDictionary *para = @{@"positionid":[ECUtil isBlankString:self.positionid]?@"":self.positionid, @"userid":[ECUtil isBlankString:userid]?@"":userid};
     [[HWAFNetworkManager shareManager] positionRequest:para positionInfo:^(BOOL success, id  _Nonnull request) {
         NSDictionary *dic = (NSDictionary *)request;
+        
         if (success) {
             self.commonModel = [CommonModel mj_objectWithKeyValues:dic];
             if ([self.commonModel.relationtype isEqualToString:@"已报名"]) {
                 self.applyBtn3.userInteractionEnabled = NO;
-                self.applyBtn3.backgroundColor = [ECUtil colorWithHexString:@"7f7f7f"];
+                self.applyBtn3.selected = YES;
+            }else {
+                self.applyBtn3.userInteractionEnabled = YES;
+                self.applyBtn3.selected = NO;
             }
+            if ([self.commonModel.relationtypecollect isEqualToString:@"已收藏"]) {
+                self.collectBtn.userInteractionEnabled = NO;
+                self.collectBtn.selected = YES;
+            }else {
+                self.collectBtn.userInteractionEnabled = YES;
+                self.collectBtn.selected = NO;
+            }
+            
             if (self.upOrDown == YES) {
                 [self.listArr removeAllObjects];
                 [self.otherRecommendArr removeAllObjects];
@@ -428,6 +549,13 @@
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
     }];
+}
+
+- (void)completeBtnAction:(UIButton *)sender {
+    self.resumeMaskBackV.hidden = YES;
+    MyResumeViewController *resume = [[MyResumeViewController alloc] init];
+    resume.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:resume animated:YES];
 }
 
 #pragma mark custom delegate
@@ -451,7 +579,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (self.tableView == tableView) {
-        if (section < 4) {
+        if (section < 5) {
             return self.listArr.count;
         }else {
             return 3;
@@ -469,15 +597,16 @@
                 cell = [[CommontTopTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommontTopTableViewCell"];
             }
             
-            cell.showConnect = self.firstLoginMark;
+//            cell.showConnect = self.firstLoginMark;
+            cell.showConnect = YES;
             cell.commonModel = self.commonModel;
             __weak typeof(self) weakSelf = self;
             cell.pasteAction = ^(NSString * _Nonnull num) {
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 
-                if (strongSelf.firstLoginMark == YES) {
-                    //安装过
-                    strongSelf.topMaskBackV.hidden = YES;
+//                if (strongSelf.firstLoginMark == YES) {
+//                    //安装过
+//                    strongSelf.topMaskBackV.hidden = YES;
                     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
                     pasteboard.string = strongSelf.commonModel.positiontelnum;
                     [HWPorgressHUD HWHudShowStatus:@"复制成功！"];
@@ -497,40 +626,36 @@
                         }
                     }];
                     
-                }else {
-                    strongSelf.topMaskBackV.hidden = NO;
-                    
-                }
+//                }else {
+//                    strongSelf.topMaskBackV.hidden = NO;
+//
+//                }
             };
             return cell;
-        }else if (indexPath.section == 1 || indexPath.section == 2 || indexPath.section == 3) {
+        }else if (indexPath.section == 1) {
             CommonDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonDetailsTableViewCell"];
             if (!cell) {
                 cell = [[CommonDetailsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonDetailsTableViewCell"];
             }
-            
-            if (indexPath.section == 1) {
-                cell.commonModel = self.commonModel;
-            }
-            if (indexPath.section == 2) {
-                //            CGSize size = [ECUtil textSize:self.commonModel.positionworktime font:KFontNormalSize10 bounding:CGSizeMake(KSCREEN_WIDTH - KSpaceDistance15 * 2, CGFLOAT_MAX)];
-                //            cell.commonModel.cellHeight = size.height;
-                //            cell.commonModel = self.commonModel;
-                cell.workContentLab.text = self.commonModel.positionworktime;
-                cell.contentStr = self.commonModel.positionworktime;
-                cell.workContentBackV.hidden = YES;
-            }
-            
-            if (indexPath.section == 3) {
-                CommonWorkLocationTableViewCell *cell1 = [tableView dequeueReusableCellWithIdentifier:@"CommonWorkLocationTableViewCell"];
-                if (!cell1) {
-                    cell1 = [[CommonWorkLocationTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonWorkLocationTableViewCell"];
+            cell.contentStr = self.commonModel.positioninfo;
+            cell.workContentBackV.hidden = YES;
+            return cell;
+        }else if (indexPath.section == 2 || indexPath.section == 3) {
+            CommonWorkLocationTableViewCell *cell1 = [tableView dequeueReusableCellWithIdentifier:@"CommonWorkLocationTableViewCell"];
+            if (!cell1) {
+                cell1 = [[CommonWorkLocationTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonWorkLocationTableViewCell"];
                 }
-                ////            cell.workContentLab.text = self.commonModel.positionworkaddressinfo;
-                ////            cell.contentStr = self.commonModel.positionworkaddressinfo;
-                //            cell.workContentBackV.hidden = YES;
-                cell1.commonModel = self.commonModel;
-                return cell1;
+            if (indexPath.section == 2) {
+                cell1.componyLocationLab.text = self.commonModel.positionworktime;
+            }
+            if (indexPath.section == 3) {
+                cell1.componyLocationLab.text = self.commonModel.positionworkaddressinfo;
+            }
+            return cell1;
+        }else if (indexPath.section == 4) {
+            CommonRemindTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonRemindTableViewCell"];
+            if (!cell) {
+                cell = [[CommonRemindTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonRemindTableViewCell"];
             }
             return cell;
         }else {
@@ -551,7 +676,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.tableView == tableView) {
-        if (indexPath.section == 4) {
+        if (indexPath.section == 5) {
             CommonDetailsViewController *detail = [[CommonDetailsViewController alloc] init];
             CommonModel *model = self.otherRecommendArr[indexPath.row];
             detail.positionid = model.positionid;
@@ -570,9 +695,9 @@
             return 128 + 26;
         }
         if (indexPath.section == 1) {
-            NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[self.commonModel.positioninfo dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-            CGRect rect = [attributedString boundingRectWithSize:CGSizeMake(KSCREEN_WIDTH - 30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
-            return rect.size.height + 30 + 50;
+//            NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[self.commonModel.positioninfo dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+//            CGRect rect = [attributedString boundingRectWithSize:CGSizeMake(KSCREEN_WIDTH - 30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+            return [self getHTMLHeightByStr:self.commonModel.positioninfo font:nil lineSpacing:5 width:KSCREEN_WIDTH-30];
         }
         if (indexPath.section == 2) {
             CGSize size = [ECUtil textSize:self.commonModel.positionworktime font:KFontNormalSize14 bounding:CGSizeMake(KSCREEN_WIDTH - 30, CGFLOAT_MAX)];
@@ -582,6 +707,10 @@
         if (indexPath.section == 3) {
             CGSize size = [ECUtil textSize:self.commonModel.positionworkaddressinfo font:KFontNormalSize14 bounding:CGSizeMake(KSCREEN_WIDTH - 30, CGFLOAT_MAX)];
             return size.height + 30;
+        }
+        if (indexPath.section == 4) {
+            CGSize size = [ECUtil textSize:@"凡是涉及到工作内容不符、收费、违法信息传播的工作，请您警惕并收集相关证据向我们举报" font:KFontNormalSize14 bounding:CGSizeMake(KSCREEN_WIDTH - 90, CGFLOAT_MAX)];
+            return size.height + 20;
         }
     }
     return 80;
@@ -604,6 +733,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (self.tableView == tableView) {
         if (section == 0) {
+            return 0;
+        }
+        if (section == 4) {
             return 0;
         }
         return 34;
@@ -655,7 +787,7 @@
 
 - (NSArray *)sectionArr {
     if (!_sectionArr) {
-        _sectionArr = @[@" ",@"职位详情",@"工作时间",@"工作地点",@"其它推荐"];
+        _sectionArr = @[@" ",@"职位详情",@"工作时间",@"工作地点",@"",@"更多岗位推荐"];
     }
     return _sectionArr;
 }
@@ -684,6 +816,52 @@
         _detailBottomBar.delegate = self;
     }
     return _detailBottomBar;
+}
+
+- (UIView *)resumeMaskBackV {
+    if (_resumeMaskBackV == nil) {
+        _resumeMaskBackV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT)];
+        _resumeMaskBackV.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+    }
+    return _resumeMaskBackV;
+}
+
+- (UIButton *)completeBtn {
+    if (_completeBtn == nil) {
+        _completeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _completeBtn.backgroundColor = kColor_Main;
+        _completeBtn.layer.cornerRadius = 15;
+        _completeBtn.layer.masksToBounds = YES;
+        [_completeBtn setTitle:@"完善简历" forState:UIControlStateNormal];
+        [_completeBtn addTarget:self action:@selector(completeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _completeBtn;
+}
+
+
+/**
+ 计算html字符串高度
+
+ @param str html 未处理的字符串
+ @param font 字体设置
+ @param lineSpacing 行高设置
+ @param width 容器宽度设置
+ @return 富文本高度
+ */
+-(CGFloat )getHTMLHeightByStr:(NSString *)str font:(UIFont *)font lineSpacing:(CGFloat)lineSpacing width:(CGFloat)width
+{
+//    str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"];
+    str = [NSString stringWithFormat:@"<head><style>img{width:%f !important;height:auto}</style></head>%@",[UIScreen mainScreen].bounds.size.width,str];
+    
+    NSMutableAttributedString *htmlString =[[NSMutableAttributedString alloc] initWithData:[str dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute:[NSNumber numberWithInt:NSUTF8StringEncoding]} documentAttributes:NULL error:nil];
+//    [htmlString addAttributes:@{NSFontAttributeName:font} range:NSMakeRange(0, htmlString.length)];
+    //设置行间距
+    NSMutableParagraphStyle *paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle1 setLineSpacing:lineSpacing];
+    [htmlString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle1 range:NSMakeRange(0, [htmlString length])];
+    
+    CGSize contextSize = [htmlString boundingRectWithSize:(CGSize){width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
+    return contextSize.height ;
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "MJRefresh.h"
 #import "MJExtension.h"
 #import "CommonDetailsViewController.h"
+#import "NoneTableViewCell.h"
 
 @interface PomeloLimitThreeTableViewController ()
 
@@ -23,10 +24,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"我的报名";
+    
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[CommonTableViewCell class] forCellReuseIdentifier:@"CommonTableViewCell"];
     
     [self tableViewRefresh];
+    
+    [self.tableView.mj_header beginRefreshing];
+    
 }
 
 #pragma mark - Table view data source
@@ -34,7 +41,20 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.tableView.mj_header beginRefreshing];
+    //创建一个UIButton
+    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 40, 40)];
+    //设置UIButton的图像
+    [backButton setImage:[UIImage imageNamed:@"turnleft"] forState:UIControlStateNormal];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
+    __weak typeof(self) weakSelf = self;
+    [[backButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    //覆盖返回按键
+    self.navigationItem.leftBarButtonItem = backItem;
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -59,7 +79,6 @@
     
     NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
     NSDictionary *para = @{@"userid":[ECUtil isBlankString:userid]?@"":userid, @"relationtype":@"已报名"};
-    
     [[HWAFNetworkManager shareManager] userLimitPositionRequest:para userPosition:^(BOOL success, id  _Nonnull request) {
         if (success) {
             NSArray *dicArr = request;
@@ -71,27 +90,40 @@
             }
             [self.tableView reloadData];
         }
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
     }];
-    
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
 }
-
-
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.listArr.count;
+    if (self.listArr.count > 0) {
+        return self.listArr.count;
+    }else {
+        return 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CommonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonTableViewCell"];
-    cell.commonModel = self.listArr[indexPath.row];
-    return cell;
+    if (self.listArr.count > 0) {
+        CommonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonTableViewCell"];
+        cell.commonModel = self.listArr[indexPath.row];
+        return cell;
+    }else {
+        NoneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NoneTableViewCell"];
+        if (!cell) {
+            cell = [[NoneTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NoneTableViewCell"];
+        }
+        return cell;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80;
+    if (self.listArr.count > 0) {
+        return 80;
+    }else {
+        return KSCREEN_HEIGHT;
+    }
 }
 
 - (NSMutableArray *)listArr {
@@ -101,16 +133,6 @@
     return _listArr;
 }
 
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
 
 /*
 // Override to support conditional editing of the table view.

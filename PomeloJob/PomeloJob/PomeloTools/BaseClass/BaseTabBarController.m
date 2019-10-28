@@ -59,7 +59,7 @@
         //[item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor cyanColor], NSFontAttributeName:[UIFont systemFontOfSize:15]} forState:UIControlStateNormal];
         
         [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
-        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:226/255.0 green:78/255.0 blue:119/255.0 alpha:1], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kColor_Main, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
         na.tabBarItem = item;
         [naArr addObject:na];
     }
@@ -70,6 +70,7 @@
 }
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
+    tabBar.tintColor = kColor_Main;
     NSDictionary *para = @{@"adtype":item.title,
                            @"adindex":@"0",//0 表示当前选择类型
                            @"phonecard":[ECUtil getIDFA]};

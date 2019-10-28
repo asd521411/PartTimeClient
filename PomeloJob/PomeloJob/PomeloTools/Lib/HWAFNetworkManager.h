@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^ZHandlerBlock)(BOOL success, id request);
+typedef void(^ZHandlerProgressBlock)(NSProgress *progress);
 
 @interface HWAFNetworkManager : AFHTTPSessionManager
 
@@ -57,7 +58,12 @@ typedef void(^ZHandlerBlock)(BOOL success, id request);
 //1.5
 - (void)resume:(NSDictionary *)parameters selectResumeInfo:(ZHandlerBlock)handler;
 - (void)resume:(NSDictionary *)parameters updateResume:(ZHandlerBlock)handler;
+- (void)resume:(NSDictionary *)parameters images:(NSArray<UIImage *> *)images name:(NSString *)name fileName:(NSString *)filename mimeType:(NSString *)type progress:(ZHandlerProgressBlock)progressHandler updateResume:(ZHandlerBlock)handler;
 
+- (void)appPost:(NSString *)url parameters:(NSDictionary *)parameters image:(UIImage *)image handler:(void(^)(BOOL success, NSDictionary *response))handler;
+
+- (void)opinionRequest:(NSDictionary *)parameters collectTel:(ZHandlerBlock)handler;
+- (void)opinionRequest:(NSDictionary *)parameters collectFeedback:(ZHandlerBlock)handler;
 
 //记录操作
 - (void)clickOperation:(NSDictionary *)parameters advertismentclick:(ZHandlerBlock)handler;
@@ -68,6 +74,20 @@ typedef void(^ZHandlerBlock)(BOOL success, id request);
 
 //我的
 - (void)userInfo:(NSDictionary *)parameters queryMymine:(ZHandlerBlock)handler;
+
+- (void)accountRequest:(NSDictionary *)parameters findPassword:(ZHandlerBlock)handler;
+- (void)accountRequest:(NSDictionary *)parameters updaterefactoruserpassword:(ZHandlerBlock)handler;
+- (void)accountRequest:(NSDictionary *)parameters checkMessage:(ZHandlerBlock)handler;
+- (void)userInfo:(NSDictionary *)parameters selectuserinfo:(ZHandlerBlock)handler;
+- (void)userInfo:(NSDictionary *)parameters images:(NSArray<UIImage *> *)images name:(NSString *)name fileName:(NSString *)filename mimeType:(NSString *)type progress:(ZHandlerProgressBlock)progressHandler updateuserinfo:(ZHandlerBlock)handler;
+//删除收藏
+- (void)position:(NSDictionary *)parameters deleteuserposition:(ZHandlerBlock)handler;
+- (void)position:(NSDictionary *)parameters setuserposition:(ZHandlerBlock)handler;
+- (void)position:(NSDictionary *)parameters collectFeedback:(ZHandlerBlock)handler;
+
+
+
+
 
 @end
 

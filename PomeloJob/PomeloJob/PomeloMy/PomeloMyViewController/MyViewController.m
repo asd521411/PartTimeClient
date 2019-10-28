@@ -24,14 +24,18 @@
 #import "ChangePersonInfoViewController.h"
 #import "MyWeChatTableViewCell.h"
 #import "UserInfoModel.h"
+#import "UIButton+WebCache.h"
+#import "PomeloLimitThreeTableViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
-@interface MyViewController ()<UITableViewDelegate, UITableViewDataSource, HeadBackViewDelegate>
+@interface MyViewController ()<UITableViewDelegate, UITableViewDataSource, HeadBackViewDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) HeadBackView *headBackView;
 @property (nonatomic, strong) UserInfoModel *userInfoModel;
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *listArr;
+@property (nonatomic, copy) NSString *resumecompleteness;
 
 @end
 
@@ -41,39 +45,46 @@
     [super viewDidLoad];
     self.title = @"我的";
     
-    //[self loadData];
     [self setupSubViews];
+    
+//    [self loadData];
     
     // Do any additional setup after loading the view.
 }
 
 //- (void)loadData {
-//    NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
-//    NSDictionary *para = @{@"userid":userid};
 //    [[HWAFNetworkManager shareManager] userInfo:para queryMymine:^(BOOL success, id  _Nonnull request) {
 //        NSLog(@"=====%@", request);
 //        if (success) {
-//            NSValue *value = request[@"status"];
-//            NSLog(@"---------%@", value);
-//            if ([value isEqual:[NSNumber numberWithInt:402]]) {//验证码错误
-//                [SVProgressHUD showErrorWithStatus:request[@"statusMessage"]];
-//                [SVProgressHUD dismissWithDelay:1];
+//            [SVProgressHUD showErrorWithStatus:request[@"statusMessage"]];
+//            [SVProgressHUD dismissWithDelay:1];
+//            if ([request[@"status"] integerValue] == 200) {
+//                 self.resumecompleteness = request[@"body"][@"resumecompleteness"];
 //            }
+//            if ([request[@"status"] integerValue] == 400) {
+//
+//            }
+//
+//
 //        }
 //    }];
 //}
 
 - (BOOL)loginStatus {
     NSString *status = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
-    if ([ECUtil isBlankString:status]) {//空未登陆
+    if ([ECUtil isBlankString:status]) {//空未登录
         return NO;
     }else {
+        NSDictionary *dic = [NSUserDefaultMemory defaultGetwithUnityKey:USERINFO];
+        self.userInfoModel = [UserInfoModel mj_objectWithKeyValues:dic];
+        NSLog(@"userinfo==============%@", dic);
         return YES;
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    //
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setBarTintColor:kColor_Main];
@@ -81,6 +92,9 @@
     
     if ([self loginStatus]) {
         self.headBackView.infoType = InforTypeOn_Line;
+        self.headBackView.modificationControl.nameStr = self.userInfoModel.name;
+        [self.headBackView.portraitImgV sd_setImageWithURL:[NSURL URLWithString:self.userInfoModel.userimg] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portraitImgV"]];
+        [self.tableView reloadData];
     }else {
         self.headBackView.infoType = InforTypeOff_Line;
     }
@@ -89,7 +103,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
-    [self.navigationController.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName, KFontNormalSize18, NSFontAttributeName,nil]];
+    [self.navigationController.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[ECUtil colorWithHexString:@"4a4a4a"], NSForegroundColorAttributeName, KFontNormalSize18, NSFontAttributeName,nil]];
 }
 
 - (void)setupSubViews {
@@ -104,11 +118,13 @@
 - (void)gotoLogin {
     LoginViewController *log = [[LoginViewController alloc] init];
     LoginNavigationController *na = [[LoginNavigationController alloc] initWithRootViewController:log];
+    na.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:na animated:YES completion:nil];
 }
 
 - (void)changeInfoMessage {
     ChangePersonInfoViewController *change = [[ChangePersonInfoViewController alloc] init];
+    change.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:change animated:YES];
 }
 
@@ -124,7 +140,7 @@
     }else if (section == 1) {
         return self.listArr.count;
     }else {
-        return 1;
+        return 0;
     }
 }
 
@@ -132,6 +148,15 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     if (indexPath.section == 0) {
         CompleteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CompleteTableViewCell"];
+        if ([self.userInfoModel.resumecompleteness isEqualToString:@"100%"]) {
+            cell.percentImgV.image = [UIImage imageNamed:@"persent4"];
+        }else if ([self.userInfoModel.resumecompleteness isEqualToString:@"60%"]){
+            cell.percentImgV.image = [UIImage imageNamed:@"persent3"];
+        }else if ([self.userInfoModel.resumecompleteness isEqualToString:@"30%"]){
+            cell.percentImgV.image = [UIImage imageNamed:@"persent2"];
+        }else{
+            cell.percentImgV.image = [UIImage imageNamed:@"persent1"];
+        }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else if (indexPath.section == 1) {
@@ -167,25 +192,49 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        MyResumeViewController *resume = [[MyResumeViewController alloc] init];
-        resume.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:resume animated:YES];
+        if ([self loginStatus]) {
+            MyResumeViewController *resume = [[MyResumeViewController alloc] init];
+            resume.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:resume animated:YES];
+        }else {
+            LoginViewController *log = [[LoginViewController alloc] init];
+            LoginNavigationController *na = [[LoginNavigationController alloc] initWithRootViewController:log];
+            na.modalPresentationStyle = UIModalPresentationFullScreen;
+            [self presentViewController:na animated:YES completion:nil];
+        }
     }
     if (indexPath.section == 1) {
-        UIViewController *vc = [[NSClassFromString(self.listArr[indexPath.row][@"vcname"]) alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([self loginStatus]) {
+            UIViewController *vc = [[NSClassFromString(self.listArr[indexPath.row][@"vcname"]) alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else {
+            LoginViewController *log = [[LoginViewController alloc] init];
+            LoginNavigationController *na = [[LoginNavigationController alloc] initWithRootViewController:log];
+            na.modalPresentationStyle = UIModalPresentationFullScreen;
+            [self presentViewController:na animated:YES completion:nil];
+        }
     }
     if (indexPath.section == 2) {
         
+//        if ([self loginStatus]) {
+//
+//        }else {
+//            LoginViewController *log = [[LoginViewController alloc] init];
+//            LoginNavigationController *na = [[LoginNavigationController alloc] initWithRootViewController:log];
+//            na.modalPresentationStyle = UIModalPresentationFullScreen;
+//            [self presentViewController:na animated:YES completion:nil];
+//        }
+        
     }
+    
 }
 
 #pragma mark getter
 
 - (HeadBackView *)headBackView {
     if (_headBackView == nil) {
-         CGFloat imgH = (KSCREEN_WIDTH * 300/750);
+         CGFloat imgH = (KSCREEN_WIDTH * 280/750);
         _headBackView = [[HeadBackView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, imgH)];
         _headBackView.infoType = InforTypeOff_Line;
         _headBackView.delegate = self;
@@ -211,12 +260,15 @@
 
 - (NSArray *)listArr {
     if (!_listArr) {
-        _listArr = @[@{@"img":@"wodebaoming",@"title":@"我的报名", @"vcname":@"MyCollectResignViewController"},
+        _listArr = @[@{@"img":@"wodebaoming",@"title":@"我的报名", @"vcname":@"PomeloLimitThreeTableViewController"},
                      @{@"img":@"wodeshoucang",@"title":@"我的收藏", @"vcname":@"MyCollectResignViewController"},
-                     @{@"img":@"shezhi",@"title":@"设      置", @"vcname":@"PomeloSetViewController"}];
+                     @{@"img":@"shezhi",@"title":@"设      置", @"vcname":@"PomeloSetViewController"},
+                     @{@"img":@"shangwuqitan",@"title":@"商务洽谈", @"vcname":@"BusinessRelationViewController"}];
     }
     return _listArr;
 }
+
+
 
 /*
 #pragma mark - Navigation

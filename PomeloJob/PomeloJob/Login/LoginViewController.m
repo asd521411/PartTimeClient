@@ -47,12 +47,26 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.hidden = NO;
+    
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timer:) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     [self.timer setFireDate:[NSDate distantFuture]];
+    [self.getCode setTitle:@"获取验证码" forState:UIControlStateNormal];
 }
 
 - (void)setupSubViews {
@@ -70,11 +84,13 @@
 }
 
 - (void)verificationCodeLoginStyle {
-    self.titleLab.text = @"短信验证登陆/注册";
+    self.titleLab.text = @"短信验证登录/注册";
     self.phoneTextFd.placeholder = @"请输入您的手机号";
     self.verifyCodeTextFd.placeholder = @"验证码";
-    [self.loginStyle setTitle:@"用密码登陆" forState:UIControlStateNormal];
+    self.verifyCodeTextFd.secureTextEntry = NO;
     self.verifyCodeTextFd.keyboardType = UIKeyboardTypeNumberPad;
+    [self.loginStyle setTitle:@"用密码登录" forState:UIControlStateNormal];
+    [self.getCode setTitle:@"获取验证码" forState:UIControlStateNormal];
     [self.findPasswordBtn setTitle:@"收不到验证码？" forState:UIControlStateNormal];
     [self.loginBtn setBackgroundColor:kColor_UnSelect];
     //self.loginBtn.userInteractionEnabled = NO;
@@ -82,10 +98,11 @@
 }
 
 - (void)passwordLoginStyle {
-    self.titleLab.text = @"账号密码登陆";
+    self.titleLab.text = @"帐号密码登录";
     self.verifyCodeTextFd.placeholder = @"密码";
-    [self.loginStyle setTitle:@"用短信验证登陆/注册" forState:UIControlStateNormal];
+    self.verifyCodeTextFd.secureTextEntry = YES;
     self.verifyCodeTextFd.keyboardType = UIKeyboardTypeASCIICapable;
+    [self.loginStyle setTitle:@"用短信验证登录/注册" forState:UIControlStateNormal];
     [self.findPasswordBtn setTitle:@"找回密码" forState:UIControlStateNormal];
     [self.loginBtn setBackgroundColor:[ECUtil colorWithHexString:@"a8a8a8"]];
     //self.loginBtn.userInteractionEnabled = NO;
@@ -119,6 +136,7 @@
     if (send.selected) {
         [self verificationCodeLoginStyle];
         self._86BackV.hidden = NO;
+        self.getCode.hidden = NO;
 //        self.phoneTextFd.text = nil;
         self.verifyCodeTextFd.text = nil;
         [self.phoneTextFd mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -129,6 +147,7 @@
         }];
     }else {
         [self passwordLoginStyle];
+        self.getCode.hidden = YES;
         self._86BackV.hidden = YES;
 //        self.phoneTextFd.text = nil;
         self.verifyCodeTextFd.text = nil;
@@ -178,10 +197,8 @@
 
 - (void)login {
     
-    
-    
     NSDictionary *para = nil;
-    if (!self.loginStyleBtn.selected) {//验证码登陆
+    if (!self.loginStyleBtn.selected) {//验证码登录
         para = @{@"usertel":self.phoneTextFd.text,
                  @"Message":self.verifyCodeTextFd.text,
                  @"password":@"",
@@ -194,10 +211,15 @@
                  @"phonecard":[ECUtil getIDFA],
         };
     }
+    //限制点击
+    self.loginBtn.userInteractionEnabled = NO;
+    
     [[HWAFNetworkManager shareManager] accountRequest:para loginByMessageAndPassword:^(BOOL success, id  _Nonnull request) {
         NSDictionary *dic = (NSDictionary *)request;
         NSLog(@"========%@", dic);
         if (success) {
+            self.loginBtn.userInteractionEnabled = YES;
+            
             NSValue *value = dic[@"status"];
             if ([value isEqual:[NSNumber numberWithInt:402]]) {//验证码错误
                 [SVProgressHUD showErrorWithStatus:dic[@"statusMessage"]];
@@ -210,10 +232,6 @@
                 verify.phoneNum = self.phoneTextFd.text;
                 verify.inputCodeType = InputCodeTypePassword;
                 [self.navigationController pushViewController:verify animated:YES];
-            }
-            if ([value isEqual:[NSNumber numberWithInt:402]]) {//验证码错误
-                [SVProgressHUD showErrorWithStatus:dic[@"statusMessage"]];
-                [SVProgressHUD dismissWithDelay:1];
             }
             
             if ([value isEqual:[NSNumber numberWithInt:200]]) {
@@ -469,12 +487,13 @@
             NSString *str = (NSString *)x;
             if (strongSelf.loginStyleBtn.selected) {
         
+                if (strongSelf.phoneTextFd.text.length == 11 && str.length >= 6) {
+                    strongSelf.loginBtn.backgroundColor = kColor_Main;
+                }else {
+                    strongSelf.loginBtn.backgroundColor = [ECUtil colorWithHexString:@"a8a8a8"];
+                }
                 if (str.length >= 16) {
                     strongSelf->_verifyCodeTextFd.text = [str substringToIndex:16];
-                }
-                
-                if (strongSelf.phoneTextFd.text.length == 11) {
-                    strongSelf.loginBtn.backgroundColor = kColor_Main;
                 }
                 
             }else {
@@ -498,7 +517,6 @@
         _getCode.backgroundColor = kColor_Main;
         _getCode.layer.cornerRadius = 14;
         _getCode.layer.masksToBounds = YES;
-        [_getCode setTitle:@"获取验证码" forState:UIControlStateNormal];
         _getCode.titleLabel.font = KFontNormalSize12;
         [_getCode addTarget:self action:@selector(getCodeAction:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -532,7 +550,7 @@
         _loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _loginBtn.layer.cornerRadius = 3;
         _loginBtn.layer.masksToBounds = YES;
-        [_loginBtn setTitle:@"登 陆" forState:UIControlStateNormal];
+        [_loginBtn setTitle:@"登 录" forState:UIControlStateNormal];
         [_loginBtn addTarget:self action:@selector(loginBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _loginBtn;
@@ -544,6 +562,8 @@
         [_backBtn setImage:[UIImage imageNamed:@"loginclose"] forState:UIControlStateNormal];
         __weak typeof(self) weakSelf = self;
         [[_backBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+            [weakSelf.phoneTextFd resignFirstResponder];
+            [weakSelf.verifyCodeTextFd resignFirstResponder];
             [weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
         }];
     }
@@ -553,7 +573,7 @@
 - (YYLabel *)agreement_yylab {
     if (_agreement_yylab == nil) {
         _agreement_yylab = [[YYLabel alloc] init];
-        NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc] initWithString:@"登陆即代表你已同意《柚选隐私政策》"];
+        NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc] initWithString:@"登录即代表你已同意《柚选隐私政策》"];
         mutStr.yy_alignment = NSTextAlignmentCenter;
         mutStr.yy_font = kFontNormalSize(16);
         mutStr.yy_color = [ECUtil colorWithHexString:@"b7b7b7"];

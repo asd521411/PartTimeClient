@@ -19,6 +19,8 @@ typedef void(^InputContentBlock)(NSString *content);
 
 @interface ResumeInputViewController : BaseViewController
 
+@property (nonatomic, copy) NSString *titleStr;
+
 @property (nonatomic, copy) NSString *placeHolder;
 
 @property (nonatomic, assign) InputType inputType;

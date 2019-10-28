@@ -220,7 +220,7 @@
     [self.backScrollV addSubview:login];
     switch (self.entranceType) {
         case VerifyLoginStyle:
-            [login setTitle:@"登   陆" forState:UIControlStateNormal];
+            [login setTitle:@"登   录" forState:UIControlStateNormal];
             break;
         case ForgetPassword:
             [login setTitle:@"输入新密码" forState:UIControlStateNormal];

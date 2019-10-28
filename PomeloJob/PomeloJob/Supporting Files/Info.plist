@@ -12,6 +12,11 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>zh_CN</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
@@ -30,7 +35,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -46,6 +51,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>如果不允许，你可能无法正常使用“柚选”提供的头像修改、投诉反馈等服务。</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>如果不允许，你无法保存图片或头像到本地</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>如果不允许，你可能无法正常使用“柚选”提供的头像修改、投诉反馈等服务。</string>
 	<key>UIMainStoryboardFile</key>
