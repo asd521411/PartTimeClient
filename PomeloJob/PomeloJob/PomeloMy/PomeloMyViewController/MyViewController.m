@@ -61,7 +61,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];//去线
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setBarTintColor:kColor_Main];
     [self.navigationController.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, KFontNormalSize18,NSFontAttributeName,nil]];
@@ -71,11 +71,17 @@
         NSString *userid = [NSString stringWithFormat:@"%@", [NSUserDefaultMemory defaultGetwithUnityKey:USERID]];
         NSDictionary *para = @{@"userid":userid};
         [[HWAFNetworkManager shareManager] userInfo:para queryMymine:^(BOOL success, id  _Nonnull request) {
+            NSLog(@"===========%@", request);
             if (success) {
                 if ([request[@"status"] integerValue] == 200) {
-                    [SVProgressHUD showWithStatus:request[@""]];
-                    [SVProgressHUD dismissWithDelay:1];
-                    self.resumecompleteness = request[@"body"][@"resumecompleteness"];
+//                    [SVProgressHUD showWithStatus:request[@""]];
+//                    [SVProgressHUD dismissWithDelay:1];
+                    if ([ECUtil isBlankString:request[@"body"][@"resumecompleteness"]]) {
+                         self.resumecompleteness = @"0%";
+                    }else {
+                        self.resumecompleteness = request[@"body"][@"resumecompleteness"];
+                    }
+                    
                 }
                 [self.tableView reloadData];
             }

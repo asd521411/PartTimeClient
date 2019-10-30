@@ -71,7 +71,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"职位详情";
     ////[self firstLogin];
 
     [self setupTableViews];
@@ -80,7 +80,7 @@
 
     [self setupConnectViews];
 
-    ////[self setupTopMaskViews];
+    //[self setupTopMaskViews];
 
     [self setupMaskViews];
 
@@ -93,6 +93,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+//    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[ECUtil colorWithHexString:@"4a4a4a"],NSForegroundColorAttributeName, KFontNormalSize18,NSFontAttributeName,nil]];
     
     NSDictionary *para = @{@"adtype":self.clickStyleStr,
                            @"adindex":self.indexStr,
@@ -116,6 +121,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    //self.navigationController.navigationBar.translucent = NO;
+    
     [self.tableView.mj_header endRefreshing];
 }
 
@@ -151,7 +158,7 @@
 
 - (void)setupTableViews {
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [ECStyle navigationbarHeight], KSCREEN_WIDTH, KSCREEN_HEIGHT - [ECStyle navigationbarHeight] - [ECStyle toolbarHeight]) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [ECStyle navigationbarHeight], KSCREEN_WIDTH, KSCREEN_HEIGHT-[ECStyle navigationbarHeight]-(42+[ECStyle tabbarExtensionHeight]+5)) style:UITableViewStyleGrouped];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
@@ -160,11 +167,11 @@
     UIView *head = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, 0.1)];
     self.tableView.tableHeaderView = head;
     
-//    if (@available(iOS 11.0, *)) {
-//        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-//    } else {
-//        self.automaticallyAdjustsScrollViewInsets = NO;
-//    }
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
 
 - (void)setupConnectViews {
@@ -320,9 +327,9 @@
     [win addSubview:self.resumeMaskBackV];
     self.resumeMaskBackV.hidden = YES;
 
-    CGFloat wid = KSCREEN_WIDTH - 128;
-    CGFloat hei = wid * 331 / 492;
-    UIView *back = [[UIView alloc] initWithFrame:CGRectMake((KSCREEN_WIDTH-wid)/2, 70, wid, hei)];
+    CGFloat wid = 275;//KSCREEN_WIDTH - 130;
+    CGFloat hei = 184;//wid * 331 / 492;
+    UIView *back = [[UIView alloc] initWithFrame:CGRectMake((KSCREEN_WIDTH-wid)/2, 100, wid, hei)];
     back.backgroundColor = [UIColor whiteColor];
     back.layer.cornerRadius = 20;
     back.layer.masksToBounds = YES;
@@ -334,15 +341,15 @@
     backImgV.center = CGPointMake(back.width/2, 60);
     [back addSubview:backImgV];
     
-    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, backImgV.bottom+10, back.width, 15)];
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, backImgV.bottom+10, back.width, 18)];
     lab.textColor = kColor_Main;
     lab.numberOfLines = 0;
-    lab.font = kFontNormalSize(14);
+    lab.font = kFontNormalSize(16);
     lab.text = @"还没完善简历呢，快去完善简历吧！";
     lab.textAlignment = NSTextAlignmentCenter;
     [back addSubview:lab];
     
-    self.completeBtn.frame = CGRectMake(60, lab.bottom+10, back.width-120, 30);
+    self.completeBtn.frame = CGRectMake(70, lab.bottom+10, back.width-140, 34);
     [back addSubview:self.completeBtn];
     
 }
@@ -419,8 +426,8 @@
     //[self.view addSubview:self.maskBackV];
     [win addSubview:self.maskBackV];
     
-    CGFloat wid = KSCREEN_WIDTH - 128;
-    CGFloat hei = wid * 331 / 492;
+    CGFloat wid = 275;//KSCREEN_WIDTH - 130;
+    CGFloat hei = 184;//wid * 331 / 492;
     UIImageView *backImgV = [[UIImageView alloc] initWithFrame:CGRectMake((KSCREEN_WIDTH-wid)/2, 112, wid, hei)];
     backImgV.backgroundColor = [UIColor whiteColor];
     backImgV.layer.cornerRadius = 5;
@@ -436,11 +443,13 @@
     lab.text = @"请主动联系公司咨询相关工作内容，完成录取流程。";
     //[backImgV addSubview:lab];
     
+    CGFloat w = 80;
+    
     UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"xiangqingtishi"]];
-    img.frame = CGRectMake((backImgV.width-80)/2, 20, 80, 80);
+    img.frame = CGRectMake((backImgV.width-w)/2, 10, w, w);
     [backImgV addSubview:img];
     
-    UILabel *connect = [[UILabel alloc] initWithFrame:CGRectMake(10, backImgV.height - 90, backImgV.width-20, 20)];
+    UILabel *connect = [[UILabel alloc] initWithFrame:CGRectMake(10, img.bottom, backImgV.width-20, 16)];
     connect.textAlignment = NSTextAlignmentCenter;
     connect.textColor = kColor_Main;
     connect.font = KFontNormalSize16;
@@ -448,14 +457,16 @@
     [backImgV addSubview:connect];
     
     self.connectType = [[UILabel alloc] init];
-    self.connectType.textAlignment = NSTextAlignmentLeft;
-    //connect1.textColor = [ECUtil colorWithHexString:@"5c5c5c"];
+    self.connectType.textAlignment = NSTextAlignmentCenter;
+    self.connectType.textColor = kColor_Main;
     self.connectType.font = KFontNormalSize16;
-    self.connectType.text = @"    ";
-    //[backImgV addSubview:self.connectType];
+    self.connectType.text = @"联系方式";
+    [backImgV addSubview:self.connectType];
     [self.connectType mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(connect.mas_right).offset(10);
-        make.top.mas_equalTo(connect.mas_top);
+        make.left.mas_equalTo(connect.mas_left);
+        make.right.mas_equalTo(connect.mas_right);
+        make.top.mas_equalTo(connect.mas_bottom).offset(10);
+        make.height.mas_equalTo(16);
     }];
     
     self.connectNum = [[UILabel alloc] init];
@@ -471,9 +482,9 @@
     
     UIButton *pasteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     pasteBtn.backgroundColor = kColor_Main;
-    pasteBtn.frame = CGRectMake(60, backImgV.height - 57, wid - 60 * 2, 38);
+    pasteBtn.frame = CGRectMake(60, backImgV.height - 42, wid - 60 * 2, 32);
     [pasteBtn setTitle:@"复制联系方式" forState:UIControlStateNormal];
-    pasteBtn.layer.cornerRadius = 19;
+    pasteBtn.layer.cornerRadius = 16;
     pasteBtn.layer.masksToBounds = YES;
     [backImgV addSubview:pasteBtn];
     __weak typeof(self) weakSelf = self;
@@ -568,11 +579,6 @@
                     [self.listArr addObject:self.commonModel];
                     [self.tableView reloadData];
                 }
-                
-                
-                
-                
-                
             }
         }
         [self.tableView.mj_header endRefreshing];
@@ -864,7 +870,7 @@
     if (_completeBtn == nil) {
         _completeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _completeBtn.backgroundColor = kColor_Main;
-        _completeBtn.layer.cornerRadius = 15;
+        _completeBtn.layer.cornerRadius = 17;
         _completeBtn.layer.masksToBounds = YES;
         [_completeBtn setTitle:@"完善简历" forState:UIControlStateNormal];
         [_completeBtn addTarget:self action:@selector(completeBtnAction:) forControlEvents:UIControlEventTouchUpInside];

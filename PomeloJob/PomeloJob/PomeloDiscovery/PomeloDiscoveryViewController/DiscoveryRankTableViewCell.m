@@ -52,21 +52,21 @@
     }];
     
     [self.rankImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(70);
+        make.left.mas_equalTo(60);
         make.width.height.mas_equalTo(15);
         make.top.mas_equalTo(self.rankNum.mas_top);
     }];
     
     [self.backImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.mas_equalTo(self);
-        make.left.mas_equalTo(100);
+        make.left.mas_equalTo(90);
         make.right.mas_equalTo(self);
     }];
     
     [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(15);
         make.left.mas_equalTo(15);
-        make.right.mas_equalTo(-120);
+        make.right.mas_equalTo(-90);
         make.height.mas_equalTo(18);
 
     }];
@@ -209,7 +209,7 @@
 - (UILabel *)titleLab {
     if (!_titleLab) {
         _titleLab = [[UILabel alloc] init];
-        _titleLab.font = KFontNormalSize18;
+        _titleLab.font = KFontNormalSize16;
         _titleLab.textAlignment = NSTextAlignmentLeft;
     }
     return _titleLab;

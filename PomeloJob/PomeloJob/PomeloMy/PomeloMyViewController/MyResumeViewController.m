@@ -135,7 +135,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setBarTintColor:kColor_Main];
     [self.navigationController.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, KFontNormalSize18,NSFontAttributeName,nil]];
@@ -208,7 +208,7 @@
 
 - (void)fillnicknameBtnAction:(UIButton *)sender {
     ResumeInputViewController *input = [[ResumeInputViewController alloc] init];
-    input.placeHolder = self.fillnicknameBtn.titleLabel.text;
+    input.placeHolder = self.fillnicknameBtn.currentTitle;
     input.inputType = InputTypeWorkPosition;
     input.titleStr = @"姓名";
     __weak typeof(self) weakSelf = self;
@@ -231,10 +231,10 @@
     
     NSValue *value = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
     NSString *userid = [NSString stringWithFormat:@"%@", value];
-    UIImage *image = self.portraitImg==nil?[UIImage imageNamed:@"portraitImgV"]:self.portraitImg;
+    UIImage *image = self.portraitImg;
     NSDictionary *para = @{@"userid":userid,
                            //@"imgfile":imageData,//上传图片
-                           @"resumename":self.fillnicknameBtn.titleLabel.text,//简历中的姓名
+                           @"resumename":self.fillnicknameBtn.currentTitle,//简历中的姓名
                            @"resumesex":self.baseinfoModel.resumesex,//简历中的性别
                            @"resumebirthday":self.baseinfoModel.resumebirthday,//简历中的生日
                            @"resumeidentity":self.baseinfoModel.resumeidentity,//简历中的身份
@@ -266,11 +266,19 @@
 }
 
 - (BOOL)alreadyConformCondition {
-    if ([ECUtil isBlankString:self.fillnicknameBtn.titleLabel.text] || [self.fillnicknameBtn.titleLabel.text isEqualToString:@"请输入姓名"]) {
+    
+    if (self.portraitImg == nil) {
+        [SVProgressHUD showInfoWithStatus:@"请选择头像"];
+        [SVProgressHUD dismissWithDelay:1];
+        return NO;
+    }
+    
+    if ([ECUtil isBlankString:self.fillnicknameBtn.currentTitle] || (self.fillnicknameBtn.currentTitle.length == 0) || [self.fillnicknameBtn.currentTitle isEqualToString:@"请输入姓名"]) {
         [SVProgressHUD showInfoWithStatus:@"请输入姓名"];
         [SVProgressHUD dismissWithDelay:1];
         return NO;
     }
+    
     if ([ECUtil isBlankString:self.baseinfoModel.resumesex]) {
         [SVProgressHUD showInfoWithStatus:@"请选择性别"];
         [SVProgressHUD dismissWithDelay:1];

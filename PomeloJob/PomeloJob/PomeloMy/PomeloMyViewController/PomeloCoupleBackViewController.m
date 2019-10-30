@@ -124,7 +124,7 @@
         if (str.length >= 200) {
             strongSelf.textFdV.text = [str substringToIndex:200];
         }
-        strongSelf.lab2.text =  [@"(" stringByAppendingString:[[NSString stringWithFormat:@"%lu", (unsigned long)strongSelf.textFdV.text.length] stringByAppendingString:@"/200以内)"]];
+        strongSelf.lab2.text =  [@"(" stringByAppendingString:[[NSString stringWithFormat:@"%lu", (unsigned long)strongSelf.textFdV.text.length] stringByAppendingString:@"/200)"]];
         
         if (strongSelf.textFdV.text.length > 0 && [strongSelf.phoneTextFd.text n6_isMobile]) {
             strongSelf.loginBtn.backgroundColor = kColor_Main;

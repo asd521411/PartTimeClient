@@ -88,7 +88,7 @@
     self.phoneTextFd.placeholder = @"请输入您的手机号";
     self.verifyCodeTextFd.placeholder = @"验证码";
     self.verifyCodeTextFd.secureTextEntry = NO;
-    self.verifyCodeTextFd.keyboardType = UIKeyboardTypeNumberPad;
+    //self.verifyCodeTextFd.keyboardType = UIKeyboardTypeNumberPad;
     [self.loginStyle setTitle:@"用密码登录" forState:UIControlStateNormal];
     [self.getCode setTitle:@"获取验证码" forState:UIControlStateNormal];
     [self.findPasswordBtn setTitle:@"收不到验证码？" forState:UIControlStateNormal];
@@ -101,7 +101,7 @@
     self.titleLab.text = @"帐号密码登录";
     self.verifyCodeTextFd.placeholder = @"密码";
     self.verifyCodeTextFd.secureTextEntry = YES;
-    self.verifyCodeTextFd.keyboardType = UIKeyboardTypeASCIICapable;
+    //self.verifyCodeTextFd.keyboardType = UIKeyboardTypeDefault;
     [self.loginStyle setTitle:@"用短信验证登录/注册" forState:UIControlStateNormal];
     [self.findPasswordBtn setTitle:@"找回密码" forState:UIControlStateNormal];
     [self.loginBtn setBackgroundColor:[ECUtil colorWithHexString:@"a8a8a8"]];
@@ -133,7 +133,9 @@
 }
 
 - (void)loginStyleAction:(UIButton *)send {
-    if (send.selected) {
+    [self.verifyCodeTextFd resignFirstResponder];
+    
+    if (self.loginStyleBtn.selected) {
         [self verificationCodeLoginStyle];
         self._86BackV.hidden = NO;
         self.getCode.hidden = NO;
@@ -145,6 +147,7 @@
             make.width.mas_equalTo(KSCREEN_WIDTH-120);
             make.height.mas_equalTo(25);
         }];
+        //self.verifyCodeTextFd.keyboardType = UIKeyboardTypeNumberPad;
     }else {
         [self passwordLoginStyle];
         self.getCode.hidden = YES;
@@ -157,8 +160,10 @@
                make.width.mas_equalTo(KSCREEN_WIDTH-60);
                make.height.mas_equalTo(25);
         }];
+        //self.verifyCodeTextFd.keyboardType = UIKeyboardTypeDefault;
     }
-    send.selected = !send.selected;
+    self.verifyCodeTextFd.keyboardType = self.loginStyleBtn.selected?UIKeyboardTypeNumberPad:UIKeyboardTypeDefault;
+    self.loginStyleBtn.selected = !self.loginStyleBtn.selected;
 }
 
 - (void)findPasswordAction:(UIButton *)send {
@@ -226,13 +231,19 @@
                 [SVProgressHUD showErrorWithStatus:dic[@"statusMessage"]];
                 [SVProgressHUD dismissWithDelay:1];
             }
+            
             if ([value isEqual:[NSNumber numberWithInt:401]]) {//未注册
-                //[SVProgressHUD showInfoWithStatus:dic[@"statusMessage"]];
-                //[SVProgressHUD dismissWithDelay:1];
-                VerifyCodeViewController *verify = [[VerifyCodeViewController alloc] init];
-                verify.phoneNum = self.phoneTextFd.text;
-                verify.inputCodeType = InputCodeTypePassword;
-                [self.navigationController pushViewController:verify animated:YES];
+                if (self.loginStyleBtn.selected) {
+                    [SVProgressHUD showInfoWithStatus:@"手机号未注册"];
+                    [SVProgressHUD dismissWithDelay:1];
+                }else {
+                    //[SVProgressHUD showInfoWithStatus:dic[@"statusMessage"]];
+                    //[SVProgressHUD dismissWithDelay:1];
+                    VerifyCodeViewController *verify = [[VerifyCodeViewController alloc] init];
+                    verify.phoneNum = self.phoneTextFd.text;
+                    verify.inputCodeType = InputCodeTypePassword;
+                    [self.navigationController pushViewController:verify animated:YES];
+                }
             }
             
             if ([value isEqual:[NSNumber numberWithInt:200]]) {
@@ -488,12 +499,13 @@
         _verifyCodeTextFd = [[UITextField alloc] init];
         _verifyCodeTextFd.font = kFontNormalSize(18);
         _verifyCodeTextFd.textAlignment = NSTextAlignmentLeft;
+        _verifyCodeTextFd.keyboardType = UIKeyboardTypeNumberPad;
         __weak typeof(self) weakSelf = self;
         [[_verifyCodeTextFd rac_textSignal] subscribeNext:^(id x) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
             NSString *str = (NSString *)x;
+            
             if (strongSelf.loginStyleBtn.selected) {
-        
                 if (strongSelf.phoneTextFd.text.length == 11 && str.length >= 6) {
                     strongSelf.loginBtn.backgroundColor = kColor_Main;
                 }else {

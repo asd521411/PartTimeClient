@@ -41,6 +41,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[ECUtil colorWithHexString:@"4a4a4a"],NSForegroundColorAttributeName, KFontNormalSize18,NSFontAttributeName,nil]];
+    
     //创建一个UIButton
     UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 40, 40)];
     //设置UIButton的图像
@@ -117,6 +122,16 @@
         return cell;
     }
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    CommonDetailsViewController *detail = [[CommonDetailsViewController alloc] init];
+    CommonModel *model = self.listArr[indexPath.row];
+    detail.clickStyleStr = @"立即报名";//self.cellTitle;//立即报名
+    detail.positionid = model.positionid;
+    detail.indexStr = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
+    [self.navigationController pushViewController:detail animated:YES];
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.listArr.count > 0) {

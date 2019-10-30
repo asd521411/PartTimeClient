@@ -30,6 +30,7 @@
 @property (nonatomic, strong) UserInfoModel *userInfoModel;
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @property (nonatomic, strong) UIImage *portraitImg;
+@property (nonatomic, copy) NSString *nameStr;
 
 @end
 
@@ -64,7 +65,6 @@
     //覆盖返回按键
     self.navigationItem.leftBarButtonItem = backItem;
     
-    //[self loadData];
 }
 
 - (void)loadData {
@@ -76,7 +76,11 @@
         if (success) {
             if ([request[@"status"] integerValue] == 200) {
                 self.userInfoModel = [UserInfoModel mj_objectWithKeyValues:request[@"userinfo"]];
-                [self.fillnicknameBtn setTitle:self.userInfoModel.username forState:UIControlStateNormal];
+                if ([ECUtil isBlankString:self.userInfoModel.username]) {
+                    [self.fillnicknameBtn setTitle:@"请填写姓名" forState:UIControlStateNormal];
+                }else {
+                    [self.fillnicknameBtn setTitle:self.userInfoModel.username forState:UIControlStateNormal];
+                }
                 
                 if ([ECUtil isBlankString:self.userInfoModel.userimg]) {
                     [self.headBackView.portraitImgV sd_setBackgroundImageWithURL:[NSURL URLWithString:self.userInfoModel.userimg] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portraitImgV"]];
@@ -103,7 +107,7 @@
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headBackView;
     [self.tableView addSubview:self.saveBtn];
-    
+
     UIWindow *win = [[UIApplication sharedApplication] delegate].window;
     [win addSubview:self.datePickerBackV];
     [self.datePickerBackV addSubview:self.cancelBtn];
@@ -117,10 +121,9 @@
 
 - (void)fillnicknameBtnAction:(UIButton *)sender {
     ResumeInputViewController *input = [[ResumeInputViewController alloc] init];
-    input.placeHolder = self.fillnicknameBtn.titleLabel.text;
+    input.placeHolder = self.fillnicknameBtn.currentTitle;
     input.inputType = InputTypeWorkPosition;
     input.titleStr = @"修改昵称";
-    input.placeHolder = self.fillnicknameBtn.titleLabel.text;
     __weak typeof(self) weakSelf = self;
     input.inputContentBlock = ^(NSString * _Nonnull content) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -134,11 +137,10 @@
 }
 
 - (void)sureBtnAction:(UIButton *)sender {
-    if (self.datePicker.hidden == NO) {
-        if (self.section == 0) {
-            if (self.row == 1) {
-                self.userInfoModel.userbirthday = self.birthday;
-            }
+    
+    if (self.section == 0) {
+        if (self.row == 1) {
+            self.userInfoModel.userbirthday = self.birthday;
         }
     }
     //刷新cell
@@ -170,9 +172,9 @@
         return;
     }
     NSString *userid = [NSString stringWithFormat:@"%@", [NSUserDefaultMemory defaultGetwithUnityKey:USERID]];
-    UIImage *image = self.portraitImg==nil?[UIImage imageNamed:@"portraitImgV"]:self.portraitImg;
+    UIImage *image = self.portraitImg;
     NSDictionary *para = @{@"userid":userid,
-                           @"username":self.fillnicknameBtn.titleLabel.text,//简历中的姓名
+                           @"username":self.fillnicknameBtn.currentTitle,//简历中的姓名
                            @"usersex":self.userInfoModel.usersex,//简历中的性别
                            @"userbirthday":self.userInfoModel.userbirthday,//简历中的生日
     };
@@ -198,11 +200,25 @@
 }
 
 - (BOOL)alreadyConformCondition {
-    if ([ECUtil isBlankString:self.fillnicknameBtn.titleLabel.text] ) {
+    
+    if (self.portraitImg == nil) {
+        [SVProgressHUD showInfoWithStatus:@"请选择头像"];
+        [SVProgressHUD dismissWithDelay:1];
+        return NO;
+    }
+    
+    if ([ECUtil isBlankString:self.fillnicknameBtn.currentTitle] || (self.fillnicknameBtn.currentTitle.length == 0) || [self.fillnicknameBtn.currentTitle isEqualToString:@"请输入姓名"]) {
         [SVProgressHUD showInfoWithStatus:@"请输入姓名"];
         [SVProgressHUD dismissWithDelay:1];
         return NO;
     }
+    
+    if ([self.fillnicknameBtn.currentTitle isEqualToString:@"请填写姓名"]) {
+        [SVProgressHUD showInfoWithStatus:@"请输入姓名"];
+        [SVProgressHUD dismissWithDelay:1];
+        return NO;
+    }
+    
     return YES;
 }
 

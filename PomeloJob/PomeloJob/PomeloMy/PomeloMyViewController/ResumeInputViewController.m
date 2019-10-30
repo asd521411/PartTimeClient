@@ -141,7 +141,7 @@
             break;
         case InputTypeWorkPosition:
             if (self.inputContentBlock) {
-                self.inputContentBlock([ECUtil isBlankString:self.inputTextFd.text]?@"":self.inputTextFd.text);
+                self.inputContentBlock(self.inputTextFd.text.length==0?@"":self.inputTextFd.text);
             }
         default:
             break;
@@ -174,8 +174,9 @@
 - (UITextField *)inputTextFd {
     if (_inputTextFd == nil) {
         _inputTextFd = [[UITextField alloc] initWithFrame:CGRectMake(15, 40, KSCREEN_WIDTH-30, 40)];
-        if ([ECUtil isBlankString:self.placeHolder]) {
+        if (self.placeHolder.length == 0 || [self.placeHolder isEqualToString:@"请输入姓名"] || [self.placeHolder isEqualToString:@"请填写姓名"] || [ECUtil isBlankString:self.placeHolder]) {
             _inputTextFd.placeholder = @"请输入";
+            _inputTextFd.text = @"";
         }else {
             _inputTextFd.text = self.placeHolder;
         }
@@ -191,6 +192,7 @@
             if (str.length >= 16) {
                 strongSelf.inputTextFd.text = [str substringToIndex:16];
             }
+            strongSelf.inputTextFd.text = str;
         }];
     }
     return _inputTextFd;

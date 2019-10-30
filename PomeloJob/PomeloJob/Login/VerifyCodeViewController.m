@@ -123,8 +123,8 @@
     [[self.loginBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         __block typeof(weakSelf) strongSelf = weakSelf;
         
-        if (textFd1.text.length <= 6 || textFd2.text.length <= 6) {
-            [SVProgressHUD showWithStatus:@"7-16位密码！"];
+        if (textFd1.text.length < 6 || textFd2.text.length < 6) {
+            [SVProgressHUD showWithStatus:@"6-16位密码！"];
             [SVProgressHUD dismissWithDelay:1];
             return ;
         }
