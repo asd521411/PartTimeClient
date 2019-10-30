@@ -26,7 +26,8 @@
     self = [super initWithBaseURL:url];
     if (self) {
         [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-        //self.requestSerializer = [AFHTTPRequestSerializer serializer];
+        self.requestSerializer = [AFHTTPRequestSerializer serializer];
+        self.requestSerializer.timeoutInterval = 10.0;
         self.responseSerializer = [[AFJSONResponseSerializer alloc] init];
         __weak HWAFNetworkManager *weakSelf = self;
         [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"" object:nil] subscribeNext:^(id x) {
@@ -73,10 +74,27 @@
     url = [PartTimeBaseUrl stringByAppendingString:url];
     return [self GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *response = (NSDictionary *)responseObject;
+        
+//        if ([response[@"status"] integerValue] == 200) {
+//
+//        }else if ([response[@"status"] integerValue] == 400) {
+//
+//        }else if ([response[@"status"] integerValue] == 401) {
+//
+//        }else {
+//            [SVProgressHUD showInfoWithStatus:@"连接超时！"];
+//            [SVProgressHUD dismissWithDelay:1];
+//        }
+        
         [self handleData:response withHandle:handler];
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"failure---------%@=======%@", task, error);
         [self handleError:error withHandle:handler];
+        [SVProgressHUD showErrorWithStatus:@"请求失败!"];
+        [SVProgressHUD dismissWithDelay:1];
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+        NSInteger statuscode = response.statusCode;
+        NSLog(@"error===========%ld", (long)statuscode);
     }];
     
 }
@@ -96,16 +114,29 @@
     NSData *imageData = UIImageJPEGRepresentation(imageq, 0.5);
     
     [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        
         [formData appendPartWithFileData:imageData name:@"portrait" fileName:@"imgfile" mimeType:@"JPEG"];
-        
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         handler(YES, responseObject);
+        NSDictionary *response = (NSDictionary *)responseObject;
+//        if ([response[@"status"] integerValue] == 200) {
+//
+//        }else if ([response[@"status"] integerValue] == 400) {
+//
+//        }else if ([response[@"status"] integerValue] == 401) {
+//
+//        }else {
+//            [SVProgressHUD showInfoWithStatus:@"连接超时！"];
+//            [SVProgressHUD dismissWithDelay:1];
+//        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"failure---------%@=======%@", task, error);
+        [SVProgressHUD showErrorWithStatus:@"请求失败!"];
+        [SVProgressHUD dismissWithDelay:1];
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+        NSInteger statuscode = response.statusCode;
+        NSLog(@"error===========%ld", (long)statuscode);
     }];
 }
 
@@ -115,12 +146,31 @@
         [self handleError:[[NSError alloc] initWithDomain:@"network" code:-1009 userInfo:nil] withHandle:nil];
         return nil;
     }
+    
+    //[SVProgressHUD showWithStatus:@""];
+    
     return [self POST:url parameters:[self wrappedParameters:parameters] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *response = (NSDictionary *)responseObject;
+        
+//        if ([response[@"status"] integerValue] == 200) {
+//            
+//        }else if ([response[@"status"] integerValue] == 400) {
+//            
+//        }else if ([response[@"status"] integerValue] == 401) {
+//            
+//        }else {
+//            [SVProgressHUD showInfoWithStatus:@"连接超时！"];
+//            [SVProgressHUD dismissWithDelay:1];
+//        }
+        
         [self handleData:response withHandle:handler];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self handleError:error withHandle:handler];
-        NSLog(@"failure====================%@", task);
+        [SVProgressHUD showErrorWithStatus:@"请求失败!"];
+        [SVProgressHUD dismissWithDelay:1];
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+        NSInteger statuscode = response.statusCode;
+        NSLog(@"error===========%ld", (long)statuscode);
     }];
 }
 
@@ -141,8 +191,12 @@
         NSDictionary *response = (NSDictionary *)responseObject;
         [self handleData:response withHandle:handler];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        //[self handleError:error withHandle:handler];
-        NSLog(@"task========%@--------%@", task, error);
+        [SVProgressHUD showErrorWithStatus:@"请求失败!"];
+        [SVProgressHUD dismissWithDelay:1];
+        [self handleError:error withHandle:handler];
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+        NSInteger statuscode = response.statusCode;
+        NSLog(@"error===========%ld", (long)statuscode);
     }];
 }
 
@@ -167,7 +221,6 @@
 }
 
 - (void)handleError:(NSError *)error withHandle:(void(^)(BOOL success, NSDictionary *response))handler {
-    NSLog(@"handleError--------%ld--------!!!!!!!", (long)error.code);
     if (error.code == -1009) {
         //handler(NO, @{@"code":@"-1009"});
     }else {

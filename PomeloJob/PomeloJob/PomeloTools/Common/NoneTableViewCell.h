@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NoneTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) UIImageView *showImgV;
+
+@property (nonatomic, strong) UILabel *remindLab;
+
 @end
 
 NS_ASSUME_NONNULL_END

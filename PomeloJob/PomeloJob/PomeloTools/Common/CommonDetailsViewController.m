@@ -24,6 +24,7 @@
 #import "LoginViewController.h"
 #import "LoginNavigationController.h"
 #import "MyResumeViewController.h"
+#import "NoneTableViewCell.h"
 
 @interface CommonDetailsViewController ()<UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, DetailBottomBarDelegate>
 
@@ -59,6 +60,8 @@
 
 @property (nonatomic, strong) UIView *resumeMaskBackV;
 @property (nonatomic, strong) UIButton *completeBtn;
+
+@property (nonatomic, assign) NSInteger loginState;
 
 @end
 
@@ -193,7 +196,7 @@
     self.collectBtn.layer.mask = lay;
     
     if ([self.commonModel.relationtypecollect isEqualToString:@"已收藏"]) {
-        self.collectBtn.userInteractionEnabled = NO;
+        //self.collectBtn.userInteractionEnabled = NO;
         self.collectBtn.selected = YES;
     }else {
         self.collectBtn.selected = NO;
@@ -202,29 +205,42 @@
     __weak typeof(self) weakSelf = self;
     [[self.collectBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
+        UIButton *btn = (UIButton *)x;
+        
         NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
         if (![ECUtil isBlankString:userid]) {
             NSDictionary *para = @{@"userid":userid, @"positionid":self.commonModel.positionid, @"relationtype":@"已收藏"};
-            [[HWAFNetworkManager shareManager] position:para setuserposition:^(BOOL success, id  _Nonnull request) {
-                
-                if (success) {
-                    [SVProgressHUD showWithStatus:request[@"statusMessage"]];
-                    [SVProgressHUD dismissWithDelay:1];
-                    if ([request[@"status"] integerValue] == 200) {
-                        strongSelf.collectBtn.userInteractionEnabled = NO;
-                        strongSelf.collectBtn.selected = YES;
+            if (btn.selected == NO) {
+                [[HWAFNetworkManager shareManager] position:para setuserposition:^(BOOL success, id  _Nonnull request) {
+                    if (success) {
+                        [SVProgressHUD showWithStatus:request[@"statusMessage"]];
+                        [SVProgressHUD dismissWithDelay:1];
+                        if ([request[@"status"] integerValue] == 200) {
+                        }
+                        if ([request[@"status"] integerValue] == 400) {
+
+                        }
                     }
-                    if ([request[@"status"] integerValue] == 400) {
-                        
+                }];
+            }else {
+                [[HWAFNetworkManager shareManager] position:para deleteuserposition:^(BOOL success, id  _Nonnull request) {
+                    if (success) {
+                        [SVProgressHUD showWithStatus:request[@"statusMessage"]];
+                        [SVProgressHUD dismissWithDelay:1];
+                        if ([request[@"status"] integerValue] == 200) {
+                            
+                        }
                     }
-                }
-            }];
+                }];
+            }
         }else {
             LoginViewController *log = [[LoginViewController alloc] init];
             LoginNavigationController *na = [[LoginNavigationController alloc] initWithRootViewController:log];
             na.modalPresentationStyle = UIModalPresentationFullScreen;
             [weakSelf presentViewController:na animated:YES completion:nil];
         }
+        btn.selected = !btn.selected;
+    
     }];
     
     self.applyBtn3 = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -518,31 +534,44 @@
     NSDictionary *para = @{@"positionid":[ECUtil isBlankString:self.positionid]?@"":self.positionid, @"userid":[ECUtil isBlankString:userid]?@"":userid};
     [[HWAFNetworkManager shareManager] positionRequest:para positionInfo:^(BOOL success, id  _Nonnull request) {
         NSDictionary *dic = (NSDictionary *)request;
-        
         if (success) {
-            self.commonModel = [CommonModel mj_objectWithKeyValues:dic];
-            if ([self.commonModel.relationtype isEqualToString:@"已报名"]) {
-                self.applyBtn3.userInteractionEnabled = NO;
-                self.applyBtn3.selected = YES;
-            }else {
-                self.applyBtn3.userInteractionEnabled = YES;
-                self.applyBtn3.selected = NO;
-            }
-            if ([self.commonModel.relationtypecollect isEqualToString:@"已收藏"]) {
-                self.collectBtn.userInteractionEnabled = NO;
-                self.collectBtn.selected = YES;
-            }else {
-                self.collectBtn.userInteractionEnabled = YES;
-                self.collectBtn.selected = NO;
-            }
-            
-            if (self.upOrDown == YES) {
-                [self.listArr removeAllObjects];
-                [self.otherRecommendArr removeAllObjects];
-                self.otherRecommendArr = [CommonModel mj_objectArrayWithKeyValuesArray:dic[@"positionList"]];
-                [self.listArr addObject:self.commonModel];
+            if (![ECUtil isBlankString:[NSString stringWithFormat:@"%@", dic[@"status"]]] && [dic[@"status"] integerValue] == 400) {
+                
+                self.bottomBackV.hidden = YES;
+                self.loginState = 400;
                 [self.tableView reloadData];
+                
             }else {
+            
+                self.bottomBackV.hidden = NO;
+                
+                self.commonModel = [CommonModel mj_objectWithKeyValues:dic];
+                if ([self.commonModel.relationtype isEqualToString:@"已报名"]) {
+                    self.applyBtn3.userInteractionEnabled = NO;
+                    self.applyBtn3.selected = YES;
+                }else {
+                    self.applyBtn3.userInteractionEnabled = YES;
+                    self.applyBtn3.selected = NO;
+                }
+                if ([self.commonModel.relationtypecollect isEqualToString:@"已收藏"]) {
+                    //self.collectBtn.userInteractionEnabled = NO;
+                    self.collectBtn.selected = YES;
+                }else {
+                    //self.collectBtn.userInteractionEnabled = YES;
+                    self.collectBtn.selected = NO;
+                }
+                
+                if (self.upOrDown == YES) {
+                    [self.listArr removeAllObjects];
+                    [self.otherRecommendArr removeAllObjects];
+                    self.otherRecommendArr = [CommonModel mj_objectArrayWithKeyValuesArray:dic[@"positionList"]];
+                    [self.listArr addObject:self.commonModel];
+                    [self.tableView reloadData];
+                }
+                
+                
+                
+                
                 
             }
         }
@@ -571,107 +600,112 @@
 #pragma mark UITableView delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.tableView == tableView) {
-        return self.sectionArr.count;
-    }else {
+    if (self.loginState == 400) {
         return 1;
+    }else {
+        return self.sectionArr.count;
     }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (self.tableView == tableView) {
-        if (section < 5) {
-            return self.listArr.count;
-        }else {
-            return 3;
-        }
-    }else {
-        return 1;
-    }
+     if (self.loginState == 400) {
+         return 1;
+     }else {
+         if (section < 5) {
+             return self.listArr.count;
+         }else {
+             return 3;
+         }
+     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.tableView == tableView) {
-        if (indexPath.section == 0) {
-            CommontTopTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommontTopTableViewCell"];
-            if (!cell) {
-                cell = [[CommontTopTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommontTopTableViewCell"];
-            }
-            
-//            cell.showConnect = self.firstLoginMark;
-            cell.showConnect = YES;
-            cell.commonModel = self.commonModel;
-            __weak typeof(self) weakSelf = self;
-            cell.pasteAction = ^(NSString * _Nonnull num) {
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                
-//                if (strongSelf.firstLoginMark == YES) {
-//                    //安装过
-//                    strongSelf.topMaskBackV.hidden = YES;
-                    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-                    pasteboard.string = strongSelf.commonModel.positiontelnum;
-                    [HWPorgressHUD HWHudShowStatus:@"复制成功！"];
-                    if ([strongSelf.commonModel.positionteltype isEqualToString:@"联系微信号"] || [strongSelf.commonModel.positionteltype isEqualToString:@"公众号联系"] || [strongSelf.commonModel.positionteltype isEqualToString:@"微信号联系"]) {
-                        [strongSelf openWechat];
-                    }
-                    if ([strongSelf.commonModel.positionteltype isEqualToString:@"手机号联系"]) {
-                        
-                    }
-                    
-                    //记录点击次数
-                    NSDictionary *para = @{@"adtype":@"复制",
-                                           @"adindex":self.commonModel.positionid,
-                                           @"phonecard":[ECUtil getIDFA]};
-                    [[HWAFNetworkManager shareManager] clickOperation:para advertismentclick:^(BOOL success, id  _Nonnull request) {
-                        if (success) {
-                        }
-                    }];
-                    
-//                }else {
-//                    strongSelf.topMaskBackV.hidden = NO;
-//
-//                }
-            };
-            return cell;
-        }else if (indexPath.section == 1) {
-            CommonDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonDetailsTableViewCell"];
-            if (!cell) {
-                cell = [[CommonDetailsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonDetailsTableViewCell"];
-            }
-            cell.contentStr = self.commonModel.positioninfo;
-            cell.workContentBackV.hidden = YES;
-            return cell;
-        }else if (indexPath.section == 2 || indexPath.section == 3) {
-            CommonWorkLocationTableViewCell *cell1 = [tableView dequeueReusableCellWithIdentifier:@"CommonWorkLocationTableViewCell"];
-            if (!cell1) {
-                cell1 = [[CommonWorkLocationTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonWorkLocationTableViewCell"];
-                }
-            if (indexPath.section == 2) {
-                cell1.componyLocationLab.text = self.commonModel.positionworktime;
-            }
-            if (indexPath.section == 3) {
-                cell1.componyLocationLab.text = self.commonModel.positionworkaddressinfo;
-            }
-            return cell1;
-        }else if (indexPath.section == 4) {
-            CommonRemindTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonRemindTableViewCell"];
-            if (!cell) {
-                cell = [[CommonRemindTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonRemindTableViewCell"];
-            }
-            return cell;
-        }else {
-            CommonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonTableViewCell"];
-            cell = [[CommonTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonTableViewCell"];
-            if (self.otherRecommendArr.count > 0) {
-                cell.commonModel = self.otherRecommendArr[indexPath.row];
-            }
-            return cell;
+    
+    if (self.loginState == 400) {
+        NoneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NoneTableViewCell"];
+        if (!cell) {
+            cell = [[NoneTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NoneTableViewCell"];
         }
-    }else {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
-        cell.textLabel.text = @"无数据";
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.showImgV.image = [UIImage imageNamed:@"deletebackimg"];
+        cell.remindLab.text = @"你来晚了，职位已被删除";
         return cell;
+    }else {
+        if (indexPath.section == 0) {
+                    CommontTopTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommontTopTableViewCell"];
+                    if (!cell) {
+                        cell = [[CommontTopTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommontTopTableViewCell"];
+                    }
+                    
+        //            cell.showConnect = self.firstLoginMark;
+                    cell.showConnect = YES;
+                    cell.commonModel = self.commonModel;
+                    __weak typeof(self) weakSelf = self;
+                    cell.pasteAction = ^(NSString * _Nonnull num) {
+                        __strong typeof(weakSelf) strongSelf = weakSelf;
+                        
+        //                if (strongSelf.firstLoginMark == YES) {
+        //                    //安装过
+        //                    strongSelf.topMaskBackV.hidden = YES;
+                            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                            pasteboard.string = strongSelf.commonModel.positiontelnum;
+                            [HWPorgressHUD HWHudShowStatus:@"复制成功！"];
+                            if ([strongSelf.commonModel.positionteltype isEqualToString:@"联系微信号"] || [strongSelf.commonModel.positionteltype isEqualToString:@"公众号联系"] || [strongSelf.commonModel.positionteltype isEqualToString:@"微信号联系"]) {
+                                [strongSelf openWechat];
+                            }
+                            if ([strongSelf.commonModel.positionteltype isEqualToString:@"支付宝联系"]) {
+                                [self openAlipay];
+                            }
+                            
+                            //记录点击次数
+                            NSDictionary *para = @{@"adtype":@"复制",
+                                                   @"adindex":self.commonModel.positionid,
+                                                   @"phonecard":[ECUtil getIDFA]};
+                            [[HWAFNetworkManager shareManager] clickOperation:para advertismentclick:^(BOOL success, id  _Nonnull request) {
+                                if (success) {
+                                }
+                            }];
+                            
+        //                }else {
+        //                    strongSelf.topMaskBackV.hidden = NO;
+        //
+        //                }
+                    };
+                    return cell;
+                }else if (indexPath.section == 1) {
+                    CommonDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonDetailsTableViewCell"];
+                    if (!cell) {
+                        cell = [[CommonDetailsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonDetailsTableViewCell"];
+                    }
+                    cell.contentStr = self.commonModel.positioninfo;
+                    cell.workContentBackV.hidden = YES;
+                    return cell;
+                }else if (indexPath.section == 2 || indexPath.section == 3) {
+                    CommonWorkLocationTableViewCell *cell1 = [tableView dequeueReusableCellWithIdentifier:@"CommonWorkLocationTableViewCell"];
+                    if (!cell1) {
+                        cell1 = [[CommonWorkLocationTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonWorkLocationTableViewCell"];
+                        }
+                    if (indexPath.section == 2) {
+                        cell1.componyLocationLab.text = self.commonModel.positionworktime;
+                    }
+                    if (indexPath.section == 3) {
+                        cell1.componyLocationLab.text = self.commonModel.positionworkaddressinfo;
+                    }
+                    return cell1;
+                }else if (indexPath.section == 4) {
+                    CommonRemindTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonRemindTableViewCell"];
+                    if (!cell) {
+                        cell = [[CommonRemindTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonRemindTableViewCell"];
+                    }
+                    return cell;
+                }else {
+                    CommonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonTableViewCell"];
+                    cell = [[CommonTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonTableViewCell"];
+                    if (self.otherRecommendArr.count > 0) {
+                        cell.commonModel = self.otherRecommendArr[indexPath.row];
+                    }
+                    return cell;
+                }
     }
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

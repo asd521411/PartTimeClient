@@ -92,23 +92,23 @@
         return ;
     }
     NSDictionary *para = @{@"usertel":self.inputTextFd.text};
-//    [[HWAFNetworkManager shareManager] accountRequest:para findPassword:^(BOOL success, id  _Nonnull request) {
-//        if (success) {
-//            [SVProgressHUD showSuccessWithStatus:request[@"statusMessage"]];
-//            [SVProgressHUD dismissWithDelay:1];
-//            if ([request[@"status"] integerValue] == 200) {
-//                self.saveBtn.userInteractionEnabled = YES;
-//                FindSecondViewController *second = [[FindSecondViewController alloc] init];
-//                second.phoneNum = self.inputTextFd.text;
-//                [self.navigationController pushViewController:second animated:YES];
-//            }else if([request[@"status"] integerValue] == 40) {
-//                [self.navigationController popViewControllerAnimated:YES];
-//            }
-//         }
-//     }];
-    FindSecondViewController *second = [[FindSecondViewController alloc] init];
-    second.phoneNum = self.inputTextFd.text;
-    [self.navigationController pushViewController:second animated:YES];
+    [[HWAFNetworkManager shareManager] accountRequest:para findPassword:^(BOOL success, id  _Nonnull request) {
+        if (success) {
+            [SVProgressHUD showSuccessWithStatus:request[@"statusMessage"]];
+            [SVProgressHUD dismissWithDelay:1];
+            if ([request[@"status"] integerValue] == 200) {
+                self.saveBtn.userInteractionEnabled = YES;
+                FindSecondViewController *second = [[FindSecondViewController alloc] init];
+                second.phoneNum = self.inputTextFd.text;
+                [self.navigationController pushViewController:second animated:YES];
+            }else if([request[@"status"] integerValue] == 40) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+         }
+     }];
+//    FindSecondViewController *second = [[FindSecondViewController alloc] init];
+//    second.phoneNum = self.inputTextFd.text;
+//    [self.navigationController pushViewController:second animated:YES];
 }
 
 - (UITextField *)inputTextFd {

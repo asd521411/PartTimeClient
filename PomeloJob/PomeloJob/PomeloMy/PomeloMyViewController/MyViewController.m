@@ -27,11 +27,11 @@
 #import "UIButton+WebCache.h"
 #import "PomeloLimitThreeTableViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "YUXPWkWebViewController.h"
 
 @interface MyViewController ()<UITableViewDelegate, UITableViewDataSource, HeadBackViewDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) HeadBackView *headBackView;
-@property (nonatomic, strong) UserInfoModel *userInfoModel;
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *listArr;
@@ -47,53 +47,44 @@
     
     [self setupSubViews];
     
-//    [self loadData];
-    
     // Do any additional setup after loading the view.
 }
 
-//- (void)loadData {
-//    [[HWAFNetworkManager shareManager] userInfo:para queryMymine:^(BOOL success, id  _Nonnull request) {
-//        NSLog(@"=====%@", request);
-//        if (success) {
-//            [SVProgressHUD showErrorWithStatus:request[@"statusMessage"]];
-//            [SVProgressHUD dismissWithDelay:1];
-//            if ([request[@"status"] integerValue] == 200) {
-//                 self.resumecompleteness = request[@"body"][@"resumecompleteness"];
-//            }
-//            if ([request[@"status"] integerValue] == 400) {
-//
-//            }
-//
-//
-//        }
-//    }];
-//}
-
 - (BOOL)loginStatus {
-    NSString *status = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
-    if ([ECUtil isBlankString:status]) {//空未登录
+    NSString *userid = [NSString stringWithFormat:@"%@", [NSUserDefaultMemory defaultGetwithUnityKey:USERID]];
+    if ([ECUtil isBlankString:userid]) {//空未登录
         return NO;
     }else {
-        NSDictionary *dic = [NSUserDefaultMemory defaultGetwithUnityKey:USERINFO];
-        self.userInfoModel = [UserInfoModel mj_objectWithKeyValues:dic];
-        NSLog(@"userinfo==============%@", dic);
         return YES;
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setBarTintColor:kColor_Main];
     [self.navigationController.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, KFontNormalSize18,NSFontAttributeName,nil]];
     
     if ([self loginStatus]) {
+        
+        NSString *userid = [NSString stringWithFormat:@"%@", [NSUserDefaultMemory defaultGetwithUnityKey:USERID]];
+        NSDictionary *para = @{@"userid":userid};
+        [[HWAFNetworkManager shareManager] userInfo:para queryMymine:^(BOOL success, id  _Nonnull request) {
+            if (success) {
+                if ([request[@"status"] integerValue] == 200) {
+                    [SVProgressHUD showWithStatus:request[@""]];
+                    [SVProgressHUD dismissWithDelay:1];
+                    self.resumecompleteness = request[@"body"][@"resumecompleteness"];
+                }
+                [self.tableView reloadData];
+            }
+        }];
+        
         self.headBackView.infoType = InforTypeOn_Line;
-        self.headBackView.modificationControl.nameStr = self.userInfoModel.name;
-        [self.headBackView.portraitImgV sd_setImageWithURL:[NSURL URLWithString:self.userInfoModel.userimg] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portraitImgV"]];
+        self.headBackView.modificationControl.nameStr = [NSUserDefaultMemory defaultGetwithUnityKey:USERNAME];
+        [self.headBackView.portraitImgV sd_setImageWithURL:[NSURL URLWithString:[NSUserDefaultMemory defaultGetwithUnityKey:USERIMG]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portraitImgV"]];
+        
         [self.tableView reloadData];
     }else {
         self.headBackView.infoType = InforTypeOff_Line;
@@ -148,11 +139,11 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     if (indexPath.section == 0) {
         CompleteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CompleteTableViewCell"];
-        if ([self.userInfoModel.resumecompleteness isEqualToString:@"100%"]) {
+        if ([self.resumecompleteness isEqualToString:@"100%"]) {
             cell.percentImgV.image = [UIImage imageNamed:@"persent4"];
-        }else if ([self.userInfoModel.resumecompleteness isEqualToString:@"60%"]){
+        }else if ([self.resumecompleteness isEqualToString:@"60%"]){
             cell.percentImgV.image = [UIImage imageNamed:@"persent3"];
-        }else if ([self.userInfoModel.resumecompleteness isEqualToString:@"30%"]){
+        }else if ([self.resumecompleteness isEqualToString:@"30%"]){
             cell.percentImgV.image = [UIImage imageNamed:@"persent2"];
         }else{
             cell.percentImgV.image = [UIImage imageNamed:@"persent1"];
@@ -207,7 +198,15 @@
         if ([self loginStatus]) {
             UIViewController *vc = [[NSClassFromString(self.listArr[indexPath.row][@"vcname"]) alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
+            if (indexPath.row == 3) {
+                YUXPWkWebViewController *hw = (YUXPWkWebViewController *)vc;
+                hw.urls = @"http://114.116.230.97:8888/public/public.html";
+                hw.titleStr = @"商务洽谈";
+                [self.navigationController pushViewController:hw animated:YES];
+            }else {
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            
         }else {
             LoginViewController *log = [[LoginViewController alloc] init];
             LoginNavigationController *na = [[LoginNavigationController alloc] initWithRootViewController:log];
@@ -263,11 +262,10 @@
         _listArr = @[@{@"img":@"wodebaoming",@"title":@"我的报名", @"vcname":@"PomeloLimitThreeTableViewController"},
                      @{@"img":@"wodeshoucang",@"title":@"我的收藏", @"vcname":@"MyCollectResignViewController"},
                      @{@"img":@"shezhi",@"title":@"设      置", @"vcname":@"PomeloSetViewController"},
-                     @{@"img":@"shangwuqitan",@"title":@"商务洽谈", @"vcname":@"BusinessRelationViewController"}];
+                     @{@"img":@"shangwuqitan",@"title":@"商务洽谈", @"vcname":@"YUXPWkWebViewController"}];
     }
     return _listArr;
 }
-
 
 
 /*

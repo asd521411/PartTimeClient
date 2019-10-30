@@ -111,24 +111,24 @@
         return ;
     }
     NSDictionary *para = @{@"usertel":self.phoneNum, @"usermessagecode":self.inputTextFd.text};
-//    [[HWAFNetworkManager shareManager] accountRequest:para checkMessage:^(BOOL success, id  _Nonnull request) {
-//        if (success) {
-//            [SVProgressHUD showSuccessWithStatus:request[@"statusMessage"]];
-//            [SVProgressHUD dismissWithDelay:1];
-//            if ([request[@"status"] integerValue] == 200) {
-//                FindPasswodViewController *password = [[FindPasswodViewController alloc] init];
-//                password.phoneNum = self.phoneNum;
-//                [self.navigationController pushViewController:password animated:YES];
-//            }else {
-//                self.saveBtn.userInteractionEnabled = NO;
-//            }
-//
-//        }
-//    }];
+    [[HWAFNetworkManager shareManager] accountRequest:para checkMessage:^(BOOL success, id  _Nonnull request) {
+        if (success) {
+            [SVProgressHUD showSuccessWithStatus:request[@"statusMessage"]];
+            [SVProgressHUD dismissWithDelay:1];
+            if ([request[@"status"] integerValue] == 200) {
+                FindPasswodViewController *password = [[FindPasswodViewController alloc] init];
+                password.phoneNum = self.phoneNum;
+                [self.navigationController pushViewController:password animated:YES];
+            }else {
+                self.saveBtn.userInteractionEnabled = NO;
+            }
+
+        }
+    }];
  
-    FindPasswodViewController *password = [[FindPasswodViewController alloc] init];
-    password.phoneNum = self.phoneNum;
-    [self.navigationController pushViewController:password animated:YES];
+//    FindPasswodViewController *password = [[FindPasswodViewController alloc] init];
+//    password.phoneNum = self.phoneNum;
+//    [self.navigationController pushViewController:password animated:YES];
 }
 
 - (void)findPasswordAction:(UIButton *)send {

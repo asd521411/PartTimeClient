@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"aaa";
+    self.title = @"输入密码";
     
     [self setupSubViews];
     
@@ -27,8 +27,8 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     //创建一个UIButton
     UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 40, 40)];
     //设置UIButton的图像
@@ -39,6 +39,11 @@
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
     //覆盖返回按键
     self.navigationItem.leftBarButtonItem = backItem;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
 }
 
 - (void)setupSubViews {
@@ -140,13 +145,20 @@
                                        @"phonecard":[ECUtil getIDFA]};
                 [[HWAFNetworkManager shareManager] accountRequest:para userLogin:^(BOOL success, id  _Nonnull request) {
                     if (success) {
-                        NSValue *value = request[@"status"];
-                        if ([value isEqual:[NSNumber numberWithInt:200]]) {
+                        if ([request[@"status"] integerValue] == 200) {
                             [SVProgressHUD showWithStatus:request[@"statusMessage"]];
                             [SVProgressHUD dismissWithDelay:1];
-                            [NSUserDefaultMemory defaultSetMemory:request[@"userid"] unityKey:USERID];
+                            
+                            if([request[@"userid"] intValue] >0){
+                                [NSUserDefaultMemory defaultSetMemory:@([request[@"userid"] intValue]) unityKey:USERID];
+                            }else{
+                                [NSUserDefaultMemory defaultSetMemory:@"" unityKey:USERID];
+                            }
+                            [NSUserDefaultMemory defaultSetMemory:request[@"username"] unityKey:USERNAME];
                             [MobClick profileSignInWithPUID:request[@"userid"]];
                             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                        }else if ([request[@"status"] integerValue] == 400) {
+                            
                         }
                     }
                 }];

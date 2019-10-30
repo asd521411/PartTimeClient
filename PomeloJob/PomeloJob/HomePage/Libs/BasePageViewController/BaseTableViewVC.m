@@ -44,7 +44,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSLog(@"--%@--%@", [self class], NSStringFromSelector(_cmd));
 //     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        [self.tableView.mj_header beginRefreshing];
 //    });
@@ -52,17 +51,14 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"--%@--%@", [self class], NSStringFromSelector(_cmd));
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    NSLog(@"--%@--%@", [self class], NSStringFromSelector(_cmd));
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    NSLog(@"--%@--%@", [self class], NSStringFromSelector(_cmd));
 }
 
 /// 添加下拉刷新

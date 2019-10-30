@@ -71,14 +71,20 @@
     NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
     NSDictionary *para = @{@"userid":userid};
     [[HWAFNetworkManager shareManager] resume:para selectResumeInfo:^(BOOL success, id  _Nonnull request) {
-        NSLog(@"--------%@", request);
         if (success) {
             self.baseinfoModel = [ResumeModel mj_objectWithKeyValues:request[@"baseinfo"]];
             self.educationexperienceModel = [ResumeModel mj_objectWithKeyValues:request[@"educationexperience"]];
             self.workexperiencesModel = [ResumeModel mj_objectWithKeyValues:request[@"workexperiences"]];
             
             //基本信息
-            [self.headBackView.portraitImgV sd_setBackgroundImageWithURL:[NSURL URLWithString:self.baseinfoModel.resumeimg] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portraitImgV"]];
+            
+            if ([ECUtil isBlankString:self.baseinfoModel.resumeimg]) {
+                [self.headBackView.portraitImgV sd_setBackgroundImageWithURL:[NSURL URLWithString:self.baseinfoModel.resumeimg] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portraitImgV"]];
+            }else {
+                [self.headBackView.portraitImgV sd_setBackgroundImageWithURL:[NSURL URLWithString:self.baseinfoModel.resumeimg] forState:UIControlStateNormal completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
+                    self.portraitImg = image;
+                }];
+            }
             
             if ([ECUtil isBlankString:self.baseinfoModel.resumename]) {
                 [self.fillnicknameBtn setTitle:@"请填写姓名" forState:UIControlStateNormal];
@@ -245,9 +251,6 @@
                            @"jobduties":[ECUtil isBlankString:self.workexperiencesModel.jobduties]?@"":self.workexperiencesModel.jobduties,//工作职责
                            
     };
-    
-    NSLog(@"1-1-1-1-1--1-1-1----%@", para);
-    
     [[HWAFNetworkManager shareManager] resume:para images:@[image] name:@"imgfile" fileName:@"jpg" mimeType:@"jpeg" progress:^(NSProgress * _Nonnull progress) {
     } updateResume:^(BOOL success, id  _Nonnull request) {
         if (success) {
@@ -263,7 +266,7 @@
 }
 
 - (BOOL)alreadyConformCondition {
-    if ([ECUtil isBlankString:self.fillnicknameBtn.titleLabel.text] ) {
+    if ([ECUtil isBlankString:self.fillnicknameBtn.titleLabel.text] || [self.fillnicknameBtn.titleLabel.text isEqualToString:@"请输入姓名"]) {
         [SVProgressHUD showInfoWithStatus:@"请输入姓名"];
         [SVProgressHUD dismissWithDelay:1];
         return NO;
@@ -344,7 +347,6 @@
     //设置时间格式
     formatter.dateFormat = @"yyyy-MM-dd";
     NSString *dateStr = [formatter  stringFromDate:datePicker.date];
-    NSLog(@"pppppp====%@", dateStr);
     if (self.section == 0) {
         if (self.row == 1) {
             self.birthday = dateStr;
@@ -693,7 +695,6 @@
             self.workexperience = self.pickerViewRowsArr[row];
         }
     }
-    NSLog(@"===%ld------%@", (long)row, self.pickerViewRowsArr[row]);
 }
 
 #pragma mark
@@ -796,7 +797,7 @@
     if (_datePicker == nil) {
         _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT-300, KSCREEN_WIDTH, 300)];
         _datePicker.backgroundColor = [UIColor whiteColor];
-        _datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
+         
         //设置日期模式(Displays month, day, and year depending on the locale setting)
         _datePicker.datePickerMode = UIDatePickerModeDate;
         // 设置当前显示时间

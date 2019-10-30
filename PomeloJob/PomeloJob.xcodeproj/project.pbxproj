@@ -50,6 +50,8 @@
 		0460D9EB234DE99900C721CE /* PrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460D9EA234DE99900C721CE /* PrivacyPolicyViewController.m */; };
 		0460D9EE234EFD6D00C721CE /* TopMaskBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460D9ED234EFD6D00C721CE /* TopMaskBackViewController.m */; };
 		048D73072366B88D0071C9CF /* BusinessRelationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048D73062366B88D0071C9CF /* BusinessRelationViewController.m */; };
+		048D730A2367E5690071C9CF /* VerisionUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048D73092367E5690071C9CF /* VerisionUpdateViewController.m */; };
+		048D730D23685EC90071C9CF /* YUXPWkWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048D730C23685EC90071C9CF /* YUXPWkWebViewController.m */; };
 		04A5E4502338F27D0028B1C9 /* PomeloAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E44F2338F27D0028B1C9 /* PomeloAppDelegate.m */; };
 		04A5E4532338F27D0028B1C9 /* PomeloViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5E4522338F27D0028B1C9 /* PomeloViewController.m */; };
 		04A5E4562338F27D0028B1C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A5E4542338F27D0028B1C9 /* Main.storyboard */; };
@@ -228,6 +230,10 @@
 		0460D9ED234EFD6D00C721CE /* TopMaskBackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopMaskBackViewController.m; sourceTree = "<group>"; };
 		048D73052366B88D0071C9CF /* BusinessRelationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BusinessRelationViewController.h; sourceTree = "<group>"; };
 		048D73062366B88D0071C9CF /* BusinessRelationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BusinessRelationViewController.m; sourceTree = "<group>"; };
+		048D73082367E5690071C9CF /* VerisionUpdateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerisionUpdateViewController.h; sourceTree = "<group>"; };
+		048D73092367E5690071C9CF /* VerisionUpdateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VerisionUpdateViewController.m; sourceTree = "<group>"; };
+		048D730B23685EC90071C9CF /* YUXPWkWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YUXPWkWebViewController.h; sourceTree = "<group>"; };
+		048D730C23685EC90071C9CF /* YUXPWkWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YUXPWkWebViewController.m; sourceTree = "<group>"; };
 		04A5E44B2338F27D0028B1C9 /* PomeloJob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomeloJob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A5E44E2338F27D0028B1C9 /* PomeloAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PomeloAppDelegate.h; sourceTree = "<group>"; };
 		04A5E44F2338F27D0028B1C9 /* PomeloAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PomeloAppDelegate.m; sourceTree = "<group>"; };
@@ -540,6 +546,8 @@
 				04A5E47E2338F7A00028B1C9 /* PomeloForgetViewController.m */,
 				04A5E47D2338F7A00028B1C9 /* PomeloGuidancePageViewController.h */,
 				04A5E47B2338F7A00028B1C9 /* PomeloGuidancePageViewController.m */,
+				048D73082367E5690071C9CF /* VerisionUpdateViewController.h */,
+				048D73092367E5690071C9CF /* VerisionUpdateViewController.m */,
 				04A5E4802338F7A00028B1C9 /* PomeloLoginViewController.h */,
 				04A5E4842338F7A10028B1C9 /* PomeloLoginViewController.m */,
 				04A5E4862338F7A10028B1C9 /* PomeloVerifyLoginViewController.h */,
@@ -632,6 +640,8 @@
 				0408D956235DA7B4005D6B18 /* ResumeInputViewController.m */,
 				048D73052366B88D0071C9CF /* BusinessRelationViewController.h */,
 				048D73062366B88D0071C9CF /* BusinessRelationViewController.m */,
+				048D730B23685EC90071C9CF /* YUXPWkWebViewController.h */,
+				048D730C23685EC90071C9CF /* YUXPWkWebViewController.m */,
 			);
 			path = PomeloMyViewController;
 			sourceTree = "<group>";
@@ -1087,6 +1097,7 @@
 				04A5E45E2338F27E0028B1C9 /* main.m in Sources */,
 				0450F1262363512F005BAD9A /* NoneTableViewCell.m in Sources */,
 				F1C4D931233A0785004BD723 /* ResumeTableViewCell.m in Sources */,
+				048D730D23685EC90071C9CF /* YUXPWkWebViewController.m in Sources */,
 				04BDCC152344B45F0044346C /* SquareStyleModel.m in Sources */,
 				F1C4D8C5233A03AE004BD723 /* PomeloFiltrateViewController.m in Sources */,
 				F1C4D93E233A0785004BD723 /* ImgTitleView.m in Sources */,
@@ -1142,6 +1153,7 @@
 				0460D9BF234C212700C721CE /* RTLabel.m in Sources */,
 				F1C4D89D233A0358004BD723 /* PomeloRelationUsViewController.m in Sources */,
 				043C70642354122D00083E9E /* YNPageConfigration.m in Sources */,
+				048D730A2367E5690071C9CF /* VerisionUpdateViewController.m in Sources */,
 				043C705B2354118700083E9E /* UIScrollView+YNPageExtend.m in Sources */,
 				043C704E2354116C00083E9E /* YNPageScrollMenuView.m in Sources */,
 				F1C4D8A3233A0358004BD723 /* PomeloJobIntentionViewController.m in Sources */,
@@ -1327,6 +1339,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gx.pomelo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1352,6 +1365,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gx.pomelo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -76,9 +76,9 @@
 - (void)loadData {
     
     NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
-    NSDictionary *para = @{@"userid":[ECUtil isBlankString:userid]?@"":userid, @"relationtype":@"收藏"};
+    NSDictionary *para = @{@"userid":[ECUtil isBlankString:userid]?@"":userid, @"relationtype":@"已收藏"};
+    
     [[HWAFNetworkManager shareManager] userLimitPositionRequest:para userPosition:^(BOOL success, id  _Nonnull request) {
-        NSLog(@"===============%@", request);
         if (success) {
             NSArray *dicArr = request;
             if (self.upOrDown) {
@@ -100,7 +100,6 @@
     }else {
         return 1;
     }
-    //return self.listArr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -113,17 +112,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
      if (self.listArr.count > 0) {
-           CommonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonTableViewCell"];
-           cell.commonModel = self.listArr[indexPath.row];
-    //cell.textLabel.text = [NSString stringWithFormat:@"%@", self.listArr[indexPath.row]];
-           return cell;
-       }else {
-           NoneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NoneTableViewCell"];
-           if (!cell) {
-               cell = [[NoneTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NoneTableViewCell"];
-           }
-           return cell;
-       }
+         CommonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonTableViewCell"];
+         cell.commonModel = self.listArr[indexPath.row];
+         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+     }else {
+         NoneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NoneTableViewCell"];
+         if (!cell) {
+             cell = [[NoneTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NoneTableViewCell"];
+         }
+         return cell;
+     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -143,7 +142,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         CommonModel *model = self.listArr[indexPath.row];
         NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
-        NSDictionary *para = @{@"userid":userid?@"":userid,@"positionid":model.positionid, @"relationtype":@"已收藏"};
+        NSDictionary *para = @{@"userid":userid?userid:@"",@"positionid":model.positionid, @"relationtype":@"已收藏"};
         [[HWAFNetworkManager shareManager] position:para deleteuserposition:^(BOOL success, id  _Nonnull request) {
             if (success) {
                 [SVProgressHUD showInfoWithStatus:request[@"statusMessage"]];
@@ -210,8 +209,8 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-[ECStyle navigationbarHeight]-[ECStyle tabbarExtensionHeight]) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        //_tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-        [_tableView registerClass:[CollectionTableViewCell class] forCellReuseIdentifier:@"CommonTableViewCell"];
+        _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+        [_tableView registerClass:[CommonTableViewCell class] forCellReuseIdentifier:@"CommonTableViewCell"];
     }
     return _tableView;
 }

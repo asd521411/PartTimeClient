@@ -87,14 +87,14 @@
                 [btn addTarget:self action:@selector(btn:) forControlEvents:UIControlEventTouchUpInside];
                 
                 UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-                btn1.backgroundColor = [HWRandomColor randomColor];
-                btn1.frame = CGRectMake(95, KSCREEN_HEIGHT - 100 - 50, KSCREEN_WIDTH - 95 * 2, hei);
+                btn1.backgroundColor = kColor_Main;
+                btn1.frame = CGRectMake(95, KSCREEN_HEIGHT - 100 - hei, KSCREEN_WIDTH - 95 * 2, hei);
                 btn1.layer.cornerRadius = 20;
                 btn1.layer.masksToBounds = YES;
                 btn1.tag = 222;
                 [img addSubview:btn1];
                 [btn1 setTitle:@"立即体验" forState:UIControlStateNormal];
-                [ECUtil gradientLayer:btn1 startPoint:CGPointMake(0.5, 0) endPoint:CGPointMake(0.5, 1) colorArr1:KColorGradient_light colorArr2:KColorGradient_dark location1:0 location2:0];
+                //[ECUtil gradientLayer:btn1 startPoint:CGPointMake(0.5, 0) endPoint:CGPointMake(0.5, 1) colorArr1:KColorGradient_light colorArr2:KColorGradient_dark location1:0 location2:0];
                 [btn1 addTarget:self action:@selector(btn:) forControlEvents:UIControlEventTouchUpInside];
                 
             }

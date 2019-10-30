@@ -185,7 +185,7 @@
     
     NSDictionary *para = @{@"feedbackusertel":self.phoneTextFd.text, @"feedbackinfo":self.textFdV.text};
     [[HWAFNetworkManager shareManager] position:para collectFeedback:^(BOOL success, id  _Nonnull request) {
-        NSLog(@"========%@", request);
+        
         if (success) {
             if ([request[@"status"] integerValue] == 200) {
                 [SVProgressHUD showWithStatus:request[@"statusMessage"]];

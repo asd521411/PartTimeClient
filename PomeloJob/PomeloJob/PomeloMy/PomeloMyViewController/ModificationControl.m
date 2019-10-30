@@ -39,7 +39,7 @@
     [super layoutSubviews];
     
     [self.nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.mas_equalTo(self);
+        make.top.left.mas_equalTo(self).offset(10);
         make.height.mas_equalTo(20);
     }];
     
@@ -64,7 +64,6 @@
 
 - (void)setNameStr:(NSString *)nameStr{
     if (_nameStr != nameStr) {
-        NSLog(@"============%@", nameStr);
         self.nameLab.text = nameStr;
     }
 }

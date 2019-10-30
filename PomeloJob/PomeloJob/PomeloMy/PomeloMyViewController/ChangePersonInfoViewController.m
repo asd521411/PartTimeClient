@@ -69,15 +69,22 @@
 
 - (void)loadData {
     
-    NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
+    NSString *userid = [NSString stringWithFormat:@"%@", [NSUserDefaultMemory defaultGetwithUnityKey:USERID]];
     NSDictionary *para = @{@"userid":userid};
     [[HWAFNetworkManager shareManager] userInfo:para selectuserinfo:^(BOOL success, id  _Nonnull request) {
-        NSLog(@"aaaa========%@", request);
+        
         if (success) {
             if ([request[@"status"] integerValue] == 200) {
                 self.userInfoModel = [UserInfoModel mj_objectWithKeyValues:request[@"userinfo"]];
                 [self.fillnicknameBtn setTitle:self.userInfoModel.username forState:UIControlStateNormal];
-                [self.headBackView.portraitImgV sd_setBackgroundImageWithURL:[NSURL URLWithString:self.userInfoModel.userimg] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portraitImgV"]];
+                
+                if ([ECUtil isBlankString:self.userInfoModel.userimg]) {
+                    [self.headBackView.portraitImgV sd_setBackgroundImageWithURL:[NSURL URLWithString:self.userInfoModel.userimg] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portraitImgV"]];
+                }else {
+                    [self.headBackView.portraitImgV sd_setBackgroundImageWithURL:[NSURL URLWithString:self.userInfoModel.userimg] forState:UIControlStateNormal completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
+                        self.portraitImg = image;
+                    }];
+                }
             }
             [self.tableView reloadData];
         }
@@ -145,7 +152,7 @@
     //设置时间格式
     formatter.dateFormat = @"yyyy-MM-dd";
     NSString *dateStr = [formatter  stringFromDate:datePicker.date];
-    NSLog(@"pppppp====%@", dateStr);
+    
     if (self.section == 0) {
         if (self.row == 1) {
             self.birthday = dateStr;
@@ -162,22 +169,26 @@
     if ([self alreadyConformCondition] == NO) {
         return;
     }
-    NSValue *value = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
-    NSString *userid = [NSString stringWithFormat:@"%@", value];
+    NSString *userid = [NSString stringWithFormat:@"%@", [NSUserDefaultMemory defaultGetwithUnityKey:USERID]];
     UIImage *image = self.portraitImg==nil?[UIImage imageNamed:@"portraitImgV"]:self.portraitImg;
     NSDictionary *para = @{@"userid":userid,
                            @"username":self.fillnicknameBtn.titleLabel.text,//简历中的姓名
                            @"usersex":self.userInfoModel.usersex,//简历中的性别
                            @"userbirthday":self.userInfoModel.userbirthday,//简历中的生日
     };
-    NSLog(@"ssssssssss==========%@", para);
     [[HWAFNetworkManager shareManager] userInfo:para images:@[image] name:@"subimg" fileName:@"jpg" mimeType:@"JPEG" progress:^(NSProgress * _Nonnull progress) {
         
     } updateuserinfo:^(BOOL success, id  _Nonnull request) {
+        NSDictionary *dic = (NSDictionary *)request;
         if (success) {
             [SVProgressHUD showWithStatus:request[@"statusMessage"]];
             [SVProgressHUD dismissWithDelay:1];
             if ([request[@"status"] integerValue] == 200) {
+                ////[NSUserDefaultMemory defaultSetMemory:dic[@"body"][@"userid"] unityKey:USERID];
+                [NSUserDefaultMemory defaultSetMemory:dic[@"body"][@"userbirthday"] unityKey:USERBIRTHDAY];
+                [NSUserDefaultMemory defaultSetMemory:dic[@"body"][@"username"] unityKey:USERNAME];
+                [NSUserDefaultMemory defaultSetMemory:dic[@"body"][@"usersex"] unityKey:USERSEX];
+                [NSUserDefaultMemory defaultSetMemory:dic[@"body"][@"userimg"] unityKey:USERIMG];
                 [self.navigationController popViewControllerAnimated:YES];
             }
         }
@@ -306,9 +317,7 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(nonnull NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
-    NSLog(@"========%@", info[@"UIImagePickerControllerOriginalImage"]);
     self.portraitImg = info[@"UIImagePickerControllerOriginalImage"];
-    
     [self.headBackView.portraitImgV setBackgroundImage:info[@"UIImagePickerControllerOriginalImage"] forState:UIControlStateNormal];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

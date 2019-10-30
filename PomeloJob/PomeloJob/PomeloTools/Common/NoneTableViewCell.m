@@ -10,8 +10,6 @@
 
 @interface NoneTableViewCell ()
 
-@property (nonatomic, strong) UIImageView *showImgV;
-@property (nonatomic, strong) UILabel *remindLab;
 
 @end
 

@@ -212,22 +212,23 @@
         };
     }
     //限制点击
-    self.loginBtn.userInteractionEnabled = NO;
+    //self.loginBtn.userInteractionEnabled = NO;
+    [SVProgressHUD showWithStatus:@""];
     
     [[HWAFNetworkManager shareManager] accountRequest:para loginByMessageAndPassword:^(BOOL success, id  _Nonnull request) {
+    
         NSDictionary *dic = (NSDictionary *)request;
-        NSLog(@"========%@", dic);
         if (success) {
             self.loginBtn.userInteractionEnabled = YES;
-            
+            [SVProgressHUD dismiss];
             NSValue *value = dic[@"status"];
             if ([value isEqual:[NSNumber numberWithInt:402]]) {//验证码错误
                 [SVProgressHUD showErrorWithStatus:dic[@"statusMessage"]];
                 [SVProgressHUD dismissWithDelay:1];
             }
             if ([value isEqual:[NSNumber numberWithInt:401]]) {//未注册
-                [SVProgressHUD showInfoWithStatus:dic[@"statusMessage"]];
-                [SVProgressHUD dismissWithDelay:1];
+                //[SVProgressHUD showInfoWithStatus:dic[@"statusMessage"]];
+                //[SVProgressHUD dismissWithDelay:1];
                 VerifyCodeViewController *verify = [[VerifyCodeViewController alloc] init];
                 verify.phoneNum = self.phoneTextFd.text;
                 verify.inputCodeType = InputCodeTypePassword;
@@ -239,8 +240,12 @@
                 [SVProgressHUD dismissWithDelay:1];
                 if (dic[@"body"]) {
                     [NSUserDefaultMemory defaultSetMemory:dic[@"body"][@"userid"] unityKey:USERID];
-                    NSDictionary *body = [NSDictionary dictionaryWithDictionary:dic[@"body"]];
-                    [NSUserDefaultMemory defaultSetMemory:body unityKey:USERINFO];
+                    [NSUserDefaultMemory defaultSetMemory:dic[@"body"][@"username"] unityKey:USERNAME];
+                    [NSUserDefaultMemory defaultSetMemory:dic[@"body"][@"userbirthday"] unityKey:USERBIRTHDAY];
+                    [NSUserDefaultMemory defaultSetMemory:dic[@"body"][@"userimg"] unityKey:USERIMG];
+                    [NSUserDefaultMemory defaultSetMemory:dic[@"body"][@"usersex"] unityKey:USERSEX];
+                    [NSUserDefaultMemory defaultSetMemory:dic[@"body"][@"usertel"] unityKey:USERTEL];
+                    
                     [MobClick profileSignInWithPUID:dic[@"userid"]];
                     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                 }else {
@@ -250,6 +255,8 @@
             }
         }
     }];
+//    [SVProgressHUD showInfoWithStatus:@"网络连接超时"];
+//    [SVProgressHUD dismissWithDelay:10];
 }
 
 - (BOOL)inputCheckout {

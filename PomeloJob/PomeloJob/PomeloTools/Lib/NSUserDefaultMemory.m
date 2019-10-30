@@ -11,7 +11,9 @@
 @implementation NSUserDefaultMemory
 
 + (void)defaultSetMemory:(id)obj unityKey:(NSString *)key {
-    [[NSUserDefaults standardUserDefaults] setValue:obj forKey:key];
+    
+    NSString *str = [NSString stringWithFormat:@"%@", obj];
+    [[NSUserDefaults standardUserDefaults] setObject:str.length>0?str:@"" forKey:key];
 }
 
 + (id)defaultGetwithUnityKey:(NSString *)key {
