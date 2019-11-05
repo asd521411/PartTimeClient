@@ -102,6 +102,7 @@
     NSDictionary *para = @{@"adtype":self.clickStyleStr,
                            @"adindex":self.indexStr,
                            @"phonecard":[ECUtil getIDFA]};
+    NSLog(@"mmm===========%@----%@======%@", para[@"adtype"], para[@"adindex"], para[@"phonecard"]);
     [[HWAFNetworkManager shareManager] clickOperation:para advertismentclick:^(BOOL success, id  _Nonnull request) {
         if (success) {
         }
@@ -123,7 +124,7 @@
     [super viewDidAppear:animated];
     //self.navigationController.navigationBar.translucent = NO;
     
-    [self.tableView.mj_header endRefreshing];
+//    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -144,9 +145,10 @@
 //}
 
 - (void)tableViewRefresh {
+    __weak typeof(self) weakSelf = self;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        self.upOrDown = YES;
-        [self loadData];
+        weakSelf.upOrDown = YES;
+        [weakSelf loadData];
     }];
     
 //    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
@@ -218,6 +220,7 @@
         if (![ECUtil isBlankString:userid]) {
             NSDictionary *para = @{@"userid":userid, @"positionid":self.commonModel.positionid, @"relationtype":@"已收藏"};
             if (btn.selected == NO) {
+                [SVProgressHUD show];
                 [[HWAFNetworkManager shareManager] position:para setuserposition:^(BOOL success, id  _Nonnull request) {
                     if (success) {
                         [SVProgressHUD showWithStatus:request[@"statusMessage"]];
@@ -274,6 +277,7 @@
     
     //审核状态
     [[HWAFNetworkManager shareManager] accountRequest:@{} checkStatus:^(BOOL success, id  _Nonnull request) {
+
         if (success) {
             if ([request[@"status"] isEqualToString:@"0"]) {
                 self.bottomBackV.hidden = YES;
@@ -288,8 +292,10 @@
         NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
         if (![ECUtil isBlankString:userid]) {
             NSDictionary *para = @{@"userid":userid, @"positionid":self.commonModel.positionid, @"relationtype":@"已报名"};
+            [SVProgressHUD show];
             [[HWAFNetworkManager shareManager] positionRequest:para selectResumeByuserid:^(BOOL success, id  _Nonnull request) {
                 if (success) {
+                    [SVProgressHUD dismiss];
                     if ([request[@"status"] integerValue] == 200) {
                         strongSelf.connectType.text = strongSelf.commonModel.positionteltype;
                         NSString *str = nil;
@@ -349,7 +355,7 @@
     lab.textAlignment = NSTextAlignmentCenter;
     [back addSubview:lab];
     
-    self.completeBtn.frame = CGRectMake(70, lab.bottom+10, back.width-140, 34);
+    self.completeBtn.frame = CGRectMake(70, lab.bottom+10, back.width-140, 32);
     [back addSubview:self.completeBtn];
     
 }
@@ -418,6 +424,7 @@
 }
 
 - (void)setupMaskViews {
+    
     self.maskBackV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT)];
     self.maskBackV.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     self.maskBackV.hidden = YES;
@@ -463,8 +470,7 @@
     self.connectType.text = @"联系方式";
     [backImgV addSubview:self.connectType];
     [self.connectType mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(connect.mas_left);
-        make.right.mas_equalTo(connect.mas_right);
+        make.left.mas_equalTo(30);
         make.top.mas_equalTo(connect.mas_bottom).offset(10);
         make.height.mas_equalTo(16);
     }];
@@ -474,10 +480,12 @@
     self.connectNum.textColor = kColor_Main;
     self.connectNum.font = KFontNormalSize16;
     self.connectNum.text = @"   ";
-    //[backImgV addSubview:self.connectNum];
+    self.connectNum.textAlignment = NSTextAlignmentCenter;
+    [backImgV addSubview:self.connectNum];
     [self.connectNum mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.connectType.mas_right).offset(10);
-        make.top.mas_equalTo(connect.mas_top);
+        make.top.mas_equalTo(self.connectType.mas_top);
+        make.right.mas_equalTo(-30);
     }];
     
     UIButton *pasteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -490,7 +498,7 @@
     __weak typeof(self) weakSelf = self;
     [[pasteBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        [self sendDojob];
+        [weakSelf sendDojob];
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = strongSelf.commonModel.positiontelnum;
         [HWPorgressHUD HWHudShowStatus:@"复制成功！"];
@@ -543,19 +551,16 @@
 - (void)loadData {
     NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
     NSDictionary *para = @{@"positionid":[ECUtil isBlankString:self.positionid]?@"":self.positionid, @"userid":[ECUtil isBlankString:userid]?@"":userid};
+    
     [[HWAFNetworkManager shareManager] positionRequest:para positionInfo:^(BOOL success, id  _Nonnull request) {
         NSDictionary *dic = (NSDictionary *)request;
         if (success) {
             if (![ECUtil isBlankString:[NSString stringWithFormat:@"%@", dic[@"status"]]] && [dic[@"status"] integerValue] == 400) {
-                
                 self.bottomBackV.hidden = YES;
                 self.loginState = 400;
                 [self.tableView reloadData];
-                
             }else {
             
-                self.bottomBackV.hidden = NO;
-                
                 self.commonModel = [CommonModel mj_objectWithKeyValues:dic];
                 if ([self.commonModel.relationtype isEqualToString:@"已报名"]) {
                     self.applyBtn3.userInteractionEnabled = NO;
@@ -646,24 +651,24 @@
                     cell.commonModel = self.commonModel;
                     __weak typeof(self) weakSelf = self;
                     cell.pasteAction = ^(NSString * _Nonnull num) {
-                        __strong typeof(weakSelf) strongSelf = weakSelf;
+                       // __strong typeof(weakSelf) strongSelf = weakSelf;
                         
         //                if (strongSelf.firstLoginMark == YES) {
         //                    //安装过
         //                    strongSelf.topMaskBackV.hidden = YES;
                             UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-                            pasteboard.string = strongSelf.commonModel.positiontelnum;
+                            pasteboard.string = weakSelf.commonModel.positiontelnum;
                             [HWPorgressHUD HWHudShowStatus:@"复制成功！"];
-                            if ([strongSelf.commonModel.positionteltype isEqualToString:@"联系微信号"] || [strongSelf.commonModel.positionteltype isEqualToString:@"公众号联系"] || [strongSelf.commonModel.positionteltype isEqualToString:@"微信号联系"]) {
-                                [strongSelf openWechat];
+                            if ([weakSelf.commonModel.positionteltype isEqualToString:@"联系微信号"] || [weakSelf.commonModel.positionteltype isEqualToString:@"公众号联系"] || [weakSelf.commonModel.positionteltype isEqualToString:@"微信号联系"]) {
+                                [weakSelf openWechat];
                             }
-                            if ([strongSelf.commonModel.positionteltype isEqualToString:@"支付宝联系"]) {
-                                [self openAlipay];
+                            if ([weakSelf.commonModel.positionteltype isEqualToString:@"支付宝联系"]) {
+                                [weakSelf openAlipay];
                             }
                             
                             //记录点击次数
                             NSDictionary *para = @{@"adtype":@"复制",
-                                                   @"adindex":self.commonModel.positionid,
+                                                   @"adindex":weakSelf.commonModel.positionid,
                                                    @"phonecard":[ECUtil getIDFA]};
                             [[HWAFNetworkManager shareManager] clickOperation:para advertismentclick:^(BOOL success, id  _Nonnull request) {
                                 if (success) {
@@ -870,7 +875,7 @@
     if (_completeBtn == nil) {
         _completeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _completeBtn.backgroundColor = kColor_Main;
-        _completeBtn.layer.cornerRadius = 17;
+        _completeBtn.layer.cornerRadius = 16;
         _completeBtn.layer.masksToBounds = YES;
         [_completeBtn setTitle:@"完善简历" forState:UIControlStateNormal];
         [_completeBtn addTarget:self action:@selector(completeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -903,5 +908,6 @@
     CGSize contextSize = [htmlString boundingRectWithSize:(CGSize){width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
     return contextSize.height ;
 }
+
 
 @end

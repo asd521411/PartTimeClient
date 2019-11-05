@@ -22,7 +22,7 @@
 #define kOpenRefreshHeaderViewHeight 0
 
 //banner:202*99
-#define kBannerWidth        (KSCREEN_WIDTH - 30)
+#define kBannerWidth        (KSCREEN_WIDTH)
 #define kBannerHeight       (kBannerWidth * 230 / 690)
 
 //itemBackView高度: k
@@ -86,13 +86,11 @@
     //headerView.layer.contents = (id)[UIImage imageNamed:@"mine_header_bg"].CGImage;
     
     vc.autoScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, kBannerHeight) delegate:vc placeholderImage:[UIImage imageNamed:@" "]];
-//    vc.autoScrollView.layer.cornerRadius = 10;
-//    vc.autoScrollView.layer.masksToBounds = YES;
+    vc.autoScrollView.backgroundColor = [UIColor whiteColor];
     [headerView addSubview:vc.autoScrollView];
     
     UIView *itemBackView = [[UIView alloc] initWithFrame:CGRectMake(0, vc.autoScrollView.bottom, KSCREEN_WIDTH, kItemViewHeight + 30 + 10 + 12)];
     [headerView addSubview:itemBackView];
-    
     
     for (NSInteger i = 0; i < vc.positionTypeArr.count; i++) {
         ImgTitleView *item = [[ImgTitleView alloc] initWithFrame:CGRectMake(23 + (i % 4) * (kItemViewWidth + 65), 15, kItemViewWidth, kItemViewHeight)];
@@ -132,9 +130,11 @@
     
     vc.bgScrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
+        [weakVC loadData];
+        
         NSInteger refreshPage = weakVC.pageIndex;
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             /// 取到之前的页面进行刷新 pageIndex 是当前页面
             YNSuspendTopPauseBaseTableViewVC *vc2 = weakVC.controllersM[refreshPage];
             
@@ -169,6 +169,7 @@
 #pragma mark - Private Function
 
 - (void)loadData {
+    
     [[HWAFNetworkManager shareManager] commonAcquireImg:@{@"imgtype":@"首页"} firstImg:^(BOOL success, id  _Nonnull request) {
         NSDictionary *dic = (NSDictionary *)request;
         if (success) {

@@ -75,7 +75,8 @@
 
 - (void)loadData {
     
-    NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
+    NSString *userid = [NSString stringWithFormat:@"%@", [NSUserDefaultMemory defaultGetwithUnityKey:USERID]];
+    NSLog(@"=========%@", userid);
     NSDictionary *para = @{@"userid":[ECUtil isBlankString:userid]?@"":userid, @"relationtype":@"已收藏"};
     
     [[HWAFNetworkManager shareManager] userLimitPositionRequest:para userPosition:^(BOOL success, id  _Nonnull request) {

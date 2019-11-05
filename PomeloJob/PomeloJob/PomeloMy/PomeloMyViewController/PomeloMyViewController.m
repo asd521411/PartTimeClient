@@ -258,7 +258,7 @@
 //        PomeloPersonalInfoViewController *info = [[PomeloPersonalInfoViewController alloc] init];
 //        info.hidesBottomBarWhenPushed = YES;
 //        [self.navigationController pushViewController:info animated:YES];
-        LoginNavigationController *na = [[LoginNavigationController alloc] init];
+//        LoginNavigationController *na = [[LoginNavigationController alloc] init];
         //[self.navigationController presentViewController:na animated:YES completion:nil];
     
     }else {

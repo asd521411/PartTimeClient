@@ -108,7 +108,7 @@
         self.titleLab.text = commonModel.positionname;
         self.workAddressLab.text = commonModel.positionworkaddressinfo;
         
-        self.princeLab.attributedText = [ECUtil mutableArrtibuteString:commonModel.positonmoney foregroundColor:[ECUtil colorWithHexString:@"ff4457"] fontName:KFontNormalSize12 attribut:@"天" foregroundColor:[ECUtil colorWithHexString:@"ff4457"] fontName:KFontNormalSize12];
+        self.princeLab.attributedText = [ECUtil mutableArrtibuteString:commonModel.positonmoney foregroundColor:[ECUtil colorWithHexString:@"ff4457"] fontName:KFontNormalSize12 attribut:@"元/天" foregroundColor:[ECUtil colorWithHexString:@"ff4457"] fontName:KFontNormalSize12];
         
     }
 }

@@ -218,7 +218,7 @@
     }
     //限制点击
     //self.loginBtn.userInteractionEnabled = NO;
-    [SVProgressHUD showWithStatus:@""];
+    [SVProgressHUD show];
     
     [[HWAFNetworkManager shareManager] accountRequest:para loginByMessageAndPassword:^(BOOL success, id  _Nonnull request) {
     

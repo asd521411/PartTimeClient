@@ -24,6 +24,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    // 启动图片延时: 1秒
+    [NSThread sleepForTimeInterval:1];
+    
     // MARK:友盟
     [UMConfigure initWithAppkey:UMENGkEY channel:nil];
     [MobClick setScenarioType:E_UM_NORMAL];//支持普通场景
@@ -60,11 +63,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    //判断是否显示新特性
-    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
-    NSString *localVersion = [defaults objectForKey:@"CFBundleShortVersionString"];
-    
     if (![NSUserDefaultMemory defaultGetwithUnityKey:FIRSTLAUNCHRECORD]) {
         PomeloGuidancePageViewController *gui = [[PomeloGuidancePageViewController alloc] init];
         self.window.rootViewController = gui;
@@ -87,7 +85,6 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager POST:@"https://itunes.apple.com/lookup?id=1481210769" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        //NSLog(@"ssssssss====%@", responseObject);
         NSArray *array = responseObject[@"results"];
         if(array.count < 1) {
             return;

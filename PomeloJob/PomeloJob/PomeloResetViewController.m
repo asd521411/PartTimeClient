@@ -181,9 +181,9 @@
             }
                 break;
             case ForgetPassword:{
-                NSDictionary *para = @{@"usertel":textFd1.text,
-                                       @"userpassword":textFd2.text,
-                                       };
+//                NSDictionary *para = @{@"usertel":textFd1.text,
+//                                       @"userpassword":textFd2.text,
+//                                       };
 //                [[HWAFNetworkManager shareManager] accountRequest:para updataPassword:^(BOOL success, id  _Nonnull request) {
 //                    if (success) {
 //                        [SVProgressHUD showWithStatus:request[@"statusMessage"]];

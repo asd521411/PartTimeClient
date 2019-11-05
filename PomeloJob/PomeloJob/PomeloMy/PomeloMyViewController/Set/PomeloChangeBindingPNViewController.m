@@ -67,7 +67,7 @@
     [[textFd1 rac_textSignal] subscribeNext:^(id x) {
         NSString *str = [NSString stringWithFormat:@"%@", x];
         if (str.length >= 11) {
-            str = [str substringToIndex:11];
+            textFd1.text = [str substringToIndex:11];
         }
     }];
     

@@ -27,7 +27,7 @@
     if (self) {
         [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
         self.requestSerializer = [AFHTTPRequestSerializer serializer];
-        self.requestSerializer.timeoutInterval = 10.0;
+        self.requestSerializer.timeoutInterval = 20.0;
         self.responseSerializer = [[AFJSONResponseSerializer alloc] init];
         __weak HWAFNetworkManager *weakSelf = self;
         [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"" object:nil] subscribeNext:^(id x) {

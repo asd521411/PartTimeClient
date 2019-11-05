@@ -63,21 +63,21 @@
     
     [self setupSubViews];
     
-    
     // Do any additional setup after loading the view.
 }
 
 - (void)loadData {
     NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
     NSDictionary *para = @{@"userid":userid};
+    [SVProgressHUD show];
     [[HWAFNetworkManager shareManager] resume:para selectResumeInfo:^(BOOL success, id  _Nonnull request) {
         if (success) {
+            [SVProgressHUD dismiss];
             self.baseinfoModel = [ResumeModel mj_objectWithKeyValues:request[@"baseinfo"]];
             self.educationexperienceModel = [ResumeModel mj_objectWithKeyValues:request[@"educationexperience"]];
             self.workexperiencesModel = [ResumeModel mj_objectWithKeyValues:request[@"workexperiences"]];
             
             //基本信息
-            
             if ([ECUtil isBlankString:self.baseinfoModel.resumeimg]) {
                 [self.headBackView.portraitImgV sd_setBackgroundImageWithURL:[NSURL URLWithString:self.baseinfoModel.resumeimg] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portraitImgV"]];
             }else {
@@ -251,9 +251,11 @@
                            @"jobduties":[ECUtil isBlankString:self.workexperiencesModel.jobduties]?@"":self.workexperiencesModel.jobduties,//工作职责
                            
     };
+    [SVProgressHUD show];
     [[HWAFNetworkManager shareManager] resume:para images:@[image] name:@"imgfile" fileName:@"jpg" mimeType:@"jpeg" progress:^(NSProgress * _Nonnull progress) {
     } updateResume:^(BOOL success, id  _Nonnull request) {
         if (success) {
+            
             [SVProgressHUD showWithStatus:request[@"statusMessage"]];
             [SVProgressHUD dismissWithDelay:1];
             if ([request[@"status"] integerValue] == 200) {
@@ -522,7 +524,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     self.section = indexPath.section;
     self.row = indexPath.row;
     if (indexPath.section == 0) {
@@ -530,6 +531,12 @@
             self.datePickerBackV.hidden = NO;
             self.datePicker.hidden = NO;
             self.pickerView.hidden = YES;
+            [self.datePicker setDate:[NSDate date] animated:YES];
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            //设置时间格式
+            formatter.dateFormat = @"yyyy-MM-dd";
+            NSString *dateStr = [formatter  stringFromDate:self.datePicker.date];
+            self.birthday = dateStr;
         }
         if (indexPath.row == 3) {
             self.datePickerBackV.hidden = NO;
@@ -538,6 +545,8 @@
             self.pickerViewRowsArr = nil;
             self.pickerViewRowsArr = [NSArray arrayWithArray:self.educationBackgroundArr];
             [self.pickerView reloadAllComponents];
+            [self.pickerView selectRow:0 inComponent:0 animated:YES];
+            self.education = self.education = self.pickerViewRowsArr[0];
         }
         if (indexPath.row == 4) {
             self.datePickerBackV.hidden = NO;
@@ -546,6 +555,8 @@
             self.pickerViewRowsArr = nil;
             self.pickerViewRowsArr = [NSArray arrayWithArray:self.workYears];
             [self.pickerView reloadAllComponents];
+            [self.pickerView selectRow:0 inComponent:0 animated:YES];
+            self.workexperience = self.pickerViewRowsArr[0];
         }
     }else if (indexPath.section == 1) {
         if (indexPath.row == 0 ) {
@@ -558,6 +569,21 @@
             self.datePickerBackV.hidden = NO;
             self.datePicker.hidden = NO;
             self.pickerView.hidden = YES;
+            //[self.datePicker setDate:[NSDate date] animated:YES];
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            //设置时间格式
+            formatter.dateFormat = @"yyyy-MM-dd";
+            NSString *dateStr = [formatter  stringFromDate:self.datePicker.date];
+//            if ([ECUtil isBlankString:self.educationexperienceModel.edustartdate]) {
+//                dateStr = [formatter  stringFromDate:self.datePicker.date];
+//            }else {
+//                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//                [formatter setDateFormat:@"yyyy-MM-dd"];
+//                [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
+//                NSDate *date = [formatter dateFromString:self.educationexperienceModel.edustartdate];
+//                dateStr = [formatter  stringFromDate:date];
+//            }
+            self.edustartdate = dateStr;
         }
         
     }else if (indexPath.section == 2) {
@@ -716,7 +742,7 @@
 
 - (HeadBackView *)headBackView {
     if (_headBackView == nil) {
-        CGFloat imgH = 140;//(KSCREEN_WIDTH * 280/750);
+        CGFloat imgH = 150;//(KSCREEN_WIDTH * 280/750);
         _headBackView = [[HeadBackView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, imgH)];
         _headBackView.infoType = InforTypeShow;
         _headBackView.delegate = self;
@@ -817,8 +843,8 @@
         NSDate *minDate = [fmt dateFromString:@"1930-1-1"];
         _datePicker.minimumDate = minDate;
         [_datePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
-        
     }
+    
     return _datePicker;
 }
 

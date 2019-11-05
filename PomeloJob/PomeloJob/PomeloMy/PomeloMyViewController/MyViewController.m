@@ -70,8 +70,8 @@
         
         NSString *userid = [NSString stringWithFormat:@"%@", [NSUserDefaultMemory defaultGetwithUnityKey:USERID]];
         NSDictionary *para = @{@"userid":userid};
+        
         [[HWAFNetworkManager shareManager] userInfo:para queryMymine:^(BOOL success, id  _Nonnull request) {
-            NSLog(@"===========%@", request);
             if (success) {
                 if ([request[@"status"] integerValue] == 200) {
 //                    [SVProgressHUD showWithStatus:request[@""]];
@@ -239,7 +239,7 @@
 
 - (HeadBackView *)headBackView {
     if (_headBackView == nil) {
-         CGFloat imgH = (KSCREEN_WIDTH * 280/750);
+        CGFloat imgH = 150;//(KSCREEN_WIDTH * 280/750);
         _headBackView = [[HeadBackView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, imgH)];
         _headBackView.infoType = InforTypeOff_Line;
         _headBackView.delegate = self;

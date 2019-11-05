@@ -54,8 +54,8 @@
     }
     
     NSDictionary *para = @{@"usertel":self.inputTextFd.text};
+    [SVProgressHUD show];
     [[HWAFNetworkManager shareManager] opinionRequest:para collectTel:^(BOOL success, id  _Nonnull request) {
-      
         if (success) {
             [SVProgressHUD showInfoWithStatus:request[@"statusMessage"]];
             [SVProgressHUD dismissWithDelay:1];

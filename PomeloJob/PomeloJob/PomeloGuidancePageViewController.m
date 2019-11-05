@@ -64,11 +64,11 @@
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         _scrollView.pagingEnabled = YES;
         _scrollView.delegate = self;
-        _scrollView.showsHorizontalScrollIndicator = YES;
+        _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.bounces = NO;
         for (int i = 0; i < self.scrollArr.count; i++) {
             UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(i * self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height)];
-            img.backgroundColor = [HWRandomColor randomColor];
+            img.backgroundColor = kColor_Main;
             img.image = [UIImage imageNamed:self.scrollArr[i]];
             img.userInteractionEnabled = YES;
             [_scrollView addSubview:img];
@@ -76,7 +76,7 @@
             if (i == self.scrollArr.count - 1) {
                 
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-                btn.backgroundColor = [UIColor cyanColor];
+                btn.backgroundColor = kColor_Main;
                 btn.frame = CGRectMake(spa, self.view.frame.size.height - 120, wid, hei);
                 btn.layer.cornerRadius = 5;
                 btn.layer.masksToBounds = YES;
@@ -113,7 +113,7 @@
         //_pageControl.backgroundColor = [UIColor purpleColor];
         _pageControl.numberOfPages = _scrollArr.count;
         _pageControl.currentPage = 0;
-        _pageControl.currentPageIndicatorTintColor = KColorGradient_light;
+        _pageControl.currentPageIndicatorTintColor = kColor_Main;
         _pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
         [_pageControl addTarget:self action:@selector(pageControlTurn:) forControlEvents:UIControlEventValueChanged];
     }

@@ -111,6 +111,7 @@
         return ;
     }
     NSDictionary *para = @{@"usertel":self.phoneNum, @"usermessagecode":self.inputTextFd.text};
+    [SVProgressHUD show];
     [[HWAFNetworkManager shareManager] accountRequest:para checkMessage:^(BOOL success, id  _Nonnull request) {
         if (success) {
             [SVProgressHUD showSuccessWithStatus:request[@"statusMessage"]];

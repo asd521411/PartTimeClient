@@ -68,7 +68,6 @@
     
     [self tableViewRefresh];
     
-    
     [self.squareTableV.mj_header beginRefreshing];
     
     // Do any additional setup after loading the view.
@@ -78,7 +77,7 @@
     [super viewWillAppear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.squareTableV.mj_header endRefreshing];
     [self.squareTableV.mj_footer endRefreshing];
@@ -123,6 +122,7 @@
 }
 
 - (void)loadData {
+    
     NSDictionary *para = @{@"page":@(self.page)};
     [[HWAFNetworkManager shareManager] position:para postion:^(BOOL success, id  _Nonnull request) {
         NSArray *arr = request[@"resultList"];

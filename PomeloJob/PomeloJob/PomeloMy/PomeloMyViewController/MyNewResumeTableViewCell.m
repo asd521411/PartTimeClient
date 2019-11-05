@@ -118,7 +118,7 @@
     [self.rightImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-15);
         make.centerY.mas_equalTo(self);
-        make.width.mas_equalTo(8);
+        make.width.mas_equalTo(12);
         make.height.mas_equalTo(16);
     }];
     

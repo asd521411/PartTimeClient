@@ -83,7 +83,7 @@
         if (text.length >= 16) {
             self.textFd1.text = [text substringToIndex:16];
         }
-        if (self.textFd1.text.length > 6 && self.textFd2.text.length > 6) {
+        if (self.textFd1.text.length >= 6 && self.textFd2.text.length >= 6) {
             strongSelf.login.backgroundColor = kColor_Main;
         }else {
             strongSelf.login.backgroundColor = kColor_UnSelect;
@@ -115,7 +115,7 @@
             self.textFd2.text = [text substringToIndex:16];
         }
         
-        if (self.textFd1.text.length > 6 && self.textFd2.text.length > 6) {
+        if (self.textFd1.text.length >= 6 && self.textFd2.text.length >= 6) {
             strongSelf.login.backgroundColor = kColor_Main;
         }else {
             strongSelf.login.backgroundColor = kColor_UnSelect;
@@ -152,6 +152,7 @@
         }
         
         NSDictionary *para = @{@"usertel":self.phoneNum, @"newpassword":self.textFd1.text};
+        [SVProgressHUD show];
         [[HWAFNetworkManager shareManager] accountRequest:para updaterefactoruserpassword:^(BOOL success, id  _Nonnull request) {
             if (success) {
                 [SVProgressHUD showSuccessWithStatus:request[@"statusMessage"]];

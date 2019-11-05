@@ -178,11 +178,15 @@
                            @"usersex":self.userInfoModel.usersex,//简历中的性别
                            @"userbirthday":self.userInfoModel.userbirthday,//简历中的生日
     };
+    
+    [SVProgressHUD show];
+    
     [[HWAFNetworkManager shareManager] userInfo:para images:@[image] name:@"subimg" fileName:@"jpg" mimeType:@"JPEG" progress:^(NSProgress * _Nonnull progress) {
         
     } updateuserinfo:^(BOOL success, id  _Nonnull request) {
         NSDictionary *dic = (NSDictionary *)request;
         if (success) {
+            [SVProgressHUD dismiss];
             [SVProgressHUD showWithStatus:request[@"statusMessage"]];
             [SVProgressHUD dismissWithDelay:1];
             if ([request[@"status"] integerValue] == 200) {
@@ -209,6 +213,12 @@
     
     if ([ECUtil isBlankString:self.fillnicknameBtn.currentTitle] || (self.fillnicknameBtn.currentTitle.length == 0) || [self.fillnicknameBtn.currentTitle isEqualToString:@"请输入姓名"]) {
         [SVProgressHUD showInfoWithStatus:@"请输入姓名"];
+        [SVProgressHUD dismissWithDelay:1];
+        return NO;
+    }
+    
+    if (self.fillnicknameBtn.currentTitle.length > 16) {
+        [SVProgressHUD showInfoWithStatus:@"姓名过长"];
         [SVProgressHUD dismissWithDelay:1];
         return NO;
     }
@@ -342,7 +352,7 @@
 
 - (HeadBackView *)headBackView {
     if (_headBackView == nil) {
-        CGFloat imgH = 140;//(KSCREEN_WIDTH * 300/750);
+        CGFloat imgH = 150;//(KSCREEN_WIDTH * 300/750);
         _headBackView = [[HeadBackView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, imgH)];
         _headBackView.infoType = InforTypeShow;
         _headBackView.delegate = self;

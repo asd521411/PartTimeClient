@@ -42,7 +42,7 @@
     
     [self.backImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(self);
-        make.bottom.mas_equalTo(self);
+        make.bottom.mas_equalTo(-12);
     }];
     
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,7 +96,7 @@
 //                self.modificationControl.nameStr = dic[@"name"];
 //                [self.portraitImgV sd_setBackgroundImageWithURL:[NSURL URLWithString:dic[@"userimg"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portraitImgV"]];
                 [self.portraitImgV mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.top.mas_equalTo(10);
+                    make.top.mas_equalTo(30);
                     make.left.mas_equalTo(self).offset(20);
                     make.width.height.mas_equalTo(80);
                 }];

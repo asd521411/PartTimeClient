@@ -110,7 +110,7 @@
         self.workAddressLab.text = commonModel.positionworkaddressinfo;
         
         NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:commonModel.positonmoney attributes:@{NSForegroundColorAttributeName:[ECUtil colorWithHexString:@"ff4457"], NSFontAttributeName:KFontNormalSize16}];
-        NSMutableAttributedString *attributedStr1 = [[NSMutableAttributedString alloc] initWithString:@"/天" attributes:@{NSForegroundColorAttributeName:[ECUtil colorWithHexString:@"ff4457"], NSFontAttributeName:KFontNormalSize14}];
+        NSMutableAttributedString *attributedStr1 = [[NSMutableAttributedString alloc] initWithString:@"元/天" attributes:@{NSForegroundColorAttributeName:[ECUtil colorWithHexString:@"ff4457"], NSFontAttributeName:KFontNormalSize14}];
         [attributedStr appendAttributedString:attributedStr1];
         self.princeLab.attributedText = attributedStr;
         

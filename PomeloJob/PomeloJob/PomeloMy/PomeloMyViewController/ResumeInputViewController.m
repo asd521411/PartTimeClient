@@ -192,7 +192,6 @@
             if (str.length >= 16) {
                 strongSelf.inputTextFd.text = [str substringToIndex:16];
             }
-            strongSelf.inputTextFd.text = str;
         }];
     }
     return _inputTextFd;

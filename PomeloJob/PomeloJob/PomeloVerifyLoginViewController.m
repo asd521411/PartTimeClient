@@ -308,10 +308,10 @@
                 break;
             case RegisterStyle:{
 
-                NSDictionary *para = @{@"usertel":textFd1.text,
-                                       @"usermessagecode":textFd2.text,
-                                       @"phonecar":[ECUtil getIDFA]
-                                       };
+//                NSDictionary *para = @{@"usertel":textFd1.text,
+//                                       @"usermessagecode":textFd2.text,
+//                                       @"phonecar":[ECUtil getIDFA]
+//                                       };
 //                NSDictionary *para = @{@"usertel":textFd1.text,
 //                                       @"usermessagecode":textFd2.text,
 //                                       };

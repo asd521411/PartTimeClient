@@ -92,6 +92,7 @@
         return ;
     }
     NSDictionary *para = @{@"usertel":self.inputTextFd.text};
+    [SVProgressHUD show];
     [[HWAFNetworkManager shareManager] accountRequest:para findPassword:^(BOOL success, id  _Nonnull request) {
         if (success) {
             [SVProgressHUD showSuccessWithStatus:request[@"statusMessage"]];
