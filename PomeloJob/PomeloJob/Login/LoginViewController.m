@@ -80,7 +80,7 @@
     [self.backScrollV addSubview:self.loginStyle];
     [self.backScrollV addSubview:self.findPasswordBtn];
     [self.backScrollV addSubview:self.loginBtn];
-    [self.backScrollV addSubview:self.agreement_yylab];
+    //[self.backScrollV addSubview:self.agreement_yylab];
 }
 
 - (void)verificationCodeLoginStyle {
@@ -330,9 +330,11 @@
 #pragma mark layout
 
 - (void)setupLayoutSubViews {
-    [self.backScrollV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self);
-    }];
+//    [self.backScrollV mas_makeConstraints:^(MASConstraintMaker *make) {
+//        //make.edges.mas_equalTo(self);
+//        make.top.left.right.bottom.mas_equalTo(self);
+//    }];
+//    self.backScrollV.contentSize = CGSizeMake(KSCREEN_WIDTH, KSCREEN_HEIGHT+200);
     
     [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(40);
@@ -375,14 +377,14 @@
         make.width.mas_equalTo(0.5);
         make.height.mas_equalTo(12);
     }];
-    
+
     [self.phoneTextFd mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.titleLab.mas_bottom).offset(65);
         make.left.mas_equalTo(95);
         make.width.mas_equalTo(KSCREEN_WIDTH-120);
         make.height.mas_equalTo(25);
     }];
-    
+
     UIView *line1 = [[UIView alloc] init];
     line1.backgroundColor = [ECUtil colorWithHexString:@"e5e5e5"];
     [self.backScrollV addSubview:line1];
@@ -392,20 +394,20 @@
         make.width.mas_equalTo(KSCREEN_WIDTH-60);
         make.height.mas_equalTo(0.5);
     }];
-    
+
     [self.verifyCodeTextFd mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(line1.mas_bottom).offset(47);
         make.left.mas_equalTo(30);
         make.width.mas_equalTo(KSCREEN_WIDTH-60);
         make.height.mas_equalTo(25);
     }];
-    
+
     [self.getCode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.verifyCodeTextFd.mas_right);
         make.bottom.mas_equalTo(self.verifyCodeTextFd.mas_bottom);
         make.width.mas_equalTo(90);
     }];
-    
+
     UIView *line2 = [[UIView alloc] init];
     line2.backgroundColor = [ECUtil colorWithHexString:@"e5e5e5"];
     [self.backScrollV addSubview:line2];
@@ -415,34 +417,34 @@
         make.width.mas_equalTo(KSCREEN_WIDTH-60);
         make.height.mas_equalTo(0.5);
     }];
-    
+
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.verifyCodeTextFd.mas_bottom).offset(45);
         make.left.mas_equalTo(self.titleLab.mas_left);
         make.right.mas_equalTo(self.titleLab.mas_right);
         make.height.mas_equalTo(40);
     }];
-    
+
     [self.findPasswordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.loginBtn.mas_bottom).offset(15);
         make.right.mas_equalTo(self.loginBtn.mas_right);
         //make.left.mas_equalTo(self.loginStyleBtn.mas_right);
         make.height.mas_equalTo(20);
     }];
-    
+
     [self.loginStyle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.loginBtn.mas_bottom).offset(15);
         make.left.mas_equalTo(self.loginBtn.mas_left);
         make.right.mas_equalTo(self.findPasswordBtn.mas_left);
         make.height.mas_equalTo(20);
     }];
-    
-    [self.agreement_yylab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.loginBtn.mas_bottom).offset(83);
-        make.left.mas_equalTo(30);
-        make.width.mas_equalTo(KSCREEN_WIDTH-60);
-        make.height.mas_equalTo(20);
-    }];
+
+//    [self.agreement_yylab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.loginBtn.mas_bottom).offset(83);
+//        make.left.mas_equalTo(30);
+//        make.width.mas_equalTo(KSCREEN_WIDTH-60);
+//        make.height.mas_equalTo(20);
+//    }];
     //暂时解决backScrollV加手势yylabel点击失效
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.backScrollV addSubview:btn];
@@ -459,7 +461,7 @@
 
 - (UIScrollView *)backScrollV {
     if (_backScrollV == nil) {
-        _backScrollV = [[UIScrollView alloc] init];
+        _backScrollV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT)];
         _backScrollV.contentSize = CGSizeMake(KSCREEN_WIDTH, KSCREEN_HEIGHT+200);
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backScrollVTap:)];
         [_backScrollV addGestureRecognizer:tap];

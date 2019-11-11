@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) UIButton *turnBtn;
 @property (nonatomic, strong) UIImageView *typeimgV;
+@property (nonatomic, strong) UIImageView *turnRImgV;
 @end
 
 @implementation CommonTableViewHeaderFooterView
@@ -28,6 +29,7 @@
     [self addSubview:self.titleLab];
     [self addSubview:self.turnImgV];
     [self addSubview:self.turnBtn];
+    [self addSubview:self.turnRImgV];
 }
 
 - (void)turnBtnAction:(UIButton *)send {
@@ -52,7 +54,13 @@
         make.top.right.height.mas_equalTo(self);
         make.width.mas_equalTo(self);
     }];
-
+    
+    [self.turnRImgV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-15);
+        make.centerY.mas_equalTo(self);
+        make.width.mas_equalTo(10);
+        make.height.mas_equalTo(17);
+    }];
 }
 
 - (UILabel *)titleLab {
@@ -67,7 +75,7 @@
 - (UIImageView *)turnImgV {
     if (!_turnImgV) {
         _turnImgV = [[UIImageView alloc] init];
-        //_turnImgV.image = [UIImage imageNamed:@"rightjiantou"];
+        _turnImgV.image = [UIImage imageNamed:@"rightjiantou"];
         
     }
     return _turnImgV;
@@ -81,6 +89,12 @@
     return _turnBtn;
 }
 
+- (UIImageView *)turnRImgV {
+    if (_turnRImgV == nil) {
+        _turnRImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rightjiantou"]];
+    }
+    return _turnRImgV;
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

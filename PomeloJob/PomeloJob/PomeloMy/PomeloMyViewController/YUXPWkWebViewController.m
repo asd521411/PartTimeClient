@@ -55,7 +55,7 @@
         _webView.navigationDelegate = self;
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urls]]];
 
-    [[_webView configuration].userContentController addScriptMessageHandler:self name:@"save"];
+    [[_webView configuration].userContentController addScriptMessageHandler:self name:@"send"];
     
     if(self.titleStr.length >0){
         
@@ -124,7 +124,7 @@
 }
 -(void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
-    if ([message.name isEqualToString:@"save"]) {
+    if ([message.name isEqualToString:@"send"]) {
         //做处理 do something
         NSLog(@"捕获到点击事件");
     }

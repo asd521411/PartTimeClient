@@ -38,6 +38,7 @@
         self.workContentLab.scrollEnabled = NO;
         self.workContentLab.textColor = [ECUtil colorWithHexString:@"7a7a7a"];
         [self addSubview:self.workContentLab];
+        self.workContentLab.userInteractionEnabled = NO;
         
         self.workContentBackV = [[UIView alloc] init];
         self.workContentBackV.backgroundColor = [ECUtil colorWithHexString:@"f8f8f8"];

@@ -39,7 +39,7 @@
     
     [self setupSubViews];
     [self tableViewRefresh];
-   
+    [self.tableView.mj_header beginRefreshing];
     // Do any additional setup after loading the view.
 }
 
@@ -49,7 +49,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)tableViewRefresh {
@@ -131,6 +130,7 @@
     head.commonHeaderActionBlock = ^{
         CommonViewController *com = [[CommonViewController alloc] init];
         com.titleStr = self.sectionTitleArr[section][@"title"];
+        com.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:com animated:YES];
     };
     return head;

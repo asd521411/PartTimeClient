@@ -80,7 +80,7 @@
 
     [self setupConnectViews];
 
-    //[self setupTopMaskViews];
+    ////[self setupTopMaskViews];
 
     [self setupMaskViews];
 
@@ -102,7 +102,6 @@
     NSDictionary *para = @{@"adtype":self.clickStyleStr,
                            @"adindex":self.indexStr,
                            @"phonecard":[ECUtil getIDFA]};
-    NSLog(@"mmm===========%@----%@======%@", para[@"adtype"], para[@"adindex"], para[@"phonecard"]);
     [[HWAFNetworkManager shareManager] clickOperation:para advertismentclick:^(BOOL success, id  _Nonnull request) {
         if (success) {
         }
@@ -267,7 +266,6 @@
     appLay.path = applyPath.CGPath;
     self.applyBtn3.layer.mask = appLay;
     
-    
     if ([self.commonModel.relationtype isEqualToString:@"已报名"]) {
         self.applyBtn3.userInteractionEnabled = NO;
         self.applyBtn3.selected = YES;
@@ -277,7 +275,6 @@
     
     //审核状态
     [[HWAFNetworkManager shareManager] accountRequest:@{} checkStatus:^(BOOL success, id  _Nonnull request) {
-
         if (success) {
             if ([request[@"status"] isEqualToString:@"0"]) {
                 self.bottomBackV.hidden = YES;
@@ -360,7 +357,6 @@
     
 }
 
-
 - (void)sendDojob {
     NSString *userid = [NSUserDefaultMemory defaultGetwithUnityKey:USERID];
     NSDictionary *para = @{@"userid":userid, @"phonecard":[ECUtil getIDFA]};
@@ -373,7 +369,7 @@
 - (void)setupTopMaskViews {
     self.topMaskBackV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT)];
     self.topMaskBackV.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
-    //[self.view addSubview:self.topMaskBackV];
+    [self.view addSubview:self.topMaskBackV];
     
     UIWindow *win = [[UIApplication sharedApplication] delegate].window;
     [win addSubview:self.topMaskBackV];
@@ -517,8 +513,7 @@
                                @"adindex":self.commonModel.positionid,
                                @"phonecard":[ECUtil getIDFA]};
         [[HWAFNetworkManager shareManager] clickOperation:para advertismentclick:^(BOOL success, id  _Nonnull request) {
-            if (success) {
-            }
+            [SVProgressHUD dismiss];
         }];
 
     }];
@@ -530,9 +525,13 @@
     //先判断是否能打开该url
     if (canOpen){   //打开微信
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+            if (@available(iOS 10.0, *)) {
+                [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+            } else {
+                // Fallback on earlier versions
+                [[UIApplication sharedApplication] openURL:url];
+            }
         });
-    }else {
     }
 }
 
@@ -542,7 +541,12 @@
     //先判断是否能打开该url
     if (canOpen){   //打开支付宝
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+            if (@available(iOS 10.0, *)) {
+                [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+            } else {
+                // Fallback on earlier versions
+                [[UIApplication sharedApplication] openURL:url];
+            }
         });
     }else {
     }

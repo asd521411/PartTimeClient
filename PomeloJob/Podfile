@@ -20,7 +20,6 @@ target 'PomeloJob' do
   pod 'UMCAnalytics'
   pod 'UMCCommonLog'
   pod 'SSKeychain'
-  #pod 'MLeaksFinder'
   pod 'FTPopOverMenu'
   pod 'YYText'
   

@@ -32,8 +32,8 @@
     [MobClick setScenarioType:E_UM_NORMAL];//支持普通场景
 #ifdef DEBUG
     //开发者需要显式的调用此函数，日志系统才能工作
-    [UMCommonLogManager setUpUMCommonLogManager];
-    [UMConfigure setLogEnabled:YES];//设置打开日志
+//    [UMCommonLogManager setUpUMCommonLogManager];
+//    [UMConfigure setLogEnabled:YES];//设置打开日志
 //    //插屏消息要打开
 //    [UMessage openDebugMode:YES];
 #endif

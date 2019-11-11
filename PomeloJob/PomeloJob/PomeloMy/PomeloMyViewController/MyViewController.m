@@ -80,6 +80,19 @@
                          self.resumecompleteness = @"0%";
                     }else {
                         self.resumecompleteness = request[@"body"][@"resumecompleteness"];
+                        
+                    }
+                    
+                    if (![ECUtil isBlankString:request[@"body"][@"name"]]) {
+                        self.headBackView.modificationControl.nameStr = request[@"body"][@"name"];
+                    }else {
+                        self.headBackView.modificationControl.nameStr = [NSUserDefaultMemory defaultGetwithUnityKey:USERNAME];
+                    }
+                    
+                    if (![ECUtil isBlankString:request[@"body"][@"userimg"]]) {
+                        [self.headBackView.portraitImgV sd_setImageWithURL:[NSURL URLWithString:request[@"body"][@"userimg"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portraitImgV"]];
+                    }else {
+                        [self.headBackView.portraitImgV sd_setImageWithURL:[NSURL URLWithString:[NSUserDefaultMemory defaultGetwithUnityKey:USERIMG]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portraitImgV"]];
                     }
                     
                 }
@@ -88,9 +101,6 @@
         }];
         
         self.headBackView.infoType = InforTypeOn_Line;
-        self.headBackView.modificationControl.nameStr = [NSUserDefaultMemory defaultGetwithUnityKey:USERNAME];
-        [self.headBackView.portraitImgV sd_setImageWithURL:[NSURL URLWithString:[NSUserDefaultMemory defaultGetwithUnityKey:USERIMG]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portraitImgV"]];
-        
         [self.tableView reloadData];
     }else {
         self.headBackView.infoType = InforTypeOff_Line;

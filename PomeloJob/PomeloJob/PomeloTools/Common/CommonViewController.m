@@ -135,7 +135,7 @@
     NSDictionary *para = @{@"positionStatus":self.titleStr, @"page":@(self.page)};
     
     [[HWAFNetworkManager shareManager] position:para postion:^(BOOL success, id  _Nonnull request) {
-        NSArray *resultArr = request;
+        NSArray *resultArr = request[@"resultList"];
         if (success) {
             if (self.upOrDown == YES) {
                 [self.listArr removeAllObjects];
