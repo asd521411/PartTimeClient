@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSString * urls;
 @property (nonatomic,strong) NSString * titleStr;
 
+@property (nonatomic, assign) BOOL adaptiveNaviHeight;
+
 @end
 
 NS_ASSUME_NONNULL_END

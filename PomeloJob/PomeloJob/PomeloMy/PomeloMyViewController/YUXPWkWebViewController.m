@@ -12,33 +12,45 @@
 @interface YUXPWkWebViewController ()<WKUIDelegate, WKNavigationDelegate,WKScriptMessageHandler>
 
 @property (nonatomic, strong) WKWebView *  webView;
+@property (nonatomic, strong) UIButton *backButton;
+
 @end
 
 @implementation YUXPWkWebViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //创建一个UIButton
+    self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.backButton.frame = CGRectMake(10, 0, 40, 40);
+    //设置UIButton的图像
+    [self.backButton setImage:[UIImage imageNamed:@"turnleft"] forState:UIControlStateNormal];
+    self.backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    if (self.adaptiveNaviHeight == YES) {
+        self.backButton.hidden = NO;
+    }else {
+        self.backButton.hidden = YES;
+    }
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
+    self.navigationItem.leftBarButtonItem = backItem;
+    [[self.backButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        if (self.adaptiveNaviHeight == YES) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }else {
+            if ([self.webView canGoBack]) {
+                       [self.webView goBack];
+                   }else{
+                       [self.view resignFirstResponder];
+                   }
+        }
+    }];
     
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
-    [self.navigationController.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[ECUtil colorWithHexString:@"4a4a4a"],NSForegroundColorAttributeName, KFontNormalSize18,NSFontAttributeName,nil]];
-    
-    //创建一个UIButton
-    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 40, 40)];
-    //设置UIButton的图像
-    [backButton setImage:[UIImage imageNamed:@"turnleft"] forState:UIControlStateNormal];
-    [[backButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
-    //覆盖返回按键
-    self.navigationItem.leftBarButtonItem = backItem;
 }
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -48,7 +60,11 @@
         [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.view);
             make.right.equalTo(self.view);
-            make.top.mas_equalTo(self.view).mas_offset([ECStyle navigationbarHeight]);
+//            if (self.adaptiveNaviHeight == YES) {
+//                make.top.mas_equalTo(self.view).mas_offset([ECStyle navigationbarHeight]);
+//            }else {
+                make.top.mas_equalTo(self.view);
+//            }
             make.bottom.equalTo(self.view);
         }];
         _webView.UIDelegate = self;
@@ -58,7 +74,6 @@
     [[_webView configuration].userContentController addScriptMessageHandler:self name:@"send"];
     
     if(self.titleStr.length >0){
-        
          self.title = self.titleStr;
     }
 }
@@ -75,7 +90,13 @@
 }
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
- 
+    if (self.adaptiveNaviHeight == NO) {
+        if ([self.webView canGoBack] && self.backButton.hidden == YES) {
+            [self.backButton setHidden:NO];
+        }else{
+            [self.backButton setHidden:YES];
+        }
+    }
     [SVProgressHUD dismiss];
 }
 // 页面加载失败时调用
@@ -89,7 +110,7 @@
 // 在收到响应后，决定是否跳转
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
  
-//    NSLog(@"%@",navigationResponse.response.URL.absoluteString);
+    NSLog(@"%@",navigationResponse.response.URL.absoluteString);
     //允许跳转
     decisionHandler(WKNavigationResponsePolicyAllow);
     //不允许跳转
@@ -98,7 +119,7 @@
 // 在发送请求之前，决定是否跳转
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
  
-//     NSLog(@"%@",navigationAction.request.URL.absoluteString);
+     NSLog(@"a%@",navigationAction.request.URL.absoluteString);
     //允许跳转
     decisionHandler(WKNavigationActionPolicyAllow);
     //不允许跳转
@@ -107,7 +128,12 @@
 #pragma mark - WKUIDelegate
 // 创建一个新的WebView
 - (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures{
-    return [[WKWebView alloc]init];
+    //该方法是说不需要新建,我只需要在我自己的上加载界面
+      WKFrameInfo *frameInfo = navigationAction.targetFrame;
+      if (![frameInfo isMainFrame]) {
+          [webView loadRequest:navigationAction.request];
+      }
+      return nil;
 }
 // 输入框
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler{

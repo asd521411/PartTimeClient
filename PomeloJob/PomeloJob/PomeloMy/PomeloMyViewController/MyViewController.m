@@ -218,6 +218,7 @@
                 YUXPWkWebViewController *hw = (YUXPWkWebViewController *)vc;
                 hw.urls = @"http://114.116.230.97:8888/public/public.html";
                 hw.titleStr = @"商务洽谈";
+                hw.adaptiveNaviHeight = YES;
                 [self.navigationController pushViewController:hw animated:YES];
             }else {
                 [self.navigationController pushViewController:vc animated:YES];

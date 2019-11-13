@@ -15,6 +15,8 @@
 #import "PomeloMessageViewController.h"
 #import "PomeloMyViewController.h"
 #import "MyViewController.h"
+#import "YUXPWkWebViewController.h"
+#import "PomeloAppDelegate.h"
 
 @interface BaseTabBarController ()<UITabBarControllerDelegate>
 
@@ -29,10 +31,11 @@
     NSMutableArray *vcArr = [[NSMutableArray alloc] init];
     //LJSecondScrollViewController *lj = [[LJSecondScrollViewController alloc] init];
     YNSuspendTopPausePageVC *yn = [YNSuspendTopPausePageVC suspendTopPausePageVC];
-    
     PomeloDiscoveryViewController *dis = [[PomeloDiscoveryViewController alloc] init];
     PomeloSquareViewController *squ = [[PomeloSquareViewController alloc] init];
     PomeloMessageViewController *message = [[PomeloMessageViewController alloc] init];
+    YUXPWkWebViewController *web = [[YUXPWkWebViewController alloc] init];
+    web.urls = @"https://4g.baizhan.net/46/?5asdfg";
     //PomeloMyViewController *my = [[PomeloMyViewController alloc] init];
     MyViewController *my = [[MyViewController alloc] init];
     
@@ -48,23 +51,42 @@
                           @{@"img":@"guangchang", @"imgsele":@"guangchangsele",@"title":@"广场"},
                           @{@"img":@"xiaoxi", @"imgsele":@"xiaoxisele",@"title":@"消息"},
                           @{@"img":@"wode", @"imgsele":@"wodesele",@"title":@"我的"}];
+    
     for (NSInteger i = 0; i < titleArr.count; i++) {
         BaseNavigationController *na = [[BaseNavigationController alloc] initWithRootViewController:vcArr[i]];
-        
         UITabBarItem *item = [[UITabBarItem alloc] init];
         item.title = titleArr[i][@"title"];
         item.image = [[UIImage imageNamed:titleArr[i][@"img"]]  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         item.selectedImage = [[UIImage imageNamed:titleArr[i][@"imgsele"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        
-        //[item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor cyanColor], NSFontAttributeName:[UIFont systemFontOfSize:15]} forState:UIControlStateNormal];
         
         [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
         [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kColor_Main, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
         na.tabBarItem = item;
         [naArr addObject:na];
     }
-    
     [self setViewControllers:naArr];
+    
+    PomeloAppDelegate *app = (PomeloAppDelegate *)[UIApplication sharedApplication].delegate;
+    [[HWAFNetworkManager shareManager] accountRequest:@{} checkStatus:^(BOOL success, id  _Nonnull request) {
+        if (success) {
+            if ([request[@"status"] isEqualToString:@"0"]) {
+                app.approvalStatus = NO;
+            }else if ([request[@"status"] isEqualToString:@"1"]){
+                app.approvalStatus = YES;
+                BaseNavigationController *na = [[BaseNavigationController alloc] initWithRootViewController:web];
+                UITabBarItem *item = [[UITabBarItem alloc] init];
+                item.title = @"新闻";
+                item.image = [[UIImage imageNamed:titleArr[3][@"img"]]  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                item.selectedImage = [[UIImage imageNamed:titleArr[3][@"imgsele"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                
+                [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+                [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kColor_Main, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+                na.tabBarItem = item;
+                [naArr replaceObjectAtIndex:3 withObject:na];
+            }
+            [self setViewControllers:naArr];
+        }
+    }];
     
     // Do any additional setup after loading the view.
 }
@@ -79,7 +101,6 @@
         }
     }];
 }
-
 
 
 

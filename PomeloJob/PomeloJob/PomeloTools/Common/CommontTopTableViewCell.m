@@ -47,17 +47,17 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    [self.princeLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        //make.left.mas_equalTo(self.addressnameTitleLab.mas_right);
+        make.top.mas_equalTo(self.addressnameTitleLab);
+        make.right.mas_equalTo(self).offset(-15);
+        make.height.mas_equalTo(18);
+    }];
+    
     [self.addressnameTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(15);
         make.right.mas_equalTo(self.princeLab.mas_left);
         make.height.mas_equalTo(20);
-    }];
-    
-    [self.princeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.addressnameTitleLab.mas_right);
-        make.top.mas_equalTo(self.addressnameTitleLab);
-        make.right.mas_equalTo(self).offset(-15);
-        make.height.mas_equalTo(18);
     }];
     
 //    [self.positionStyleLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -70,7 +70,7 @@
     
     [self.demandTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
-        make.top.mas_equalTo(self.princeLab.mas_bottom).offset(15);
+        make.top.mas_equalTo(self.princeLab.mas_bottom).offset(10);
         make.right.mas_equalTo(70);
         make.height.mas_equalTo(14);
     }];

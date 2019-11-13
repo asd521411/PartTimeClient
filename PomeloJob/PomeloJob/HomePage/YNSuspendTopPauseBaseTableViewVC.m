@@ -29,10 +29,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"reloadData" object:nil];
+    
     [self.tableView registerClass:[CommonTableViewCell class] forCellReuseIdentifier:@"id"];
     [self.view addSubview:self.tableView];
     
     _dataArray = @[].mutableCopy;
+    
+    [self loadData];
+    
+    [self addTableViewRefresh];
+}
+
+- (void)reloadData:(NSNotificationCenter *)info {
+    [self loadData];
+}
+
+- (void)loadData {
     //加载数据
     self.upOrDown = YES;
     self.page = 1;
@@ -48,9 +61,7 @@
             }
         }];
     });
-    [self addTableViewRefresh];
 }
-
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -72,8 +83,8 @@
     __weak typeof (self) weakSelf = self;
     // 这里加 footer 刷新
     
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    self.tableView.mj_footer = [MJRefreshBackFooter footerWithRefreshingBlock:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if (weakSelf.upOrDown == YES) {
                 self.page = 2;
             }
@@ -94,8 +105,8 @@
                     
                 }
             }];
-            [weakSelf.tableView reloadData];
             [weakSelf.tableView.mj_footer endRefreshing];
+            [weakSelf.tableView reloadData];
         });
     }];
 }
@@ -159,6 +170,10 @@
         _tableView.dataSource = self;
     }
     return _tableView;
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

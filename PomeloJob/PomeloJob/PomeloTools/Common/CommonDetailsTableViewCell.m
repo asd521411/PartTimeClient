@@ -117,7 +117,7 @@
         make.left.mas_equalTo(15);
         make.top.mas_equalTo(self);
         make.right.mas_equalTo(self).offset(-15);
-        make.height.mas_equalTo(self.height);
+        make.height.mas_equalTo(self);
     }];
     
 //    self.rtLab.text = self.conStr;
@@ -208,9 +208,7 @@
 - (void)setContentStr:(NSString *)contentStr {
     if (_contentStr != contentStr) {
         _contentStr = contentStr;
-        
-//        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[contentStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-        self.workContentLab.attributedText = [self setAttributedString:contentStr font:nil lineSpacing:5];
+        self.workContentLab.attributedText = [self setAttributedString:contentStr font:kFontNormalSize(16) lineSpacing:5];
     }
 }
 
@@ -238,46 +236,14 @@
     str = [NSString stringWithFormat:@"<head><style>img{width:%f !important;height:auto}</style></head>%@",[UIScreen mainScreen].bounds.size.width,str];
     NSMutableAttributedString *htmlString =[[NSMutableAttributedString alloc] initWithData:[str dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute:[NSNumber numberWithInt:NSUTF8StringEncoding]} documentAttributes:NULL error:nil];
     //设置富文本字的大小
-//    [htmlString addAttributes:@{NSFontAttributeName:font} range:NSMakeRange(0, htmlString.length)];
+    [htmlString addAttributes:@{NSFontAttributeName:font} range:NSMakeRange(0, htmlString.length)];
+    [htmlString addAttributes:@{NSForegroundColorAttributeName:[ECUtil colorWithHexString:@"4a4a4a"]} range:NSMakeRange(0, htmlString.length)];
     //设置行间距
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:lineSpacing];
     [htmlString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [htmlString length])];
-    
     return htmlString;
-
 }
-
-
-
-/**
- 计算html字符串高度
-
- @param str html 未处理的字符串
- @param font 字体设置
- @param lineSpacing 行高设置
- @param width 容器宽度设置
- @return 富文本高度
- */
-+(CGFloat )getHTMLHeightByStr:(NSString *)str font:(UIFont *)font lineSpacing:(CGFloat)lineSpacing width:(CGFloat)width
-{
-//    str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"];
-    str = [NSString stringWithFormat:@"<head><style>img{width:%f !important;height:auto}</style></head>%@",[UIScreen mainScreen].bounds.size.width,str];
-    
-    NSMutableAttributedString *htmlString =[[NSMutableAttributedString alloc] initWithData:[str dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute:[NSNumber numberWithInt:NSUTF8StringEncoding]} documentAttributes:NULL error:nil];
-//    [htmlString addAttributes:@{NSFontAttributeName:font} range:NSMakeRange(0, htmlString.length)];
-    //设置行间距
-    NSMutableParagraphStyle *paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle1 setLineSpacing:lineSpacing];
-    [htmlString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle1 range:NSMakeRange(0, [htmlString length])];
-    
-    CGSize contextSize = [htmlString boundingRectWithSize:(CGSize){width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
-    return contextSize.height ;
-}
-
-
-
-
 
 - (void)awakeFromNib {
     [super awakeFromNib];

@@ -93,7 +93,7 @@
     }];
     [self.princeLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self).offset(-15);
-        make.centerY.mas_equalTo(self);
+        make.centerY.mas_equalTo(self).offset(5);
     }];
     
     [self.tagLab mas_makeConstraints:^(MASConstraintMaker *make) {

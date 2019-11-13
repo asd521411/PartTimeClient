@@ -25,6 +25,7 @@
 #import "LoginNavigationController.h"
 #import "MyResumeViewController.h"
 #import "NoneTableViewCell.h"
+#import "PomeloAppDelegate.h"
 
 @interface CommonDetailsViewController ()<UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, DetailBottomBarDelegate>
 
@@ -255,8 +256,6 @@
     self.applyBtn3 = [UIButton buttonWithType:UIButtonTypeCustom];
     self.applyBtn3.frame = CGRectMake(self.collectBtn.right, 0, (SCREENWIDTH-30)/2, height);
     self.applyBtn3.backgroundColor = kColor_Main;
-//    [self.applyBtn3 setBackgroundImage:[UIImage imageNamed:@"baoming"] forState:UIControlStateNormal];
-//    [self.applyBtn3 setBackgroundImage:[UIImage imageNamed:@"yibaoming"] forState:UIControlStateSelected];
     [self.applyBtn3 setTitle:@"立即报名" forState:UIControlStateNormal];
     [self.applyBtn3 setTitle:@"已报名" forState:UIControlStateSelected];
     [self.bottomBackV addSubview:self.applyBtn3];
@@ -273,13 +272,24 @@
         self.applyBtn3.selected = NO;
     }
     
-    //审核状态
+    PomeloAppDelegate *app = (PomeloAppDelegate *)[UIApplication sharedApplication].delegate;
+    if (app.approvalStatus == YES) {
+        self.bottomBackV.hidden = NO;
+        self.tableView.frame = CGRectMake(0, [ECStyle navigationbarHeight], KSCREEN_WIDTH, KSCREEN_HEIGHT-[ECStyle navigationbarHeight]-(42+[ECStyle tabbarExtensionHeight]+5));
+    }else {
+        self.bottomBackV.hidden = YES;
+        self.tableView.frame = CGRectMake(0, [ECStyle navigationbarHeight], KSCREEN_WIDTH, KSCREEN_HEIGHT-[ECStyle navigationbarHeight]-[ECStyle tabbarExtensionHeight]);
+    }
+    
+    //状态
     [[HWAFNetworkManager shareManager] accountRequest:@{} checkStatus:^(BOOL success, id  _Nonnull request) {
         if (success) {
             if ([request[@"status"] isEqualToString:@"0"]) {
                 self.bottomBackV.hidden = YES;
+                self.tableView.frame = CGRectMake(0, [ECStyle navigationbarHeight], KSCREEN_WIDTH, KSCREEN_HEIGHT-[ECStyle navigationbarHeight]-[ECStyle tabbarExtensionHeight]);
             }else if ([request[@"status"] isEqualToString:@"1"]){
                 self.bottomBackV.hidden = NO;
+                self.tableView.frame = CGRectMake(0, [ECStyle navigationbarHeight], KSCREEN_WIDTH, KSCREEN_HEIGHT-[ECStyle navigationbarHeight]-(42+[ECStyle tabbarExtensionHeight]+5));
             }
         }
     }];
@@ -561,11 +571,13 @@
         if (success) {
             if (![ECUtil isBlankString:[NSString stringWithFormat:@"%@", dic[@"status"]]] && [dic[@"status"] integerValue] == 400) {
                 self.bottomBackV.hidden = YES;
+                
                 self.loginState = 400;
                 [self.tableView reloadData];
             }else {
             
                 self.commonModel = [CommonModel mj_objectWithKeyValues:dic];
+                self.commonModel.cellHeight = [self getHTMLHeightByStr:self.commonModel.positioninfo font:kFontNormalSize(16) lineSpacing:5 width:KSCREEN_WIDTH-30];
                 if ([self.commonModel.relationtype isEqualToString:@"已报名"]) {
                     self.applyBtn3.userInteractionEnabled = NO;
                     self.applyBtn3.selected = YES;
@@ -744,9 +756,7 @@
             return 128 + 26;
         }
         if (indexPath.section == 1) {
-//            NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[self.commonModel.positioninfo dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-//            CGRect rect = [attributedString boundingRectWithSize:CGSizeMake(KSCREEN_WIDTH - 30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
-            return [self getHTMLHeightByStr:self.commonModel.positioninfo font:nil lineSpacing:5 width:KSCREEN_WIDTH-30];
+            return self.commonModel.cellHeight;
         }
         if (indexPath.section == 2) {
             CGSize size = [ECUtil textSize:self.commonModel.positionworktime font:KFontNormalSize14 bounding:CGSizeMake(KSCREEN_WIDTH - 30, CGFLOAT_MAX)];
@@ -800,32 +810,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0;
 }
-
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return self.ageListArr.count;
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [self.ageListArr[row] stringByAppendingString:@"岁"];
-}
-
-- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
-    return 100;
-}
-
-- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
-    return 45;
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    self.ageStr = self.ageListArr[row];
-}
-
 
 - (NSMutableArray *)listArr {
     if (!_listArr) {
@@ -897,13 +881,15 @@
  @param width 容器宽度设置
  @return 富文本高度
  */
+
 -(CGFloat )getHTMLHeightByStr:(NSString *)str font:(UIFont *)font lineSpacing:(CGFloat)lineSpacing width:(CGFloat)width
 {
 //    str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"];
     str = [NSString stringWithFormat:@"<head><style>img{width:%f !important;height:auto}</style></head>%@",[UIScreen mainScreen].bounds.size.width,str];
     
     NSMutableAttributedString *htmlString =[[NSMutableAttributedString alloc] initWithData:[str dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute:[NSNumber numberWithInt:NSUTF8StringEncoding]} documentAttributes:NULL error:nil];
-//    [htmlString addAttributes:@{NSFontAttributeName:font} range:NSMakeRange(0, htmlString.length)];
+    [htmlString addAttributes:@{NSFontAttributeName:font} range:NSMakeRange(0, htmlString.length)];
+    [htmlString addAttributes:@{NSForegroundColorAttributeName:[ECUtil colorWithHexString:@"9b9b9b"]} range:NSMakeRange(0, htmlString.length)];
     //设置行间距
     NSMutableParagraphStyle *paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle1 setLineSpacing:lineSpacing];
@@ -912,6 +898,5 @@
     CGSize contextSize = [htmlString boundingRectWithSize:(CGSize){width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
     return contextSize.height ;
 }
-
 
 @end
